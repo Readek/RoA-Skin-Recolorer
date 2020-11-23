@@ -15,18 +15,28 @@ function elBoton() {
 }
 
 
-/* Character Propierties */
+/* Character Properties */
 
 function orcane() {
+
     this.width = 308;
     this.height = 289;
 
     mainCa.width = this.width;
     mainCa.height = this.height;
 
-    baseChar = new base("Orcane");
-    body = new part(["Orcane/Body/1.png", "Orcane/Body/2.png", "Orcane/Body/3.png"], [[3, 5, -9], [7, 11, -17]]);
-    belly = new part(["Orcane/Belly/1.png", "Orcane/Belly/2.png", "Orcane/Belly/3.png"], [[5, 10, -28], [17, 19, -52]]);
+    //this is the base image that we will split in different separated colors
+    this.image = new Image();
+    this.image.src = "Characters/Orcane.png";
+    this.image.onload = () => {
+        //draw it so we can look at it later
+        mainCo.drawImage(this.image, 0, 0);
+
+        //create the different parts of the character that will be recolored
+        //constructor: [rgb values of the 3 original parts], [the 2 hsv color differences from the original color]
+        body = new part([[59, 73, 135], [44, 53, 113], [29, 33, 91]], [[3, 5, -9], [7, 11, -17]]);
+        belly = new part([[205, 247, 247], [130, 173, 177], [74, 104, 116]], [[5, 10, -28], [17, 19, -52]]);
+    }
 
     this.recolor = (rgb) => {
         body.recolor(rgb[0]);
@@ -37,29 +47,13 @@ function orcane() {
 
 /* Character Parts */
 
-//the base part will load at startup and will never be recolored
-function base (char) {
-    //this canvas will be added onto the main canvas
-    this.canvas = document.createElement("canvas"),
-    this.canvas.width = mainCa.width;
-    this.canvas.height = mainCa.height;
-    this.context = this.canvas.getContext("2d");
-
-    this.image = new Image();
-    this.image.src = char+"/Base.png";
-    this.image.onload = () => {
-        this.context.drawImage(this.image, 0, 0);
-        mainCo.drawImage(this.canvas, 0, 0);
-    }
-}
-
-//each part will always have 3 different colors (normal, dark, darker)
-function part(paths, range) {
+function part(inColors, range) {
 
     const subs = [];
-    subs[0] = new subPart(paths[0]); //final color wont get modified
-    subs[1] = new subPart(paths[1], range[0]); //range defines darkness
-    subs[2] = new subPart(paths[2], range[1]);
+    //each part will always have 3 different colors (normal, dark, darker)
+    subs[0] = new subPart(inColors[0]); //final color wont get modified
+    subs[1] = new subPart(inColors[1], range[0]); //range defines darkness
+    subs[2] = new subPart(inColors[2], range[1]);
 
     this.recolor = function(rgb) {
         for (let i = 0; i < subs.length; i++) {
@@ -68,22 +62,38 @@ function part(paths, range) {
     }
 }
 
-function subPart(path, range = 0) {
+function subPart(inColor, range = 0) {
     //this canvas will be added onto the main canvas
     this.canvas = document.createElement("canvas"),
     this.canvas.width = mainCa.width;
     this.canvas.height = mainCa.height;
     this.context = this.canvas.getContext("2d");
 
-    this.image = new Image();
-    this.image.src = path;
-    this.image.onload = () => {
-        this.context.drawImage(this.image, 0, 0);
-        mainCo.drawImage(this.canvas, 0, 0);
-    }
+    //values of the original colors of the part
+    this.r = inColor[0];
+    this.g = inColor[1];
+    this.b = inColor[2];
 
+    //darkness difference in hsv for the color
     this.colorRange = range;
-    
+
+    //create a separate image containing only this color, add it to the part's canvas
+    const imgData = mainCo.getImageData(0, 0, mainCa.width, mainCa.height);
+    let i;
+    const l = imgData.data.length;
+    for (i = 0; i < l; i += 4) {
+        if (imgData.data[i] == this.r && imgData.data[i + 1] == this.g && imgData.data[i+2] == this.b) {
+            imgData.data[i] = this.r;
+            imgData.data[i+1] = this.g;
+            imgData.data[i+2] = this.b;
+        } else {
+            imgData.data[i+3] = 0;
+        }
+    }
+    this.context.putImageData(imgData, 0, 0);
+    mainCo.drawImage(this.canvas, 0, 0);
+
+    //this is where the magic happens    
     this.recolor = (rgb) => {
 
         if (!this.colorRange) {
@@ -125,12 +135,11 @@ function subPart(path, range = 0) {
             mainCo.drawImage(can, 0, 0);
             
         }
-
     }
 }
 
 
-/* color conversions */
+/* color Conversions */
 
 function hexDecode(hex) {
 
