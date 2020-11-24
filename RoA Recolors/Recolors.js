@@ -45,10 +45,15 @@ class Part {
     constructor(inColors, range) {
 
         const subs = [];
-        //each part will always have 3 different colors (normal, dark, darker)
-        subs[0] = new SubPart(inColors[0]); //final color wont get modified
-        subs[1] = new SubPart(inColors[1], range[0]); //range defines darkness
-        subs[2] = new SubPart(inColors[2], range[1]);
+        //each part will have different colors deviating from the original for shading
+        for (let i = 0; i < inColors.length; i++) {
+            if (i == 0) {
+                subs.push(new SubPart(inColors[0])); //final color wont get modified
+            } else {
+                subs.push(new SubPart(inColors[i], range[i-1])); //range defines darkness
+            }
+            
+        }
 
         this.recolor = function (rgb) {
             for (let i = 0; i < subs.length; i++) {
@@ -245,8 +250,22 @@ function hsv2rgb(h, s, v) {
 /* Character Database */
 
 // Each part will follow the same structure:
-// [the 3 rgb values of the 3 original parts]
-// [the 2 hsv color differences from the original color]
+// [the rgb values of the original parts]
+// [the hsv color differences from the original color]
+const etalus = {
+    body: [
+        [[251, 250, 252], [200, 182, 226], [129, 100, 168]],
+        [[-5, 18, -10], [-4, 39, -33]]
+    ],
+    ice: [
+        [[180, 230, 230], [130, 173, 177], [74, 104, 116]],
+        [[5, 5, -21], [17, 14, -45]]
+    ],
+    shading: [
+        [[67, 68, 87], [50, 51, 62]],
+        [[-2, -4, -10]]
+    ]
+}
 const orcane = {
     body: [
         [[59, 73, 135], [44, 53, 113], [29, 33, 91]],
@@ -255,7 +274,7 @@ const orcane = {
     belly: [
         [[205, 247, 247], [130, 173, 177], [74, 104, 116]],
         [[5, 10, -28], [17, 19, -52]]
-    ]    
+    ]
 }
 
 
@@ -268,5 +287,5 @@ function elBoton() {
 }
 
 let char;
-char = new Character("Orcane", [orcane.body, orcane.belly]);
+char = new Character("Etalus", [etalus.body, etalus.ice, etalus.shading]);
 
