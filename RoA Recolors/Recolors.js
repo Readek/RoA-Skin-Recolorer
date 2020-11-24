@@ -5,141 +5,139 @@ document.getElementById("mainCanvas").appendChild(mainCa);
 mainCa.className = "charCanvas";
 
 
-/*  */
-char = new orcane;
-
-function elBoton() {
-    const hex = document.getElementById("body").value;
-    const rgb = hexDecode(hex);
-    char.recolor(rgb);
-}
-
-
 /* Character Properties */
 
-function orcane() {
+class Character {
+    constructor(charName, parts) {
 
-    this.width = 308;
-    this.height = 289;
+        //this is the base image that we will split in different separated colors
+        const image = new Image();
+        image.src = "Characters/"+charName+".png";
+        image.onload = () => {
 
-    mainCa.width = this.width;
-    mainCa.height = this.height;
+            //change the size of the main canvas
+            mainCa.width = image.width;
+            mainCa.height = image.height;
 
-    //this is the base image that we will split in different separated colors
-    this.image = new Image();
-    this.image.src = "Characters/Orcane.png";
-    this.image.onload = () => {
-        //draw it so we can look at it later
-        mainCo.drawImage(this.image, 0, 0);
+            //draw it so we can look at it later
+            mainCo.drawImage(image, 0, 0);
 
-        //create the different parts of the character that will be recolored
-        //constructor: [rgb values of the 3 original parts], [the 2 hsv color differences from the original color]
-        body = new part([[59, 73, 135], [44, 53, 113], [29, 33, 91]], [[3, 5, -9], [7, 11, -17]]);
-        belly = new part([[205, 247, 247], [130, 173, 177], [74, 104, 116]], [[5, 10, -28], [17, 19, -52]]);
+            //create the different parts of the character that will be recolored
+            this.charParts = [];
+            for (let i = 0; i < parts.length; i++) {
+                this.charParts.push(new Part(parts[i][0], parts[i][1]));
+            }            
+        };
+
     }
 
-    this.recolor = (rgb) => {
-        body.recolor(rgb[0]);
-        belly.recolor(rgb[1]);
-    }
+    recolor(rgb) {
+        for (let i = 0; i < this.charParts.length; i++) {
+            this.charParts[i].recolor(rgb[i]);
+        }
+    };
 }
 
 
 /* Character Parts */
 
-function part(inColors, range) {
+class Part {
+    constructor(inColors, range) {
 
-    const subs = [];
-    //each part will always have 3 different colors (normal, dark, darker)
-    subs[0] = new subPart(inColors[0]); //final color wont get modified
-    subs[1] = new subPart(inColors[1], range[0]); //range defines darkness
-    subs[2] = new subPart(inColors[2], range[1]);
+        const subs = [];
+        //each part will always have 3 different colors (normal, dark, darker)
+        subs[0] = new SubPart(inColors[0]); //final color wont get modified
+        subs[1] = new SubPart(inColors[1], range[0]); //range defines darkness
+        subs[2] = new SubPart(inColors[2], range[1]);
 
-    this.recolor = function(rgb) {
-        for (let i = 0; i < subs.length; i++) {
-            subs[i].recolor(rgb);
-        }
-    }
-}
-
-function subPart(inColor, range = 0) {
-    //this canvas will be added onto the main canvas
-    this.canvas = document.createElement("canvas"),
-    this.canvas.width = mainCa.width;
-    this.canvas.height = mainCa.height;
-    this.context = this.canvas.getContext("2d");
-
-    //values of the original colors of the part
-    this.r = inColor[0];
-    this.g = inColor[1];
-    this.b = inColor[2];
-
-    //darkness difference in hsv for the color
-    this.colorRange = range;
-
-    //create a separate image containing only this color, add it to the part's canvas
-    const imgData = mainCo.getImageData(0, 0, mainCa.width, mainCa.height);
-    let i;
-    const l = imgData.data.length;
-    for (i = 0; i < l; i += 4) {
-        if (imgData.data[i] == this.r && imgData.data[i + 1] == this.g && imgData.data[i+2] == this.b) {
-            imgData.data[i] = this.r;
-            imgData.data[i+1] = this.g;
-            imgData.data[i+2] = this.b;
-        } else {
-            imgData.data[i+3] = 0;
-        }
-    }
-    this.context.putImageData(imgData, 0, 0);
-    mainCo.drawImage(this.canvas, 0, 0);
-
-    //this is where the magic happens    
-    this.recolor = (rgb) => {
-
-        if (!this.colorRange) {
-            //if no color range, use the regular value
-            recolorChar(rgb, this.context, this.canvas);
-        } else {
-
-            //convert the sent rgb to hsv
-            const hsv = rgb2hsv(rgb[0], rgb[1], rgb[2]);
-
-            //add the values to make it darker
-            hsv[0] += this.colorRange[0];
-            hsv[1] += this.colorRange[1];
-            hsv[2] += this.colorRange[2];
-
-            //convert back to rgb
-            const charRgb = hsv2rgb(hsv[0], hsv[1], [hsv[2]]);
-
-            //then recolor
-            recolorChar(charRgb, this.context, this.canvas);
-        }
-
-        function recolorChar(rgb, ctx, can) {
-
-            //we will recolor this image
-            const imgData = ctx.getImageData(0, 0, mainCa.width, mainCa.height);
-        
-            //run through each pixel of the image and change its rgb value
-            let i;
-            const l = imgData.data.length;
-            for (i = 0; i < l; i += 4) {
-                imgData.data[i] = rgb[0];
-                imgData.data[i+1] = rgb[1];
-                imgData.data[i+2] = rgb[2];
+        this.recolor = function (rgb) {
+            for (let i = 0; i < subs.length; i++) {
+                subs[i].recolor(rgb);
             }
-        
-            //the result will be added to the main canvas
-            ctx.putImageData(imgData, 0, 0);
-            mainCo.drawImage(can, 0, 0);
-            
+        };
+
+    }
+}
+
+class SubPart {
+    constructor(inColor, range = false) {
+        //this canvas will be added onto the main canvas
+        const canvas = document.createElement("canvas");
+        canvas.width = mainCa.width;
+        canvas.height = mainCa.height;
+        const context = canvas.getContext("2d");
+
+        //values of the original colors of the part
+        let r = inColor[0];
+        let g = inColor[1];
+        let b = inColor[2];
+
+        //darkness difference in hsv for the color
+        const colorRange = range;
+
+        //create a separate image containing only this color, add it to the part's canvas
+        const imgData = mainCo.getImageData(0, 0, mainCa.width, mainCa.height);
+        let i = 0;
+        const l = imgData.data.length;
+        for (i; i < l; i += 4) {
+            if (imgData.data[i] == r && imgData.data[i + 1] == g && imgData.data[i + 2] == b) {
+                imgData.data[i] = r;
+                imgData.data[i + 1] = g;
+                imgData.data[i + 2] = b;
+            } else {
+                imgData.data[i + 3] = 0;
+            }
+        }
+        context.putImageData(imgData, 0, 0);
+
+        //this is where the magic happens    
+        this.recolor = (rgb) => {
+
+            if (!colorRange) {
+                //if no color range, use the regular value
+                recolorChar(rgb, context, canvas);
+            } else {
+
+                //convert the sent rgb to hsv
+                const hsv = rgb2hsv(rgb[0], rgb[1], rgb[2]);
+
+                //add the values to make it darker
+                hsv[0] += colorRange[0];
+                hsv[1] += colorRange[1];
+                hsv[2] += colorRange[2];
+
+                //convert back to rgb
+                const charRgb = hsv2rgb(hsv[0], hsv[1], [hsv[2]]);
+
+                //then recolor
+                recolorChar(charRgb, context, canvas);
+            }
+
+            function recolorChar(rgb, ctx, can) {
+
+                //we will recolor this image
+                const imgData = ctx.getImageData(0, 0, mainCa.width, mainCa.height);
+
+                //run through each pixel of the image and change its rgb value
+                let i = 0;
+                const l = imgData.data.length;
+                for (i; i < l; i += 4) {
+                    imgData.data[i] = rgb[0];
+                    imgData.data[i + 1] = rgb[1];
+                    imgData.data[i + 2] = rgb[2];
+                }
+
+                //the result will be added to the main canvas
+                ctx.putImageData(imgData, 0, 0);
+                mainCo.drawImage(can, 0, 0);
+
+            }
         }
     }
 }
 
 
-/* color Conversions */
+/* Color Conversions */
 
 function hexDecode(hex) {
 
@@ -208,9 +206,9 @@ function rgb2hsv (r, g, b) {
       h /= 6
     }
   
-    h = Math.round(h * HUE_MAX)
-    s = Math.round(s * SV_MAX)
-    v = Math.round(v * SV_MAX)
+    h = h * HUE_MAX
+    s = s * SV_MAX
+    v = v * SV_MAX
 
     return [h, s, v];
   }
@@ -242,3 +240,33 @@ function hsv2rgb(h, s, v) {
     b = Math.round(b * 255)
     return [r, g, b]  
 }
+
+
+/* Character Database */
+
+// Each part will follow the same structure:
+// [the 3 rgb values of the 3 original parts]
+// [the 2 hsv color differences from the original color]
+const orcane = {
+    body: [
+        [[59, 73, 135], [44, 53, 113], [29, 33, 91]],
+        [[3, 5, -9], [7, 11, -17]]
+    ],
+    belly: [
+        [[205, 247, 247], [130, 173, 177], [74, 104, 116]],
+        [[5, 10, -28], [17, 19, -52]]
+    ]    
+}
+
+
+/* Actual webpage code */
+
+function elBoton() {
+    const hex = document.getElementById("body").value;
+    const rgb = hexDecode(hex);
+    char.recolor(rgb);
+}
+
+let char;
+char = new Character("Orcane", [orcane.body, orcane.belly]);
+
