@@ -5,14 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoA Skin Recolorer</title>
     <script src="Recolors.js" defer></script>
-
-    <style>
-
-        .charCanvas {
-            border: 1px solid #d3d3d3;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="Recolors.css">
 
 </head>
 <body>
@@ -20,9 +13,13 @@
     <div id="mainCanvas">
         
     </div>
-    <div id="ss">
-        <input type="text" id="body"><button onclick="elBoton()">Recolor</button><br>
-    
+    <div>
+        <input type="text" id="codeInput"><button onclick="elBoton()">Recolor</button><br>
+        <button onclick="eta()">Etalus</button><button onclick="orc()">Orcane</button>
+
+        <p>Final images may have 2/-2 difference for the rgb values respect to the ingame colors.<p>
+            
+        <p>Currently WIP, more (base) characters will be added. <a href="https://github.com/Readek/RoA-Skin-Recolorer">Check the GitHub.</a> </p>
     </div>
 
 </body>

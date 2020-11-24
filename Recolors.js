@@ -107,9 +107,14 @@ class SubPart {
                 const hsv = rgb2hsv(rgb[0], rgb[1], rgb[2]);
 
                 //add the values to make it darker
-                hsv[0] += colorRange[0];
-                hsv[1] += colorRange[1];
-                hsv[2] += colorRange[2];
+                for (let i = 0; i < hsv.length; i++) {
+                    if (hsv[i] + colorRange[i] < 0) {
+                        hsv[i] = 0; //if the value ends negative, set it to 0
+                    } else {
+                        hsv[i] += colorRange[i];
+                    }
+                    
+                }                
 
                 //convert back to rgb
                 const charRgb = hsv2rgb(hsv[0], hsv[1], [hsv[2]]);
@@ -280,12 +285,24 @@ const orcane = {
 
 /* Actual webpage code */
 
+const codeInput = document.getElementById("codeInput");
+
 function elBoton() {
-    const hex = document.getElementById("body").value;
+    const hex = codeInput.value;
     const rgb = hexDecode(hex);
     char.recolor(rgb);
 }
 
 let char;
-char = new Character("Etalus", [etalus.body, etalus.ice, etalus.shading]);
 
+orc();
+
+function eta() {
+    char = new Character("Etalus", [etalus.body, etalus.ice, etalus.shading]);
+    codeInput.placeholder = "0000-0000-0000-0000-0000";
+}
+
+function orc() {
+    char = new Character("Orcane", [orcane.body, orcane.belly]);
+    codeInput.placeholder = "0000-0000-0000-0000";
+}
