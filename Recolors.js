@@ -287,7 +287,8 @@ const orcane = {
 
 const codeInput = document.getElementById("codeInput");
 
-function elBoton() {
+document.getElementById("bRecolor").addEventListener("click", clickRecolor);
+function clickRecolor() {
     const hex = codeInput.value;
     const rgb = hexDecode(hex);
     char.recolor(rgb);

@@ -10,17 +10,26 @@
 </head>
 <body>
 
-    <div id="mainCanvas">
-        
-    </div>
-    <div>
-        <input type="text" id="codeInput"><button onclick="elBoton()">Recolor</button><br>
-        <button onclick="eta()">Etalus</button><button onclick="orc()">Orcane</button>
+    <div id="content">
+        <div id="mainCanvas"></div>
+        <div id="belowCanvas">
+            <div id="row1" class="row">
+                <input type="text" id="codeInput">
+                <div id="bRecolor">Recolor</div>
 
-        <p>Final images may have 2/-2 difference for the rgb values respect to the ingame colors.<p>
-            
-        <p>Currently WIP, more (base) characters will be added. <a href="https://github.com/Readek/RoA-Skin-Recolorer">Check the GitHub.</a> </p>
+            </div>
+            <div id="row2" class="row">
+                <button onclick="eta()">Etalus</button>
+                <button onclick="orc()">Orcane</button>
+            </div>
+    
+            <p>Final images may have 2/-2 difference for the rgb values respect to the ingame colors.<p>
+                
+            <p>Currently WIP, more (base) characters will be added. <a href="https://github.com/Readek/RoA-Skin-Recolorer">Check the GitHub.</a> </p>
+                
+        </div>
     </div>
+
 
 </body>
 </html>

@@ -1,3 +1,64 @@
-.charCanvas {
-    border: 1px solid #d3d3d3;
+html {
+    background-color: #514188;
+    color: white;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#belowCanvas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.row {
+    padding: 10px;
+}
+
+
+input {
+    width: 210px;
+    height: 25px;
+    outline: none;
+    border: none;
+    border-radius: 20px 0px 0px 20px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #7c6bb4;
+    color: white;
+    float: left;
+}
+
+#bRecolor {
+    width: 65px;
+    height: 25px;
+    border-radius: 0px 20px 20px 0px;
+    padding: 5px 10px;
+    background-color: #7c6bb4;
+    float: left;
+    border-left: 1px solid #9f96bd;
+}
+
+input:hover, #bRecolor:hover {
+    filter: brightness(1.1);
+}
+#bRecolor:hover {
+    cursor: pointer;
+}
+#bRecolor:active {
+    filter: brightness(.9);
+}
+
+
+a:link {
+    color: lightsalmon;
+}
+
+a:visited {
+    color: lightgrey;
 }
