@@ -1,8 +1,6 @@
 /* This is where the image is going to appear */
-const mainCa = document.createElement("canvas");
+const mainCa = document.getElementById("mainCanvas");
 const mainCo = mainCa.getContext("2d");
-document.getElementById("mainCanvas").appendChild(mainCa);
-mainCa.className = "charCanvas";
 
 
 /* Character Properties */
@@ -12,7 +10,7 @@ class Character {
 
         //this is the base image that we will split in different separated colors
         const image = new Image();
-        image.src = "Characters/"+charName+".png";
+        image.src = "Characters/"+charName+"/Full.png";
         image.onload = () => {
 
             //change the size of the main canvas
@@ -257,53 +255,166 @@ function hsv2rgb(h, s, v) {
 // Each part will follow the same structure:
 // [the rgb values of the original parts]
 // [the hsv color differences from the original color]
-const etalus = {
-    body: [
-        [[251, 250, 252], [200, 182, 226], [129, 100, 168]],
-        [[-5, 18, -10], [-4, 39, -33]]
-    ],
-    ice: [
-        [[180, 230, 230], [130, 173, 177], [74, 104, 116]],
-        [[5, 5, -21], [17, 14, -45]]
-    ],
-    shading: [
-        [[67, 68, 87], [50, 51, 62]],
-        [[-2, -4, -10]]
+const db = {
+    "chars": [
+        {
+            name : "Etalus",
+            parts : [
+                [ //body
+                    [[251, 250, 252], [200, 182, 226], [129, 100, 168]],
+                    [[-5, 18, -10], [-4, 39, -33]]
+                ],
+                [ //ice
+                    [[180, 230, 230], [130, 173, 177], [74, 104, 116]],
+                    [[5, 5, -21], [17, 14, -45]]
+                ],
+                [ //shading
+                    [[67, 68, 87], [50, 51, 62]],
+                    [[-2, -4, -10]]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000"
+        },
+        {
+            name : "Orcane",
+            parts : [
+                [ //body
+                    [[59, 73, 135], [44, 53, 113], [29, 33, 91]],
+                    [[3, 5, -9], [7, 11, -17]]
+                ],
+                [ //belly
+                    [[205, 247, 247], [130, 173, 177], [74, 104, 116]],
+                    [[5, 10, -28], [17, 19, -52]]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000"
+        }
     ]
 }
-const orcane = {
-    body: [
-        [[59, 73, 135], [44, 53, 113], [29, 33, 91]],
-        [[3, 5, -9], [7, 11, -17]]
-    ],
-    belly: [
-        [[205, 247, 247], [130, 173, 177], [74, 104, 116]],
-        [[5, 10, -28], [17, 19, -52]]
-    ]
-}
+
+
 
 
 /* Actual webpage code */
 
-const codeInput = document.getElementById("codeInput");
+let currentChar; // this will hold the values from the db just above
+let charCanvas; // this will be used for the canvases
 
+let maxLength; // limits how many characters there should be in the code input
+
+const charIcon = document.getElementById("selectedIcon");
+const codeInput = document.getElementById("codeInput");
+const recolorButton = document.getElementById("bRecolor");
+const codeWarning = document.getElementById("row2");
+
+
+//this will fire everytime we type in the color code input
+codeInput.addEventListener("input", codeControl); 
+function codeControl() {
+
+    //look if the code length is correct or if its above or below the limit
+    if (codeInput.value.length == currentChar.placeholder.length || codeInput.value == "") {
+
+        //if correct, set everything to normal
+        codeInput.style.filter = "";
+        codeWarning.innerHTML = "";
+        codeWarning.value = "";
+
+        recolorButton.style.filter = "brightness(1)";
+        recolorButton.style.pointerEvents = "auto";
+
+    } else if (codeInput.value.length < currentChar.placeholder.length) {
+
+        //if its below the limit, warn the user with pretty colors and texts
+        codeInput.style.filter = "drop-shadow(0px 0px 3px orange)";
+        const dif = currentChar.placeholder.length - codeInput.value.length; //character dif
+        codeWarning.innerHTML = "This color code has "+dif+" less characters than it should.";
+        codeWarning.style.color = "orange";
+
+        //prevent the user from interacting with the recolor button
+        recolorButton.style.filter = "brightness(.8)";
+        recolorButton.style.pointerEvents = "none";
+
+    } else if (codeInput.value.length > currentChar.placeholder.length) {
+
+        //if its above the limit, well thats a big no no
+        codeInput.style.filter = "drop-shadow(0px 0px 3px red)";
+        codeWarning.innerHTML = "This color code has too many characters.";
+        codeWarning.style.color = "red";
+
+        recolorButton.style.filter = "brightness(.8)";
+        recolorButton.style.pointerEvents = "none";
+
+    }
+
+}
+
+
+//the recolor button((, also runs when we press enter))
 document.getElementById("bRecolor").addEventListener("click", clickRecolor);
 function clickRecolor() {
-    const hex = codeInput.value;
-    const rgb = hexDecode(hex);
-    char.recolor(rgb);
+    const hex = codeInput.value; //grab the color code
+    const rgb = hexDecode(hex); //make some sense out of it
+    charCanvas.recolor(rgb); //recolor the image!
 }
 
-let char;
 
-orc();
+//when the page loads, change to a random character
+changeChar(Math.round(Math.random()*1));
 
-function eta() {
-    char = new Character("Etalus", [etalus.body, etalus.ice, etalus.shading]);
-    codeInput.placeholder = "0000-0000-0000-0000-0000";
+
+//whenever the character changes
+function changeChar(charNum) {
+
+    //look at the database to see whats up
+    currentChar = db.chars[charNum];
+    //create a new character with this info
+    charCanvas = new Character(currentChar.name, currentChar.parts);
+
+    //set a new placeholder text and a new limit
+    codeInput.placeholder = currentChar.placeholder;
+    maxLength = currentChar.placeholder.length;
+    //then clear the current color code
+    codeInput.value = "";
+    codeControl(); //to reset the warning message if any
+
+    //change the character icon
+    charIcon.setAttribute("src", "Characters/"+currentChar.name+"/1.png");
+
 }
 
-function orc() {
-    char = new Character("Orcane", [orcane.body, orcane.belly]);
-    codeInput.placeholder = "0000-0000-0000-0000";
+//create the character dropdown menu
+charSwitcher();
+function charSwitcher() {
+    const drop = document.getElementById("charDropdown")
+
+    for (let i = 0; i < db.chars.length; i++) {
+        
+        //create a new div that will have the char info
+        const newDiv = document.createElement('div');
+        newDiv.className = "charEntry";
+
+        //if the div gets clicked, update the character to be recolored
+        newDiv.addEventListener("click", () => {
+            changeChar(i);
+            drop.parentElement.blur();
+        });
+
+        //create the character image, randomized icon just because we can
+        const newImg = document.createElement('img');
+        newImg.setAttribute("src", "Characters/"+db.chars[i].name+"/"+(Math.round(Math.random())+2)+".png");
+        newImg.className = "iconImage";
+
+        //create the char's box in the dropown
+        const newText = document.createElement('span');
+        newText.innerHTML = db.chars[i].name;
+
+        //add them to the div we created before
+        newDiv.appendChild(newImg);
+        newDiv.appendChild(newText);
+
+        //now add them to the actual interface
+        drop.appendChild(newDiv);
+
+    }
 }

@@ -1,3 +1,9 @@
+:root {
+    --bg: #7c6bb4;
+    --bgH: #9484c9;
+}
+
+
 html {
     background-color: #514188;
     color: white;
@@ -9,6 +15,12 @@ html {
     align-items: center;
 }
 
+#imageDiv {
+    height: 339px;
+    display: flex;
+    align-items: center;
+}
+
 #belowCanvas {
     display: flex;
     flex-direction: column;
@@ -17,7 +29,68 @@ html {
 
 
 .row {
-    padding: 10px;
+    padding: 5px;
+}
+
+
+#charSelector {
+    width: 44px;
+    height: 44px;
+    border-radius: 20px;
+    margin-right: 10px;
+    background-color: #7c6bb4;
+    float: left;
+    transition: background-color 150ms;
+    position: relative;
+}
+#selectedIcon {
+    width: 32px;
+    height: 32px;
+    margin-top: 6px;
+    margin-left: 6px;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
+}
+#charSelector:hover {
+    cursor: pointer;
+    background-color: var(--bgH);
+}
+#charSelector:active {
+    filter: brightness(.9);
+}
+
+#charDropdown {
+    display: none;
+    position: absolute;
+    background-color: var(--bg);
+    width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+    font-size: 16px;
+    margin-top: 7px;
+    border-radius: 5px;
+}
+.charEntry {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 5px;
+}
+
+.iconImage {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
+}
+
+.charEntry:hover {
+    background-color: var(--bgH);
+}
+
+#charSelector:focus #charDropdown {
+    display: block;
 }
 
 
@@ -32,26 +105,41 @@ input {
     background-color: #7c6bb4;
     color: white;
     float: left;
+    transition: background-color 150ms;
+    margin-top: 5px;
 }
 
 #bRecolor {
-    width: 65px;
+    width: 20px;
     height: 25px;
     border-radius: 0px 20px 20px 0px;
-    padding: 5px 10px;
-    background-color: #7c6bb4;
+    padding: 5px 8px 5px 5px;
+    background-color: var(--bg);
     float: left;
-    border-left: 1px solid #9f96bd;
+    transition: background-color 150ms;
+    margin-top: 5px;
+}
+#goIcon {
+    height: 20px;
+    width: 20px;
+    margin-top: 2px;
+    fill: lightgray;
 }
 
-input:hover, #bRecolor:hover {
-    filter: brightness(1.1);
+input:hover, #bRecolor:hover, input:focus {
+    background-color: #9484c9;
 }
 #bRecolor:hover {
     cursor: pointer;
 }
 #bRecolor:active {
     filter: brightness(.9);
+}
+
+
+#row2 {
+    font-size: 14px;
+    height: 16px;
 }
 
 
