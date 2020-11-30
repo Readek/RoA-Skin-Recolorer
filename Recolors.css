@@ -3,10 +3,16 @@
     --bgH: #9484c9;
 }
 
+@font-face {
+    font-family: "Roboto-Regular";
+    src: url('Roboto-Regular.ttf');
+}
+
 
 html {
     background-color: #514188;
     color: white;
+    font-family: 'Roboto-Regular';
 }
 
 #content {
@@ -16,14 +22,8 @@ html {
 }
 
 #imageDiv {
-    height: 339px;
+    height: 339px; /* max image heigth, which is Ranno's */
     display: flex;
-    align-items: center;
-}
-
-#belowCanvas {
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -42,6 +42,7 @@ html {
     float: left;
     transition: background-color 150ms;
     position: relative;
+    outline: none; /* Chromium only */
 }
 #selectedIcon {
     width: 32px;
@@ -108,6 +109,9 @@ input {
     transition: background-color 150ms;
     margin-top: 5px;
 }
+input::placeholder { /* this is just for Chromium */
+    color: lightgrey;
+}
 
 #bRecolor {
     width: 20px;
@@ -126,6 +130,8 @@ input {
     fill: lightgray;
 }
 
+
+
 input:hover, #bRecolor:hover, input:focus {
     background-color: #9484c9;
 }
@@ -143,10 +149,74 @@ input:hover, #bRecolor:hover, input:focus {
 }
 
 
+#row3 {
+    display: flex;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px 10px 0px;
+    height: 26px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: white;
+    transition: filter 100ms;
+}
+.buttons:hover {
+    filter: brightness(1.1);
+}
+.buttons:active {
+    filter: brightness(.9);
+}
+
+#randomize {
+    background-color: #75b46f;
+}
+#randomIcon {
+    height: 36px;
+    width: 36px;
+    fill: white;
+    margin-left: -5px;
+    margin-right: -2px;
+    margin-top: 7px;
+}
+
+#uplImg {
+    background-color: #7992c2;
+}
+#uploadIcon {
+    height: 28px;
+    width: 28px;
+    fill: white;
+    margin-right: 3px;
+}
+
+#downImgButton {
+    background-color: #c27979;
+}
+#downIcon {
+    height: 24px;
+    width: 24px;
+    fill: white;
+    margin-left: -2px;
+    margin-right: 2px;
+    margin-top: 4px;
+}
+
+
+div>a:link {
+    text-decoration: none;
+}
+div>a:visited {
+    text-decoration: none;
+}
 a:link {
     color: lightsalmon;
 }
-
 a:visited {
     color: lightgrey;
 }

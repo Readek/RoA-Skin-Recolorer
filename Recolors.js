@@ -307,6 +307,8 @@ const codeInput = document.getElementById("codeInput");
 const recolorButton = document.getElementById("bRecolor");
 const codeWarning = document.getElementById("row2");
 
+const downImgButton = document.getElementById("downImg");
+
 
 //this will fire everytime we type in the color code input
 codeInput.addEventListener("input", codeControl); 
@@ -360,7 +362,7 @@ function clickRecolor() {
 
 
 //when the page loads, change to a random character
-changeChar(Math.round(Math.random()*1));
+changeChar(genRnd(0, 1));
 
 
 //whenever the character changes
@@ -402,7 +404,7 @@ function charSwitcher() {
 
         //create the character image, randomized icon just because we can
         const newImg = document.createElement('img');
-        newImg.setAttribute("src", "Characters/"+db.chars[i].name+"/"+(Math.round(Math.random())+2)+".png");
+        newImg.setAttribute("src", "Characters/"+db.chars[i].name+"/"+genRnd(2, 3)+".png");
         newImg.className = "iconImage";
 
         //create the char's box in the dropown
@@ -418,3 +420,15 @@ function charSwitcher() {
 
     }
 }
+
+
+//just a simple random function
+function genRnd(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+
+//download image button, adds the canvas to the download
+downImgButton.addEventListener('click', () =>
+    downImgButton.href = mainCa.toDataURL()
+);
