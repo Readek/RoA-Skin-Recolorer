@@ -8,7 +8,7 @@ const mainCo = mainCa.getContext("2d");
 class Character {
     constructor(charName, parts) {
 
-        //this is the base image that we will split in different separated colors
+        //this is the base image that we will split in different isolated colors
         const image = new Image();
         image.src = "Characters/"+charName+"/Full.png";
         image.onload = () => {
@@ -48,7 +48,7 @@ class Part {
             if (i == 0) {
                 subs.push(new SubPart(inColors[0])); //final color wont get modified
             } else {
-                subs.push(new SubPart(inColors[i], range[i-1])); //range defines darkness
+                subs.push(new SubPart(inColors[i], range[i-1])); //range defines color difference
             }
             
         }
@@ -75,7 +75,7 @@ class SubPart {
         let g = inColor[1];
         let b = inColor[2];
 
-        //darkness difference in hsv for the color
+        //color difference from the original color in hsv
         const colorRange = range;
 
         //create a separate image containing only this color, add it to the part's canvas
@@ -104,7 +104,7 @@ class SubPart {
                 //convert the sent rgb to hsv
                 const hsv = rgb2hsv(rgb[0], rgb[1], rgb[2]);
 
-                //add the values to make it darker
+                //add the values to make it brighter or darker
                 for (let i = 0; i < hsv.length; i++) {
                     if (hsv[i] + colorRange[i] < 0) {
                         hsv[i] = 0; //if the value ends negative, set it to 0
@@ -133,6 +133,8 @@ class SubPart {
                     imgData.data[i] = rgb[0];
                     imgData.data[i + 1] = rgb[1];
                     imgData.data[i + 2] = rgb[2];
+                    //since we are not changing alpha value [i+3], 100% transparent pixels
+                    //won't show any change even if we actually recolored them
                 }
 
                 //the result will be added to the main canvas
@@ -276,6 +278,27 @@ const db = {
             placeholder : "0000-0000-0000-0000-0000"
         },
         {
+            name : "Kragg",
+            parts : [
+                [ //rock, yes this part controls 7 different colors at once
+                    [[136, 104, 93], [187, 155, 143], [99, 70, 61], [217, 199, 193], [172, 136, 128], [133, 100, 108], [109, 77, 80]],
+                    [[1, -8, 20], [-1, 6, -14], [0, -21, 32], [-4, -6, 14], [330, -7, -1], [339, -3, -10]]
+                ],
+                [ //skin
+                    [[121, 173, 100], [65, 129, 66], [45, 89, 46]],
+                    [[18, 8, -17], [18, 7, -33]]
+                ],
+                [ //armor
+                    [[213, 216, 221], [139, 141, 167], [103, 105, 127]],
+                    [[18, 13, -22], [17, 15, -37]]
+                ],
+                [ //shading
+                    [[60, 36, 36]]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000"
+        },
+        {
             name : "Orcane",
             parts : [
                 [ //body
@@ -362,7 +385,7 @@ function clickRecolor() {
 
 
 //when the page loads, change to a random character
-changeChar(genRnd(0, 1));
+changeChar(genRnd(0, 2));
 
 
 //whenever the character changes
@@ -382,6 +405,13 @@ function changeChar(charNum) {
 
     //change the character icon
     charIcon.setAttribute("src", "Characters/"+currentChar.name+"/1.png");
+
+    //adjust the code input width
+    resizeInput();
+
+    //make the recolor button unclickable and show some feedback
+    recolorButton.style.filter = "brightness(.8)";
+    recolorButton.style.pointerEvents = "none";
 
 }
 
@@ -418,6 +448,19 @@ function charSwitcher() {
         //now add them to the actual interface
         drop.appendChild(newDiv);
 
+    }
+}
+
+
+//adjust the input width depending on code length
+function resizeInput() {
+
+    if (maxLength == 19) { //orcane
+        codeInput.style.width = "170px";
+    } else if (maxLength == 24) { //etalus
+        codeInput.style.width = "210px";
+    } else if (maxLength == 34) { //kragg
+        codeInput.style.width = "300px";
     }
 }
 
