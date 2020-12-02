@@ -338,21 +338,24 @@ codeInput.addEventListener("input", codeControl);
 function codeControl() {
 
     //look if the code length is correct or if its above or below the limit
-    if (codeInput.value.length == currentChar.placeholder.length || codeInput.value == "") {
+    if (codeInput.value.length == currentChar.placeholder.length) {
 
         //if correct, set everything to normal
-        codeInput.style.filter = "";
         codeWarning.innerHTML = "";
-        codeWarning.value = "";
-
         recolorButton.style.filter = "brightness(1)";
         recolorButton.style.pointerEvents = "auto";
 
+    } else if (codeInput.value == "") {
+
+        //if no code, just disable the recolor button
+        codeWarning.innerHTML = "";
+        recolorButton.style.filter = "brightness(.8)";
+        recolorButton.style.pointerEvents = "none";
+
     } else if (codeInput.value.length < currentChar.placeholder.length) {
 
-        //if its below the limit, warn the user with pretty colors and texts
-        codeInput.style.filter = "drop-shadow(0px 0px 3px orange)";
-        const dif = currentChar.placeholder.length - codeInput.value.length; //character dif
+        //if its below the limit, warn the user
+        const dif = currentChar.placeholder.length - codeInput.value.length;
         codeWarning.innerHTML = "This color code has "+dif+" less characters than it should.";
         codeWarning.style.color = "orange";
 
@@ -363,7 +366,6 @@ function codeControl() {
     } else if (codeInput.value.length > currentChar.placeholder.length) {
 
         //if its above the limit, well thats a big no no
-        codeInput.style.filter = "drop-shadow(0px 0px 3px red)";
         codeWarning.innerHTML = "This color code has too many characters.";
         codeWarning.style.color = "red";
 
@@ -458,7 +460,7 @@ function resizeInput() {
     if (maxLength == 19) { //orcane
         codeInput.style.width = "170px";
     } else if (maxLength == 24) { //etalus
-        codeInput.style.width = "210px";
+        codeInput.style.width = "215px";
     } else if (maxLength == 34) { //kragg
         codeInput.style.width = "300px";
     }
@@ -475,3 +477,52 @@ function genRnd(min, max) {
 downImgButton.addEventListener('click', () =>
     downImgButton.href = mainCa.toDataURL()
 );
+
+
+//randomize button, generates a random valid code based on character parts count
+document.getElementById("randomize").addEventListener("click", () => {
+    randomize(currentChar.parts.length)
+});
+function randomize(colorNum) {
+
+    //code from https://github.com/ErrorThreeOThree/ROAColorCodeBot
+
+    //randomize the rgb values
+	const r = [...Array(colorNum)].map(() => Math.floor(Math.random() * 256));
+	const g = [...Array(colorNum)].map(() => Math.floor(Math.random() * 256));
+    const b = [...Array(colorNum)].map(() => Math.floor(Math.random() * 256));
+    
+    //generate a valid checksum (this is only for the game, the webpage doesn't need this)
+	let checksum = 0;
+	for (let i = 0; i < colorNum; i++)
+	{
+		checksum += (i + 101) * r[i];
+		checksum += (i + 102) * g[i];
+		checksum += (i + 103) * b[i];
+	}
+    checksum = checksum % 256;
+    
+    //convert the rgb values to hex, add those and the checksum to a single string
+    let code = "";
+    let i = 0;
+	for (i; i < colorNum; i++)
+	{
+		code += r[i].toString(16).toUpperCase().padStart(2, '0');
+		code += g[i].toString(16).toUpperCase().padStart(2, '0');
+		code += b[i].toString(16).toUpperCase().padStart(2, '0');
+	}
+	code += checksum.toString(16).toUpperCase().padStart(2, '0');
+	if (i % 2 == 0)
+	{
+		code += "00";
+    }
+    
+    //put the code in the code input, separating the full color code with "-" every 4 characters    
+    codeInput.value = code.match(/.{1,4}/g).join("-");
+
+    //check the code, this is just to allow the recolor button to be clicked
+    codeControl();
+
+    //automatically click the recolor button to show the results
+    recolorButton.click();
+}

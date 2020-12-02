@@ -158,7 +158,7 @@ input:hover, #bRecolor:hover, input:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px 10px 10px 0px;
+    margin: 0px 5px 0px 5px;
     height: 26px;
     border-radius: 20px;
     padding: 5px 10px;
@@ -168,6 +168,7 @@ input:hover, #bRecolor:hover, input:focus {
 }
 .buttons:hover {
     filter: brightness(1.1);
+    cursor: pointer;
 }
 .buttons:active {
     filter: brightness(.9);
