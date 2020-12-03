@@ -6,11 +6,15 @@ const mainCo = mainCa.getContext("2d");
 /* Character Properties */
 
 class Character {
-    constructor(charName, parts) {
+    constructor(charName, parts, imgsrc = false) {
 
         //this is the base image that we will split in different isolated colors
         const image = new Image();
-        image.src = "Characters/"+charName+"/Full.png";
+        if (imgsrc) {
+            image.src = imgsrc;
+        } else {
+            image.src = "Characters/"+charName+"/Full.png";
+        }
         image.onload = () => {
 
             //change the size of the main canvas
@@ -561,3 +565,23 @@ function randomize(colorNum) {
     //automatically click the recolor button to show the results
     recolorButton.click();
 }
+
+
+//file upload button
+const defaultFile = document.getElementById("fileupload");
+//when clicking on the fake upload image button, click on the hidden upload file button
+document.getElementById("uplImg").addEventListener("click", () => {
+    defaultFile.click();
+});
+//if we got a file
+defaultFile.addEventListener("change", () => {
+    const newImg = defaultFile.files[0]; //i think you can only select 1 file but just in case
+
+    //read file with some magic i dont really understand
+    const fileReader = new FileReader();
+    fileReader.addEventListener("load", function () {
+        //create a new character using the current values, but adding a new image as 'result'
+        charCanvas = new Character(currentChar.name, currentChar.parts, this.result);
+    });
+    fileReader.readAsDataURL(newImg); //imma be honest idk what this is but it doesnt work without it
+});
