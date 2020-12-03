@@ -275,7 +275,8 @@ const db = {
                     [[-2, -4, -10]]
                 ]
             ],
-            placeholder : "0000-0000-0000-0000-0000"
+            placeholder : "0000-0000-0000-0000-0000",
+            icons : 4
         },
         {
             name : "Kragg",
@@ -296,7 +297,8 @@ const db = {
                     [[60, 36, 36]]
                 ]
             ],
-            placeholder : "0000-0000-0000-0000-0000-0000-0000"
+            placeholder : "0000-0000-0000-0000-0000-0000-0000",
+            icons : 4
         },
         {
             name : "Orcane",
@@ -310,7 +312,31 @@ const db = {
                     [[5, 10, -28], [17, 19, -52]]
                 ]
             ],
-            placeholder : "0000-0000-0000-0000"
+            placeholder : "0000-0000-0000-0000",
+            icons : 4
+        },
+        {
+            name : "Shovel Knight",
+            parts : [
+                [ //armor light, 
+                    [[58, 210, 228], [49, 167, 181], [40, 124, 134]],
+                    [[0, -2, -18], [0, -5, -36]]
+                ],
+                [ //armor dark
+                    [[59, 73, 135], [44, 53, 113]],
+                    [[3, 5, -9]]
+                ],
+                [ //trim
+                    [[255, 255, 0], [255, 160, 0]],
+                    [[-22, 0, 0]]
+                ],
+                [ //horns
+                    [[220, 203, 105], [200, 126, 30]],
+                    [[-17, 33, -8]]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000",
+            icons : 5
         }
     ]
 }
@@ -376,9 +402,16 @@ function codeControl() {
 
 }
 
+// when typing the color code, if pressing enter, click on the recolor button
+codeInput.addEventListener("keydown", event => {
+    if(event.key !== "Enter") return;
+    recolorButton.click();
+    event.preventDefault();
+});
 
-//the recolor button((, also runs when we press enter))
-document.getElementById("bRecolor").addEventListener("click", clickRecolor);
+
+//the recolor button
+recolorButton.addEventListener("click", clickRecolor);
 function clickRecolor() {
     const hex = codeInput.value; //grab the color code
     const rgb = hexDecode(hex); //make some sense out of it
@@ -436,7 +469,9 @@ function charSwitcher() {
 
         //create the character image, randomized icon just because we can
         const newImg = document.createElement('img');
-        newImg.setAttribute("src", "Characters/"+db.chars[i].name+"/"+genRnd(2, 3)+".png");
+        newImg.setAttribute("src",
+            "Characters/"+db.chars[i].name+"/"+genRnd(2, db.chars[i].icons)+".png"
+        );
         newImg.className = "iconImage";
 
         //create the char's box in the dropown
@@ -457,11 +492,11 @@ function charSwitcher() {
 //adjust the input width depending on code length
 function resizeInput() {
 
-    if (maxLength == 19) { //orcane
+    if (maxLength == 19) { // Orcane
         codeInput.style.width = "170px";
-    } else if (maxLength == 24) { //etalus
+    } else if (maxLength == 24) { // Etalus
         codeInput.style.width = "215px";
-    } else if (maxLength == 34) { //kragg
+    } else if (maxLength == 34) { // kragg, Shovel Knight
         codeInput.style.width = "300px";
     }
 }

@@ -25,6 +25,8 @@ html {
     height: 339px; /* max image heigth, which is Ranno's */
     display: flex;
     align-items: center;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
 }
 
 
@@ -45,12 +47,13 @@ html {
     outline: none; /* Chromium only */
 }
 #selectedIcon {
-    width: 32px;
-    height: 32px;
-    margin-top: 6px;
-    margin-left: 6px;
+    width: 30px;
+    height: 30px;
+    margin-top: 7px;
+    margin-left: 7px;
     image-rendering: pixelated; /* Chromium */
     image-rendering: crisp-edges; /* Firefox */
+    object-fit: contain;
 }
 #charSelector:hover {
     cursor: pointer;
@@ -64,7 +67,7 @@ html {
     display: none;
     position: absolute;
     background-color: var(--bg);
-    width: 100px;
+    width: 145px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 3;
     font-size: 16px;
@@ -84,6 +87,7 @@ html {
     margin-right: 5px;
     image-rendering: pixelated; /* Chromium */
     image-rendering: crisp-edges; /* Firefox */
+    object-fit: contain;
 }
 
 .charEntry:hover {
@@ -96,7 +100,7 @@ html {
 
 
 input {
-    width: 210px;
+    width: 120px; /* init width is just so an animation happens on page load */
     height: 25px;
     outline: none;
     border: none;
@@ -106,12 +110,16 @@ input {
     background-color: #7c6bb4;
     color: white;
     float: left;
-    transition: background-color 150ms;
+    transition: background-color 150ms, width 150ms;
     margin-top: 5px;
 }
 input::placeholder { /* this is just for Chromium */
     color: lightgrey;
 }
+input:hover, input:focus, #bRecolor:hover {
+    background-color: #8a7bbb;
+}
+
 
 #bRecolor {
     width: 20px;
@@ -120,7 +128,7 @@ input::placeholder { /* this is just for Chromium */
     padding: 5px 8px 5px 5px;
     background-color: var(--bg);
     float: left;
-    transition: background-color 150ms;
+    transition: background-color 100ms;
     margin-top: 5px;
 }
 #goIcon {
@@ -129,17 +137,11 @@ input::placeholder { /* this is just for Chromium */
     margin-top: 2px;
     fill: lightgray;
 }
-
-
-
-input:hover, #bRecolor:hover, input:focus {
-    background-color: #9484c9;
-}
 #bRecolor:hover {
     cursor: pointer;
 }
 #bRecolor:active {
-    filter: brightness(.9);
+    background-color: #7c6bb4;
 }
 
 
@@ -165,6 +167,7 @@ input:hover, #bRecolor:hover, input:focus {
     font-size: 16px;
     color: white;
     transition: filter 100ms;
+    user-select: none;
 }
 .buttons:hover {
     filter: brightness(1.1);
