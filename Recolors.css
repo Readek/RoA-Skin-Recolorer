@@ -1,4 +1,5 @@
 :root {
+    --mainBG: #514188;
     --bg: #7c6bb4;
     --bgH: #9484c9;
 }
@@ -10,10 +11,25 @@
 
 
 html {
-    background-color: #514188;
+    background-color: var(--mainBG);
     color: white;
     font-family: 'Roboto-Regular';
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--bg) var(--mainBG); /* Firefox */
 }
+
+/* all of this is chromium only */
+body::-webkit-scrollbar {
+    width: 5px; /* this doesnt seem to matter at all? */
+    height: 5px;
+}
+body::-webkit-scrollbar-track {
+    background: var(--mainBG);
+  }
+body::-webkit-scrollbar-thumb {
+    background-color: var(--bg);
+}
+
 
 #content {
     display: flex;
@@ -21,12 +37,13 @@ html {
     align-items: center;
 }
 
-#imageDiv {
+#resultImg {
     height: 339px; /* max image heigth, which is Ranno's */
+    width: 600px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    image-rendering: pixelated; /* Chromium */
-    image-rendering: crisp-edges; /* Firefox */
+    object-fit: scale-down;
 }
 
 
@@ -114,7 +131,7 @@ input {
     margin-top: 5px;
 }
 input::placeholder { /* this is just for Chromium */
-    color: lightgrey;
+    color: rgb(158, 158, 158);
 }
 input:hover, input:focus, #bRecolor:hover {
     background-color: #8a7bbb;

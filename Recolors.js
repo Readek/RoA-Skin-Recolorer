@@ -1,5 +1,6 @@
 /* This is where the image is going to appear */
-const mainCa = document.getElementById("mainCanvas");
+const mainImg = document.getElementById("resultImg");
+const mainCa = document.createElement("canvas");
 const mainCo = mainCa.getContext("2d");
 
 
@@ -27,8 +28,12 @@ class Character {
             //create the different parts of the character that will be recolored
             this.charParts = [];
             for (let i = 0; i < parts.length; i++) {
-                this.charParts.push(new Part(parts[i][0], parts[i][1]));
-            }            
+                this.charParts.push(new Part(parts[i]));
+            }
+            
+            //when thats finished, add the result to the webpage image
+            //we are not using the canvas itself since it cant be resized if it overflows
+            mainImg.src = mainCa.toDataURL();
         };
 
     }
@@ -44,15 +49,28 @@ class Character {
 /* Character Parts */
 
 class Part {
-    constructor(inColors, range) {
+    constructor(inColors) {
 
         const subs = [];
         //each part will have different colors deviating from the original for shading
         for (let i = 0; i < inColors.length; i++) {
             if (i == 0) {
-                subs.push(new SubPart(inColors[0])); //final color wont get modified
+                //main part, final color wont get modified
+                subs.push(new SubPart(inColors[0]));
             } else {
-                subs.push(new SubPart(inColors[i], range[i-1])); //range defines color difference
+                //for subparts, color is decided in reference to the main part, so we need the delta
+                const ogHSV = rgb2hsv(inColors[0][0],inColors[0][1],inColors[0][2]);
+                const newHSV = rgb2hsv(inColors[i][0],inColors[i][1],inColors[i][2]);
+                const colorDelta = []
+                colorDelta[0] = ogHSV[0] - newHSV[0];
+                colorDelta[1] = ogHSV[1] - newHSV[1];
+                colorDelta[2] = ogHSV[2] - newHSV[2];
+         
+                //i dont know what this does but it was in the ingame code so
+                if (Math.abs(colorDelta[0])>0.5) colorDelta[0] -= Math.sign(colorDelta[0]);
+
+                //add a new sub part that will add the color diference to the main color
+                subs.push(new SubPart(inColors[i], colorDelta));
             }
             
         }
@@ -109,17 +127,22 @@ class SubPart {
                 const hsv = rgb2hsv(rgb[0], rgb[1], rgb[2]);
 
                 //add the values to make it brighter or darker
-                for (let i = 0; i < hsv.length; i++) {
-                    if (hsv[i] + colorRange[i] < 0) {
-                        hsv[i] = 0; //if the value ends negative, set it to 0
-                    } else {
-                        hsv[i] += colorRange[i];
-                    }
-                    
-                }                
+                hsv[0] = hsv[0] - colorRange[0] //ingame shader adds % 1 to this? https://pastebin.com/kXsTD1Vu
+                hsv[1] = clamp((hsv[1] - colorRange[1]), 0.0, 1.0);
+                hsv[2] = clamp((hsv[2] - colorRange[2]), 0.0, 1.0);
+
+                //just in case it somehow gets out of range
+                function clamp(num, min, max) {
+                    return num <= min ? min : num >= max ? max : num;
+                }
 
                 //convert back to rgb
                 const charRgb = hsv2rgb(hsv[0], hsv[1], [hsv[2]]);
+
+                //we like to work with int values
+                charRgb[0] = charRgb[0] * 255
+                charRgb[1] = charRgb[1] * 255
+                charRgb[2] = charRgb[2] * 255
 
                 //then recolor
                 recolorChar(charRgb, context, canvas);
@@ -184,99 +207,92 @@ function hex2rgb(hex) {
 
 function rgb2hsv (r, g, b) {
 
-    //code from https://github.com/netbeast/colorsys, a bit modified
+    // this is the ingame code translated from https://pastebin.com/kXsTD1Vu
+    // i didnt manage to get it working right for some reason
 
-    const RGB_MAX = 255;
-    const HUE_MAX = 360;
-    const SV_MAX = 100;
-  
-    // It converts [0,255] format, to [0,1]
-    r = (r === RGB_MAX) ? 1 : (r % RGB_MAX / parseFloat(RGB_MAX))
-    g = (g === RGB_MAX) ? 1 : (g % RGB_MAX / parseFloat(RGB_MAX))
-    b = (b === RGB_MAX) ? 1 : (b % RGB_MAX / parseFloat(RGB_MAX))
-  
-    var max = Math.max(r, g, b)
-    var min = Math.min(r, g, b)
-    var h, s, v = max
-  
-    var d = max - min
-  
-    s = max === 0 ? 0 : d / max
-  
-    if (max === min) {
-      h = 0 // achromatic
-    } else {
-      switch (max) {
-        case r:
-          h = (g - b) / d + (g < b ? 6 : 0)
-          break
-        case g:
-          h = (b - r) / d + 2
-          break
-        case b:
-          h = (r - g) / d + 4
-          break
-      }
-      h /= 6
+    /* r = r/255, g = g/255, b = b/255;
+
+    let H, S, V;
+ 
+    const M = Math.max(r, Math.max(g, b));
+    const m = Math.min(r, Math.min(g, b));
+ 
+    V = M;
+ 
+    const C = M - m;
+ 
+    if (C > 0)
+    {
+        if (M == r) H = 6 % ( (g - b) / C);
+        if (M == g) H = (b - r) / C + 2.0;
+        if (M == b) H = (r - g) / C + 4.0;
+        H /= 6;
+        S = C / V;
     }
-  
-    h = h * HUE_MAX
-    s = s * SV_MAX
-    v = v * SV_MAX
+ 
+    return [H, S, V]; */
+
+
+    //now this actually gives us the correct values
+
+    r = r/255, g = g/255, b = b/255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, v = max;
+
+    var d = max - min;
+    s = max == 0 ? 0 : d / max;
+
+    if (max == min) {
+        h = 0; // achromatic
+    } else {
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
 
     return [h, s, v];
   }
 
 
-function hsv2rgb(h, s, v) {
-    var r, g, b, i, f, p, q, t;
+function hsv2rgb(H, S, V) {
 
-    h = h / 360;
-    s = s / 100;
-    v = v / 100;
+    // translated from https://pastebin.com/kXsTD1Vu
 
-    i = Math.floor(h * 6);
-    f = h * 6 - i;
-    p = v * (1 - s);
-    q = v * (1 - f * s);
-    t = v * (1 - (1 - f) * s);
-    switch (i % 6) {
-        case 0: r = v, g = t, b = p; break;
-        case 1: r = q, g = v, b = p; break;
-        case 2: r = p, g = v, b = t; break;
-        case 3: r = p, g = q, b = v; break;
-        case 4: r = t, g = p, b = v; break;
-        case 5: r = v, g = p, b = q; break;
-    }
-
-    r = Math.round(r * 255)
-    g = Math.round(g * 255)
-    b = Math.round(b * 255)
-    return [r, g, b]  
+    let C = V * S;
+ 
+    H *= 6;
+    let X = C * (1 - Math.abs( H % 2 - 1 ));
+    let m = V - C;
+    C += m;
+    X += m;
+ 
+    if (H < 1) return [C, X, m];
+    if (H < 2) return [X, C, m];
+    if (H < 3) return [m, C, X];
+    if (H < 4) return [m, X, C];
+    if (H < 5) return [X, m, C];
+    else       return [C, m, X];
 }
 
 
 /* Character Database */
-
-// Each part will follow the same structure:
-// [the rgb values of the original parts]
-// [the hsv color differences from the original color]
+// Each part will include arrays with the original subpart rgb values
 const db = {
     "chars": [
         {
             name : "Etalus",
             parts : [
                 [ //body
-                    [[251, 250, 252], [200, 182, 226], [129, 100, 168]],
-                    [[-5, 18, -10], [-4, 39, -33]]
+                    [251, 250, 252], [200, 182, 226], [129, 100, 168]
                 ],
                 [ //ice
-                    [[180, 230, 230], [130, 173, 177], [74, 104, 116]],
-                    [[5, 5, -21], [17, 14, -45]]
+                    [180, 230, 230], [130, 173, 177], [74, 104, 116]
                 ],
                 [ //shading
-                    [[67, 68, 87], [50, 51, 62]],
-                    [[-2, -4, -10]]
+                    [67, 68, 87], [50, 51, 62]
                 ]
             ],
             placeholder : "0000-0000-0000-0000-0000",
@@ -286,19 +302,16 @@ const db = {
             name : "Kragg",
             parts : [
                 [ //rock, yes this part controls 7 different colors at once
-                    [[136, 104, 93], [187, 155, 143], [99, 70, 61], [217, 199, 193], [172, 136, 128], [133, 100, 108], [109, 77, 80]],
-                    [[1, -8, 20], [-1, 6, -14], [0, -21, 32], [-4, -6, 14], [330, -7, -1], [339, -3, -10]]
+                    [136, 104, 93], [187, 155, 143], [99, 70, 61], [217, 199, 193], [172, 136, 128], [133, 100, 108], [109, 77, 80]
                 ],
                 [ //skin
-                    [[121, 173, 100], [65, 129, 66], [45, 89, 46]],
-                    [[18, 8, -17], [18, 7, -33]]
+                    [121, 173, 100], [65, 129, 66], [45, 89, 46]
                 ],
                 [ //armor
-                    [[213, 216, 221], [139, 141, 167], [103, 105, 127]],
-                    [[18, 13, -22], [17, 15, -37]]
+                    [213, 216, 221], [139, 141, 167], [103, 105, 127]
                 ],
                 [ //shading
-                    [[60, 36, 36]]
+                    [60, 36, 36]
                 ]
             ],
             placeholder : "0000-0000-0000-0000-0000-0000-0000",
@@ -308,12 +321,10 @@ const db = {
             name : "Orcane",
             parts : [
                 [ //body
-                    [[59, 73, 135], [44, 53, 113], [29, 33, 91]],
-                    [[3, 5, -9], [7, 11, -17]]
+                    [59, 73, 135], [44, 53, 113], [29, 33, 91]
                 ],
                 [ //belly
-                    [[205, 247, 247], [130, 173, 177], [74, 104, 116]],
-                    [[5, 10, -28], [17, 19, -52]]
+                    [205, 247, 247], [130, 173, 177], [74, 104, 116]
                 ]
             ],
             placeholder : "0000-0000-0000-0000",
@@ -323,20 +334,16 @@ const db = {
             name : "Shovel Knight",
             parts : [
                 [ //armor light, 
-                    [[58, 210, 228], [49, 167, 181], [40, 124, 134]],
-                    [[0, -2, -18], [0, -5, -36]]
+                    [58, 210, 228], [49, 167, 181], [40, 124, 134]
                 ],
                 [ //armor dark
-                    [[59, 73, 135], [44, 53, 113]],
-                    [[3, 5, -9]]
+                    [59, 73, 135], [44, 53, 113]
                 ],
                 [ //trim
-                    [[255, 255, 0], [255, 160, 0]],
-                    [[-22, 0, 0]]
+                    [255, 255, 0], [255, 160, 0]
                 ],
                 [ //horns
-                    [[220, 203, 105], [200, 126, 30]],
-                    [[-17, 33, -8]]
+                    [220, 203, 105], [200, 126, 30]
                 ]
             ],
             placeholder : "0000-0000-0000-0000-0000-0000-0000",
@@ -359,7 +366,7 @@ const charIcon = document.getElementById("selectedIcon");
 const codeInput = document.getElementById("codeInput");
 const recolorButton = document.getElementById("bRecolor");
 const codeWarning = document.getElementById("row2");
-
+const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImg");
 
 
@@ -420,6 +427,7 @@ function clickRecolor() {
     const hex = codeInput.value; //grab the color code
     const rgb = hexDecode(hex); //make some sense out of it
     charCanvas.recolor(rgb); //recolor the image!
+    mainImg.src = mainCa.toDataURL(); //update the image!
 }
 
 
@@ -451,6 +459,9 @@ function changeChar(charNum) {
     //make the recolor button unclickable and show some feedback
     recolorButton.style.filter = "brightness(.8)";
     recolorButton.style.pointerEvents = "none";
+
+    //update the dowloaded image name
+    downLink.setAttribute("download", currentChar.name + " Recolor.png");
 
 }
 
@@ -564,6 +575,7 @@ function randomize(colorNum) {
 
     //automatically click the recolor button to show the results
     recolorButton.click();
+
 }
 
 
@@ -575,7 +587,7 @@ document.getElementById("uplImg").addEventListener("click", () => {
 });
 //if we got a file
 defaultFile.addEventListener("change", () => {
-    const newImg = defaultFile.files[0]; //i think you can only select 1 file but just in case
+    const newImg = defaultFile.files[0]; //store the selected file
 
     //read file with some magic i dont really understand
     const fileReader = new FileReader();
