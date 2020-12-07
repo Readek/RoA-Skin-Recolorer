@@ -30,6 +30,11 @@ class Character {
             for (let i = 0; i < parts.length; i++) {
                 this.charParts.push(new Part(parts[i]));
             }
+
+            //Ori is the only character that has to be recolored for startup
+            if (charName == "Ori and Sein") {
+                charCanvas.recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000"));
+            }
             
             //when thats finished, add the result to the webpage image
             //we are not using the canvas itself since it cant be resized if it overflows
@@ -38,6 +43,7 @@ class Character {
 
     }
 
+    //rgb code will already be decoded here
     recolor(rgb) {
         for (let i = 0; i < this.charParts.length; i++) {
             this.charParts[i].recolor(rgb[i]);
@@ -176,6 +182,7 @@ class SubPart {
 
 /* Color Conversions */
 
+//this one will delete the "-" from the codes, then split each color for every 6 characters
 function hexDecode(hex) {
 
     let newHex = "";
@@ -239,7 +246,7 @@ function rgb2hsv (r, g, b) {
     const max = Math.max(r, g, b), min = Math.min(r, g, b);
     let h, s, v = max;
 
-    var d = max - min;
+    const d = max - min;
     s = max == 0 ? 0 : d / max;
 
     if (max == min) {
@@ -580,7 +587,6 @@ const db = {
 
 let currentChar; // this will hold the values from the db just above
 let charCanvas; // this will be used for the canvases
-
 let maxLength; // limits how many characters there should be in the code input
 
 const charIcon = document.getElementById("selectedIcon");
@@ -591,6 +597,9 @@ const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImg");
 
 
+//when the page loads, change to a random character
+changeChar(genRnd(0, db.chars.length - 1));
+
 //this will fire everytime we type in the color code input
 codeInput.addEventListener("input", codeControl); 
 function codeControl() {
@@ -600,6 +609,7 @@ function codeControl() {
 
         //if correct, set everything to normal
         codeWarning.innerHTML = "";
+        codeWarning.style.height = "0px";
         recolorButton.style.filter = "brightness(1)";
         recolorButton.style.pointerEvents = "auto";
 
@@ -607,6 +617,7 @@ function codeControl() {
 
         //if no code, just disable the recolor button
         codeWarning.innerHTML = "";
+        codeWarning.style.height = "0px";
         recolorButton.style.filter = "brightness(.8)";
         recolorButton.style.pointerEvents = "none";
 
@@ -616,6 +627,7 @@ function codeControl() {
         const dif = currentChar.placeholder.length - codeInput.value.length;
         codeWarning.innerHTML = "This color code has "+dif+" less characters than it should.";
         codeWarning.style.color = "orange";
+        codeWarning.style.height = "18px";
 
         //prevent the user from interacting with the recolor button
         recolorButton.style.filter = "brightness(.8)";
@@ -626,6 +638,7 @@ function codeControl() {
         //if its above the limit, well thats a big no no
         codeWarning.innerHTML = "This color code has too many characters.";
         codeWarning.style.color = "red";
+        codeWarning.style.height = "18px";
 
         recolorButton.style.filter = "brightness(.8)";
         recolorButton.style.pointerEvents = "none";
@@ -634,7 +647,7 @@ function codeControl() {
 
 }
 
-// when typing the color code, if pressing enter, click on the recolor button
+//when typing the color code, if pressing enter, click on the recolor button
 codeInput.addEventListener("keydown", event => {
     if(event.key !== "Enter") return;
     recolorButton.click();
@@ -650,10 +663,6 @@ function clickRecolor() {
     charCanvas.recolor(rgb); //recolor the image!
     mainImg.src = mainCa.toDataURL(); //update the image!
 }
-
-
-//when the page loads, change to a random character
-changeChar(genRnd(0, db.chars.length - 1));
 
 
 //whenever the character changes

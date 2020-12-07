@@ -76,9 +76,6 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
     background-color: var(--bgH);
 }
-#charSelector:active {
-    background-color: var(--bg);
-}
 
 #charDropdown {
     display: none;
@@ -170,12 +167,14 @@ input:hover, input:focus, #bRecolor:hover {
 
 
 #row2 {
-    font-size: 14px;
-    height: 16px;
+    font-size: 15px;
+    height: 0px;
+    transition: height 150ms;
+    margin-top: -5px;
 }
 
 
-#row3 {
+#row3, #row4 {
     display: flex;
 }
 
@@ -186,6 +185,7 @@ input:hover, input:focus, #bRecolor:hover {
     align-items: center;
     margin: 0px 5px 0px 5px;
     height: 26px;
+    width: 152px;
     border-radius: 20px;
     padding: 5px 10px;
     font-size: 17px;
@@ -233,6 +233,52 @@ input:hover, input:focus, #bRecolor:hover {
     margin-left: -2px;
     margin-right: 2px;
     margin-top: 4px;
+}
+
+
+.buttonsBot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    transition: filter 100ms;
+    margin: 0px 3px 0px 3px;
+}
+.buttonsBot:hover {
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+.buttonsBot:active {
+    filter: brightness(.9);
+}
+#twitterButton {
+    background-color: #6479be;
+}
+#twitterIcon {
+    height: 21px;
+    width: 21px;
+    fill: white;
+    transform: translate(1px, 1px);
+}
+#githubButton {
+    background-color: #272727;
+}
+#githubIcon {
+    height: 23px;
+    width: 23px;
+    fill: white;
+    transform: translate(0px, 1px);
+}
+#resourcesButton {
+    background-color: #c2934d;
+}
+#resourcesIcon {
+    height: 21px;
+    width: 21px;
+    fill: white;
+    transform: translate(0px, 0px);
 }
 
 
