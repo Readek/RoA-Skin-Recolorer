@@ -77,38 +77,45 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--bgH);
 }
 #charSelector:active {
-    filter: brightness(.9);
+    background-color: var(--bg);
 }
 
 #charDropdown {
     display: none;
     position: absolute;
     background-color: var(--bg);
-    width: 145px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 3;
-    font-size: 16px;
     margin-top: 7px;
     border-radius: 5px;
+    cursor: default;
 }
+.charRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .charEntry {
     display: flex;
     align-items: center;
     height: 30px;
     padding: 5px;
+    background-color: var(--bg);
+    border-radius: 10px;
 }
 
 .iconImage {
     width: 30px;
     height: 30px;
-    margin-right: 5px;
     image-rendering: pixelated; /* Chromium */
     image-rendering: crisp-edges; /* Firefox */
     object-fit: contain;
 }
 
 .charEntry:hover {
-    background-color: var(--bgH);
+    filter: brightness(1.2);
+    cursor: pointer;
 }
 
 #charSelector:focus #charDropdown {
@@ -181,7 +188,7 @@ input:hover, input:focus, #bRecolor:hover {
     height: 26px;
     border-radius: 20px;
     padding: 5px 10px;
-    font-size: 16px;
+    font-size: 17px;
     color: white;
     transition: filter 100ms;
     user-select: none;
@@ -241,3 +248,74 @@ a:link {
 a:visited {
     color: lightgrey;
 }
+
+
+/* modified from https://codepen.io/reiinii1/pen/aPGXEa */
+
+[data-tooltip] {
+    position: relative;
+  }
+  
+  /* Positioning and visibility settings of the tooltip */
+  [data-tooltip]:before,
+  [data-tooltip]:after {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: 50%;
+    bottom: calc(100% + 5px); /* 5px is the size of the arrow */
+    pointer-events: none;
+    transition: 0.05s;
+    margin-bottom: -4px;
+  }
+  
+  /* The actual tooltip with a dynamic width */
+  [data-tooltip]:before {
+    content: attr(data-tooltip);
+    padding: 5px 10px;
+    min-width: 50px;
+    max-width: 310px;
+    width: max-content;
+    width: -moz-max-content;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #222;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-align: center;
+    white-space: pre-wrap;
+    transform: translate(-50%, -5px) scale(0.9);
+  }
+  
+  /* Tooltip becomes visible at hover */
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after {
+    visibility: visible;
+    opacity: 1;
+  }
+  /* Scales from 0.5 to 1 -> grow effect */
+  [data-tooltip]:hover:before {
+    transition-delay: .8s;
+    transform: translate(-50%, -5px) scale(1);
+  }
+
+    
+  /* BOTTOM */
+  [data-tooltip-location="bottom"]:before,
+  [data-tooltip-location="bottom"]:after {
+    top: calc(100% + 5px);
+    bottom: auto;
+  }
+  
+  [data-tooltip-location="bottom"]:before {
+    transform: translate(-50%, 5px) scale(0.9);
+  }
+  [data-tooltip-location="bottom"]:hover:before {
+    transform: translate(-50%, 5px) scale(1);
+  }
+  
+
+  /* For the characters drowdown */
+  [data-tooltip-delay="none"]:hover:before {
+    transition-delay: 0s;
+  }
