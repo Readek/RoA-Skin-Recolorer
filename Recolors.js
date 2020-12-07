@@ -279,9 +279,82 @@ function hsv2rgb(H, S, V) {
 
 
 /* Character Database */
-// Each part will include arrays with the original subpart rgb values
+// Each part will include arrays with the original part rgb values
+// First array from each part is always the color provided by the color code
 const db = {
     "chars": [
+        {
+            name : "Absa",
+            parts : [
+                [ //body
+                    [120, 121, 161], [87, 87, 122], [60, 60, 78], [50, 51, 62], [34, 35, 42]
+                ],
+                [ //hair
+                    [217, 135, 205], [164, 88, 168]
+                ],
+                [ //lightning
+                    [130, 173, 177], [205, 247, 247]
+                ],
+                [ //horns
+                    [187, 155, 143], [136, 104, 93]
+                ],
+                [ //belly
+                    [214, 215, 244], [163, 164, 217]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
+        },
+        {
+            name : "Clairen",
+            parts : [
+                [ //body
+                    [65, 54, 80], [43, 37, 51]
+                ],
+                [ //suit
+                    [69, 69, 89], [50, 51, 62]
+                ],
+                [ //cloak (3rd part is just 2 tiny pixels left in the render with a slight color dif)
+                    [170, 34, 74], [113, 29, 54], [169, 34, 73]
+                ],
+                [ //armor
+                    [181, 181, 181], [125, 125, 125]
+                ],
+                [ //belt
+                    [255, 230, 99], [220, 160, 48]
+                ],
+                [ //plasma 1
+                    [255, 13, 106], [196, 68, 166], [255, 155, 193]
+                ],
+                [ //plasma 2
+                    [0, 255, 247], [85, 221, 229], [60, 189, 226], [170, 255, 253], [170, 188, 211]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
+        },
+        {
+            name : "Elliana",
+            parts : [
+                [ //mech
+                    [213, 128, 87], [159, 83, 51], [113, 48, 21], [234, 198, 157]
+                ],
+                [ //trim
+                    [150, 156, 145], [80, 87, 78], [37, 44, 29], [200, 207, 192]
+                ],
+                [ //body
+                    [175, 145, 200], [223, 210, 243], [114, 70, 144]
+                ],
+                [ //propellers
+                    [157, 212, 84], [133, 170, 58], [85, 112, 53]
+                ],
+                [ //weapons (this one does not appear in the render)
+                    [137, 198, 194], [214, 235, 235], [94, 150, 152]
+                ],
+                [ //clothes
+                    [72, 69, 60]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
+        },
         {
             name : "Etalus",
             parts : [
@@ -296,7 +369,33 @@ const db = {
                 ]
             ],
             placeholder : "0000-0000-0000-0000-0000",
-            icons : 4
+        },
+        {
+            name : "Forsburn",
+            parts : [
+                [ //cloak 1 (3rd part are the tiny pixels of the belt)
+                    [116, 110, 108], [76, 72, 72], [119, 108, 109]
+                ],
+                [ //body
+                    [128, 96, 28], [170, 149, 58], [88, 55, 17]
+                ],
+                [ //fire 1 (2nd part, for some reason the 3 eye pixels are slighty different)
+                    [255, 233, 0], [255, 228, 0]
+                ],
+                [ //fire 2 (2nd part same as above)
+                    [255, 127, 0], [255, 124, 0]
+                ],
+                [ //fire 3
+                    [170, 0, 0], [122, 25, 14], [83, 17, 9]
+                ],
+                [ //cloak 2 (does not appear in the render)
+                    [36, 34, 36]
+                ],
+                [ //skull
+                    [255, 255, 228], [193, 193, 157]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
         },
         {
             name : "Kragg",
@@ -315,7 +414,27 @@ const db = {
                 ]
             ],
             placeholder : "0000-0000-0000-0000-0000-0000-0000",
-            icons : 4
+        },
+        {
+            name : "Maypul",
+            parts : [
+                [ //body
+                    [108, 155, 113], [73, 118, 81], [55, 90, 65]
+                ],
+                [ //belly
+                    [228, 225, 173], [192, 183, 142], [156, 141, 110], [181, 162, 126]
+                ],
+                [ //leaf
+                    [169, 245, 124], [89, 164, 74]
+                ],
+                [ //marks
+                    [65, 62, 55], [46, 42, 37]
+                ],
+                [ //vines
+                    [195, 135, 101], [145, 86, 70]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
         },
         {
             name : "Orcane",
@@ -328,7 +447,48 @@ const db = {
                 ]
             ],
             placeholder : "0000-0000-0000-0000",
-            icons : 4
+        },
+        {
+            name : "Ori and Sein",
+            parts : [
+                [ //body
+                    [240, 232, 250], [197, 179, 223], [127, 98, 165]
+                ],
+                [ //detail
+                    [250, 235, 250], [224, 181, 224], [165, 99, 165]
+                ],
+                [ //eyes
+                    [69, 255, 64]
+                ],
+                [ //sein
+                    [93, 203, 241], [160, 255, 255], [70, 153, 181], [47, 102, 121]
+                ],
+                [ //energy (not shown on render)
+                    [255, 200, 33], [229, 134, 25]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
+        },
+        {
+            name : "Ranno",
+            parts : [
+                [ //body light
+                    [58, 210, 228], [49, 167, 181], [40, 124, 134], [203, 223, 235], [127, 160, 215]
+                ],
+                [ //body dark
+                    [44, 53, 113], [59, 73, 135], [29, 33, 91]
+                ],
+                [ //pants
+                    [255, 124, 0], [203, 70, 4], [149, 52, 3]
+                ],
+                [ //bandages
+                    [193, 193, 157], [156, 141, 110], [255, 255, 228]
+                ],
+                [ //poison
+                    [182, 244, 48], [163, 207, 43], [144, 169, 37], [255, 233, 0], [175, 189, 31], [255, 255, 97]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
         },
         {
             name : "Shovel Knight",
@@ -347,11 +507,72 @@ const db = {
                 ]
             ],
             placeholder : "0000-0000-0000-0000-0000-0000-0000",
-            icons : 5
+        },
+        {
+            name : "Sylvanos",
+            parts : [
+                [ //body
+                    [50, 54, 40], [41, 45, 33], [32, 35, 25]
+                ],
+                [ //leaves
+                    [126, 167, 87], [92, 132, 56], [61, 81, 42]
+                ],
+                [ //bark
+                    [145, 86, 70], [97, 61, 48], [68, 49, 42]
+                ],
+                [ //petals 1
+                    [196, 44, 69], [153, 29, 48], [113, 29, 54]
+                ],
+                [ //petals 2
+                    [242, 208, 134], [224, 114, 100]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
+        },
+        {
+            name : "Wrastor",
+            parts : [
+                [ //body
+                    [168, 87, 143], [129, 60, 116], [98, 50, 93], [207, 130, 170]
+                ],
+                [ //hands (why isnt this called wings??)
+                    [97, 68, 96], [66, 40, 70]
+                ],
+                [ //scarf
+                    [141, 231, 255], [94, 190, 215], [94, 195, 222], [67, 154, 177]
+                ],
+                [ //belly
+                    [246, 173, 197]
+                ],
+                [ //beak
+                    [230, 218, 25], [179, 157, 26], [120, 105, 18]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
+        },
+        {
+            name : "Zetterburn",
+            parts : [
+                [ //body
+                    [122, 90, 78], [84, 54, 52], [57, 37, 36]
+                ],
+                [ //face (1st part does not appear on the main render oh my god Dan)
+                    [220, 203, 105], [193, 176, 68], [128, 96, 28], [75, 58, 16], [158, 176, 53], [91, 102, 24]
+                ],
+                [ //fire 1
+                    [255, 233, 0]
+                ],
+                [ //fire 2
+                    [255, 127, 0]
+                ],
+                [ //fire 3
+                    [170, 0, 0]
+                ]
+            ],
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
         }
     ]
 }
-
 
 
 
@@ -432,7 +653,7 @@ function clickRecolor() {
 
 
 //when the page loads, change to a random character
-changeChar(genRnd(0, 2));
+changeChar(genRnd(0, db.chars.length - 1));
 
 
 //whenever the character changes
@@ -485,7 +706,7 @@ function charSwitcher() {
         //create the character image, randomized icon just because we can
         const newImg = document.createElement('img');
         newImg.setAttribute("src",
-            "Characters/"+db.chars[i].name+"/"+genRnd(2, db.chars[i].icons)+".png"
+            "Characters/"+db.chars[i].name+"/"+genRnd(2, 3)+".png"
         );
         newImg.className = "iconImage";
 
@@ -506,13 +727,18 @@ function charSwitcher() {
 
 //adjust the input width depending on code length
 function resizeInput() {
-
-    if (maxLength == 19) { // Orcane
+    if (maxLength == 19) {
         codeInput.style.width = "170px";
-    } else if (maxLength == 24) { // Etalus
+    } else if (maxLength == 24) {
         codeInput.style.width = "215px";
-    } else if (maxLength == 34) { // kragg, Shovel Knight
+    } else if (maxLength == 34) {
         codeInput.style.width = "300px";
+    } else if (maxLength == 39) {
+        codeInput.style.width = "345px";
+    } else if (maxLength == 49) {
+        codeInput.style.width = "430px";
+    } else {
+        codeInput.style.width = "475px";
     }
 }
 
