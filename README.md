@@ -1,5 +1,12 @@
-![preview](https://cdn.discordapp.com/attachments/574303886869790730/785638990903509022/unknown.png)
-# RoA-Skin-Recolorer
+<p align="center">
+
+  <img width="500" src="https://cdn.discordapp.com/attachments/574303886869790730/785638990903509022/unknown.png" alt="Preview">
+
+</p>
+
+<h1 align="center">RoA-Skin-Recolorer<h1>
+
+
 Uses the Rivals of Aether's color codes to return a recolored character image.
 
 Go [here](https://readek.github.io/RoA-Skin-Recolorer/) to try it out.
