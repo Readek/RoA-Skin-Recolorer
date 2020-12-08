@@ -351,7 +351,7 @@ const db = {
                     [122, 90, 78], [84, 54, 52], [57, 37, 36]
                 ],
                 [ //face (1st part does not appear on the main render oh my god Dan)
-                    [220, 203, 105], [193, 176, 68], [128, 96, 28], [75, 58, 16], [158, 176, 53], [91, 102, 24]
+                    [220, 203, 105], [193, 176, 68], [128, 96, 28], [75, 56, 16], [158, 176, 53], [91, 102, 24]
                 ],
                 [ //fire 1
                     [255, 233, 0]
@@ -389,11 +389,11 @@ const db = {
         {
             name : "Absa",
             parts : [
-                [ //body
+                [ //body (this part is all wrong but the 1st array, i have no idea whats happening here)
                     [120, 121, 161], [87, 87, 122], [60, 60, 78], [50, 51, 62], [34, 35, 42]
                 ],
-                [ //hair
-                    [217, 135, 205], [164, 88, 168]
+                [ //hair (1st part does not appear in renders Dan you're making me cry)
+                    [231, 121, 185], [217, 135, 205], [164, 88, 168]
                 ],
                 [ //lightning
                     [130, 173, 177], [205, 247, 247]
@@ -455,8 +455,8 @@ const db = {
         {
             name : "Maypul",
             parts : [
-                [ //body
-                    [108, 155, 113], [73, 118, 81], [55, 90, 65]
+                [ //body (1st part is not on the render Dan why)
+                    [113, 155, 111], [108, 155, 113], [73, 118, 81], [55, 90, 65]
                 ],
                 [ //belly
                     [228, 225, 173], [192, 183, 142], [156, 141, 110], [181, 162, 126]
@@ -476,7 +476,7 @@ const db = {
         {
             name : "Kragg",
             parts : [
-                [ //rock, yes this part controls 7 different colors at once
+                [ //rock (this part is all wrong but the 1st array, i have no idea whats happening here)
                     [136, 104, 93], [187, 155, 143], [99, 70, 61], [217, 199, 193], [172, 136, 128], [133, 100, 108], [109, 77, 80]
                 ],
                 [ //skin
@@ -542,11 +542,11 @@ const db = {
         {
             name : "Ori and Sein",
             parts : [
-                [ //body
-                    [240, 232, 250], [197, 179, 223], [127, 98, 165]
+                [ //body (1st part not in render yada yada)
+                    [243, 235, 253], [240, 232, 250], [197, 179, 223], [127, 98, 165]
                 ],
-                [ //detail
-                    [250, 235, 250], [224, 181, 224], [165, 99, 165]
+                [ //detail (same here)
+                    [253, 238, 253], [250, 235, 250], [224, 181, 224], [165, 99, 165]
                 ],
                 [ //eyes
                     [69, 255, 64]
@@ -613,7 +613,10 @@ function codeControl() {
         recolorButton.style.filter = "brightness(1)";
         recolorButton.style.pointerEvents = "auto";
 
-    } else if (codeInput.value == "") {
+        //automatically click on the recolor button for some QoL
+        recolorButton.click();
+
+    } else if (!codeInput.value) {
 
         //if no code, just disable the recolor button
         codeWarning.innerHTML = "";
