@@ -4,7 +4,7 @@
 
 </p>
 
-<h1 align="center">RoA-Skin-Recolorer<h1>
+<h1 align="center">RoA-Skin-Recolorer</h1>
 
 
 Uses the Rivals of Aether's color codes to return a recolored character image.
