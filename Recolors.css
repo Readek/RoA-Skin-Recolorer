@@ -153,6 +153,7 @@ input:hover, input:focus, #copyToClip:hover {
     float: left;
     transition: background-color 100ms;
     margin-top: 5px;
+    outline: none; /* Chromium only */
 }
 #copyIcon {
     height: 20px;
@@ -212,6 +213,7 @@ input:hover, input:focus, #copyToClip:hover {
     color: white;
     transition: filter 100ms;
     user-select: none;
+    outline: none; /* Chromium only */
 }
 .buttons:hover {
     filter: brightness(1.1);
