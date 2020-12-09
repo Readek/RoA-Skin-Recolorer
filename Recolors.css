@@ -87,6 +87,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 7px;
     border-radius: 5px;
     cursor: default;
+    border: 3px solid var(--bgH);
 }
 .charRow {
     display: flex;
@@ -100,7 +101,6 @@ body::-webkit-scrollbar-thumb {
     height: 30px;
     padding: 5px;
     background-color: var(--bg);
-    border-radius: 10px;
 }
 
 .iconImage {
@@ -173,6 +173,7 @@ input:hover, input:focus, #copyToClip:hover {
     left: -11px;
     opacity: 0;
     user-select: none;
+    pointer-events: none;
 }
 .copiedAnim {
     animation: copyMove 1s ease 1;
@@ -362,6 +363,12 @@ a:visited {
   [data-tooltip]:hover:before {
     transition-delay: .8s;
     transform: translate(-50%, -5px) scale(1);
+  }
+
+  [data-tooltip]:focus:before,
+  [data-tooltip]:focus:after {
+    visibility: hidden;
+    opacity: 0;
   }
 
     

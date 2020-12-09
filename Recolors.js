@@ -723,6 +723,21 @@ function charSwitcher() {
         newDiv.setAttribute("data-tooltip", db.chars[i].name);
         newDiv.setAttribute("data-tooltip-delay", "none");
 
+        //depending on the char num, set elemental background
+        if (i < 3) { //fire
+            newDiv.style.backgroundColor = "#ba6464"
+        } else if (i < 6) { //air
+            newDiv.style.backgroundColor = "#bd8ac1"
+        }
+        else if (i < 9) { //earth
+            newDiv.style.backgroundColor = "#6ca577"
+        }
+        else if (i < 12) { //water
+            newDiv.style.backgroundColor = "#6673ad"
+        } else { //but everything changed when the indie characters attacked
+            newDiv.style.backgroundColor = "#c9b4d3"
+        }
+
         //if the div gets clicked, update the character to be recolored
         newDiv.addEventListener("click", () => {
             changeChar(i);
