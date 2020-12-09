@@ -16,7 +16,7 @@
 
         <div id="row1" class="row">
 
-            <div id="charSelector" tabindex="1">
+            <div id="charSelector" tabindex="1" data-tooltip="Generate a random color code">
                 <img id="selectedIcon" alt=" ">
                 <div id="charDropdown">
                     <div class="charRow" id="charRow1"></div>
@@ -27,10 +27,11 @@
 
             <input type="text" id="codeInput" title="Paste your color code here!">
 
-            <div id="bRecolor" title="Click to recolor the character image.">
-                <svg id="goIcon" class="icon" viewBox="0 0 20 20">
-                    <path d="M1.729,9.212h14.656l-4.184-4.184c-0.307-0.306-0.307-0.801,0-1.107c0.305-0.306,0.801-0.306,1.106,0l5.481,5.482c0.018,0.014,0.037,0.019,0.053,0.034c0.181,0.181,0.242,0.425,0.209,0.66c-0.004,0.038-0.012,0.071-0.021,0.109c-0.028,0.098-0.075,0.188-0.143,0.271c-0.021,0.026-0.021,0.061-0.045,0.085c-0.015,0.016-0.034,0.02-0.051,0.033l-5.483,5.483c-0.306,0.307-0.802,0.307-1.106,0c-0.307-0.305-0.307-0.801,0-1.105l4.184-4.185H1.729c-0.436,0-0.788-0.353-0.788-0.788S1.293,9.212,1.729,9.212z"></path>
+            <div id="copyToClip" data-tooltip="Copy the current color code to clipboard" data-tooltip-delay="none">
+                <svg id="copyIcon" viewBox="0 0 20 20">
+                    <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>
                 </svg>
+                <img id="copied" src="Characters/Copied.png" alt=" ">
             </div>
 
         </div>

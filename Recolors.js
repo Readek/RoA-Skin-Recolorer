@@ -588,10 +588,12 @@ const db = {
 let currentChar; // this will hold the values from the db just above
 let charCanvas; // this will be used for the canvases
 let maxLength; // limits how many characters there should be in the code input
+let playingAnim = false; // to not allow playing an animation until its finished
 
 const charIcon = document.getElementById("selectedIcon");
 const codeInput = document.getElementById("codeInput");
-const recolorButton = document.getElementById("bRecolor");
+const copyToClip = document.getElementById("copyToClip");
+const copiedImg = document.getElementById("copied");
 const codeWarning = document.getElementById("row2");
 const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImg");
@@ -610,19 +612,19 @@ function codeControl() {
         //if correct, set everything to normal
         codeWarning.innerHTML = "";
         codeWarning.style.height = "0px";
-        recolorButton.style.filter = "brightness(1)";
-        recolorButton.style.pointerEvents = "auto";
+        copyToClip.style.filter = "brightness(1)";
+        copyToClip.style.pointerEvents = "auto";
 
-        //automatically click on the recolor button for some QoL
-        recolorButton.click();
+        //automatically execute recolor for some QoL
+        mainRecolor();
 
     } else if (!codeInput.value) {
 
-        //if no code, just disable the recolor button
+        //if no code, just disable the copy button
         codeWarning.innerHTML = "";
         codeWarning.style.height = "0px";
-        recolorButton.style.filter = "brightness(.8)";
-        recolorButton.style.pointerEvents = "none";
+        copyToClip.style.filter = "brightness(.8)";
+        copyToClip.style.pointerEvents = "none";
 
     } else if (codeInput.value.length < currentChar.placeholder.length) {
 
@@ -632,9 +634,9 @@ function codeControl() {
         codeWarning.style.color = "orange";
         codeWarning.style.height = "18px";
 
-        //prevent the user from interacting with the recolor button
-        recolorButton.style.filter = "brightness(.8)";
-        recolorButton.style.pointerEvents = "none";
+        //prevent the user from interacting with the copy button
+        copyToClip.style.filter = "brightness(.8)";
+        copyToClip.style.pointerEvents = "none";
 
     } else if (codeInput.value.length > currentChar.placeholder.length) {
 
@@ -643,24 +645,31 @@ function codeControl() {
         codeWarning.style.color = "red";
         codeWarning.style.height = "18px";
 
-        recolorButton.style.filter = "brightness(.8)";
-        recolorButton.style.pointerEvents = "none";
+        copyToClip.style.filter = "brightness(.8)";
+        copyToClip.style.pointerEvents = "none";
 
     }
 
 }
 
-//when typing the color code, if pressing enter, click on the recolor button
-codeInput.addEventListener("keydown", event => {
-    if(event.key !== "Enter") return;
-    recolorButton.click();
-    event.preventDefault();
+
+//copy to clipboard button, playing an animation to show feedback
+copyToClip.addEventListener("click", () => {
+    if (!playingAnim) {
+        playingAnim = true;
+        navigator.clipboard.writeText(codeInput.value);
+        copiedImg.classList.add("copiedAnim");
+    }
+});
+copiedImg.addEventListener('animationend', () => {
+    copiedImg.classList.remove("copiedAnim");
+    playingAnim = false;
 });
 
 
-//the recolor button
-recolorButton.addEventListener("click", clickRecolor);
-function clickRecolor() {
+
+//the recolor function!
+function mainRecolor() {
     const hex = codeInput.value; //grab the color code
     const rgb = hexDecode(hex); //make some sense out of it
     charCanvas.recolor(rgb); //recolor the image!
@@ -690,8 +699,8 @@ function changeChar(charNum) {
     resizeInput();
 
     //make the recolor button unclickable and show some feedback
-    recolorButton.style.filter = "brightness(.8)";
-    recolorButton.style.pointerEvents = "none";
+    copyToClip.style.filter = "brightness(.8)";
+    copyToClip.style.pointerEvents = "none";
 
     //update the dowloaded image name
     downLink.setAttribute("download", currentChar.name + " Recolor.png");
@@ -818,7 +827,7 @@ function randomize(colorNum) {
     codeControl();
 
     //automatically click the recolor button to show the results
-    recolorButton.click();
+    mainRecolor();
 
 }
 
