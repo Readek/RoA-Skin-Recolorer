@@ -12,7 +12,7 @@ class Character {
         //this is the base image that we will split in different isolated colors
         const image = new Image();
         if (imgsrc) {
-            image.src = imgsrc;
+            image.src = imgsrc; //this is for custom uploaded images
         } else {
             image.src = "Characters/"+charName+"/Full.png";
         }
@@ -72,7 +72,7 @@ class Part {
                 colorDelta[1] = ogHSV[1] - newHSV[1];
                 colorDelta[2] = ogHSV[2] - newHSV[2];
          
-                //i dont know what this does but it was in the ingame code so
+                //i dont know what this does but it was in the ingame shader code so
                 if (Math.abs(colorDelta[0])>0.5) colorDelta[0] -= Math.sign(colorDelta[0]);
 
                 //add a new sub part that will add the color diference to the main color
@@ -91,7 +91,7 @@ class Part {
 }
 
 class SubPart {
-    constructor(inColor, range = false) {
+    constructor(inColor, delta = false) {
         //this canvas will be added onto the main canvas
         const canvas = document.createElement("canvas");
         canvas.width = mainCa.width;
@@ -104,18 +104,18 @@ class SubPart {
         let b = inColor[2];
 
         //color difference from the original color in hsv
-        const colorRange = range;
+        const colorDelta = delta;
 
         //create a separate image containing only this color, add it to the part's canvas
         const imgData = mainCo.getImageData(0, 0, mainCa.width, mainCa.height);
         let i = 0;
         const l = imgData.data.length;
+        //scan every pixel of the og image
         for (i; i < l; i += 4) {
             if (imgData.data[i] == r && imgData.data[i + 1] == g && imgData.data[i + 2] == b) {
-                imgData.data[i] = r;
-                imgData.data[i + 1] = g;
-                imgData.data[i + 2] = b;
+                //leave that pixel as it is
             } else {
+                //if the pixel does not have the exact color, set alpha to none
                 imgData.data[i + 3] = 0;
             }
         }
@@ -124,8 +124,8 @@ class SubPart {
         //this is where the magic happens    
         this.recolor = (rgb) => {
 
-            if (!colorRange) {
-                //if no color range, use the regular value
+            if (!colorDelta) {
+                //if no color delta, use the regular value
                 recolorChar(rgb, context, canvas);
             } else {
 
@@ -133,14 +133,9 @@ class SubPart {
                 const hsv = rgb2hsv(rgb[0], rgb[1], rgb[2]);
 
                 //add the values to make it brighter or darker
-                hsv[0] = hsv[0] - colorRange[0] //ingame shader adds % 1 to this? https://pastebin.com/kXsTD1Vu
-                hsv[1] = clamp((hsv[1] - colorRange[1]), 0.0, 1.0);
-                hsv[2] = clamp((hsv[2] - colorRange[2]), 0.0, 1.0);
-
-                //just in case it somehow gets out of range
-                function clamp(num, min, max) {
-                    return num <= min ? min : num >= max ? max : num;
-                }
+                hsv[0] = hsv[0] - colorDelta[0] //ingame shader adds % 1 to this? https://pastebin.com/kXsTD1Vu
+                hsv[1] = clamp((hsv[1] - colorDelta[1]), 0.0, 1.0);
+                hsv[2] = clamp((hsv[2] - colorDelta[2]), 0.0, 1.0);
 
                 //convert back to rgb
                 const charRgb = hsv2rgb(hsv[0], hsv[1], [hsv[2]]);
@@ -163,11 +158,14 @@ class SubPart {
                 let i = 0;
                 const l = imgData.data.length;
                 for (i; i < l; i += 4) {
-                    imgData.data[i] = rgb[0];
-                    imgData.data[i + 1] = rgb[1];
-                    imgData.data[i + 2] = rgb[2];
-                    //since we are not changing alpha value [i+3], 100% transparent pixels
-                    //won't show any change even if we actually recolored them
+
+                    //ignore fully transparent pixels to gain some performance
+                    if (imgData.data[i + 3]) {
+                        imgData.data[i] = rgb[0];
+                        imgData.data[i + 1] = rgb[1];
+                        imgData.data[i + 2] = rgb[2];
+                    }
+
                 }
 
                 //the result will be added to the main canvas
@@ -177,6 +175,11 @@ class SubPart {
             }
         }
     }
+}
+
+// this is just in case a color somehow gets out of range
+function clamp(num, min, max) {
+    return num <= min ? min : num >= max ? max : num;
 }
 
 
@@ -287,7 +290,7 @@ function hsv2rgb(H, S, V) {
 
 /* Character Database */
 // Each part will include arrays with the original part rgb values
-// First array from each part is always the color provided by the color code
+// First array from each part is always the color provided by the color code, considered the main part
 const db = {
     "chars": [
         {
@@ -641,7 +644,8 @@ function codeControl() {
     } else if (codeInput.value.length > currentChar.placeholder.length) {
 
         //if its above the limit, well thats a big no no
-        codeWarning.innerHTML = "This color code has too many characters.";
+        const dif = codeInput.value.length - currentChar.placeholder.length;
+        codeWarning.innerHTML = "This color code has too many characters ("+dif+").";
         codeWarning.style.color = "red";
         codeWarning.style.height = "18px";
 
@@ -655,12 +659,15 @@ function codeControl() {
 
 //copy to clipboard button, playing an animation to show feedback
 copyToClip.addEventListener("click", () => {
-    if (!playingAnim) {
+
+    navigator.clipboard.writeText(codeInput.value);
+
+    if (!playingAnim) { //wait for the animation to finish if any
         playingAnim = true;
-        navigator.clipboard.writeText(codeInput.value);
         copiedImg.classList.add("copiedAnim");
     }
 });
+//automatically enable copy animation once current one finishes
 copiedImg.addEventListener('animationend', () => {
     copiedImg.classList.remove("copiedAnim");
     playingAnim = false;
