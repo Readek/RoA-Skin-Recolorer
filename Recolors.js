@@ -300,7 +300,7 @@ const db = {
                     [65, 54, 80], [43, 37, 51]
                 ],
                 [ //suit
-                    [69, 69, 89], [50, 51, 62]
+                    [69, 69, 89], [50, 51, 62], [39, 39, 48]
                 ],
                 [ //cloak (3rd part is just 2 tiny pixels left in the render with a slight color dif)
                     [170, 34, 74], [113, 29, 54], [169, 34, 73]
