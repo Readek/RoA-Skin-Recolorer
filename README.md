@@ -11,6 +11,8 @@ Uses Rivals of Aether's color codes to return a recolored character image.
 
 Go [here](https://readek.github.io/RoA-Skin-Recolorer/) to try it out.
 
+Recolorer v2 is in the works, go [here](https://readek.github.io/RoA-Skin-Recolorer/v2/) to try it.
+
 Can also recolor any image with the same colors as the character (for example, spritesheets).
 
 **Absa**'s `body` part and **Kragg**'s `rock` part will never give correct values. The game does something specific to those, but I have no idea what.
