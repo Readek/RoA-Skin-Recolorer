@@ -6,6 +6,7 @@ const animDiv = document.getElementById("animDiv");
 let char; // this will hold the values from the character database
 let maxLength; // limits how many characters there should be in the code input
 let playingAnim = false; // to not allow playing an animation until its finished
+let customImg = null; // this will hold a custom uploaded img
 
 const charIcon = document.getElementById("selectedIcon");
 const codeInput = document.getElementById("codeInput");
@@ -109,13 +110,22 @@ function mainRecolor(ss = false) {
     const hex = codeInput.value; //grab the color code
     const rgb = hexDecode(hex); //make some sense out of it
     // now recolor the images
-    render(fullCanvas, "Characters/"+char.name+"/Full.png", rgb, ss);
-    render(animCanvas, "Characters/"+char.name+"/Idle.png", rgb, false);
+    if (!customImg) { // if this is not a custom image, recolor render and sprites
+        render(fullCanvas, "Characters/"+char.name+"/Full.png", rgb, ss);
+        render(animCanvas, "Characters/"+char.name+"/Idle.png", rgb, false);
+    } else { // if it is, just recolor that custom image
+        render(fullCanvas, customImg, rgb, ss);
+    }
+
 }
 
 
 //whenever the character changes
 function changeChar(charNum) {
+
+    // clear that custom img and restore the sprites in case we changed it earlier
+    animDiv.style.display = "flex";
+    customImg = null;
 
     //look at the database to see whats up
     char = db.chars[charNum];
@@ -323,7 +333,10 @@ defaultFile.addEventListener("change", () => {
     const fileReader = new FileReader();
     fileReader.addEventListener("load", function () {
         //create a new character using the current values, but adding a new image as 'result'
-        addImg(this.result, char.ogColor, char.colorRange);
+        customImg = this.result;
+        addImg(fullCanvas, customImg, char.ogColor, char.colorRange);
+        // hide the sprites
+        animDiv.style.display = "none";
     });
     fileReader.readAsDataURL(newImg); //imma be honest idk what this is but it doesnt work without it
 
