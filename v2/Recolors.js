@@ -1,7 +1,7 @@
 "use strict";
-// this is where the WebGL magic happens
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
+const animDiv = document.getElementById("animDiv");
 
 let char; // this will hold the values from the character database
 let maxLength; // limits how many characters there should be in the code input
@@ -17,8 +17,7 @@ const downImgButton = document.getElementById("downImg");
 
 
 //when the page loads, change to a random character
-/* changeChar(genRnd(0, db.chars.length - 1)); */
-changeChar(2);
+changeChar(genRnd(0, db.chars.length - 1));
 
 //this will fire everytime we type in the color code input
 codeInput.addEventListener("input", codeControl); 
@@ -111,7 +110,7 @@ function mainRecolor(ss = false) {
     const rgb = hexDecode(hex); //make some sense out of it
     // now recolor the images
     render(fullCanvas, "Characters/"+char.name+"/Full.png", rgb, ss);
-    render(animCanvas, "Characters/"+char.name+"/Idle.png", rgb, ss);
+    render(animCanvas, "Characters/"+char.name+"/Idle.png", rgb, false);
 }
 
 
@@ -125,21 +124,23 @@ function changeChar(charNum) {
     addImg(animCanvas, "Characters/"+char.name+"/Idle.png", char.ogColor, char.colorRange);
 
     //change the width of the sprite animation, depending on the character
-    const animDiv = document.getElementById("animDiv");
     const sprite = new Image();
     sprite.src = "Characters/"+char.name+"/Idle.png";
-    animDiv.style.width = (sprite.width / char.idleFC) + "px"; //to get the w of 1 frame
-    animDiv.style.height = sprite.height + "px"; //all frames have the same h
-    //now change the values for the sprite animation
-    const r = document.querySelector(':root');
-    r.style.setProperty("--spriteMove", -sprite.width + "px"); //
-    r.style.setProperty("--spriteCount", char.idleFC);
-    // formula for this one is: 1000 is a second, then divided by 60 gets us an
-    // in-game frame, then we multiply by 7 because thats the average frame
-    // wait between sprite changes, and then we multiply by the character frame
-    // count to know how long the animation is going to take, finally, we divide
-    // by 1000 to get the value in seconds for the css variable
-    r.style.setProperty("--spriteTime", 1000/60*7*char.idleFC/1000 + "s");
+    sprite.decode().then( () => { // when the image finishes loading
+        animDiv.style.width = (sprite.width / char.idleFC) + "px"; //gets the w of 1 frame
+        animDiv.style.height = sprite.height + "px"; //all frames have the same h
+        //now change the values for the sprite animation
+        const r = document.querySelector(':root');
+        r.style.setProperty("--spriteMove", -sprite.width + "px"); //end position of the animation
+        r.style.setProperty("--spriteCount", char.idleFC);
+        // formula for this one is: 1000 is a second, then divided by 60 gets us an
+        // in-game frame, then we multiply by 7 because thats the average frame
+        // wait between sprite changes, and then we multiply by the character frame
+        // count to know how long the animation is going to take, finally, we divide
+        // by 1000 to get the value in seconds for the css variable
+        r.style.setProperty("--spriteTime", 1000/60*7*char.idleFC/1000 + "s");
+    })
+
 
     //set a new placeholder text and a new limit
     codeInput.placeholder = char.placeholder;
