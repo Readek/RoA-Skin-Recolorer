@@ -2,6 +2,9 @@
     --mainBG: #514188;
     --bg: #7c6bb4;
     --bgH: #9484c9;
+    --spriteTime: .85s;
+    --spriteCount: 8;
+    --spriteMove: -768px;
 }
 
 @font-face {
@@ -55,6 +58,23 @@ body::-webkit-scrollbar-thumb {
     overflow: auto;
 }
 
+#animDiv {
+    overflow: hidden;
+}
+#animCanvas {
+    position: relative;
+    left: 0;
+    animation: moveSprite var(--spriteTime) steps(var(--spriteCount)) infinite;
+}
+
+@keyframes moveSprite {
+    100% { left: var(--spriteMove); }
+}
+
+#testo {
+    display: block;
+    width: 500px;
+}
 
 .row {
     padding: 5px;

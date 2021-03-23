@@ -25,6 +25,7 @@ const db = {
                 40, 85, 50, 1,      // Plasma Tipper
                 /* 0, 0, 0, 1       // CSS Highlight */
             ],
+            idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -47,6 +48,7 @@ const db = {
                 18, 10, 10, 1,      // Dark Cloak
                 4, 15, 30, 1        // Skull
             ],
+            idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -65,6 +67,7 @@ const db = {
                 18, 10, 10, 1,      // Orange flame
                 18, 14, 20, 1       // Red Flame
             ],
+            idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -83,6 +86,7 @@ const db = {
                 18, 10, 10, 1,      // Orange flame
                 18, 14, 20, 1       // Red Flame
             ],
+            idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -101,6 +105,7 @@ const db = {
                 4, 15, 60, 1,       // Horns
                 18, 15, 15, 1,      // Belly
             ],
+            idleFC : 24,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -121,6 +126,7 @@ const db = {
                 8, 23, 19, 1,       // Weapons
                 17, 4, 11, 1        // Clothes
             ],
+            idleFC : 7,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -139,6 +145,7 @@ const db = {
                 10, 8, 34, 1,       // Petals 1
                 36, 11, 8, 1,       // Petals 2
             ],
+            idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -157,6 +164,7 @@ const db = {
                 54, 15, 35, 1,      // Mark
                 15, 25, 55, 1       // Vines
             ],
+            idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -173,6 +181,7 @@ const db = {
                 27, 20, 65, 1,      // Armor
                 0, 0, 0, 1          // Dark Rock
             ],
+            idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -189,6 +198,7 @@ const db = {
                 /* 2, 0, 0, 0,      // Highlight
                 3, 0, 0, 0          // Dark */
             ],
+            idleFC : 8,
             placeholder : "0000-0000-0000-0000"
         },
         {
@@ -207,6 +217,7 @@ const db = {
                 /* 0, 0, 0, 1,      // Ice Change Back?
                 0, 0, 0, 1          // Body Go Back?  */
             ],
+            idleFC : 14,
             placeholder : "0000-0000-0000-0000-0000"
         },
         {
@@ -228,6 +239,7 @@ const db = {
                 27, 22, 33, 1,      // Poison
                 /* 0, 0, 0, 1       //  */
             ],
+            idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
@@ -248,6 +260,7 @@ const db = {
                 54, 40, 40, 1,      // Energy
                 /* 0, 0, 0, 1       // CSS Highlight */
             ],
+            idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
             /* for reference these are the values for the default skin from the template
                 248, 245, 252, 1    // Body 1
@@ -275,6 +288,7 @@ const db = {
                 18, 42, 37, 1,      // Horns
                 /* 0, 0, 0, 1       // CSS Highlight */
             ],
+            idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000"
         }
     ]

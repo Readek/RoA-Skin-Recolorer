@@ -173,7 +173,7 @@ void main() {
     // the GLSL shader will then separate them every 4 values
 */
 
-let skinImg, colorIn, colorTolerance, custom;
+let colorIn, colorTolerance;
 
 // this is a variable that the shader will use
 // i will assume this is what the game uses for Early Access colors
@@ -204,12 +204,11 @@ const blend0 = [
 let blend = blend1;
 
 // this will be called whenever the image to be recolored changes
-function addImg(imgPath, ogColor, colorRange, customImg) {
+function addImg(canvas, imgPath, ogColor, colorRange) {
     colorIn = ogColor;
     colorTolerance = colorRange;
-    custom = customImg;
 
-    skinImg = new Image();
+    const skinImg = new Image();
     skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
 
     //for some reason, everything would recolor to black if using the og array
@@ -228,12 +227,15 @@ function addImg(imgPath, ogColor, colorRange, customImg) {
     skinImg.decode().then( () => {
         canvas.width = skinImg.width;
         canvas.height = skinImg.height;
-        render(initColor);
+        render(canvas, imgPath, initColor);
     })
 }
 
 // this will be called on each paint
-function render(colorOut, ss = false) {
+function render(canvas, imgPath, colorOut, ss = false) {
+
+  const skinImg = new Image();
+  skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
 
   // Get A WebGL context
   /** @type {HTMLCanvasElement} */

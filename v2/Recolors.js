@@ -1,9 +1,9 @@
 "use strict";
 // this is where the WebGL magic happens
-const canvas = document.getElementById("canvas");
+const fullCanvas = document.getElementById("fullCanvas");
+const animCanvas = document.getElementById("animCanvas");
 
 let char; // this will hold the values from the character database
-let charCanvas; // this will be used for the canvases
 let maxLength; // limits how many characters there should be in the code input
 let playingAnim = false; // to not allow playing an animation until its finished
 
@@ -17,7 +17,8 @@ const downImgButton = document.getElementById("downImg");
 
 
 //when the page loads, change to a random character
-changeChar(genRnd(0, db.chars.length - 1));
+/* changeChar(genRnd(0, db.chars.length - 1)); */
+changeChar(2);
 
 //this will fire everytime we type in the color code input
 codeInput.addEventListener("input", codeControl); 
@@ -108,7 +109,9 @@ copiedImg.addEventListener('animationend', () => {
 function mainRecolor(ss = false) {
     const hex = codeInput.value; //grab the color code
     const rgb = hexDecode(hex); //make some sense out of it
-    render(rgb, ss); //recolor the image!
+    // now recolor the images
+    render(fullCanvas, "Characters/"+char.name+"/Full.png", rgb, ss);
+    render(animCanvas, "Characters/"+char.name+"/Idle.png", rgb, ss);
 }
 
 
@@ -117,8 +120,26 @@ function changeChar(charNum) {
 
     //look at the database to see whats up
     char = db.chars[charNum];
-    //create a new character image with this info
-    addImg("Characters/"+char.name+"/Full.png", char.ogColor, char.colorRange);
+    //create new character images with this info
+    addImg(fullCanvas, "Characters/"+char.name+"/Full.png", char.ogColor, char.colorRange);
+    addImg(animCanvas, "Characters/"+char.name+"/Idle.png", char.ogColor, char.colorRange);
+
+    //change the width of the sprite animation, depending on the character
+    const animDiv = document.getElementById("animDiv");
+    const sprite = new Image();
+    sprite.src = "Characters/"+char.name+"/Idle.png";
+    animDiv.style.width = (sprite.width / char.idleFC) + "px"; //to get the w of 1 frame
+    animDiv.style.height = sprite.height + "px"; //all frames have the same h
+    //now change the values for the sprite animation
+    const r = document.querySelector(':root');
+    r.style.setProperty("--spriteMove", -sprite.width + "px"); //
+    r.style.setProperty("--spriteCount", char.idleFC);
+    // formula for this one is: 1000 is a second, then divided by 60 gets us an
+    // in-game frame, then we multiply by 7 because thats the average frame
+    // wait between sprite changes, and then we multiply by the character frame
+    // count to know how long the animation is going to take, finally, we divide
+    // by 1000 to get the value in seconds for the css variable
+    r.style.setProperty("--spriteTime", 1000/60*7*char.idleFC/1000 + "s");
 
     //set a new placeholder text and a new limit
     codeInput.placeholder = char.placeholder;
@@ -341,3 +362,5 @@ function hex2rgb(hex) {
     rgb[2] = bigint & 255;
     return rgb;
 }
+
+
