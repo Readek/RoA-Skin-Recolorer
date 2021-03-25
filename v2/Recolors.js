@@ -4,11 +4,12 @@ const animCanvas = document.getElementById("animCanvas");
 const animDiv = document.getElementById("animDiv");
 
 let char; // this will hold the values from the character database
+let characterImgs;
 let maxLength; // limits how many characters there should be in the code input
 let playingAnim = false; // to not allow playing an animation until its finished
 let customImg = null; // this will hold a custom uploaded img
 
-const charIcon = document.getElementById("selectedIcon");
+const iconCanvas = document.getElementById("selectedIcon");
 const codeInput = document.getElementById("codeInput");
 const copyToClip = document.getElementById("copyToClip");
 const copiedImg = document.getElementById("copied");
@@ -106,19 +107,12 @@ copiedImg.addEventListener('animationend', () => {
 
 
 //the recolor function!
-function mainRecolor(ss = false) {
+function mainRecolor() {
     const hex = codeInput.value; //grab the color code
     const rgb = hexDecode(hex); //make some sense out of it
     // now recolor the images
-    if (!customImg) { // if this is not a custom image, recolor render and sprites
-        render(fullCanvas, "Characters/"+char.name+"/Full.png", rgb, ss);
-        render(animCanvas, "Characters/"+char.name+"/Idle.png", rgb, false);
-    } else { // if it is, just recolor that custom image
-        render(fullCanvas, customImg, rgb, ss);
-    }
-
+    characterImgs.recolor(rgb);
 }
-
 
 //whenever the character changes
 function changeChar(charNum) {
@@ -130,8 +124,17 @@ function changeChar(charNum) {
     //look at the database to see whats up
     char = db.chars[charNum];
     //create new character images with this info
-    addImg(fullCanvas, "Characters/"+char.name+"/Full.png", char.ogColor, char.colorRange);
-    addImg(animCanvas, "Characters/"+char.name+"/Idle.png", char.ogColor, char.colorRange);
+    characterImgs = new RoaRecolor(char.ogColor, char.colorRange);
+    characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png");
+    characterImgs.addImage(iconCanvas, "Characters/"+char.name+"/1.png");
+    characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png");
+
+    //we need to do an initial recolor, ori is the only character that needs an actual recolor
+    if (char.name == "Ori and Sein") {
+        characterImgs.recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000"));
+    } else {
+        characterImgs.recolor(char.ogColor);
+    }
 
     //change the width of the sprite animation, depending on the character
     const sprite = new Image();
@@ -158,9 +161,6 @@ function changeChar(charNum) {
     //then clear the current color code
     codeInput.value = "";
     codeControl(); //to reset the warning message if any
-
-    //change the character icon
-    charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
 
     //adjust the code input width
     resizeInput();
@@ -260,9 +260,11 @@ function genRnd(min, max) {
 
 //download image button
 downImgButton.addEventListener('click', () => {
-    // we need to repaint the image to get a screenshot of it before it internaly clears
     if (codeInput.value) { //if theres a code
-        mainRecolor(true);
+        // image has to be repainted to be dowloaded
+        const hex = codeInput.value;
+        const rgb = hexDecode(hex);
+        characterImgs.download(rgb);
     } else { //just donwload the base image, im sure someone out there will want the default one
         downImgButton.href = "Characters/" + char.name + "/Full.png";
     }
@@ -332,9 +334,10 @@ defaultFile.addEventListener("change", () => {
     //read file with some magic i dont really understand
     const fileReader = new FileReader();
     fileReader.addEventListener("load", function () {
-        //create a new character using the current values, but adding a new image as 'result'
+        //add the custom image to the "full render" canvas
         customImg = this.result;
-        addImg(fullCanvas, customImg, char.ogColor, char.colorRange);
+        characterImgs.addCustom(customImg);
+        characterImgs.recolor(char.ogColor); // and show it
         // hide the sprites
         animDiv.style.display = "none";
     });

@@ -173,8 +173,6 @@ void main() {
     // the GLSL shader will then separate them every 4 values
 */
 
-let colorIn, colorTolerance;
-
 // this is a variable that the shader will use
 // i will assume this is what the game uses for Early Access colors
 // if 0, the color will have no shading
@@ -200,42 +198,61 @@ const blend0 = [
   0, 0, 0, 0,
   0, 0, 0, 0,
 ]
-// by default, im just gonna set everything to 1
-let blend = blend1;
 
-// this will be called whenever the image to be recolored changes
-function addImg(canvas, imgPath, ogColor, colorRange) {
-    colorIn = ogColor;
-    colorTolerance = colorRange;
+// time to create our recolored character!
+class RoaRecolor {
 
-    const skinImg = new Image();
-    skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
+  constructor(ogColor, colorTolerance, blend = 1) {
+    this.colorIn = ogColor;
+    this.colorTolerance = colorTolerance;
 
-    //for some reason, everything would recolor to black if using the og array
-    let initColor = [];
-    //Ori is the only character that has to be recolored for startup
-    if (char.name == "Ori and Sein") {
-      initColor = hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000");
+    //these will store whatever images you want to add in
+    this.canvases = [];
+    this.images = [];
+
+    // just in case someone wants some retro shading
+    if (blend == 1) {
+      this.blend = blend1;
     } else {
-      for (let i = 0; i < ogColor.length; i++) {
-        initColor.push(ogColor[i]);
-      }
+      this.blend = blend0;
     }
+  }
 
+  addImage(canvas, imgPath) {
+    this.canvases.push(canvas);
+    this.images.push(imgPath);
+  }
 
-    //this will fire whenever the image finishes loading
-    skinImg.decode().then( () => {
-        canvas.width = skinImg.width;
-        canvas.height = skinImg.height;
-        render(canvas, imgPath, initColor);
-    })
+  // called whenever the user wants a custom img, changes just the 1st canvas
+  addCustom(imgPath) {
+    this.images[0] = imgPath;
+  }
+
+  //and this is where the fun begins
+  recolor(colorOut) {
+    for (let i = 0; i < this.canvases.length; i++) {
+      render(this.colorIn, this.colorTolerance, this.blend, this.canvases[i], this.images[i], colorOut) 
+    }
+  }
+
+  // we need to repaint the image to get a screenshot of it before it internaly clears
+  download(colorOut) {
+    render(this.colorIn, this.colorTolerance, this.blend, this.canvases[0], this.images[0], colorOut, true) 
+  }
+
 }
 
 // this will be called on each paint
-function render(canvas, imgPath, colorOut, ss = false) {
+async function render(colorIn, colorTolerance, blend, canvas, imgPath, colorOut, ss = false) {
 
   const skinImg = new Image();
   skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
+
+  //this will fire whenever the image finishes loading
+  await skinImg.decode();
+  canvas.width = skinImg.width;
+  canvas.height = skinImg.height;
+  
 
   // Get A WebGL context
   /** @type {HTMLCanvasElement} */
