@@ -125,16 +125,21 @@ function changeChar(charNum) {
     char = db.chars[charNum];
     //create new character images with this info
     characterImgs = new RoaRecolor(char.ogColor, char.colorRange);
-    characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png");
-    characterImgs.addImage(iconCanvas, "Characters/"+char.name+"/1.png");
-    characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png");
-
-    //we need to do an initial recolor, ori is the only character that needs an actual recolor
-    if (char.name == "Ori and Sein") {
-        characterImgs.recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000"));
-    } else {
-        characterImgs.recolor(char.ogColor);
-    }
+    // save all the new images as promises so we know when they are fully loaded
+    const imgPromises = [
+        characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png"),
+        characterImgs.addImage(iconCanvas, "Characters/"+char.name+"/1.png"),
+        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png")
+    ]
+    // when the images finish loading, then recolor them with the og colors to do a first paint
+    Promise.all(imgPromises).then( () => {
+        // ori is the only character that needs an actual recolor
+        if (char.name == "Ori and Sein") {
+            characterImgs.recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000"));
+        } else {
+            characterImgs.recolor(char.ogColor);
+        }
+    })
 
     //change the width of the sprite animation, depending on the character
     const sprite = new Image();

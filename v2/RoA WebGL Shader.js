@@ -218,9 +218,14 @@ class RoaRecolor {
     }
   }
 
-  addImage(canvas, imgPath) {
+   async addImage(canvas, imgPath) {
+    const skinImg = new Image();
+    skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
+    await skinImg.decode();
+    canvas.width = skinImg.width;
+    canvas.height = skinImg.height;
     this.canvases.push(canvas);
-    this.images.push(imgPath);
+    this.images.push(skinImg);
   }
 
   // called whenever the user wants a custom img, changes just the 1st canvas
@@ -243,16 +248,7 @@ class RoaRecolor {
 }
 
 // this will be called on each paint
-async function render(colorIn, colorTolerance, blend, canvas, imgPath, colorOut, ss = false) {
-
-  const skinImg = new Image();
-  skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
-
-  //this will fire whenever the image finishes loading
-  await skinImg.decode();
-  canvas.width = skinImg.width;
-  canvas.height = skinImg.height;
-  
+function render(colorIn, colorTolerance, blend, canvas, skinImg, colorOut, ss = false) {  
 
   // Get A WebGL context
   /** @type {HTMLCanvasElement} */
