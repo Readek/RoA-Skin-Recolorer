@@ -206,9 +206,8 @@ class RoaRecolor {
     this.colorIn = ogColor;
     this.colorTolerance = colorTolerance;
 
-    //these will store whatever images you want to add in
-    this.canvases = [];
-    this.images = [];
+    //this will store whatever images you want to add in
+    this.charImgs = {};
 
     // just in case someone wants some retro shading
     if (blend == 1) {
@@ -218,36 +217,38 @@ class RoaRecolor {
     }
   }
 
-  async addImage(canvas, imgPath) {
+  async addImage(canvas, imgPath, name) {
     const skinImg = new Image();
     skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
     await skinImg.decode();
     canvas.width = skinImg.width;
     canvas.height = skinImg.height;
-    this.canvases.push(canvas);
-    this.images.push(skinImg);
+    this.charImgs[name] = {
+      canvas : canvas,
+      img : skinImg
+    }
   }
 
   // called whenever the user wants a custom img, changes just the 1st canvas
-  async addCustom(imgPath) {
+  async addCustom(imgPath, name) {
     const skinImg = new Image();
     skinImg.src = imgPath;
     await skinImg.decode();
-    this.canvases[2].width = skinImg.width;
-    this.canvases[2].height = skinImg.height;
-    this.images[2] = skinImg;
+    this.charImgs[name].img = skinImg;
+    this.charImgs[name].canvas.width = skinImg.width;
+    this.charImgs[name].canvas.height = skinImg.height;
   }
 
   //and this is where the fun begins
   recolor(colorOut) {
-    for (let i = 0; i < this.canvases.length; i++) {
-      render(this.colorIn, this.colorTolerance, this.blend, this.canvases[i], this.images[i], colorOut) 
+    for (let key in this.charImgs) {
+      render(this.colorIn, this.colorTolerance, this.blend, this.charImgs[key].canvas, this.charImgs[key].img, colorOut) 
     }
   }
 
   // we need to repaint the image to get a screenshot of it before it internaly clears
-  download(colorOut) {
-    render(this.colorIn, this.colorTolerance, this.blend, this.canvases[0], this.images[0], colorOut, true) 
+  download(colorOut, name) {
+    render(this.colorIn, this.colorTolerance, this.blend, this.charImgs[name].canvas, this.charImgs[name].img, colorOut, true) 
   }
 
 }

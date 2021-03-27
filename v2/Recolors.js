@@ -127,9 +127,9 @@ function changeChar(charNum) {
     characterImgs = new RoaRecolor(char.ogColor, char.colorRange);
     // save all the new images as promises so we know when they are fully loaded
     const imgPromises = [
-        characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png"),
-        characterImgs.addImage(iconCanvas, "Characters/"+char.name+"/1.png"),
-        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png")
+        characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png", "Full"),
+        characterImgs.addImage(iconCanvas, "Characters/"+char.name+"/1.png", "Icon"),
+        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png", "Idle")
     ]
     // when the images finish loading, then recolor them with the og colors to do a first paint
     Promise.all(imgPromises).then( () => {
@@ -269,7 +269,7 @@ downImgButton.addEventListener('click', () => {
         // image has to be repainted to be dowloaded
         const hex = codeInput.value;
         const rgb = hexDecode(hex);
-        characterImgs.download(rgb);
+        characterImgs.download(rgb, "Full");
     } else { //just donwload the base image, im sure someone out there will want the default one
         downImgButton.href = "Characters/" + char.name + "/Full.png";
     }
@@ -341,7 +341,7 @@ defaultFile.addEventListener("change", () => {
     fileReader.addEventListener("load", function () {
         //add the custom image to the "full render" canvas
         customImg = this.result;
-        characterImgs.addCustom(customImg).then( () => { // wait for the img to load
+        characterImgs.addCustom(customImg, "Full").then( () => { // wait for the img to load
             characterImgs.recolor(char.ogColor); // then show it
             animDiv.style.display = "none"; // hide the sprites
         })
