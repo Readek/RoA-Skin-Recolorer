@@ -218,7 +218,7 @@ class RoaRecolor {
     }
   }
 
-   async addImage(canvas, imgPath) {
+  async addImage(canvas, imgPath) {
     const skinImg = new Image();
     skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
     await skinImg.decode();
@@ -229,8 +229,13 @@ class RoaRecolor {
   }
 
   // called whenever the user wants a custom img, changes just the 1st canvas
-  addCustom(imgPath) {
-    this.images[0] = imgPath;
+  async addCustom(imgPath) {
+    const skinImg = new Image();
+    skinImg.src = imgPath;
+    await skinImg.decode();
+    this.canvases[2].width = skinImg.width;
+    this.canvases[2].height = skinImg.height;
+    this.images[2] = skinImg;
   }
 
   //and this is where the fun begins
