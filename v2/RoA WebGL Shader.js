@@ -165,9 +165,9 @@ void main() {
 `;
 
 /* 
-    colorIn         // original color, array of 4 rgba values for each color
+    colorIn         // original color, array of 4 [rgba] values for each color
     colorOut        // desired color, same as above
-    colorTolerance  // color range, array of 4 hsva values
+    colorTolerance  // color range, array of 4 [hsva] values
         
     // arrays need to have their values on a single array,
     // the GLSL shader will then separate them every 4 values
@@ -373,35 +373,6 @@ function render(colorIn, colorTolerance, blend, canvas, skinImg, colorOut, ss = 
   // Tell the shader to get the texture from texture unit 0
   gl.uniform1i(imageLocation, 0);
 
-  // shaders need the rbga values on a [0~1] range
-  function div255(array) {
-    const newArray = [];
-    for (let i = 1; i < array.length + 1; i++) {
-      if (i % 4 != 0) {
-        newArray[i-1] = array[i-1]/255;
-      } else {
-        newArray[i-1] = array[i-1];
-      }
-    }
-    return newArray;
-  }
-  //same for hsva
-  function divHSV(array) {
-    const newArray = [];
-    count = 0;
-    for (let i = 0; i < array.length; i++) {
-      count++;
-      if (count == 1) {
-        newArray[i] = array[i]/360;
-      } else if (count == 2 || count == 3) {
-        newArray[i] = array[i]/100;
-      } else {
-        newArray[i] = array[i];
-        count = 0;
-      }
-    }
-    return newArray;
-  }
   // Pass in the uniforms to the shader
   gl.uniform4fv(colorInLoc, div255(colorIn));
   gl.uniform4fv(colorOutLoc, div255(colorOut));
@@ -440,6 +411,36 @@ function render(colorIn, colorTolerance, blend, canvas, skinImg, colorOut, ss = 
   
     mainImg.src = url;
   }); */
+}
+
+// shaders need the rbga values on a [0~1] range
+function div255(array) {
+  const newArray = [];
+  for (let i = 1; i < array.length + 1; i++) {
+    if (i % 4 != 0) {
+      newArray[i-1] = array[i-1]/255;
+    } else {
+      newArray[i-1] = array[i-1];
+    }
+  }
+  return newArray;
+}
+//same for hsva
+function divHSV(array) {
+  const newArray = [];
+  let count = 0;
+  for (let i = 0; i < array.length; i++) {
+    count++;
+    if (count == 1) {
+      newArray[i] = array[i]/360;
+    } else if (count == 2 || count == 3) {
+      newArray[i] = array[i]/100;
+    } else {
+      newArray[i] = array[i];
+      count = 0;
+    }
+  }
+  return newArray;
 }
 
 function setRectangle(gl, x, y, width, height) {

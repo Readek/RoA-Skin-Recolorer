@@ -48,23 +48,33 @@ body::-webkit-scrollbar-thumb {
 }
 
 #cContainer {
-    min-height: 339px; /* min image height, which is Ranno's */
-    max-height: 600px;
-    min-width: 600px;
     max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: auto;
+    padding: 5px;
+    border-bottom: solid #4a368a 2px;
 }
 
+#sContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
+    padding-top: 5px;
+}
 #animDiv {
     overflow: hidden;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 #animCanvas {
     position: relative;
     left: 0;
     animation: moveSprite var(--spriteTime) steps(var(--spriteCount)) infinite;
+
 }
 
 @keyframes moveSprite {

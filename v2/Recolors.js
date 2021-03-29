@@ -2,14 +2,16 @@
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
 const animDiv = document.getElementById("animDiv");
+const sprLCanvas = document.getElementById("spriteL");
+const sprRCanvas = document.getElementById("spriteR");
+const iconCanvas = document.getElementById("selectedIcon");
 
 let char; // this will hold the values from the character database
 let characterImgs;
 let maxLength; // limits how many characters there should be in the code input
 let playingAnim = false; // to not allow playing an animation until its finished
-let customImg = null; // this will hold a custom uploaded img
 
-const iconCanvas = document.getElementById("selectedIcon");
+const spritesDiv = document.getElementById("sContainer");
 const codeInput = document.getElementById("codeInput");
 const copyToClip = document.getElementById("copyToClip");
 const copiedImg = document.getElementById("copied");
@@ -118,8 +120,7 @@ function mainRecolor() {
 function changeChar(charNum) {
 
     // clear that custom img and restore the sprites in case we changed it earlier
-    animDiv.style.display = "flex";
-    customImg = null;
+    spritesDiv.style.display = "flex";
 
     //look at the database to see whats up
     char = db.chars[charNum];
@@ -129,7 +130,9 @@ function changeChar(charNum) {
     const imgPromises = [
         characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png", "Full"),
         characterImgs.addImage(iconCanvas, "Characters/"+char.name+"/1.png", "Icon"),
-        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png", "Idle")
+        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png", "Idle"),
+        characterImgs.addImage(sprLCanvas, "Characters/"+char.name+"/SpriteL.png", "SpriteL"),
+        characterImgs.addImage(sprRCanvas, "Characters/"+char.name+"/SpriteR.png", "SpriteR")
     ]
     // when the images finish loading, then recolor them with the og colors to do a first paint
     Promise.all(imgPromises).then( () => {
@@ -270,8 +273,8 @@ downImgButton.addEventListener('click', () => {
         const hex = codeInput.value;
         const rgb = hexDecode(hex);
         characterImgs.download(rgb, "Full");
-    } else { //just donwload the base image, im sure someone out there will want the default one
-        downImgButton.href = "Characters/" + char.name + "/Full.png";
+    } else { //if there's no code, just download it as if it had the default colors
+        characterImgs.download(characterImgs.colorIn, "Full");
     }
 });
 
@@ -340,10 +343,9 @@ defaultFile.addEventListener("change", () => {
     const fileReader = new FileReader();
     fileReader.addEventListener("load", function () {
         //add the custom image to the "full render" canvas
-        customImg = this.result;
-        characterImgs.addCustom(customImg, "Full").then( () => { // wait for the img to load
+        characterImgs.addCustom(this.result, "Full").then( () => { // wait for the img to load
             characterImgs.recolor(char.ogColor); // then show it
-            animDiv.style.display = "none"; // hide the sprites
+            spritesDiv.style.display = "none"; // hide the sprites
         })
     });
     fileReader.readAsDataURL(newImg); //imma be honest idk what this is but it doesnt work without it
