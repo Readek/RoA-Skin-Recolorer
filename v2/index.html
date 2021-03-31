@@ -29,7 +29,7 @@
         <div id="row1" class="row">
 
             <div id="charSelector" tabindex="1">
-                <canvas id="selectedIcon"></canvas>
+                <img id="selectedIcon" alt=" ">
                 <div id="charDropdown">
                     <div class="charRow" id="charRow1"></div>
                     <div class="charRow" id="charRow2"></div>
@@ -49,6 +49,8 @@
         </div>
 
         <div id="row2" class="row"></div>
+
+
 
         <div id="row3" class="row">
 
@@ -79,6 +81,22 @@
         </div>
 
         <div id="row4" class="row">
+            <div id="colorEditor">
+                <input type="range" min="0" max="255" value="50" class="slider" id="slider0">
+                <input type="range" min="0" max="255" value="50" class="slider" id="slider1">
+                <input type="range" min="0" max="255" value="50" class="slider" id="slider2">
+            </div>
+            <div class="center">
+                <input type="checkbox" id="EAcheck"> <label for="EAcheck">EA Shading</label>
+            </div>
+            <!-- <div class="center">
+                <input type="checkbox" id="HDcheck"> <label for="HDcheck">HD Images</label>
+            </div> -->
+        </div>
+
+        
+
+        <div id="row5" class="row">
 
             <a href="https://twitter.com/Readeku">
                 <div id="twitterButton" class="buttonsBot" data-tooltip="Check my twitter!" data-tooltip-location="bottom" data-tooltip-delay="none">

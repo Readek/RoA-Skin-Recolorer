@@ -4,7 +4,6 @@ const animCanvas = document.getElementById("animCanvas");
 const animDiv = document.getElementById("animDiv");
 const sprLCanvas = document.getElementById("spriteL");
 const sprRCanvas = document.getElementById("spriteR");
-const iconCanvas = document.getElementById("selectedIcon");
 
 let char; // this will hold the values from the character database
 let characterImgs;
@@ -12,12 +11,15 @@ let maxLength; // limits how many characters there should be in the code input
 let playingAnim = false; // to not allow playing an animation until its finished
 
 const spritesDiv = document.getElementById("sContainer");
+const charIcon = document.getElementById("selectedIcon");
 const codeInput = document.getElementById("codeInput");
 const copyToClip = document.getElementById("copyToClip");
 const copiedImg = document.getElementById("copied");
 const codeWarning = document.getElementById("row2");
 const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImg");
+const eaCheck = document.getElementById("EAcheck");
+const colorEditor = document.getElementById("colorEditor");
 
 
 //when the page loads, change to a random character
@@ -111,9 +113,14 @@ copiedImg.addEventListener('animationend', () => {
 //the recolor function!
 function mainRecolor() {
     const hex = codeInput.value; //grab the color code
-    const rgb = hexDecode(hex); //make some sense out of it
+    let rgb;
+    try {
+        rgb = hexDecode(hex); //make some sense out of it
+    } catch (e) {
+        rgb = char.ogColor; // if the code is not valid, use the default colors
+    }
     // now recolor the images
-    characterImgs.recolor(rgb);
+    recolor(rgb);
 }
 
 //whenever the character changes
@@ -125,11 +132,10 @@ function changeChar(charNum) {
     //look at the database to see whats up
     char = db.chars[charNum];
     //create new character images with this info
-    characterImgs = new RoaRecolor(char.ogColor, char.colorRange);
+    characterImgs = new RoaRecolor(char.ogColor, char.colorRange, eaCheck.checked);
     // save all the new images as promises so we know when they are fully loaded
     const imgPromises = [
         characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png", "Full"),
-        characterImgs.addImage(iconCanvas, "Characters/"+char.name+"/1.png", "Icon"),
         characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png", "Idle"),
         characterImgs.addImage(sprLCanvas, "Characters/"+char.name+"/SpriteL.png", "SpriteL"),
         characterImgs.addImage(sprRCanvas, "Characters/"+char.name+"/SpriteR.png", "SpriteR")
@@ -138,9 +144,9 @@ function changeChar(charNum) {
     Promise.all(imgPromises).then( () => {
         // ori is the only character that needs an actual recolor
         if (char.name == "Ori and Sein") {
-            characterImgs.recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000"));
+            recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000"));
         } else {
-            characterImgs.recolor(char.ogColor);
+            recolor(char.ogColor);
         }
     })
 
@@ -170,16 +176,27 @@ function changeChar(charNum) {
     codeInput.value = "";
     codeControl(); //to reset the warning message if any
 
+    //change the character icon
+    charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
+
     //adjust the code input width
     resizeInput();
 
-    //make the recolor button unclickable and show some feedback
+    //make the copy button unclickable and show some feedback
     copyToClip.style.filter = "brightness(.8)";
     copyToClip.style.pointerEvents = "none";
 
     //update the dowloaded image name
     downLink.setAttribute("download", char.name + " Recolor.png");
 
+    // update the color editor
+    createEditor();
+
+}
+
+// create the color editor, called whenever we switch character
+function createEditor() {
+    
 }
 
 //create the character dropdown menu
@@ -281,7 +298,11 @@ downImgButton.addEventListener('click', () => {
 
 //randomize button, generates a random valid code based on character parts count
 document.getElementById("randomize").addEventListener("click", () => {
-    randomize(char.ogColor.length / 4)
+    if (char.name == "Orcane") {
+        randomize(2)
+    } else {
+        randomize(char.ogColor.length / 4)
+    }
 });
 function randomize(colorNum) {
 
@@ -344,7 +365,7 @@ defaultFile.addEventListener("change", () => {
     fileReader.addEventListener("load", function () {
         //add the custom image to the "full render" canvas
         characterImgs.addCustom(this.result, "Full").then( () => { // wait for the img to load
-            characterImgs.recolor(char.ogColor); // then show it
+            recolor(char.ogColor); // then show it
             spritesDiv.style.display = "none"; // hide the sprites
         })
     });
@@ -354,6 +375,34 @@ defaultFile.addEventListener("change", () => {
     codeInput.value = "";
 });
 
+eaCheck.addEventListener("click", (e) => {
+    if (!eaCheck.checked) {
+        characterImgs.blend = blend1;
+        mainRecolor();
+    } else {
+        characterImgs.blend = blend0;
+        mainRecolor();
+    }
+})
+
+
+// yes this is a separate function just for orcane's sprite greenness
+function recolor(rgb) {
+    if (char.name == "Orcane") {
+        for (let i = 0; i < 4; i++) {
+            const newRgb = [];
+            for (let i = 0; i < rgb.length; i++) {
+                newRgb.push(rgb[i]);               
+            }
+            for (let i = 0; i < 4; i++) {
+                newRgb[i+8] = rgb[i];
+            }
+            characterImgs.recolor(newRgb);
+        }
+    } else {
+        characterImgs.recolor(rgb);
+    }
+}
 
 function hexDecode(hex) {
 
@@ -387,4 +436,22 @@ function hex2rgb(hex) {
     return rgb;
 }
 
+var slider0 = document.getElementById("slider0");
+var slider1 = document.getElementById("slider1");
+var slider2 = document.getElementById("slider2");
 
+slider0.oninput = sliderMoved;
+slider1.oninput = sliderMoved;
+slider2.oninput = sliderMoved;
+
+function sliderMoved() {
+    const newRgb = [];
+    for (let i = 0; i < char.ogColor.length; i++) {
+        if (i == this.id.substring(6)) {
+            newRgb[i] = this.value;
+        } else {
+            newRgb.push(char.ogColor[i]);
+        }
+    }
+    recolor(newRgb);
+}

@@ -25,6 +25,7 @@ const db = {
                 40, 85, 50, 1,      // Plasma Tipper
                 /* 0, 0, 0, 1       // CSS Highlight */
             ],
+            partNames : ["Body", "Suit", "Cloak", "Armor", "Belt", "Plasma 1", "Plasma 2"],
             idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -48,6 +49,7 @@ const db = {
                 18, 10, 10, 1,      // Dark Cloak
                 4, 15, 30, 1        // Skull
             ],
+            partNames : ["Cloak 1", "Body", "Fire 1", "Fire 2", "Fire 3", "Cloak 2", "Skull"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -67,6 +69,7 @@ const db = {
                 18, 10, 10, 1,      // Orange flame
                 18, 14, 20, 1       // Red Flame
             ],
+            partNames : ["Body", "Face", "Fire 1", "Fire 2", "Fire 3"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -82,10 +85,11 @@ const db = {
             colorRange : [
                 36, 30, 40, 1,      // Body
                 24, 30, 60, 1,      // Hands
-                18, 90, 5, 1,       // Yellow flame
-                18, 10, 10, 1,      // Orange flame
-                18, 14, 20, 1       // Red Flame
+                18, 90, 5, 1,       // Scarf
+                18, 10, 10, 1,      // Belly
+                18, 14, 20, 1       // Beak
             ],
+            partNames : ["Body", "Hands", "Scarf", "Belly", "Beak"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -105,6 +109,7 @@ const db = {
                 4, 15, 60, 1,       // Horns
                 18, 15, 15, 1,      // Belly
             ],
+            partNames : ["Body", "Hair", "Lightning", "Horns", "Belly"],
             idleFC : 24,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -126,6 +131,7 @@ const db = {
                 8, 23, 19, 1,       // Weapons
                 17, 4, 11, 1        // Clothes
             ],
+            partNames : ["Mech", "Trim", "Body", "Propellers", "Weapons", "Clothes"],
             idleFC : 7,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -145,6 +151,7 @@ const db = {
                 10, 8, 34, 1,       // Petals 1
                 36, 11, 8, 1,       // Petals 2
             ],
+            partNames : ["Body", "Leaves", "Bark", "Petals 1", "Petals 2"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -164,6 +171,7 @@ const db = {
                 54, 15, 35, 1,      // Mark
                 15, 25, 55, 1       // Vines
             ],
+            partNames : ["Body", "Belly", "Leaf", "Marks", "Vines"],
             idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -181,6 +189,7 @@ const db = {
                 27, 20, 65, 1,      // Armor
                 0, 0, 0, 1          // Dark Rock
             ],
+            partNames : ["Rock", "Skin", "Armor", "Shading"],
             idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000"
         },
@@ -189,15 +198,16 @@ const db = {
             ogColor : [
                 59, 73, 135, 1,     // Body
                 205, 247, 247, 1,   // Belly
-                /* 0, 255, 0, 1,    // Highlight (golden skin only)
-                29, 33, 91, 1       // Dark (not sure what this is for?) */
+                0, 255, 0, 1,       // Highlight (golden skin only)
+                /* 29, 33, 91, 1    // Dark (not sure what this is for?) */
             ],
             colorRange : [
                 18, 30, 40, 1,      // Body
                 22, 30, 65, 1,      // Belly
-                /* 2, 0, 0, 0,      // Highlight
-                3, 0, 0, 0          // Dark */
+                2, 0, 0, 0,         // Highlight
+                /* 3, 0, 0, 0       // Dark */
             ],
+            partNames : ["Body", "Belly"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000"
         },
@@ -217,6 +227,7 @@ const db = {
                 /* 0, 0, 0, 1,      // Ice Change Back?
                 0, 0, 0, 1          // Body Go Back?  */
             ],
+            partNames : ["Body", "Ice", "Shading"],
             idleFC : 14,
             placeholder : "0000-0000-0000-0000-0000"
         },
@@ -239,6 +250,7 @@ const db = {
                 27, 22, 33, 1,      // Poison
                 /* 0, 0, 0, 1       //  */
             ],
+            partNames : ["Body Light", "Body Dark", "Pants", "Bandages", "Poison"],
             idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
         },
@@ -260,6 +272,7 @@ const db = {
                 54, 40, 40, 1,      // Energy
                 /* 0, 0, 0, 1       // CSS Highlight */
             ],
+            partNames : ["Body", "Detail", "Eyes", "Sein", "Energy"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000"
             /* for reference these are the values for the default skin from the template
@@ -288,6 +301,7 @@ const db = {
                 18, 42, 37, 1,      // Horns
                 /* 0, 0, 0, 1       // CSS Highlight */
             ],
+            partNames : ["Armor Light", "Armor Dark", "Trim", "Horns"],
             idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000"
         }

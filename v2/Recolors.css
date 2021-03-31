@@ -54,7 +54,6 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     overflow: auto;
     padding: 5px;
-    border-bottom: solid #4a368a 2px;
 }
 
 #sContainer {
@@ -64,6 +63,7 @@ body::-webkit-scrollbar-thumb {
     image-rendering: pixelated; /* Chromium */
     image-rendering: crisp-edges; /* Firefox */
     padding-top: 5px;
+    border-top: solid #4a368a 2px;
 }
 #animDiv {
     overflow: hidden;
@@ -234,8 +234,15 @@ input:hover, input:focus, #copyToClip:hover {
 }
 
 
-#row3, #row4 {
+#row3, #row5 {
     display: flex;
+}
+
+#row4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 
@@ -354,6 +361,13 @@ a:link {
 }
 a:visited {
     color: lightgrey;
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

@@ -202,7 +202,7 @@ const blend0 = [
 // time to create our recolored character!
 class RoaRecolor {
 
-  constructor(ogColor, colorTolerance, blend = 1) {
+  constructor(ogColor, colorTolerance, blend = null) {
     this.colorIn = ogColor;
     this.colorTolerance = colorTolerance;
 
@@ -210,7 +210,7 @@ class RoaRecolor {
     this.charImgs = {};
 
     // just in case someone wants some retro shading
-    if (blend == 1) {
+    if (!blend) {
       this.blend = blend1;
     } else {
       this.blend = blend0;
