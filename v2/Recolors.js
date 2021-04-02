@@ -220,14 +220,14 @@ function charSwitcher() {
             newDiv.style.backgroundColor = "#ba6464"
         } else if (i < 6) { //air
             newDiv.style.backgroundColor = "#bd8ac1"
-        }
-        else if (i < 9) { //earth
+        } else if (i < 9) { //earth
             newDiv.style.backgroundColor = "#6ca577"
-        }
-        else if (i < 12) { //water
+        } else if (i < 12) { //water
             newDiv.style.backgroundColor = "#6673ad"
-        } else { //but everything changed when the indie characters attacked
+        } else if (i < 14) { //but everything changed when the indie characters attacked
             newDiv.style.backgroundColor = "#c9b4d3"
+        } else { // but nobody expected the workshop inquisition
+            newDiv.style.backgroundColor = "#a1a1a1"
         }
 
         //if the div gets clicked, update the character to be recolored
@@ -271,8 +271,10 @@ function resizeInput() {
         codeInput.style.width = "345px";
     } else if (maxLength == 49) {
         codeInput.style.width = "430px";
-    } else {
+    } else if (maxLength == 54) {
         codeInput.style.width = "475px";
+    } else {
+        codeInput.style.width = "555px";
     }
 }
 
@@ -445,12 +447,14 @@ slider1.oninput = sliderMoved;
 slider2.oninput = sliderMoved;
 
 function sliderMoved() {
+    const hex = codeInput.value; //grab the color code
+    const rgb = hexDecode(hex);
     const newRgb = [];
-    for (let i = 0; i < char.ogColor.length; i++) {
+    for (let i = 0; i < rgb.length; i++) {
         if (i == this.id.substring(6)) {
             newRgb[i] = this.value;
         } else {
-            newRgb.push(char.ogColor[i]);
+            newRgb.push(rgb[i]);
         }
     }
     recolor(newRgb);

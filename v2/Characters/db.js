@@ -304,6 +304,102 @@ const db = {
             partNames : ["Armor Light", "Armor Dark", "Trim", "Horns"],
             idleFC : 6,
             placeholder : "0000-0000-0000-0000-0000-0000-0000"
+        },
+        {
+            name : "Mollo",
+            ogColor : [
+                171, 106, 152, 1,   // PURPLE FUR
+                214, 170, 137, 1,   // TAN FUR
+                107, 31, 31, 1,     // RED CLOTH
+                74, 55, 76, 1,      // SHIRT
+                255, 71, 71, 1,     // BOMBS
+                255, 145, 54, 1,    // EMBERS
+                41, 0, 46, 1        // EYES?
+            ],
+            colorRange : [
+                7, 5, 15, 1,        // PURPLE FUR
+                8, 19, 13, 1,       // TAN FUR
+                1, 15, 25, 1,       // RED CLOTH
+                3, 22, 16, 1,       // SHIRT
+                4, 17, 40, 1,       // BOMBS
+                22, 14, 46, 1,      // EMBERS
+                2, 36, 27, 1        // EYES?
+            ],
+            partNames : ["Purple Fur", "Tan Fur", "Red Cloth", "Shirt", "Bombs", "Embers", "Eyes"],
+            idleFC : 8,
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
+        },
+        {
+            name : "Hodan",
+            ogColor : [
+                167, 231, 231, 1,   // FX
+                231, 84, 84, 1,     // Skin
+                139, 79, 40, 1,     // Pads
+                64, 64, 255, 1,     // Towel Main
+                255, 255, 128, 1,   // Towel Strip
+                242, 249, 251, 1,   // Fur 1
+                192, 219, 255, 1,   // Fur 2
+                161, 181, 255, 1    // Fur 3
+            ],
+            colorRange : [
+                18, 21, 52, 1,      // FX
+                1, 37, 23, 1,       // Skin
+                33, 19, 14, 1,      // Pads
+                1, 27, 26, 1,       // Towel Main
+                1, 1, 1, 1,         // Towel Strip
+                1, 1, 1, 1,         // Fur 1
+                0, 0, 0, 1,         // Fur 2
+                0, 0, 0, 1          // Fur 3
+            ],
+            partNames : ["FX", "Skin", "Pads", "Towel Main", "Towel Strip", "Fur 1", "Fur 2", "Fur 3"],
+            idleFC : 8,
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
+        },
+        {
+            name : "Pomme",
+            ogColor : [
+                233, 190, 224, 1,   // Skin
+                99, 41, 76, 1,      // Jacket
+                35, 13, 64, 1,      // Outfit
+                116, 16, 80, 1,     // Eye
+                183, 101, 184, 1,   // Hair
+                243, 155, 233, 1    // Effects
+            ],
+            colorRange : [
+                13, 12, 8, 1,       // Skin
+                2, 10, 27, 1,       // Jacket
+                12, 10, 12, 1,      // Outfit
+                14, 14, 25, 1,      // Eye
+                18, 4, 24, 1,       // Hair
+                1, 12, 3, 1         // Effects
+            ],
+            partNames : ["Skin", "Jacket", "Outfit", "Eye", "Hair", "Effects"],
+            idleFC : 12,
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
+        },
+        {
+            name : "Olympia",
+            ogColor : [
+                236, 141, 202, 1,   // Gauntlets
+                166, 115, 75, 1,    // Fur
+                219, 119, 101, 1,   // Tail,Ear
+                240, 236, 236, 1,   // Pants
+                255, 249, 249, 1,   // Shine (this one overrides some "Pants" colors)
+                54, 123, 141, 1     // Eyes
+
+            ],
+            colorRange : [
+                20, 50, 50, 1,      //Gauntlets
+                55, 50, 50, 1,      //Fur
+                15, 40, 1, 1,       //Tail/Ear
+                10, 1, 50, 1,       //Pants
+                5, 5, 0, 1,         //Shine
+                10, 75, 40, 1       //Eye
+            ],
+            partNames : ["Gauntlets", "Fur", "Tail/Ear", "Pants", "Shine", "Eyes"],
+            idleFC : 7,
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         }
+
     ]
 }
