@@ -209,7 +209,8 @@ const db = {
             ],
             partNames : ["Body", "Belly"],
             idleFC : 8,
-            placeholder : "0000-0000-0000-0000"
+            placeholder : "0000-0000-0000-0000",
+            actualParts : 2
         },
         {
             name : "Etalus",
@@ -351,7 +352,7 @@ const db = {
                 0, 0, 0, 1,         // Fur 2
                 0, 0, 0, 1          // Fur 3
             ],
-            partNames : ["FX", "Skin", "Pads", "Towel Main", "Towel Strip", "Fur 1", "Fur 2", "Fur 3"],
+            partNames : ["FX", "Skin", "Pads", "Towel 1", "Towel 2", "Fur 1", "Fur 2", "Fur 3"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },

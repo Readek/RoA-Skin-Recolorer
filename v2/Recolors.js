@@ -44,6 +44,7 @@ function codeControl() {
 
         //automatically execute recolor for some QoL
         mainRecolor();
+        createEditor();
 
     } else if (!codeInput.value) {
 
@@ -144,7 +145,7 @@ function changeChar(charNum) {
     Promise.all(imgPromises).then( () => {
         // ori is the only character that needs an actual recolor
         if (char.name == "Ori and Sein") {
-            recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-0000-0000"));
+            recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-FFC7-2038"));
         } else {
             recolor(char.ogColor);
         }
@@ -196,7 +197,59 @@ function changeChar(charNum) {
 
 // create the color editor, called whenever we switch character
 function createEditor() {
-    
+    const partList = document.getElementById("partList");
+    partList.innerHTML = null;
+
+    let count = 0;
+
+    const hex = codeInput.value; //grab the color code
+    let rgb;
+    try {
+        rgb = hexDecode(hex); //make some sense out of it
+    } catch (e) {
+        rgb = char.ogColor; // if the code is not valid, use the default colors
+    }
+
+
+    for (let i = 0; i < char.ogColor.length; i += 4) {
+        
+        const part = document.createElement("div");
+        part.className = "part";
+
+        const partName = document.createElement("div");
+        partName.innerHTML = char.partNames[count];
+        partName.classList.add("partName");
+        partName.style.backgroundColor = "rgb(" + rgb[i] + ", " + rgb[i+1] + ", " + rgb[i+2] + ")";
+
+        const red = genColorDiv(rgb[i], "rgb(" + rgb[i] + ", 0, 0)");
+        const green = genColorDiv(rgb[i+1], "rgb(0," + rgb[i+1] + ", 0)");
+        const blue = genColorDiv(rgb[i+2], "rgb(0, 0," + rgb[i+2] + ")");
+
+        part.appendChild(partName);
+        part.appendChild(red);
+        part.appendChild(green);
+        part.appendChild(blue);
+
+        partList.appendChild(part);
+
+        count++;
+         
+    }
+}
+function genColorDiv(text, bgCol) {
+    const colorDiv = document.createElement("div");
+    colorDiv.classList.add("colorDiv");
+
+    const rgbColor = document.createElement("div");
+    rgbColor.classList.add("rgbColor");
+    rgbColor.style.backgroundColor = bgCol;
+    colorDiv.appendChild(rgbColor);
+
+    const colorText = document.createElement("div");
+    colorText.innerHTML = text;
+    colorDiv.appendChild(colorText);
+
+    return colorDiv;
 }
 
 //create the character dropdown menu
@@ -300,8 +353,8 @@ downImgButton.addEventListener('click', () => {
 
 //randomize button, generates a random valid code based on character parts count
 document.getElementById("randomize").addEventListener("click", () => {
-    if (char.name == "Orcane") {
-        randomize(2)
+    if (char.actualParts) { // for orcane
+        randomize(char.actualParts)
     } else {
         randomize(char.ogColor.length / 4)
     }
@@ -343,7 +396,7 @@ function randomize(colorNum) {
     //put the code in the code input, separating the full color code with "-" every 4 characters    
     codeInput.value = code.match(/.{1,4}/g).join("-");
 
-    //check the code, this is just to allow the recolor button to be clicked
+    //check the code, this is just to force recoloring the image
     codeControl();
 
     //automatically click the recolor button to show the results

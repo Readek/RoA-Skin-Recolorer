@@ -304,6 +304,40 @@ input:hover, input:focus, #copyToClip:hover {
 }
 
 
+#partList {
+    width: 450px;
+    max-width: 100%;
+}
+.part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg);
+    border-radius: 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+.partName {
+    background-color: var(--bgH);
+    border-radius: 20px;
+    padding: 8px 14px;
+    width: 84px;
+    text-shadow: 1px 1px 1px black;
+}
+.colorDiv {
+    padding: 8px 14px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+}
+.rgbColor {
+    width: 10px;
+    height: 15px;
+    border-radius: 100%;
+    margin-right: 5px;
+}
+
+
 .buttonsBot {
     display: flex;
     justify-content: center;
