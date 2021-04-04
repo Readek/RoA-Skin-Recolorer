@@ -78,16 +78,16 @@ const db = {
             ogColor : [
                 168, 87, 143, 1,    // Body
                 97, 68, 96, 1,      // Hands
-                255, 233, 0, 1,     // Scarf
-                255, 127, 0, 1,     // Belly
-                170, 0, 0, 1        // Beak
+                141, 231, 255, 1,   // Scarf
+                246, 173, 197, 1,   // Belly
+                230, 218, 25, 1     // Beak
             ],
             colorRange : [
-                36, 30, 40, 1,      // Body
-                24, 30, 60, 1,      // Hands
-                18, 90, 5, 1,       // Scarf
-                18, 10, 10, 1,      // Belly
-                18, 14, 20, 1       // Beak
+                27, 13, 50, 1,      // Body
+                18, 15, 30, 1,      // Hands
+                27, 30, 50, 1,      // Scarf
+                18, 5, 40, 1,       // Belly
+                18, 5, 60, 1        // Beak
             ],
             partNames : ["Body", "Hands", "Scarf", "Belly", "Beak"],
             idleFC : 8,
@@ -385,8 +385,8 @@ const db = {
                 166, 115, 75, 1,    // Fur
                 219, 119, 101, 1,   // Tail,Ear
                 240, 236, 236, 1,   // Pants
-                255, 249, 249, 1,   // Shine (this one overrides some "Pants" colors)
-                54, 123, 141, 1     // Eyes
+                54, 123, 141, 1,    // Eyes
+                255, 249, 249, 1    // Shine (this one overrides some "Pants" colors)
 
             ],
             colorRange : [
@@ -394,12 +394,13 @@ const db = {
                 55, 50, 50, 1,      //Fur
                 15, 40, 1, 1,       //Tail/Ear
                 10, 1, 50, 1,       //Pants
-                5, 5, 0, 1,         //Shine
-                10, 75, 40, 1       //Eye
+                10, 75, 40, 1,      //Eye
+                5, 5, 0, 1          //Shine
             ],
-            partNames : ["Gauntlets", "Fur", "Tail/Ear", "Pants", "Shine", "Eyes"],
+            partNames : ["Gauntlets", "Fur", "Tail/Ear", "Pants", "Eyes"],
             idleFC : 7,
-            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
+            actualParts : 5
         }
 
     ]

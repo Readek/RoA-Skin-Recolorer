@@ -305,7 +305,7 @@ input:hover, input:focus, #copyToClip:hover {
 
 
 #partList {
-    width: 450px;
+    width: 500px;
     max-width: 100%;
 }
 .part {
@@ -316,6 +316,10 @@ input:hover, input:focus, #copyToClip:hover {
     border-radius: 20px;
     margin: 10px;
     cursor: pointer;
+    transition: background-color 150ms;
+}
+.part:hover {
+    background-color: var(--bgH);
 }
 .partName {
     background-color: var(--bgH);
@@ -324,9 +328,14 @@ input:hover, input:focus, #copyToClip:hover {
     width: 84px;
     text-shadow: 1px 1px 1px black;
 }
+.hexDiv {
+    text-transform: uppercase;
+    padding: 0px 0px;
+    width: 80px;
+}
 .colorDiv {
-    padding: 8px 14px;
-    width: 60px;
+    padding: 0px 10px 0px 0px;
+    width: 50px;
     display: flex;
     align-items: center;
 }

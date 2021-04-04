@@ -20,6 +20,7 @@ const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImg");
 const eaCheck = document.getElementById("EAcheck");
 const colorEditor = document.getElementById("colorEditor");
+const partList = document.getElementById("partList");
 
 
 //when the page loads, change to a random character
@@ -117,8 +118,13 @@ function mainRecolor() {
     let rgb;
     try {
         rgb = hexDecode(hex); //make some sense out of it
+        rgb.splice(rgb.length - 4); //remove the checksum at the end of the code
     } catch (e) {
         rgb = char.ogColor; // if the code is not valid, use the default colors
+    }
+    // Olympia needs some special treatment since the pants colors affect all whites
+    if (char.name == "Olympia") {
+        rgb.push(char.ogColor[20], char.ogColor[21], char.ogColor[22], char.ogColor[23])
     }
     // now recolor the images
     recolor(rgb);
@@ -197,35 +203,48 @@ function changeChar(charNum) {
 
 // create the color editor, called whenever we switch character
 function createEditor() {
-    const partList = document.getElementById("partList");
+
+    //clear the part list
     partList.innerHTML = null;
 
-    let count = 0;
+    let count = 0; // this is just for the part name
 
-    const hex = codeInput.value; //grab the color code
     let rgb;
     try {
-        rgb = hexDecode(hex); //make some sense out of it
+        rgb = hexDecode(codeInput.value); // get the rgb values of the current code
     } catch (e) {
         rgb = char.ogColor; // if the code is not valid, use the default colors
     }
 
+    // check if the current character has hidden parts
+    const theLength = char.actualParts ? char.actualParts * 4 : char.ogColor.length;
 
-    for (let i = 0; i < char.ogColor.length; i += 4) {
+    // now for each (editable) part:
+    for (let i = 0; i < theLength; i += 4) {
         
+        // this is where everything will be stored
         const part = document.createElement("div");
         part.className = "part";
 
+        // get the part name and colorize its background
         const partName = document.createElement("div");
         partName.innerHTML = char.partNames[count];
         partName.classList.add("partName");
         partName.style.backgroundColor = "rgb(" + rgb[i] + ", " + rgb[i+1] + ", " + rgb[i+2] + ")";
 
+        // lets also add the hex code for each part
+        const hexDiv = document.createElement("div");
+        hexDiv.classList.add("hexDiv");
+        hexDiv.innerHTML = "#" + rgbToHex(rgb[i], rgb[i+1], rgb[i+2]);
+
+        // add the rgb values with a cool colored icon next to them
         const red = genColorDiv(rgb[i], "rgb(" + rgb[i] + ", 0, 0)");
         const green = genColorDiv(rgb[i+1], "rgb(0," + rgb[i+1] + ", 0)");
         const blue = genColorDiv(rgb[i+2], "rgb(0, 0," + rgb[i+2] + ")");
 
+        // now add everything we just created to the part div and then to the actual html
         part.appendChild(partName);
+        part.appendChild(hexDiv);
         part.appendChild(red);
         part.appendChild(green);
         part.appendChild(blue);
@@ -353,7 +372,7 @@ downImgButton.addEventListener('click', () => {
 
 //randomize button, generates a random valid code based on character parts count
 document.getElementById("randomize").addEventListener("click", () => {
-    if (char.actualParts) { // for orcane
+    if (char.actualParts) { // for orcane & olympia
         randomize(char.actualParts)
     } else {
         randomize(char.ogColor.length / 4)
@@ -398,9 +417,6 @@ function randomize(colorNum) {
 
     //check the code, this is just to force recoloring the image
     codeControl();
-
-    //automatically click the recolor button to show the results
-    mainRecolor();
 
 }
 
@@ -511,4 +527,12 @@ function sliderMoved() {
         }
     }
     recolor(newRgb);
+}
+
+function componentToHex(c) {
+    const hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+function rgbToHex(r, g, b) {
+    return componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
