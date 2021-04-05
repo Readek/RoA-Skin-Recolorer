@@ -1,15 +1,15 @@
 "use strict";
-const fullCanvas = document.getElementById("fullCanvas");
-const animCanvas = document.getElementById("animCanvas");
-const animDiv = document.getElementById("animDiv");
-const sprLCanvas = document.getElementById("spriteL");
-const sprRCanvas = document.getElementById("spriteR");
 
 let char; // this will hold the values from the character database
 let characterImgs;
 let maxLength; // limits how many characters there should be in the code input
 let playingAnim = false; // to not allow playing an animation until its finished
 
+const fullCanvas = document.getElementById("fullCanvas");
+const animCanvas = document.getElementById("animCanvas");
+const sprLCanvas = document.getElementById("spriteL");
+const sprRCanvas = document.getElementById("spriteR");
+const animDiv = document.getElementById("animDiv");
 const spritesDiv = document.getElementById("sContainer");
 const charIcon = document.getElementById("selectedIcon");
 const codeInput = document.getElementById("codeInput");
@@ -21,6 +21,10 @@ const downImgButton = document.getElementById("downImg");
 const eaCheck = document.getElementById("EAcheck");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
+const sliderR = document.getElementById("sliderR");
+const sliderG = document.getElementById("sliderG");
+const sliderB = document.getElementById("sliderB");
+const nowEditingText = document.getElementById("nowEditing")
 
 
 //when the page loads, change to a random character
@@ -199,6 +203,9 @@ function changeChar(charNum) {
     // update the color editor
     createEditor();
 
+    // hide the color sliders
+    colorEditor.style.display = "none";
+
 }
 
 // create the color editor, called whenever we switch character
@@ -225,6 +232,8 @@ function createEditor() {
         // this is where everything will be stored
         const part = document.createElement("div");
         part.className = "part";
+        part.setAttribute("pNum", count); // just a way to know what we will click
+        part.addEventListener("click", showSliders);
 
         // get the part name and colorize its background
         const partName = document.createElement("div");
@@ -328,6 +337,7 @@ function charSwitcher() {
         }
 
     }
+
 }
 
 
@@ -418,6 +428,9 @@ function randomize(colorNum) {
     //check the code, this is just to force recoloring the image
     codeControl();
 
+    // hide the color sliders
+    colorEditor.style.display = "none";
+
 }
 
 
@@ -475,6 +488,106 @@ function recolor(rgb) {
     }
 }
 
+function showSliders() {
+    
+    // show the color sliders
+    colorEditor.style.display = "block";
+
+    // this tells us what part has been clicked
+    const partNum = this.getAttribute("pNum");
+
+    // change the text of the active part
+    nowEditingText.innerHTML = char.partNames[partNum];
+
+    // tell the sliders what to change
+    sliderR.setAttribute("num", partNum * 4);
+    sliderG.setAttribute("num", partNum * 4 + 1);
+    sliderB.setAttribute("num", partNum * 4 + 2);
+
+    // update the slider values to the current part's
+    let rgb;
+    try {
+        const hex = codeInput.value;
+        rgb = hexDecode(hex);
+    } catch (error) {
+        rgb = char.ogColor; // if the code is not valid, use the default colors
+    }
+    sliderR.value = rgb[partNum * 4];
+    sliderG.value = rgb[partNum * 4 + 1];
+    sliderB.value = rgb[partNum * 4 + 2];
+
+}
+
+sliderR.oninput = sliderMoved;
+sliderG.oninput = sliderMoved;
+sliderB.oninput = sliderMoved;
+
+function sliderMoved() {
+
+    // get the current code
+    let rgb;
+    try {
+        const hex = codeInput.value;
+        rgb = hexDecode(hex);
+    } catch (error) {
+        rgb = char.ogColor; // if the code is not valid, use the default colors
+    }
+    
+    // modify the rgb values with the new ones from the sliders
+    const newRgb = [];
+    for (let i = 0; i < rgb.length; i++) {
+        if (i == this.getAttribute("num")) {
+            newRgb[i] = Number(this.value);
+        } else {
+            newRgb.push(rgb[i]);
+        }
+    }
+
+    // display a new code
+    genCodeManual(newRgb)
+
+}
+
+
+function genCodeManual(rgb) {
+
+    // this is mostly the randomize code
+
+    // get the number of parts we will recolor
+    const colorNum = char.actualParts ? char.actualParts : char.ogColor.length / 4;
+
+    // add in the rgb values in hex form
+    let finalCode = "";
+    for (let i = 0; i < colorNum * 4; i += 4) {
+        finalCode += rgbToHex(rgb[i], rgb[i+1], rgb[i+2])        
+    }
+
+    //generate a valid checksum (this is only for the game, the webpage doesn't need this)
+	let checksum = 0;
+    let count = 0;
+	for (let i = 0; i < colorNum*4; i += 4)
+	{
+		checksum += (count + 101) * rgb[i];
+		checksum += (count + 102) * rgb[i+1];
+		checksum += (count + 103) * rgb[i+2];
+        count++;
+	}
+    checksum = checksum % 256;
+    finalCode += checksum.toString(16).toUpperCase().padStart(2, '0');
+	if (colorNum % 2 == 0)
+	{
+		finalCode += "00";
+    }
+
+    //put the code in the code input, separating the full color code with "-" every 4 characters    
+    codeInput.value = finalCode.match(/.{1,4}/g).join("-");
+
+    //check the code, this is just to force recoloring the image
+    codeControl();
+
+}
+
+
 function hexDecode(hex) {
 
     // delete those "-" from the code
@@ -506,29 +619,6 @@ function hex2rgb(hex) {
     rgb[2] = bigint & 255;
     return rgb;
 }
-
-var slider0 = document.getElementById("slider0");
-var slider1 = document.getElementById("slider1");
-var slider2 = document.getElementById("slider2");
-
-slider0.oninput = sliderMoved;
-slider1.oninput = sliderMoved;
-slider2.oninput = sliderMoved;
-
-function sliderMoved() {
-    const hex = codeInput.value; //grab the color code
-    const rgb = hexDecode(hex);
-    const newRgb = [];
-    for (let i = 0; i < rgb.length; i++) {
-        if (i == this.id.substring(6)) {
-            newRgb[i] = this.value;
-        } else {
-            newRgb.push(rgb[i]);
-        }
-    }
-    recolor(newRgb);
-}
-
 function componentToHex(c) {
     const hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;

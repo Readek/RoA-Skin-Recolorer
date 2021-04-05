@@ -82,20 +82,25 @@
 
         <div id="row4" class="row">
             
+            <div id="colorEditor">
+                <div id="nowEditingDiv" class="center">
+                    <span>Now editing: </span><strong><span id="nowEditing"></span></strong>
+                </div>
+                <div>
+                    <input type="range" min="0" max="255" value="50" class="slider" id="sliderR">
+                    <input type="range" min="0" max="255" value="50" class="slider" id="sliderG">
+                    <input type="range" min="0" max="255" value="50" class="slider" id="sliderB">
+                </div>
+            </div>
+
             <div id="partList">
 
             </div>
-            <div id="colorEditor">
-                <input type="range" min="0" max="255" value="50" class="slider" id="slider0">
-                <input type="range" min="0" max="255" value="50" class="slider" id="slider1">
-                <input type="range" min="0" max="255" value="50" class="slider" id="slider2">
-            </div>
+
             <div class="center">
-                <input type="checkbox" id="EAcheck"> <label for="EAcheck">EA Shading</label>
+                <input type="checkbox" id="EAcheck" class="check"> <label for="EAcheck">EA Shading</label>
             </div>
-            <!-- <div class="center">
-                <input type="checkbox" id="HDcheck"> <label for="HDcheck">HD Images</label>
-            </div> -->
+
         </div>
 
         

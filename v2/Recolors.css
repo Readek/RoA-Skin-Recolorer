@@ -161,7 +161,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-input {
+#codeInput {
     width: 120px; /* init width is just so an animation happens on page load */
     height: 25px;
     outline: none;
@@ -174,11 +174,12 @@ input {
     float: left;
     transition: background-color 150ms, width 150ms;
     margin-top: 5px;
+    text-transform: uppercase;
 }
-input::placeholder { /* this is just for Chromium */
+#codeInput::placeholder { /* this is just for Chromium */
     color: rgb(158, 158, 158);
 }
-input:hover, input:focus, #copyToClip:hover {
+#codeInput:hover, #codeInput:focus, #copyToClip:hover {
     background-color: #8a7bbb;
 }
 
@@ -304,6 +305,49 @@ input:hover, input:focus, #copyToClip:hover {
 }
 
 
+#colorEditor {
+    display: none;
+    padding: 5px;
+}
+#nowEditingDiv {
+    padding-bottom: 5px;
+}
+#nowEditing {
+    margin-left: 5px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 175px;
+    height: 8px;
+    outline: none;
+    border-radius: 10px;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 20px;
+    border-radius: 5px;
+    background: lightgray;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 8px;
+    height: 20px;
+    background: lightgray;
+    cursor: pointer;
+}
+#sliderR {
+    background: linear-gradient(to right, black, red);
+}
+#sliderG {
+    background: linear-gradient(to right, black, green);
+}
+#sliderB {
+    background: linear-gradient(to right, black, blue);
+}
+
 #partList {
     width: 500px;
     max-width: 100%;
@@ -316,10 +360,14 @@ input:hover, input:focus, #copyToClip:hover {
     border-radius: 20px;
     margin: 10px;
     cursor: pointer;
-    transition: background-color 150ms;
+    transition: background-color 150ms, transform 150ms, filter 150ms;
 }
 .part:hover {
     background-color: var(--bgH);
+    transform: scale(1.03);
+}
+.part:active {
+    filter: brightness(.9);
 }
 .partName {
     background-color: var(--bgH);
