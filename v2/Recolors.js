@@ -24,7 +24,8 @@ const partList = document.getElementById("partList");
 const sliderR = document.getElementById("sliderR");
 const sliderG = document.getElementById("sliderG");
 const sliderB = document.getElementById("sliderB");
-const nowEditingText = document.getElementById("nowEditing")
+const nowEditingText = document.getElementById("nowEditing");
+const editingHex = document.getElementById("editingHex");
 
 
 //when the page loads, change to a random character
@@ -516,6 +517,9 @@ function showSliders() {
     sliderG.value = rgb[partNum * 4 + 1];
     sliderB.value = rgb[partNum * 4 + 2];
 
+    // change the color of the "now editing" indicator
+    editingHex.style.backgroundColor = "#" + rgbToHex(rgb[partNum*4], rgb[partNum*4+1], rgb[partNum*4+2])
+
 }
 
 sliderR.oninput = sliderMoved;
@@ -535,8 +539,9 @@ function sliderMoved() {
     
     // modify the rgb values with the new ones from the sliders
     const newRgb = [];
+    const num = Number(this.getAttribute("num"));
     for (let i = 0; i < rgb.length; i++) {
-        if (i == this.getAttribute("num")) {
+        if (i == num) {
             newRgb[i] = Number(this.value);
         } else {
             newRgb.push(rgb[i]);
@@ -545,6 +550,11 @@ function sliderMoved() {
 
     // display a new code
     genCodeManual(newRgb)
+
+    // update the color on the "now editing" indicator
+    const modul = num%4;
+    const num2 = num-modul;
+    editingHex.style.backgroundColor = "#" + rgbToHex(newRgb[num2], newRgb[num2+1], newRgb[num2+2]);
 
 }
 

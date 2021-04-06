@@ -310,10 +310,35 @@ body::-webkit-scrollbar-thumb {
     padding: 5px;
 }
 #nowEditingDiv {
-    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+#nowEditingSpan {
+    border: 2px solid var(--bgH);
+    padding: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+}
+#editingHex {
+    width: 10px;
+    height: 15px;
+    border-radius: 100%;
+    margin-left: 6px;
+    transform: translateY(2px);
 }
 #nowEditing {
-    margin-left: 5px;
+    margin-left: 3px;
+}
+
+#hideEditor {
+    border: 2px solid var(--bgH);
+    border-left: none;
+    padding: 8px;
+    padding-right: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: var(--bgH);
+    cursor: pointer;
 }
 
 .slider {
@@ -322,6 +347,7 @@ body::-webkit-scrollbar-thumb {
     height: 8px;
     outline: none;
     border-radius: 10px;
+    cursor: pointer;
 }
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;

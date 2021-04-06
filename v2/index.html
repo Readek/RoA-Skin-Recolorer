@@ -50,8 +50,6 @@
 
         <div id="row2" class="row"></div>
 
-
-
         <div id="row3" class="row">
 
             <div id="randomize" tabindex="1" class="buttons" data-tooltip="Generate a random color code">
@@ -84,7 +82,14 @@
             
             <div id="colorEditor">
                 <div id="nowEditingDiv" class="center">
-                    <span>Now editing: </span><strong><span id="nowEditing"></span></strong>
+                    <span id="nowEditingSpan">
+                        <span>Now editing: </span>
+                        <div id="editingHex"></div>
+                        <strong><span id="nowEditing"></span></strong>
+                    </span>
+                    <span id="hideEditor">
+                        X
+                    </span>
                 </div>
                 <div>
                     <input type="range" min="0" max="255" value="50" class="slider" id="sliderR">
