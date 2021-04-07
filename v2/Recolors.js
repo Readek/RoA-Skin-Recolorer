@@ -206,8 +206,9 @@ function changeChar(charNum) {
     // update the color editor
     createEditor();
 
-    // hide the color sliders
+    // hide the color sliders, show top buttons
     colorEditor.style.display = "none";
+    topButtons.style.display = "flex";
 
 }
 

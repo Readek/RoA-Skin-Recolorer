@@ -16,8 +16,6 @@
 html, body {
     padding: 0;
     margin: 0;
-    width: 100%;
-    height: 100%;
 }
 
 
@@ -103,6 +101,7 @@ body::-webkit-scrollbar-thumb {
     transition: background-color 150ms;
     position: relative;
     outline: none; /* Chromium only */
+    user-select: none;
 }
 #selectedIcon {
     width: 30px;
@@ -439,6 +438,18 @@ body::-webkit-scrollbar-thumb {
     background-color: var(--bg);
 }
 
+#editIcon {
+    height: 26px;
+    width: 26px;
+    transform: translate(-2px, -1px);
+}
+#addIcon {
+    height: 26px;
+    width: 26px;
+    fill: white;
+    transform: translateX(-3px);
+}
+
 #config {
     background-color: var(--bg);
     width: 15px;
@@ -494,7 +505,15 @@ body::-webkit-scrollbar-thumb {
     height: 21px;
     width: 21px;
     fill: white;
-    transform: translate(0px, 0px);
+}
+#kofiButton {
+    background-color: #30add3;
+}
+#kofiIcon {
+    height: 21px;
+    width: 21px;
+    fill: white;
+    transform: translate(1px, 1px);
 }
 
 
@@ -607,10 +626,15 @@ a:visited {
 
 @media (max-width: 560px) {
 
+    #row3 {
+        flex-direction: column;
+    }
+
     .slider {
         display: block;
         margin: 16px;
     }
+
 }
 
 @media (max-width: 480px) {
