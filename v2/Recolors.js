@@ -26,6 +26,8 @@ const sliderG = document.getElementById("sliderG");
 const sliderB = document.getElementById("sliderB");
 const nowEditingText = document.getElementById("nowEditing");
 const editingHex = document.getElementById("editingHex");
+const topButtons = document.getElementById("row3");
+const hideSlidsButton = document.getElementById("hideEditor");
 
 
 //when the page loads, change to a random character
@@ -491,8 +493,9 @@ function recolor(rgb) {
 
 function showSliders() {
     
-    // show the color sliders
+    // show the color sliders, hide buttons
     colorEditor.style.display = "block";
+    topButtons.style.display = "none";
 
     // this tells us what part has been clicked
     const partNum = this.getAttribute("pNum");
@@ -520,6 +523,12 @@ function showSliders() {
     // change the color of the "now editing" indicator
     editingHex.style.backgroundColor = "#" + rgbToHex(rgb[partNum*4], rgb[partNum*4+1], rgb[partNum*4+2])
 
+}
+
+hideSlidsButton.addEventListener("click", hideSliders);
+function hideSliders() {
+    colorEditor.style.display = "none";
+    topButtons.style.display = "flex";
 }
 
 sliderR.oninput = sliderMoved;

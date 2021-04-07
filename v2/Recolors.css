@@ -2,9 +2,10 @@
     --mainBG: #514188;
     --bg: #7c6bb4;
     --bgH: #9484c9;
-    --spriteTime: .85s;
-    --spriteCount: 8;
-    --spriteMove: -768px;
+    /* these will get modified by Recolors.js */
+    --spriteTime: 0s;
+    --spriteCount: 0;
+    --spriteMove: 0px;
 }
 
 @font-face {
@@ -13,10 +14,10 @@
 }
 
 html, body {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -53,7 +54,8 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     align-items: center;
     overflow: auto;
-    padding: 5px;
+    margin: 5px;
+    margin-top: 10px;
 }
 
 #sContainer {
@@ -162,7 +164,6 @@ body::-webkit-scrollbar-thumb {
 
 
 #codeInput {
-    width: 120px; /* init width is just so an animation happens on page load */
     height: 25px;
     outline: none;
     border: none;
@@ -235,8 +236,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-#row3, #row5 {
+#row3, #row6 {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #row4 {
@@ -261,6 +264,8 @@ body::-webkit-scrollbar-thumb {
     transition: filter 100ms;
     user-select: none;
     outline: none; /* Chromium only */
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
 }
 .buttons:hover {
     filter: brightness(1.1);
@@ -307,14 +312,15 @@ body::-webkit-scrollbar-thumb {
 
 #colorEditor {
     display: none;
-    padding: 5px;
+    margin-top: -5px;
 }
 #nowEditingDiv {
     margin-bottom: 10px;
 }
 #nowEditingSpan {
     border: 2px solid var(--bgH);
-    padding: 8px;
+    border-right: none;
+    padding: 7px 8px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     display: flex;
@@ -332,13 +338,16 @@ body::-webkit-scrollbar-thumb {
 
 #hideEditor {
     border: 2px solid var(--bgH);
-    border-left: none;
-    padding: 8px;
+    padding: 7px;
     padding-right: 10px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     color: var(--bgH);
     cursor: pointer;
+    transition: filter 100ms;
+}
+#hideEditor:hover {
+    filter: brightness(1.3);
 }
 
 .slider {
@@ -348,6 +357,7 @@ body::-webkit-scrollbar-thumb {
     outline: none;
     border-radius: 10px;
     cursor: pointer;
+    border: 2.5px solid var(--bg);
 }
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -418,6 +428,27 @@ body::-webkit-scrollbar-thumb {
     height: 15px;
     border-radius: 100%;
     margin-right: 5px;
+}
+
+
+#options {
+    margin-top: -5px;
+}
+#editChar, #newChar {
+    width: auto;
+    background-color: var(--bg);
+}
+
+#config {
+    background-color: var(--bg);
+    width: 15px;
+}
+#configIcon {
+    height: 20px;
+    width: 20px;
+    fill: white;
+    transform: scale(1.8);
+    
 }
 
 
@@ -566,18 +597,36 @@ a:visited {
 
 
   /* responsive time? */
-  @media (max-width: 620px) {
-
-    #row3 {
-        display:block
-    }
-
-    .buttons {
-        margin: 8px;
-    }
+  @media (max-width: 600px) {
 
     input {
-        max-width: 180px;
+        max-width: 220px;
     }
 
+}
+
+@media (max-width: 560px) {
+
+    .slider {
+        display: block;
+        margin: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #partList {
+        width: auto;
+    }
+    .hexDiv {
+        display: none;
+    }
+    .colorDiv {
+        margin-left: 5px;
+    }
+
+    #options {
+        flex-direction: column;
+    }
+    
 }
