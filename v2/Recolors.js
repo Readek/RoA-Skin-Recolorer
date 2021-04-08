@@ -373,14 +373,24 @@ function genRnd(min, max) {
 
 //download image button
 downImgButton.addEventListener('click', () => {
-    if (codeInput.value) { //if theres a code
-        // image has to be repainted to be dowloaded
-        const hex = codeInput.value;
-        const rgb = hexDecode(hex);
-        characterImgs.download(rgb, "Full");
-    } else { //if there's no code, just download it as if it had the default colors
-        characterImgs.download(characterImgs.colorIn, "Full");
+
+    // image has to be repainted to be dowloaded
+    const hex = codeInput.value; //grab the color code
+    let rgb;
+    try {
+        rgb = hexDecode(hex); //make some sense out of it
+        rgb.splice(rgb.length - 4); //remove the checksum at the end of the code
+    } catch (e) {
+        rgb = char.ogColor; // if the code is not valid, use the default colors
     }
+    // Olympia needs some special treatment since the pants colors affect all whites
+    if (char.name == "Olympia") {
+        rgb.push(char.ogColor[20], char.ogColor[21], char.ogColor[22], char.ogColor[23])
+    }
+
+    // this is like the recolor function but will activate a download once its finished
+    characterImgs.download(rgb, "Full");
+
 });
 
 
@@ -465,10 +475,10 @@ defaultFile.addEventListener("change", () => {
 
 eaCheck.addEventListener("click", (e) => {
     if (!eaCheck.checked) {
-        characterImgs.blend = blend1;
+        characterImgs.changeBlend(1);
         mainRecolor();
     } else {
-        characterImgs.blend = blend0;
+        characterImgs.changeBlend(0);
         mainRecolor();
     }
 })
@@ -477,16 +487,14 @@ eaCheck.addEventListener("click", (e) => {
 // yes this is a separate function just for orcane's sprite greenness
 function recolor(rgb) {
     if (char.name == "Orcane") {
-        for (let i = 0; i < 4; i++) {
-            const newRgb = [];
-            for (let i = 0; i < rgb.length; i++) {
-                newRgb.push(rgb[i]);               
-            }
-            for (let i = 0; i < 4; i++) {
-                newRgb[i+8] = rgb[i];
-            }
-            characterImgs.recolor(newRgb);
+        const newRgb = [];
+        for (let i = 0; i < rgb.length; i++) {
+            newRgb.push(rgb[i]);               
         }
+        for (let i = 0; i < 4; i++) {
+            newRgb[i+8] = rgb[i];
+        }
+        characterImgs.recolor(newRgb);
     } else {
         characterImgs.recolor(rgb);
     }

@@ -46,14 +46,18 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
 }
 
+
 #cContainer {
-    max-width: 100%;
+    max-height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: auto;
     margin: 5px;
     margin-top: 10px;
+}
+#fullCanvas{
+    max-width: 100%;
 }
 
 #sContainer {
@@ -507,7 +511,7 @@ body::-webkit-scrollbar-thumb {
     fill: white;
 }
 #kofiButton {
-    background-color: #30add3;
+    background-color: #64b3be;
 }
 #kofiIcon {
     height: 21px;
