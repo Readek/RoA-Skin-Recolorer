@@ -174,6 +174,15 @@ void main() {
 */
 
 
+testGL() // test if the user is actually able to do this
+function testGL() {
+  const gl = document.createElement("canvas").getContext("webgl2");
+  if (!gl) {
+    alert("Your browser doesn't support WebGL2 :(\nYou may be able to manually activate it in your browser's settings.");
+  }
+}
+
+
 // time to create our recolored character!
 class RoaRecolor {
 
@@ -210,13 +219,7 @@ class RoaRecolor {
     
 
     // it's WebGL time, get ready to not understand anything (don't worry i dont either)
-
-    // Get A WebGL context
-    /** @type {HTMLCanvasElement} */
     const gl = canvas.getContext("webgl2");
-    if (!gl) {
-      alert("Your device doesn't support WebGL2 :(");
-    }
 
     // create the shader with the text above, then create the program
     const vertexShader = compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource);

@@ -47,17 +47,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-#cContainer {
-    max-height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-    margin: 5px;
-    margin-top: 10px;
-}
 #fullCanvas{
     max-width: 100%;
+    max-height: 650px;
+    margin: 5px;
+    margin-top: 10px;
 }
 
 #sContainer {
@@ -82,7 +76,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 @keyframes moveSprite {
-    100% { left: var(--spriteMove); }
+    100% { transform: translateX(var(--spriteMove)); }
 }
 
 #testo {
