@@ -28,6 +28,7 @@ const nowEditingText = document.getElementById("nowEditing");
 const editingHex = document.getElementById("editingHex");
 const topButtons = document.getElementById("row3");
 const hideSlidsButton = document.getElementById("hideEditor");
+const loadingDiv = document.getElementById("loadingDiv");
 
 
 //when the page loads, change to a random character
@@ -140,8 +141,11 @@ function mainRecolor() {
 //whenever the character changes
 function changeChar(charNum) {
 
-    // clear that custom img and restore the sprites in case we changed it earlier
-    spritesDiv.style.display = "flex";
+    // hide the characters, show the loading div
+    loadingDiv.style.height = (fullCanvas.clientHeight + spritesDiv.clientHeight) + 17 + "px";
+    loadingDiv.style.display = "flex";
+    fullCanvas.style.display = "none";
+    spritesDiv.style.display = "none";
 
     //look at the database to see whats up
     char = db.chars[charNum];
@@ -156,12 +160,19 @@ function changeChar(charNum) {
     ]
     // when the images finish loading, then recolor them with the og colors to do a first paint
     Promise.all(imgPromises).then( () => {
+
         // ori is the only character that needs an actual recolor
         if (char.name == "Ori and Sein") {
             recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-FFC7-2038"));
         } else {
             recolor(char.ogColor);
         }
+
+        // hide the loading div, show the characters
+        loadingDiv.style.display = "none";
+        fullCanvas.style.display = "block";
+        spritesDiv.style.display = "flex";
+
     })
 
     //change the width of the sprite animation, depending on the character
@@ -473,7 +484,22 @@ defaultFile.addEventListener("change", () => {
     codeInput.value = "";
 });
 
-eaCheck.addEventListener("click", (e) => {
+// show config menu if clicking on the config button
+const configMenu = document.getElementById("configMenu");
+document.getElementById("config").addEventListener("click", () => {
+    configMenu.classList.toggle("hide");
+})
+// close the dropdown menu if the user clicks outside of it
+window.onclick = (e) => {
+    if (!e.target.matches('#config') && !e.target.matches('#configIcon') && !e.target.matches('path')) {
+        
+        if (!configMenu.classList.contains('hide')) {
+            configMenu.classList.add('hide');
+        }
+    }
+} 
+
+eaCheck.addEventListener("click", () => {
     if (!eaCheck.checked) {
         characterImgs.changeBlend(1);
         mainRecolor();

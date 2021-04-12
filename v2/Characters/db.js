@@ -219,7 +219,7 @@ const db = {
                 180, 230, 230, 1,   // Ice
                 67, 68, 87, 1,      // Dark Ice
                 /* 253, 252, 255, 1,// Ice Change Back?
-                251, 250, 252       // Body Go Back?  */
+                251, 250, 252, 1    // Body Go Back?  */
             ],
             colorRange : [
                 15, 41, 70, 1,      // Body

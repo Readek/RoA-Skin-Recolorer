@@ -76,13 +76,26 @@ body::-webkit-scrollbar-thumb {
 }
 
 @keyframes moveSprite {
-    100% { transform: translateX(var(--spriteMove)); }
+    100% { left: var(--spriteMove); }
 }
 
-#testo {
-    display: block;
-    width: 500px;
+
+#loadingDiv {
+    flex-direction: column;
+    font-size: 20px;
+    font-weight: bold;
 }
+#loadingGif {
+    width: 50px;
+    height: 50px;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
+}
+#loadingText {
+    margin-top: 10px;
+
+}
+
 
 .row {
     padding: 5px;
@@ -213,6 +226,9 @@ body::-webkit-scrollbar-thumb {
     opacity: 0;
     user-select: none;
     pointer-events: none;
+    z-index: 200;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
 }
 .copiedAnim {
     animation: copyMove 1s ease 1;
@@ -448,16 +464,65 @@ body::-webkit-scrollbar-thumb {
     transform: translateX(-3px);
 }
 
-#config {
-    background-color: var(--bg);
-    width: 15px;
+#dropdownDiv {
+    position: relative;
 }
+#config {
+    width: auto;
+    height: 36px;
+    background-color: var(--bg);
+    position: relative;
+    outline: none; /* Chromium only */
+    border: none;
+    transition: background-color 150ms;
+}
+#config:hover {
+    filter: none;
+    background-color: var(--bgH);
+}
+#config:active {
+    filter: none;
+    background-color: var(--bg);
+}
+
 #configIcon {
-    height: 20px;
-    width: 20px;
+    height: 16px;
+    width: 16px;
     fill: white;
-    transform: scale(1.8);
-    
+    transform: scale(1.7);
+}
+
+#configMenu {
+    position: absolute;
+    right: 0px;
+    bottom: 45px;
+    background-color: var(--bg);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+    margin-top: 7px;
+    border-radius: 5px;
+    border: 3px solid var(--bgH);
+}
+.hide {
+    display: none;
+}
+
+.configEntry {
+    padding: 2px 0px 2px 5px;
+    display: flex;
+    outline: none;
+    width: 200px;
+}
+.configEntry:hover {
+    background-color: var(--bgH);
+}
+
+.configCheck {
+    outline: none;
+}
+
+.configText {
+    width: 100%;
 }
 
 
