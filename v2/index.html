@@ -101,9 +101,9 @@
                     </span>
                 </div>
                 <div>
-                    <input type="range" min="0" max="255" value="50" class="slider" id="sliderR">
-                    <input type="range" min="0" max="255" value="50" class="slider" id="sliderG">
-                    <input type="range" min="0" max="255" value="50" class="slider" id="sliderB">
+                    <input type="range" min="0" max="360" class="slider" id="sliderHue">
+                    <input type="range" min="0" max="100" class="slider" id="sliderSat">
+                    <input type="range" min="0" max="100" class="slider" id="sliderVal">
                 </div>
             </div>
 
@@ -139,7 +139,7 @@
                 </button>
                 <div id="configMenu" class="hide">
     
-                    <div class="configEntry">
+                    <div class="configEntry" data-tooltip="Shades the colors like the Early Access skins." data-tooltip-delay="none">
                         <input id="EAcheck" type="checkbox" class="configCheck">
                         <label for="EAcheck" class="configText">EA Shading</label>
                     </div>
@@ -191,18 +191,6 @@
 
         </div>
 
-        <div>
-            <h4>Roadmap till release:</h4>
-            <ul>
-                <li>Edit current char mode</li>
-                <li>Add new character</li>
-                <li>x4 res download toggle</li>
-                <li>Download any image</li>
-                <li>Maybe .gif download if its easy enough?</li>
-            </ul>
-        </div>
-
-            
     </div>
 
 </body>

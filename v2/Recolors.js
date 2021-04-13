@@ -21,9 +21,9 @@ const downImgButton = document.getElementById("downImg");
 const eaCheck = document.getElementById("EAcheck");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
-const sliderR = document.getElementById("sliderR");
-const sliderG = document.getElementById("sliderG");
-const sliderB = document.getElementById("sliderB");
+const sliderHue = document.getElementById("sliderHue");
+const sliderSat = document.getElementById("sliderSat");
+const sliderVal = document.getElementById("sliderVal");
 const nowEditingText = document.getElementById("nowEditing");
 const editingHex = document.getElementById("editingHex");
 const topButtons = document.getElementById("row3");
@@ -539,9 +539,9 @@ function showSliders() {
     nowEditingText.innerHTML = char.partNames[partNum];
 
     // tell the sliders what to change
-    sliderR.setAttribute("num", partNum * 4);
-    sliderG.setAttribute("num", partNum * 4 + 1);
-    sliderB.setAttribute("num", partNum * 4 + 2);
+    sliderHue.setAttribute("num", partNum * 4);
+    sliderSat.setAttribute("num", partNum * 4 + 1);
+    sliderVal.setAttribute("num", partNum * 4 + 2);
 
     // update the slider values to the current part's
     let rgb;
@@ -551,12 +551,21 @@ function showSliders() {
     } catch (error) {
         rgb = char.ogColor; // if the code is not valid, use the default colors
     }
-    sliderR.value = rgb[partNum * 4];
-    sliderG.value = rgb[partNum * 4 + 1];
-    sliderB.value = rgb[partNum * 4 + 2];
+    const hsv = rgb2hsv(rgb[partNum * 4], rgb[partNum * 4 + 1], rgb[partNum * 4 + 2])
+    sliderHue.value = hsv[0];
+    sliderSat.value = hsv[1];
+    sliderVal.value = hsv[2];
+
+    // update the slider color
+    const cssRgb = hsv2rgb(hsv[0] / 360, 1, 1);
+    cssRgb[0] = cssRgb[0] * 255;
+    cssRgb[1] = cssRgb[1] * 255;
+    cssRgb[2] = cssRgb[2] * 255;
+    sliderSat.style.background = "linear-gradient(to right, white, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
+    sliderVal.style.background = "linear-gradient(to right, black, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
 
     // change the color of the "now editing" indicator
-    editingHex.style.backgroundColor = "#" + rgbToHex(rgb[partNum*4], rgb[partNum*4+1], rgb[partNum*4+2])
+    editingHex.style.backgroundColor = "rgb(" + rgb[partNum*4] + ", " + rgb[partNum*4+1] + ", " + rgb[partNum*4+2] + ")";
 
 }
 
@@ -566,11 +575,26 @@ function hideSliders() {
     topButtons.style.display = "flex";
 }
 
-sliderR.oninput = sliderMoved;
-sliderG.oninput = sliderMoved;
-sliderB.oninput = sliderMoved;
+sliderHue.oninput = sliderMoved;
+sliderSat.oninput = sliderMoved;
+sliderVal.oninput = sliderMoved;
 
 function sliderMoved() {
+
+    // if changing the hue, update the colors of the other sliders
+    if (this === sliderHue) {
+        const cssRgb = hsv2rgb(this.value / 360, 1, 1);
+        cssRgb[0] = cssRgb[0] * 255;
+        cssRgb[1] = cssRgb[1] * 255;
+        cssRgb[2] = cssRgb[2] * 255;
+        sliderSat.style.background = "linear-gradient(to right, white, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
+        sliderVal.style.background = "linear-gradient(to right, black, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
+    }
+
+    const rgbFromHsv = hsv2rgb(sliderHue.value / 360, sliderSat.value / 100, sliderVal.value / 100);
+    rgbFromHsv[0] = Math.round(rgbFromHsv[0] * 255);
+    rgbFromHsv[1] = Math.round(rgbFromHsv[1] * 255);
+    rgbFromHsv[2] = Math.round(rgbFromHsv[2] * 255);
 
     // get the current code
     let rgb;
@@ -584,9 +608,10 @@ function sliderMoved() {
     // modify the rgb values with the new ones from the sliders
     const newRgb = [];
     const num = Number(this.getAttribute("num"));
+    const num2 = num-(num%4);
     for (let i = 0; i < rgb.length; i++) {
-        if (i == num) {
-            newRgb[i] = Number(this.value);
+        if (i == num2 || i == num2 + 1 || i == num2 + 2) {
+            newRgb[i] = rgbFromHsv[i%4];
         } else {
             newRgb.push(rgb[i]);
         }
@@ -596,9 +621,7 @@ function sliderMoved() {
     genCodeManual(newRgb)
 
     // update the color on the "now editing" indicator
-    const modul = num%4;
-    const num2 = num-modul;
-    editingHex.style.backgroundColor = "#" + rgbToHex(newRgb[num2], newRgb[num2+1], newRgb[num2+2]);
+    editingHex.style.backgroundColor = "rgb(" + newRgb[num2] + ", " + newRgb[num2+1] + ", " + newRgb[num2+2] + ")";
 
 }
 
@@ -679,4 +702,53 @@ function componentToHex(c) {
 }
 function rgbToHex(r, g, b) {
     return componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function hsv2rgb(H, S, V) {
+
+    // translated from https://pastebin.com/kXsTD1Vu
+
+    let C = V * S;
+ 
+    H *= 6;
+    let X = C * (1 - Math.abs( H % 2 - 1 ));
+    let m = V - C;
+    C += m;
+    X += m;
+ 
+    if (H < 1) return [C, X, m];
+    if (H < 2) return [X, C, m];
+    if (H < 3) return [m, C, X];
+    if (H < 4) return [m, X, C];
+    if (H < 5) return [X, m, C];
+    else       return [C, m, X];
+
+}
+
+function rgb2hsv (r, g, b) {
+
+    r = r/255, g = g/255, b = b/255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, v = max;
+
+    const d = max - min;
+    s = max == 0 ? 0 : d / max;
+
+    if (max == min) {
+        h = 0; // achromatic
+    } else {
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    h = h * 360;
+    s = s * 100;
+    v = v * 100;
+
+    return [h, s, v];
+
 }
