@@ -391,6 +391,19 @@ body::-webkit-scrollbar-thumb {
     background: linear-gradient(to right, red, #ff0, lime, cyan, blue, #f0f, red);
 }
 
+.sliderRGB {
+    display: none;
+}
+#sliderR {
+    background: linear-gradient(to right, black, red);
+}
+#sliderG {
+    background: linear-gradient(to right, black, green);
+}
+#sliderB {
+    background: linear-gradient(to right, black, blue);
+}
+
 
 #partList {
     width: 500px;

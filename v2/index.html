@@ -101,9 +101,12 @@
                     </span>
                 </div>
                 <div>
-                    <input type="range" min="0" max="360" class="slider" id="sliderHue">
-                    <input type="range" min="0" max="100" class="slider" id="sliderSat">
-                    <input type="range" min="0" max="100" class="slider" id="sliderVal">
+                    <input type="range" min="0" max="360" class="slider sliderHSV" id="sliderHue">
+                    <input type="range" min="0" max="100" class="slider sliderHSV" id="sliderSat">
+                    <input type="range" min="0" max="100" class="slider sliderHSV" id="sliderVal">
+                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderR">
+                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderG">
+                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderB">
                 </div>
             </div>
 
@@ -139,14 +142,14 @@
                 </button>
                 <div id="configMenu" class="hide">
     
-                    <div class="configEntry" data-tooltip="Shades the colors like the Early Access skins." data-tooltip-delay="none">
+                    <div class="configEntry" data-tooltip="Shades the colors like the Early Access skins" data-tooltip-delay="none">
                         <input id="EAcheck" type="checkbox" class="configCheck">
                         <label for="EAcheck" class="configText">EA Shading</label>
                     </div>
 
-                    <div class="configEntry">
-                        <input id="test" type="checkbox" class="configCheck">
-                        <label for="test" class="configText">test</label>
+                    <div class="configEntry" data-tooltip="Changes the sliders to RGB instead of HSV" data-tooltip-delay="none">
+                        <input id="RGBsliders" type="checkbox" class="configCheck">
+                        <label for="RGBsliders" class="configText">RGB sliders</label>
                     </div>
     
                 </div>
