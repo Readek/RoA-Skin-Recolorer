@@ -76,7 +76,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 @keyframes moveSprite {
-    100% { left: var(--spriteMove); }
+    100% { transform: translateX(var(--spriteMove)) }
 }
 
 

@@ -195,35 +195,34 @@ function changeChar(charNum) {
         // count to know how long the animation is going to take, finally, we divide
         // by 1000 to get the value in seconds for the css variable
         r.style.setProperty("--spriteTime", 1000/60*7*char.idleFC/1000 + "s");
-    })
 
+        //set a new placeholder text and a new limit
+        codeInput.placeholder = char.placeholder;
+        maxLength = char.placeholder.length;
+        //then clear the current color code
+        codeInput.value = "";
+        codeControl(); //to reset the warning message if any
 
-    //set a new placeholder text and a new limit
-    codeInput.placeholder = char.placeholder;
-    maxLength = char.placeholder.length;
-    //then clear the current color code
-    codeInput.value = "";
-    codeControl(); //to reset the warning message if any
+        //change the character icon
+        charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
 
-    //change the character icon
-    charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
+        //adjust the code input width
+        resizeInput();
 
-    //adjust the code input width
-    resizeInput();
+        //make the copy button unclickable and show some feedback
+        copyToClip.style.filter = "brightness(.8)";
+        copyToClip.style.pointerEvents = "none";
 
-    //make the copy button unclickable and show some feedback
-    copyToClip.style.filter = "brightness(.8)";
-    copyToClip.style.pointerEvents = "none";
+        //update the dowloaded image name
+        downLink.setAttribute("download", char.name + " Recolor.png");
 
-    //update the dowloaded image name
-    downLink.setAttribute("download", char.name + " Recolor.png");
+        // update the color editor
+        createEditor();
 
-    // update the color editor
-    createEditor();
-
-    // hide the color sliders, show top buttons
-    colorEditor.style.display = "none";
-    topButtons.style.display = "flex";
+        // hide the color sliders, show top buttons
+        colorEditor.style.display = "none";
+        topButtons.style.display = "flex";
+    })    
 
 }
 
