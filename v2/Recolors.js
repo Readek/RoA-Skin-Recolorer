@@ -33,6 +33,7 @@ const hideSlidsButton = document.getElementById("hideEditor");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
 const rgbCheck = document.getElementById("RGBsliders");
+const darkCheck = document.getElementById("darkTheme");
 
 
 //when the page loads, change to a random character
@@ -179,10 +180,11 @@ function changeChar(charNum) {
 
     })
 
-    //change the width of the sprite animation, depending on the character
     const sprite = new Image();
     sprite.src = "Characters/"+char.name+"/Idle.png";
     sprite.decode().then( () => { // when the image finishes loading
+
+        //change the width of the sprite animation, depending on the character
         animDiv.style.width = (sprite.width / char.idleFC) + "px"; //gets the w of 1 frame
         animDiv.style.height = sprite.height + "px"; //all frames have the same h
         //now change the values for the sprite animation
@@ -502,6 +504,10 @@ window.onclick = (e) => {
     }
 } 
 
+
+// SETTINGS
+
+// Early Access check
 eaCheck.addEventListener("click", () => {
     if (!eaCheck.checked) {
         characterImgs.changeBlend(1);
@@ -511,7 +517,9 @@ eaCheck.addEventListener("click", () => {
         mainRecolor();
     }
 })
-rgbCheck.addEventListener("click", () => {
+// RGB sliders
+rgbCheck.addEventListener("click", changeSliders);
+function changeSliders() {
     if (rgbCheck.checked) {
         const slidersHSV = document.getElementsByClassName("sliderHSV");
         for (let i = 0; i < slidersHSV.length; i++) {
@@ -532,8 +540,25 @@ rgbCheck.addEventListener("click", () => {
         }
     }
     hideSliders();
-})
-rgbCheck.checked = false;
+}
+changeSliders();
+// Dark Theme
+darkCheck.addEventListener("click", darkMode);
+function darkMode() {
+    const r = document.querySelector(':root');
+    if (darkCheck.checked) {
+        r.style.setProperty("--mainBG", "#202020");
+        r.style.setProperty("--bg", "#686868");
+        r.style.setProperty("--bgH", "#818181");
+        r.style.setProperty("--bgD", "#303030");
+    } else {
+        r.style.setProperty("--mainBG", "#514188");
+        r.style.setProperty("--bg", "#7c6bb4");
+        r.style.setProperty("--bgH", "#9484c9");
+        r.style.setProperty("--bgD", "#4a368a");
+    }
+    
+}
 
 
 // yes this is a separate function just for orcane's sprite greenness
