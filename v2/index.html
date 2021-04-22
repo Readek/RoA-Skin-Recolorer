@@ -90,16 +90,23 @@
         <div id="row4" class="row">
             
             <div id="colorEditor">
-                <div id="nowEditingDiv" class="center">
-                    <span id="nowEditingSpan">
-                        <span>Now editing: </span>
-                        <div id="editingHex"></div>
-                        <strong><span id="nowEditing"></span></strong>
-                    </span>
-                    <span id="hideEditor">
-                        X
-                    </span>
+                <div class="center">
+                    <div id="hsvOrRgb" class="center">
+                        <button id="hsvClick" class="hsvOrRgb">HSV</button>
+                        <button id="rgbClick" class="hsvOrRgb">RGB</button>
+                    </div>
+                    <div id="nowEditingDiv" class="center">
+                        <span id="nowEditingSpan">
+                            <span>Now editing: </span>
+                            <div id="editingHex"></div>
+                            <strong><span id="nowEditing"></span></strong>
+                        </span>
+                        <span id="hideEditor">
+                            X
+                        </span>
+                    </div>
                 </div>
+                
                 <div id="sliderDiv">
                     <input type="range" min="0" max="360" class="slider sliderHSV" id="sliderHue">
                     <input type="range" min="0" max="100" class="slider sliderHSV" id="sliderSat">
@@ -145,11 +152,6 @@
                     <div class="configEntry" data-tooltip="Shades the colors like the Early Access skins" data-tooltip-delay="none">
                         <input id="EAcheck" type="checkbox" class="configCheck">
                         <label for="EAcheck" class="configText">EA Shading</label>
-                    </div>
-
-                    <div class="configEntry" data-tooltip="Changes the sliders to RGB instead of HSV" data-tooltip-delay="none">
-                        <input id="RGBsliders" type="checkbox" class="configCheck">
-                        <label for="RGBsliders" class="configText">RGB sliders</label>
                     </div>
 
                     <div class="configEntry" data-tooltip="For those who really need it" data-tooltip-delay="none">

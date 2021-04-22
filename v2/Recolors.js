@@ -4,6 +4,7 @@ let char; // this will hold the values from the character database
 let characterImgs;
 let maxLength; // limits how many characters there should be in the code input
 let playingAnim = false; // to not allow playing an animation until its finished
+let rgbSliders = false; // if active, the page will use rgb sliders instead of hsv ones
 
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
@@ -20,6 +21,8 @@ const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImg");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
+const hsvButton = document.getElementById("hsvClick");
+const rgbButton = document.getElementById("rgbClick");
 const sliderHue = document.getElementById("sliderHue");
 const sliderSat = document.getElementById("sliderSat");
 const sliderVal = document.getElementById("sliderVal");
@@ -32,7 +35,7 @@ const topButtons = document.getElementById("row3");
 const hideSlidsButton = document.getElementById("hideEditor");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
-const rgbCheck = document.getElementById("RGBsliders");
+const x4Down = document.getElementById("x4Down")
 const darkCheck = document.getElementById("darkTheme");
 
 
@@ -517,31 +520,6 @@ eaCheck.addEventListener("click", () => {
         mainRecolor();
     }
 })
-// RGB sliders
-rgbCheck.addEventListener("click", changeSliders);
-function changeSliders() {
-    if (rgbCheck.checked) {
-        const slidersHSV = document.getElementsByClassName("sliderHSV");
-        for (let i = 0; i < slidersHSV.length; i++) {
-            slidersHSV[i].style.display = "none";
-        }
-        const slidersRGB = document.getElementsByClassName("sliderRGB");
-        for (let i = 0; i < slidersRGB.length; i++) {
-            slidersRGB[i].style.display = "inline";
-        }
-    } else {
-        const slidersHSV = document.getElementsByClassName("sliderHSV");
-        for (let i = 0; i < slidersHSV.length; i++) {
-            slidersHSV[i].style.display = "inline";
-        }
-        const slidersRGB = document.getElementsByClassName("sliderRGB");
-        for (let i = 0; i < slidersRGB.length; i++) {
-            slidersRGB[i].style.display = "none";
-        }
-    }
-    hideSliders();
-}
-changeSliders();
 // Dark Theme
 darkCheck.addEventListener("click", darkMode);
 function darkMode() {
@@ -557,8 +535,8 @@ function darkMode() {
         r.style.setProperty("--bgH", "#9484c9");
         r.style.setProperty("--bgD", "#4a368a");
     }
-    
 }
+darkMode();
 
 
 // yes this is a separate function just for orcane's sprite greenness
@@ -577,6 +555,38 @@ function recolor(rgb) {
     }
 }
 
+
+// RGB sliders
+hsvButton.addEventListener("click", () => {
+    rgbSliders = false;
+    changeSliders();
+})
+rgbButton.addEventListener("click", () => {
+    rgbSliders = true;
+    changeSliders();
+})
+function changeSliders() {
+    const slidersHSV = document.getElementsByClassName("sliderHSV");
+    const slidersRGB = document.getElementsByClassName("sliderRGB");
+    if (rgbSliders) {
+        for (let i = 0; i < slidersHSV.length; i++) {
+            slidersHSV[i].style.display = "none";
+            slidersRGB[i].style.display = "inline";
+        }
+        hsvButton.style.backgroundColor = "var(--mainBG)";
+        rgbButton.style.backgroundColor = "var(--bg)";
+    } else {
+        for (let i = 0; i < slidersHSV.length; i++) {
+            slidersHSV[i].style.display = "inline";
+            slidersRGB[i].style.display = "none";
+        }
+        hsvButton.style.backgroundColor = "var(--bg)";
+        rgbButton.style.backgroundColor = "var(--mainBG)";
+    }
+    createEditor();
+}
+
+// called when the user clicks on a part
 function showSliders() {
     
     // show the color sliders, hide buttons
@@ -590,7 +600,7 @@ function showSliders() {
     nowEditingText.innerHTML = char.partNames[partNum];
 
     // tell the sliders what to change
-    if (rgbCheck.checked) {
+    if (rgbSliders) {
         sliderR.setAttribute("num", partNum * 4);
         sliderG.setAttribute("num", partNum * 4 + 1);
         sliderB.setAttribute("num", partNum * 4 + 2);
@@ -608,7 +618,7 @@ function showSliders() {
         rgb = char.ogColor; // if the code is not valid, use the default colors
     }
     // update the slider values to the current part's
-    if (rgbCheck.checked) {
+    if (rgbSliders) {
         sliderR.value = rgb[partNum * 4];
         sliderG.value = rgb[partNum * 4 + 1];
         sliderB.value = rgb[partNum * 4 + 2];
@@ -660,7 +670,7 @@ function sliderMoved() {
     const num = Number(this.getAttribute("num"));
     const num2 = num-(num%4);
 
-    if (rgbCheck.checked) {
+    if (rgbSliders) {
 
         // modify the rgb values with the new ones from the sliders
         for (let i = 0; i < rgb.length; i++) {

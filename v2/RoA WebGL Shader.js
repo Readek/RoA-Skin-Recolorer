@@ -406,18 +406,6 @@ function render(glCan, colorOut, dl = false) {
     downImgButton.href = canvas.toDataURL()
   }
 
-  // this is another way to (lazyly) transform the canvas to an image
-  /* canvas.toBlob( (blob) => {
-    const newImg = document.createElement('img'),
-        url = URL.createObjectURL(blob);
-  
-    newImg.onload = () => {
-      URL.revokeObjectURL(url);
-    };
-  
-    mainImg.src = url;
-  }); */
-
 }
 
 // shaders need the rbga values on a [0~1] range

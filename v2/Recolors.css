@@ -22,6 +22,7 @@ html, body {
 
 html {
     background-color: var(--mainBG);
+    transition: background-color 150ms;
     color: white;
     font-family: 'Roboto-Regular';
     scrollbar-width: thin; /* Firefox */
@@ -53,6 +54,8 @@ body::-webkit-scrollbar-thumb {
     max-height: 650px;
     margin: 5px;
     margin-top: 10px;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
 }
 
 #sContainer {
@@ -328,6 +331,34 @@ body::-webkit-scrollbar-thumb {
     margin-top: -5px;
     margin-bottom: 2px;
 }
+
+#hsvOrRgb {
+    transform: translateY(-4px);
+}
+.hsvOrRgb {
+    border: 2px solid var(--bgH);
+    padding: 7px 8px;
+    color: white;
+    background-color: var(--mainBG);
+    cursor: pointer;
+    transition: background-color 150ms;
+}
+.hsvOrRgb:hover {
+    background-color: var(--bgH);
+}
+#hsvClick {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: none;
+    background-color: var(--bg);
+}
+#rgbClick {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left: none;
+    margin-right: 6px;
+}
+
 #nowEditingDiv {
     margin-bottom: 8px;
 }
