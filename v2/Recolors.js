@@ -492,6 +492,7 @@ defaultFile.addEventListener("change", () => {
     codeInput.value = "";
 });
 
+
 // show config menu if clicking on the config button
 const configMenu = document.getElementById("configMenu");
 document.getElementById("config").addEventListener("click", () => {
@@ -556,36 +557,6 @@ function recolor(rgb) {
 }
 
 
-// RGB sliders
-hsvButton.addEventListener("click", () => {
-    rgbSliders = false;
-    changeSliders();
-})
-rgbButton.addEventListener("click", () => {
-    rgbSliders = true;
-    changeSliders();
-})
-function changeSliders() {
-    const slidersHSV = document.getElementsByClassName("sliderHSV");
-    const slidersRGB = document.getElementsByClassName("sliderRGB");
-    if (rgbSliders) {
-        for (let i = 0; i < slidersHSV.length; i++) {
-            slidersHSV[i].style.display = "none";
-            slidersRGB[i].style.display = "inline";
-        }
-        hsvButton.style.backgroundColor = "var(--mainBG)";
-        rgbButton.style.backgroundColor = "var(--bg)";
-    } else {
-        for (let i = 0; i < slidersHSV.length; i++) {
-            slidersHSV[i].style.display = "inline";
-            slidersRGB[i].style.display = "none";
-        }
-        hsvButton.style.backgroundColor = "var(--bg)";
-        rgbButton.style.backgroundColor = "var(--mainBG)";
-    }
-    createEditor();
-}
-
 // called when the user clicks on a part
 function showSliders() {
     
@@ -600,15 +571,12 @@ function showSliders() {
     nowEditingText.innerHTML = char.partNames[partNum];
 
     // tell the sliders what to change
-    if (rgbSliders) {
-        sliderR.setAttribute("num", partNum * 4);
-        sliderG.setAttribute("num", partNum * 4 + 1);
-        sliderB.setAttribute("num", partNum * 4 + 2);
-    } else {
-        sliderHue.setAttribute("num", partNum * 4);
-        sliderSat.setAttribute("num", partNum * 4 + 1);
-        sliderVal.setAttribute("num", partNum * 4 + 2);
-    }
+    sliderR.setAttribute("num", partNum * 4);
+    sliderG.setAttribute("num", partNum * 4 + 1);
+    sliderB.setAttribute("num", partNum * 4 + 2);
+    sliderHue.setAttribute("num", partNum * 4);
+    sliderSat.setAttribute("num", partNum * 4 + 1);
+    sliderVal.setAttribute("num", partNum * 4 + 2);
 
     let rgb;
     try {
@@ -715,6 +683,65 @@ function sliderMoved() {
     // update the color on the "now editing" indicator
     editingHex.style.backgroundColor = "rgb(" + newRgb[num2] + ", " + newRgb[num2+1] + ", " + newRgb[num2+2] + ")";
 
+}
+
+// RGB sliders
+hsvButton.addEventListener("click", () => {
+    rgbSliders = false;
+    changeSliders();
+})
+rgbButton.addEventListener("click", () => {
+    rgbSliders = true;
+    changeSliders();
+})
+function changeSliders() {
+
+    // show and hide the sliders
+    const slidersHSV = document.getElementsByClassName("sliderHSV");
+    const slidersRGB = document.getElementsByClassName("sliderRGB");
+    if (rgbSliders) {
+        for (let i = 0; i < slidersHSV.length; i++) {
+            slidersHSV[i].style.display = "none";
+            slidersRGB[i].style.display = "inline";
+        }
+        hsvButton.style.backgroundColor = "var(--mainBG)";
+        rgbButton.style.backgroundColor = "var(--bg)";
+    } else {
+        for (let i = 0; i < slidersHSV.length; i++) {
+            slidersHSV[i].style.display = "inline";
+            slidersRGB[i].style.display = "none";
+        }
+        hsvButton.style.backgroundColor = "var(--bg)";
+        rgbButton.style.backgroundColor = "var(--mainBG)";
+    }
+
+    // change the slider values
+    let rgb;
+    try {
+        const hex = codeInput.value;
+        rgb = hexDecode(hex);
+    } catch (error) {
+        rgb = char.ogColor; // if the code is not valid, use the default colors
+    }
+    if (rgbSliders) {
+        sliderR.value = rgb[sliderR.getAttribute("num")];
+        sliderG.value = rgb[sliderG.getAttribute("num")];
+        sliderB.value = rgb[sliderB.getAttribute("num")];
+    } else {
+        const hsv = rgb2hsv(rgb[sliderHue.getAttribute("num")], rgb[sliderSat.getAttribute("num")], rgb[sliderVal.getAttribute("num")])
+        sliderHue.value = hsv[0];
+        sliderSat.value = hsv[1];
+        sliderVal.value = hsv[2];
+
+        // update the slider color
+        const cssRgb = hsv2rgb(hsv[0] / 360, 1, 1);
+        cssRgb[0] = cssRgb[0] * 255;
+        cssRgb[1] = cssRgb[1] * 255;
+        cssRgb[2] = cssRgb[2] * 255;
+        sliderSat.style.background = "linear-gradient(to right, white, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
+        sliderVal.style.background = "linear-gradient(to right, black, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
+    }
+    
 }
 
 
