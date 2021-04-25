@@ -340,6 +340,8 @@ class RoaRecolor {
     this.charImgs[name] = {
       canvas : canvas,
       gl : gl,
+      colorInLoc : colorInLoc,
+      colorToleranceLoc : colorToleranceLoc,
       blendLoc : blendLoc,
       colorOutLoc : colorOutLoc,
       offset : offset,
@@ -368,12 +370,35 @@ class RoaRecolor {
   changeBlend(oneOrZero) {
     for (let key in this.charImgs) {
       const gl = this.charImgs[key].gl;
-      const blendLoc = this.charImgs[key].blendLoc;
       if (oneOrZero) {
-        gl.uniform4fv(blendLoc, this.blend1);
+        gl.uniform4fv(this.charImgs[key].blendLoc, this.blend1);
       } else {
-        gl.uniform4fv(blendLoc, this.blend0);
+        gl.uniform4fv(this.charImgs[key].blendLoc, this.blend0);
       }
+    }
+  }
+
+  changeOg(where, what, full) {
+    if (full) {
+      this.colorIn = full;
+    } else {
+      this.colorIn[where] = Number(what);
+    }
+    for (let key in this.charImgs) {
+      const gl = this.charImgs[key].gl;
+      gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
+    }
+  }
+
+  changeRange(where, what, full) {
+    if (full) {
+      this.colorTolerance = full;
+    } else {
+      this.colorTolerance[where] = Number(what);
+    }
+    for (let key in this.charImgs) {
+      const gl = this.charImgs[key].gl;
+      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
     }
   }
 

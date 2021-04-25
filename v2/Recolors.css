@@ -176,7 +176,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-#codeInput {
+.colorInput {
     height: 25px;
     outline: none;
     border: none;
@@ -190,15 +190,15 @@ body::-webkit-scrollbar-thumb {
     margin-top: 5px;
     text-transform: uppercase;
 }
-#codeInput::placeholder { /* this is just for Chromium */
+.colorInput::placeholder { /* this is just for Chromium */
     color: rgb(158, 158, 158);
 }
-#codeInput:hover, #codeInput:focus, #copyToClip:hover {
+.colorInput:hover, .colorInput:focus, #copyToClip:hover {
     background-color: var(--bgH);
 }
 
 
-#copyToClip {
+.copyToClip {
     width: 20px;
     height: 25px;
     border-radius: 0px 20px 20px 0px;
@@ -209,16 +209,16 @@ body::-webkit-scrollbar-thumb {
     margin-top: 5px;
     outline: none; /* Chromium only */
 }
-#copyIcon {
+.copyIcon {
     height: 20px;
     width: 20px;
     margin-top: 2px;
     fill: lightgray;
 }
-#copyToClip:hover {
+.copyToClip:hover {
     cursor: pointer;
 }
-#copyToClip:active {
+.copyToClip:active {
     background-color: var(--bg);
 }
 
@@ -571,6 +571,23 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
 }
 
+#goBack {
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    border-radius: 20px;
+    transition: filter 100ms;
+    margin: 0px 3px 0px 3px;
+    padding: 0px 10px;
+    background-color: var(--bg);
+}
+#goBack:hover {
+    filter: brightness(1.1);
+}
+#goBack:active {
+    filter: brightness(.9);
+}
+
 
 .buttonsBot {
     display: flex;
@@ -623,6 +640,57 @@ body::-webkit-scrollbar-thumb {
     width: 21px;
     fill: white;
     transform: translate(1px, 1px);
+}
+
+
+#lists {
+    display: flex;
+    flex-wrap: wrap;
+}
+.list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.titleList {
+    font-weight: bold;
+}
+
+.proPart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg);
+    border-radius: 20px;
+    margin: 10px;
+    transition: background-color 150ms;
+}
+.proPart:hover {
+    background-color: var(--bgH);
+}
+
+.proMode {
+    display: none;
+}
+
+.numInput {
+    background-color: var(--bg);
+    border: var(--bgD) 2px solid;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 45px;
+    color: white;
+    text-align: right;
+    font-size: 15px;
+    margin: 0px 5px;
+}
+.numInput::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+#ogColorInput, #colorRangeInput {
+    width: 250px;
 }
 
 

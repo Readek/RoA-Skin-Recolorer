@@ -21,6 +21,8 @@ const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImg");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
+const ogColorList = document.getElementById("ogColorList");
+const colorRangeList = document.getElementById("colorRangeList");
 const hsvButton = document.getElementById("hsvClick");
 const rgbButton = document.getElementById("rgbClick");
 const sliderHue = document.getElementById("sliderHue");
@@ -755,6 +757,160 @@ function genCodeManual(rgb) {
     codeControl();
 
 }
+
+
+document.getElementById("editChar").addEventListener("click", () => {
+
+    const proEls = document.getElementsByClassName("proMode");
+    for (let i = 0; i < proEls.length; i++) {
+        proEls[i].style.display = "flex";
+    }
+    const casualEls = document.getElementsByClassName("casualMode");
+    for (let i = 0; i < casualEls.length; i++) {
+        casualEls[i].style.display = "none";
+    }
+
+    document.getElementById("outColorsBot").insertAdjacentElement("beforeend", codeInput);
+    document.getElementById("outColorsBot").insertAdjacentElement("beforeend", copyToClip);
+    document.getElementById("buttonsEdit").insertAdjacentElement("beforeend", document.getElementById("row3"));
+    document.getElementById("row3").style.padding = "10px"
+    codeInput.style.width = "345px";
+
+    let count = 0;
+
+    for (let i = 0; i < char.ogColor.length; i += 4) {
+        
+        // this is where everything will be stored
+        const part = document.createElement("div");
+        const part2 = document.createElement("div");
+        part.className = "proPart";
+        part2.className = "proPart";
+
+        // get the part name and colorize its background
+        const partName = document.createElement("div");
+        const partName2 = document.createElement("div");
+        partName.innerHTML = char.partNames[count];
+        partName2.innerHTML = char.partNames[count];
+        partName.classList.add("partName");
+        partName2.classList.add("partName");
+        partName.style.backgroundColor = "rgb(" + char.ogColor[i] + ", " + char.ogColor[i+1] + ", " + char.ogColor[i+2] + ")";
+        partName2.style.backgroundColor = "rgb(" + char.ogColor[i] + ", " + char.ogColor[i+1] + ", " + char.ogColor[i+2] + ")";
+
+        // add the rgb values with a cool colored icon next to them
+        const red = genNumInp(char.ogColor[i], 255, i, true);
+        const green = genNumInp(char.ogColor[i+1], 255, i+1, true);
+        const blue = genNumInp(char.ogColor[i+2], 255, i+2, true);
+        const alpha = genNumInp(char.ogColor[i+3], 1, i+3, true);
+        const hue = genNumInp(char.colorRange[i], 359, i, false);
+        const sat = genNumInp(char.colorRange[i+1], 100, i+1, false);
+        const val = genNumInp(char.colorRange[i+2], 100, i+2, false);
+        const alpha2 = genNumInp(char.colorRange[i+3], 1, i+3, false);
+
+        // now add everything we just created to the part div and then to the actual html
+        part.appendChild(partName);
+        part.appendChild(red);
+        part.appendChild(green);
+        part.appendChild(blue);
+        part.appendChild(alpha);
+        ogColorList.appendChild(part);
+        part2.appendChild(partName2);
+        part2.appendChild(hue);
+        part2.appendChild(sat);
+        part2.appendChild(val);
+        part2.appendChild(alpha2);
+        colorRangeList.appendChild(part2);
+
+
+        count++;
+
+        genOgRanCode(true, true);
+        
+    }
+
+})
+
+function genNumInp(color, max, colorNum, ogOrRange) {
+    const newPart = document.createElement("input");
+    newPart.setAttribute("type", "number");
+    newPart.setAttribute("min", "0");
+    newPart.setAttribute("max", max);
+    newPart.setAttribute("partNum", colorNum);
+    newPart.value = color;
+    newPart.classList.add("numInput");
+
+    if (ogOrRange) {
+        newPart.setAttribute("ogOrRange", "og");
+    } else {
+        newPart.setAttribute("ogOrRange", "range");
+    }
+
+    newPart.addEventListener("input", updateOgRange)
+
+    return newPart;
+}
+
+function genOgRanCode(ogOrRange, all) {
+
+    let code = "";
+
+    if (all || ogOrRange == "og") {
+        
+        for (let i = 0; i < char.ogColor.length; i++) {
+            code += char.ogColor[i];
+            if (i != char.ogColor.length - 1) {
+                code += "-"            
+            }
+        }
+
+        document.getElementById("ogColorInput").value = code;
+
+    }
+
+    code = "";
+
+    if (all || ogOrRange == "range") {
+
+        for (let i = 0; i < char.colorRange.length; i++) {
+            code += char.colorRange[i];
+            if (i != char.colorRange.length - 1) {
+                code += "-"            
+            }
+        }
+
+        document.getElementById("colorRangeInput").value = code;
+        
+    }
+
+}
+
+function updateOgRange() {
+    if (this.getAttribute("ogOrRange") == "og") {
+        characterImgs.changeOg(this.getAttribute("partNum"), this.value);
+        mainRecolor();
+        genOgRanCode("og");
+    } else {
+        characterImgs.changeRange(this.getAttribute("partNum"), this.value);
+        mainRecolor();
+        genOgRanCode("range");
+    }
+}
+
+document.getElementById("ogColorInput").addEventListener("input", translateCode);
+document.getElementById("colorRangeInput").addEventListener("input", translateCode);
+
+function translateCode() {
+    const splitCode = this.value.split("-");
+    if (this.id = "ogColorInput") {
+        characterImgs.changeOg(0,0,splitCode);
+    } else {
+        characterImgs.changeRange(0,0,splitCode);
+    }
+    mainRecolor();
+}
+
+    
+
+
 
 
 function hexDecode(hex) {
