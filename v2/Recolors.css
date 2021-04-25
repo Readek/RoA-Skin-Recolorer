@@ -54,8 +54,6 @@ body::-webkit-scrollbar-thumb {
     max-height: 650px;
     margin: 5px;
     margin-top: 10px;
-    image-rendering: pixelated; /* Chromium */
-    image-rendering: crisp-edges; /* Firefox */
 }
 
 #sContainer {
@@ -341,10 +339,11 @@ body::-webkit-scrollbar-thumb {
     color: white;
     background-color: var(--mainBG);
     cursor: pointer;
-    transition: background-color 150ms;
+    transition: background-color 150ms, filter 150ms;
+    font-weight: bold;
 }
 .hsvOrRgb:hover {
-    background-color: var(--bgH);
+    filter: brightness(1.2);
 }
 #hsvClick {
     border-top-left-radius: 20px;
