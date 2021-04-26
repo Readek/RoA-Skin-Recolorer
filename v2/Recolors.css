@@ -675,7 +675,7 @@ body::-webkit-scrollbar-thumb {
 
 .numInput {
     background-color: var(--bg);
-    border: var(--bgD) 2px solid;
+    border: var(--bgD) 1px solid;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     width: 45px;

@@ -786,8 +786,10 @@ function genCodeManual(rgb) {
 }
 
 
+// lets see that edit character mode
 document.getElementById("editChar").addEventListener("click", () => {
 
+    // show hidden elements and hide useless ones
     const proEls = document.getElementsByClassName("proMode");
     for (let i = 0; i < proEls.length; i++) {
         proEls[i].style.display = "flex";
@@ -797,65 +799,80 @@ document.getElementById("editChar").addEventListener("click", () => {
         casualEls[i].style.display = "none";
     }
 
+    // move some stuff around
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", codeInput);
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", copyToClip);
     document.getElementById("buttonsEdit").insertAdjacentElement("beforeend", document.getElementById("row3"));
     document.getElementById("row3").style.padding = "10px"
     codeInput.style.width = "345px";
 
+    // create the new editors for both ogColors and colorRanges
+    createProEditor(true);
+    createProEditor();
+    
+})
+
+function createProEditor(ogOrRange) {
+    
     let count = 0;
+
+    // clear the old and dusty contents
+    if (ogOrRange) {
+        ogColorList.innerHTML = null;
+    } else {
+        colorRangeList.innerHTML = null;
+    }
 
     for (let i = 0; i < char.ogColor.length; i += 4) {
         
         // this is where everything will be stored
         const part = document.createElement("div");
-        const part2 = document.createElement("div");
         part.className = "proPart";
-        part2.className = "proPart";
 
         // get the part name and colorize its background
         const partName = document.createElement("div");
-        const partName2 = document.createElement("div");
         partName.innerHTML = char.partNames[count];
-        partName2.innerHTML = char.partNames[count];
         partName.classList.add("partName");
-        partName2.classList.add("partName");
-        partName.style.backgroundColor = "rgb(" + char.ogColor[i] + ", " + char.ogColor[i+1] + ", " + char.ogColor[i+2] + ")";
-        partName2.style.backgroundColor = "rgb(" + char.ogColor[i] + ", " + char.ogColor[i+1] + ", " + char.ogColor[i+2] + ")";
 
-        // add the rgb values with a cool colored icon next to them
-        const red = genNumInp(char.ogColor[i], 255, i, true);
-        const green = genNumInp(char.ogColor[i+1], 255, i+1, true);
-        const blue = genNumInp(char.ogColor[i+2], 255, i+2, true);
-        const alpha = genNumInp(char.ogColor[i+3], 1, i+3, true);
-        const hue = genNumInp(char.colorRange[i], 359, i, false);
-        const sat = genNumInp(char.colorRange[i+1], 100, i+1, false);
-        const val = genNumInp(char.colorRange[i+2], 100, i+2, false);
-        const alpha2 = genNumInp(char.colorRange[i+3], 1, i+3, false);
+        partName.style.backgroundColor = "rgb(" + characterImgs.colorIn[i] +
+            ", " + characterImgs.colorIn[i+1] + ", " + characterImgs.colorIn[i+2] + ")";
+
+        // depending on ogcolors or ranges, add inputs to edit them
+        let sub1, sub2, sub3, sub4;
+        if (ogOrRange) {
+            sub1 = genNumInp(characterImgs.colorIn[i], 255, i, true);
+            sub2 = genNumInp(characterImgs.colorIn[i+1], 255, i+1, true);
+            sub3 = genNumInp(characterImgs.colorIn[i+2], 255, i+2, true);
+            sub4 = genNumInp(characterImgs.colorIn[i+3], 1, i+3, true);
+        } else {
+            sub1 = genNumInp(characterImgs.colorTolerance[i], 359, i, false);
+            sub2 = genNumInp(characterImgs.colorTolerance[i+1], 100, i+1, false);
+            sub3 = genNumInp(characterImgs.colorTolerance[i+2], 100, i+2, false);
+            sub4 = genNumInp(characterImgs.colorTolerance[i+3], 1, i+3, false);   
+        }
 
         // now add everything we just created to the part div and then to the actual html
         part.appendChild(partName);
-        part.appendChild(red);
-        part.appendChild(green);
-        part.appendChild(blue);
-        part.appendChild(alpha);
-        ogColorList.appendChild(part);
-        part2.appendChild(partName2);
-        part2.appendChild(hue);
-        part2.appendChild(sat);
-        part2.appendChild(val);
-        part2.appendChild(alpha2);
-        colorRangeList.appendChild(part2);
-
+        part.appendChild(sub1);
+        part.appendChild(sub2);
+        part.appendChild(sub3);
+        part.appendChild(sub4);
+        if (ogOrRange) {
+            ogColorList.appendChild(part);
+        } else {
+            colorRangeList.appendChild(part);
+        }
 
         count++;
-
-        genOgRanCode(true, true);
         
     }
 
-})
+    // finally, generate the code below the editor
+    genOgRanCode(ogOrRange);
 
+}
+
+// generates an input element to change the internal character values
 function genNumInp(color, max, colorNum, ogOrRange) {
     const newPart = document.createElement("input");
     newPart.setAttribute("type", "number");
@@ -876,29 +893,26 @@ function genNumInp(color, max, colorNum, ogOrRange) {
     return newPart;
 }
 
-function genOgRanCode(ogOrRange, all) {
+// generates the code of either ogColors or colorRanges
+function genOgRanCode(ogOrRange) {
 
     let code = "";
 
-    if (all || ogOrRange == "og") {
+    if (ogOrRange) {
         
         for (let i = 0; i < char.ogColor.length; i++) {
-            code += char.ogColor[i];
-            if (i != char.ogColor.length - 1) {
+            code += characterImgs.colorIn[i];
+            if (i != char.ogColor.length - 1) { // if its the last one, dont add "-"
                 code += "-"            
             }
         }
 
         document.getElementById("ogColorInput").value = code;
 
-    }
-
-    code = "";
-
-    if (all || ogOrRange == "range") {
+    } else {
 
         for (let i = 0; i < char.colorRange.length; i++) {
-            code += char.colorRange[i];
+            code += characterImgs.colorTolerance[i];
             if (i != char.colorRange.length - 1) {
                 code += "-"            
             }
@@ -910,34 +924,35 @@ function genOgRanCode(ogOrRange, all) {
 
 }
 
+// gets called every time a number input gets updated
 function updateOgRange() {
     if (this.getAttribute("ogOrRange") == "og") {
         characterImgs.changeOg(this.getAttribute("partNum"), this.value);
         mainRecolor();
-        genOgRanCode("og");
+        genOgRanCode(true);
     } else {
         characterImgs.changeRange(this.getAttribute("partNum"), this.value);
         mainRecolor();
-        genOgRanCode("range");
+        genOgRanCode();
     }
 }
 
+// if someone pastes a code on the code inputs
 document.getElementById("ogColorInput").addEventListener("input", translateCode);
 document.getElementById("colorRangeInput").addEventListener("input", translateCode);
-
 function translateCode() {
-    const splitCode = this.value.split("-");
-    if (this.id = "ogColorInput") {
-        characterImgs.changeOg(0,0,splitCode);
+
+    const splitCode = this.value.split("-"); // create a new array
+    if (this.id == "ogColorInput") {
+        characterImgs.changeOg(0,0,splitCode); // will update the shader
+        createProEditor(true); // redo the editor to show updated values
     } else {
         characterImgs.changeRange(0,0,splitCode);
+        createProEditor();
     }
-    mainRecolor();
+    mainRecolor(); // update the render
+
 }
-
-    
-
-
 
 
 function hexDecode(hex) {
