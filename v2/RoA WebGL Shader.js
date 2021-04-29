@@ -176,9 +176,8 @@ void main() {
 
 testGL() // test if the user is actually able to do this
 function testGL() {
-  const gl = document.createElement("canvas").getContext("webgl2");
-  if (!gl) {
-    alert("Your browser doesn't support WebGL2 :(\nYou may be able to manually activate it in your browser's settings.");
+  if (!document.createElement("canvas").getContext("webgl2")) {
+    document.getElementById("noWGL").style.display = "flex";
   }
 }
 

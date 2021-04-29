@@ -693,6 +693,41 @@ body::-webkit-scrollbar-thumb {
 }
 
 
+.infoUI {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.infoDiv {
+    width: 300px;
+    text-align: center;
+    background-color: var(--bgD);
+    padding: 30px;
+    border-radius: 20px;
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.5));
+}
+
+.okButton {
+    background-color: var(--bgD);
+    border: 2px solid var(--bgH);
+    border-radius: 20px;
+    color: white;
+    width: 50px;
+    height: 34px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.okButton:hover {
+    filter: brightness(1.2);
+}
+
+
 div>a:link {
     text-decoration: none;
 }

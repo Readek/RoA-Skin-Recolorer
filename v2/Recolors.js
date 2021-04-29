@@ -789,6 +789,9 @@ function genCodeManual(rgb) {
 // lets see that edit character mode
 document.getElementById("editChar").addEventListener("click", () => {
 
+    // show a bit of info just in case
+    document.getElementById("infoCE").style.display = "flex";
+
     // show hidden elements and hide useless ones
     const proEls = document.getElementsByClassName("proMode");
     for (let i = 0; i < proEls.length; i++) {
@@ -952,6 +955,16 @@ function translateCode() {
     }
     mainRecolor(); // update the render
 
+}
+
+
+// lets just slap an event listener to every ok button
+const okButts = document.getElementsByClassName("okButton");
+for (let i = 0; i < okButts.length; i++) {
+    okButts[i].addEventListener("click", hideInfoUI);
+}
+function hideInfoUI() { // this will work with any info UI with the same structure
+    this.parentElement.parentElement.style.display = "none";
 }
 
 

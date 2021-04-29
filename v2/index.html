@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoA Skin Recolorer</title>
-    <script src="RoA WebGL Shader.js"></script>
-    <script src="Characters/db.js"></script>
+    <script src="RoA WebGL Shader.js" defer></script>
+    <script src="Characters/db.js" defer></script>
     <script src="Recolors.js" defer></script>
     <link rel="stylesheet" href="Recolors.css">
 
 </head>
 <body>
+
+    <div class="infoUI" id="infoCE">
+
+        <div class="infoDiv">
+
+            <h2>Character Editor</h2>
+
+            <p>Here you can edit the values of the shader, such as the internal Original Colors, as well as the Color Ranges. This is so you can upload a custom character image, then tweak the values to make it work with existing color codes.</p>
+            <p>Looking for examples? Check the <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Skins.md">Custom Skins Database</a>!</p>
+
+            <button class="okButton">OK</button>
+        </div>
+
+    </div>
+
+    <div class="infoUI" id="noWGL">
+
+        <div class="infoDiv">
+
+            <h2>WebGL2 not supported</h2>
+
+            <p>Without WebGL2 support, this page doesn't work! This is showing up because either your device is really old, or WebGL2 is disabled on your browser.</p>
+            <p>You may be able to manually activate WebGL2 on your browser's settings. Not looking at anyone, especially not at Safari.</p>
+            <p>Alternatively, you can use an <a href="https://readek.github.io/RoA-Skin-Recolorer/">older version</a> of the Recolorer.</p>
+
+            <button class="okButton">OK</button>
+        </div>
+
+    </div>
 
     <div id="content">
 
@@ -240,6 +269,8 @@
         </div>
 
     </div>
+
+
 
 </body>
 </html>
