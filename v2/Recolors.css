@@ -702,6 +702,7 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
+    animation: .1s linear fadeIn;    
 }
 
 .infoDiv {
@@ -711,6 +712,7 @@ body::-webkit-scrollbar-thumb {
     padding: 30px;
     border-radius: 20px;
     filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.5));
+    animation: .3s slideIn;
 }
 
 .okButton {
@@ -726,6 +728,9 @@ body::-webkit-scrollbar-thumb {
 .okButton:hover {
     filter: brightness(1.2);
 }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { transform: translateY(-50px); } to { transform: translateY(0px); } }
 
 
 div>a:link {

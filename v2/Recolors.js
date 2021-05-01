@@ -805,8 +805,7 @@ document.getElementById("editChar").addEventListener("click", () => {
     // move some stuff around
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", codeInput);
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", copyToClip);
-    document.getElementById("buttonsEdit").insertAdjacentElement("beforeend", document.getElementById("row3"));
-    document.getElementById("row3").style.padding = "10px"
+    document.getElementById("row3").style.paddingBottom = "10px"
     codeInput.style.width = "345px";
 
     // create the new editors for both ogColors and colorRanges
@@ -956,6 +955,31 @@ function translateCode() {
     mainRecolor(); // update the render
 
 }
+
+
+// its character creator time
+document.getElementById("newChar").addEventListener("click", () => {
+
+    // show a bit of info just in case
+    document.getElementById("infoNC").style.display = "flex";
+
+    /* // show hidden elements and hide useless ones
+    const proEls = document.getElementsByClassName("proMode");
+    for (let i = 0; i < proEls.length; i++) {
+        proEls[i].style.display = "flex";
+    }
+    const casualEls = document.getElementsByClassName("casualMode");
+    for (let i = 0; i < casualEls.length; i++) {
+        casualEls[i].style.display = "none";
+    }
+
+    // move some stuff around
+    document.getElementById("outColorsBot").insertAdjacentElement("beforeend", codeInput);
+    document.getElementById("outColorsBot").insertAdjacentElement("beforeend", copyToClip);
+    document.getElementById("row3").style.paddingBottom = "10px"
+    codeInput.style.width = "345px"; */
+
+})
 
 
 // lets just slap an event listener to every ok button

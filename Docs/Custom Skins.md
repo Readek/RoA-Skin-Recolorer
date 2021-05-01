@@ -1,6 +1,6 @@
 <h1 align="center">Custom Skins database</h1>
 
-[Game Codes](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game_Codes.md) - Custom Skins - [Custom Characters](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom_Characters.md)
+[Game Codes](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game Codes.md) - Custom Skins - [Custom Characters](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md)
 
 These are some codes and images that can be used on the Recolorer's `Edit Character` menu, so you can use any color code you want on them.
 
@@ -9,6 +9,19 @@ To use them, simply copy and paste the "Original Colors" code and the "Color Ran
 Did you create a preset for an image that's not listed here? Please, submit a **pull request**!
 
 ---
+
+<h2>Forsburn</h2>
+
+<p align="center">
+
+  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Forsburn/LoA.png" alt="LoA Forsburn">
+
+</p>
+
+OC - `59-55-59-1-128-96-28-1-252-171-84-1-239-121-57-1-167-27-17-1-70-70-74-1-208-196-171-1`
+
+CR - `10-10-15-1-29-25-30-1-0-0-0-1-0-0-0-1-28-11-100-1-30-22-20-1-22-15-30-1`
+
 
 <h2>Kragg</h2>
 
@@ -26,7 +39,6 @@ CR - `41-25-48-1-27-29-50-1-73-12-24-1-0-0-0-1`
 
 Notes: `Shading` does not have assigned colors.
 
----
 
 <h2>Zetterburn</h2>
 
