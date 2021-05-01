@@ -365,6 +365,11 @@ class RoaRecolor {
     render(this.charImgs[name], colorOut, true);
   }
 
+  // maybe we want to stop recoloring something
+  delete(name) {
+    delete this.charImgs[name];
+  }
+
   // to hot-change retro shading
   changeBlend(oneOrZero) {
     for (let key in this.charImgs) {

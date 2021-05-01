@@ -484,8 +484,15 @@ defaultFile.addEventListener("change", () => {
     fileReader.addEventListener("load", function () {
         //add the custom image to the "full render" canvas
         characterImgs.addCustom(this.result, "Full").then( () => { // wait for the img to load
+
             recolor(char.ogColor); // then show it
-            spritesDiv.style.display = "none"; // hide the sprites
+
+            // hide the sprites, then stop recoloring them
+            spritesDiv.style.display = "none";
+            characterImgs.delete("Idle");
+            characterImgs.delete("SpriteL");
+            characterImgs.delete("SpriteR");
+
         })
     });
     fileReader.readAsDataURL(newImg); //imma be honest idk what this is but it doesnt work without it

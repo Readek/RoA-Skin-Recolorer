@@ -1,6 +1,6 @@
 <h1 align="center">Custom Skins database</h1>
 
-[Game Codes](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game Codes.md) - Custom Skins - [Custom Characters](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md)
+<p align="center"><a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game Codes.md">Game Codes</a> - Custom Skins - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters</a></p>
 
 These are some codes and images that can be used on the Recolorer's `Edit Character` menu, so you can use any color code you want on them.
 
@@ -17,6 +17,8 @@ Did you create a preset for an image that's not listed here? Please, submit a **
   <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Forsburn/LoA.png" alt="LoA Forsburn">
 
 </p>
+
+<h3>LoA</h3>
 
 OC - `59-55-59-1-128-96-28-1-252-171-84-1-239-121-57-1-167-27-17-1-70-70-74-1-208-196-171-1`
 
