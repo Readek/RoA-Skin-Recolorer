@@ -413,22 +413,26 @@ class RoaRecolor {
         this.colorTolerance.push(1)
       } else {
         this.colorTolerance.push(0);
-      } 
+      }
+      this.blend.push(this.blend[0])
     }
     for (let key in this.charImgs) {
       const gl = this.charImgs[key].gl;
       gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
       gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
+      gl.uniform4fv(this.charImgs[key].blendLoc, this.blend);
     }
   }
 
   removeRow() {
     this.colorIn.splice(this.colorIn.length - 4)
     this.colorTolerance.splice(this.colorTolerance.length - 4)
+    this.blend.splice(this.blend.length - 4)
     for (let key in this.charImgs) {
       const gl = this.charImgs[key].gl;
       gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
       gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
+      gl.uniform4fv(this.charImgs[key].blendLoc, this.blend);
     }
   }
 }
