@@ -406,6 +406,31 @@ class RoaRecolor {
     }
   }
 
+  addRow() {
+    for (let i = 0; i < 4; i++) {
+      this.colorIn.push(1);
+      if (i==3 || i==7) {
+        this.colorTolerance.push(1)
+      } else {
+        this.colorTolerance.push(0);
+      } 
+    }
+    for (let key in this.charImgs) {
+      const gl = this.charImgs[key].gl;
+      gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
+      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
+    }
+  }
+
+  removeRow() {
+    this.colorIn.splice(this.colorIn.length - 4)
+    this.colorTolerance.splice(this.colorTolerance.length - 4)
+    for (let key in this.charImgs) {
+      const gl = this.charImgs[key].gl;
+      gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
+      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
+    }
+  }
 }
 
 // this will be called on each paint

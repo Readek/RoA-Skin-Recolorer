@@ -556,7 +556,7 @@ body::-webkit-scrollbar-thumb {
     padding: 2px 0px 2px 5px;
     display: flex;
     outline: none;
-    width: 200px;
+    width: 150px;
 }
 .configEntry:hover {
     background-color: var(--bgH);
@@ -727,6 +727,38 @@ body::-webkit-scrollbar-thumb {
 }
 .okButton:hover {
     filter: brightness(1.2);
+}
+
+
+/* custom character stuff */
+#introCustom {
+    display: none;
+    font-size: 20px;
+}
+
+.customUpl {
+    display: none;
+    background-color: #7992c2;
+    width: auto;
+}
+
+#frameCountInp {
+    background-color: var(--bg);
+    border: var(--bgD) 1px solid;
+    border-radius: 5px;
+    width: 40px;
+    height: 30px;
+    color: white;
+    text-align: right;
+    font-size: 16px;
+    margin: 10px;
+}
+#frameCountDiv {
+    display: none;
+}
+
+.addRemoveDiv {
+    display: none;
 }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

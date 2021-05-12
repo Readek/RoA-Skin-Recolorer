@@ -18,7 +18,8 @@
 
             <h2>Character Editor</h2>
 
-            <p>Here you can edit the values of the shader, such as the internal Original Colors, as well as the Color Ranges. This is so you can upload a custom character image, then tweak the values to make it work with existing color codes.</p>
+            <p>Here you can edit the internal values of the shader. This is so you can upload a custom character image, then tweak the values to make it work with existing color codes.</p>
+            <p>You can find more info about how the shader works <a href="https://rivalsofaether.com/colors-gml/">here</a>.<p></p>
             <p>Looking for examples?<br>Check the <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Skins.md">Custom Skins Database</a>!</p>
 
             <button class="okButton">OK</button>
@@ -31,9 +32,11 @@
         <div class="infoDiv">
 
             <h2>Character Creator</h2>
+            <h2>NOT FINISHED</h2>
 
-            <!-- <p>Here you can start a character from scratch uploading your image and changing the Original Colors and Color Ranges. You can use the values from "colors.gml" on your workshop's character folder.</p>
-            <p>Looking for examples?<br>Check the <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters Database</a>!</p> -->
+            <p>Here you can start a character from scratch uploading your image and changing the Original Colors and Color Ranges. You can use the values from "colors.gml" on your workshop's character folder.</p>
+            <p>You can find more info about how the shader works <a href="https://rivalsofaether.com/colors-gml/">here</a>.<p>
+            <p>Looking for examples?<br>Check the <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters Database</a>!</p>
 
             <p>Coming soon i guess</p>
 
@@ -64,14 +67,19 @@
             <h5>This version of the recolorer is under active development.<br>This is NOT a stable release, expect stuff not working and breaking from day to day.</h5>
         </div>        
 
-        <canvas id="fullCanvas" title="Ain't this a lovely character?"></canvas>
+        <canvas id="fullCanvas" class="hideCustom" title="To download, press the download button down below"></canvas>
 
-        <div id="sContainer">
-            <canvas id="spriteL"></canvas>
+        <div id="sContainer" class="hideCustom">
+            <canvas id="spriteL" class="hideCustom"></canvas>
             <div id="animDiv">
                 <canvas id="animCanvas"></canvas>
             </div>
-            <canvas id="spriteR"></canvas>
+            <canvas id="spriteR" class="hideCustom"></canvas>
+        </div>
+
+        <div id="frameCountDiv">
+            Frame Count: 
+            <input type="number" min="0" id="frameCountInp">
         </div>
 
         <div id="loadingDiv" class="center">
@@ -79,7 +87,11 @@
             <span id="loadingText">Loading...</span>
         </div>
 
-        <div id="row1" class="row">
+        <div class="showCustom" id="introCustom">
+            <p>To begin, upload a portrait or spritesheet.</p>
+        </div>
+
+        <div id="row1" class="row hideCustom">
 
             <div id="charSelector" class="casualMode" tabindex="1">
                 <img id="selectedIcon" alt=" ">
@@ -112,12 +124,28 @@
                 Randomize
             </div>
 
-            <div id="uplImg" tabindex="1" class="buttons" data-tooltip="Upload a local image to be recolored (for example, game spritesheets). Will search the rgb values of the currently selected character, then recolor them if found.">
+            <div id="uplImg" tabindex="1" class="buttons hideCustom" data-tooltip="Upload a local image to be recolored (for example, game spritesheets). Will search the rgb values of the currently selected character, then recolor them if found.">
                 <input type="file" id="fileupload" hidden="hidden"/>
                 <svg id="uploadIcon" viewBox="0 0 20 20">
                     <path d="M18.555,15.354V4.592c0-0.248-0.202-0.451-0.45-0.451H1.888c-0.248,0-0.451,0.203-0.451,0.451v10.808c0,0.559,0.751,0.451,0.451,0.451h16.217h0.005C18.793,15.851,18.478,14.814,18.555,15.354 M2.8,14.949l4.944-6.464l4.144,5.419c0.003,0.003,0.003,0.003,0.003,0.005l0.797,1.04H2.8z M13.822,14.949l-1.006-1.317l1.689-2.218l2.688,3.535H13.822z M17.654,14.064l-2.791-3.666c-0.181-0.237-0.535-0.237-0.716,0l-1.899,2.493l-4.146-5.42c-0.18-0.237-0.536-0.237-0.716,0l-5.047,6.598V5.042h15.316V14.064z M12.474,6.393c-0.869,0-1.577,0.707-1.577,1.576s0.708,1.576,1.577,1.576s1.577-0.707,1.577-1.576S13.343,6.393,12.474,6.393 M12.474,8.645c-0.371,0-0.676-0.304-0.676-0.676s0.305-0.676,0.676-0.676c0.372,0,0.676,0.304,0.676,0.676S12.846,8.645,12.474,8.645"></path>
                 </svg>
                 Upload Image
+            </div>
+
+            <div id="uplPor" tabindex="1" class="buttons customUpl showCustom" data-tooltip="Upload the portrait of the character here">
+                <input type="file" id="fileuploadPor" hidden="hidden"/>
+                <svg id="uploadIcon" viewBox="0 0 20 20">
+                    <path d="M18.555,15.354V4.592c0-0.248-0.202-0.451-0.45-0.451H1.888c-0.248,0-0.451,0.203-0.451,0.451v10.808c0,0.559,0.751,0.451,0.451,0.451h16.217h0.005C18.793,15.851,18.478,14.814,18.555,15.354 M2.8,14.949l4.944-6.464l4.144,5.419c0.003,0.003,0.003,0.003,0.003,0.005l0.797,1.04H2.8z M13.822,14.949l-1.006-1.317l1.689-2.218l2.688,3.535H13.822z M17.654,14.064l-2.791-3.666c-0.181-0.237-0.535-0.237-0.716,0l-1.899,2.493l-4.146-5.42c-0.18-0.237-0.536-0.237-0.716,0l-5.047,6.598V5.042h15.316V14.064z M12.474,6.393c-0.869,0-1.577,0.707-1.577,1.576s0.708,1.576,1.577,1.576s1.577-0.707,1.577-1.576S13.343,6.393,12.474,6.393 M12.474,8.645c-0.371,0-0.676-0.304-0.676-0.676s0.305-0.676,0.676-0.676c0.372,0,0.676,0.304,0.676,0.676S12.846,8.645,12.474,8.645"></path>
+                </svg>
+                Upload Portrait
+            </div>
+
+            <div id="uplSpr" tabindex="1" class="buttons customUpl showCustom" data-tooltip="Upload a spritesheet of the character here, It will automatically animate">
+                <input type="file" id="fileuploadSpr" hidden="hidden"/>
+                <svg id="uploadIcon" viewBox="0 0 20 20">
+                    <path d="M18.555,15.354V4.592c0-0.248-0.202-0.451-0.45-0.451H1.888c-0.248,0-0.451,0.203-0.451,0.451v10.808c0,0.559,0.751,0.451,0.451,0.451h16.217h0.005C18.793,15.851,18.478,14.814,18.555,15.354 M2.8,14.949l4.944-6.464l4.144,5.419c0.003,0.003,0.003,0.003,0.003,0.005l0.797,1.04H2.8z M13.822,14.949l-1.006-1.317l1.689-2.218l2.688,3.535H13.822z M17.654,14.064l-2.791-3.666c-0.181-0.237-0.535-0.237-0.716,0l-1.899,2.493l-4.146-5.42c-0.18-0.237-0.536-0.237-0.716,0l-5.047,6.598V5.042h15.316V14.064z M12.474,6.393c-0.869,0-1.577,0.707-1.577,1.576s0.708,1.576,1.577,1.576s1.577-0.707,1.577-1.576S13.343,6.393,12.474,6.393 M12.474,8.645c-0.371,0-0.676-0.304-0.676-0.676s0.305-0.676,0.676-0.676c0.372,0,0.676,0.304,0.676,0.676S12.846,8.645,12.474,8.645"></path>
+                </svg>
+                Upload Spritesheet
             </div>
             
             <a id="downImg" tabindex="1" download="Character Recolor.png" data-tooltip="Download the image shown above">
@@ -131,7 +159,7 @@
             
         </div>
 
-        <div id="row4" class="row">
+        <div id="row4" class="row hideCustom">
             
             <div id="colorEditor">
                 <div class="center">
@@ -175,6 +203,10 @@
                             <img id="copied" src="Resources/Copied.png" alt="">
                         </div>
                     </div>
+                    <div class="addRemoveDiv showCustom">
+                        <button class="addRemoveButton" id="addOg">+</button>
+                        <button class="addRemoveButton" id="removeOg">-</button>
+                    </div>
                 </div>
 
                 <div class="list proMode">
@@ -188,6 +220,10 @@
                             </svg>
                             <img id="copied" src="Resources/Copied.png" alt="">
                         </div>
+                    </div>
+                    <div class="addRemoveDiv showCustom">
+                        <button class="addRemoveButton" id="addRa">+</button>
+                        <button class="addRemoveButton" id="removeRa">-</button>
                     </div>
                 </div>
 
@@ -206,7 +242,7 @@
 
         <div id="options" class="row center">
 
-            <div id="editChar" tabindex="1" class="buttons casualMode" data-tooltip-delay="none" data-tooltip="Edit the internal values of the currently selected character">
+            <div id="editChar" tabindex="1" class="buttons casualMode hideCustom" data-tooltip-delay="none" data-tooltip="Edit the internal values of the currently selected character">
                 <svg id="editIcon" viewBox="0 0 24 24" stroke-width="1" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
@@ -215,14 +251,14 @@
                 Edit Current Character
             </div>
 
-            <div id="newChar" tabindex="1" class="buttons casualMode" data-tooltip-delay="none" data-tooltip="Create a new character from scratch">
+            <div id="newChar" tabindex="1" class="buttons casualMode hideCustom" data-tooltip-delay="none" data-tooltip="Create a new character from scratch">
                 <svg id="addIcon" viewBox="0 0 20 20">
                     <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                 </svg>
                 Add New Character
             </div>
 
-            <a id="goBack" class="proMode" href="https://readek.github.io/RoA-Skin-Recolorer/v2">Go back</a>
+            <a id="goBack" class="proMode showCustom" href="https://readek.github.io/RoA-Skin-Recolorer/v2">Go back</a>
 
             <div id="dropdownDiv">
                 <button id="config" class="buttons" data-tooltip-delay="none" data-tooltip="Open the Settings menu">
@@ -244,7 +280,6 @@
     
                 </div>
             </div>
-
 
         </div>
 
@@ -285,8 +320,6 @@
         </div>
 
     </div>
-
-
 
 </body>
 </html>

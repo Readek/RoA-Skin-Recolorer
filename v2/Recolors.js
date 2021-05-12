@@ -832,7 +832,7 @@ function createProEditor(ogOrRange) {
         colorRangeList.innerHTML = null;
     }
 
-    for (let i = 0; i < char.ogColor.length; i += 4) {
+    for (let i = 0; i < characterImgs.colorIn.length; i += 4) {
         
         // this is where everything will be stored
         const part = document.createElement("div");
@@ -909,9 +909,9 @@ function genOgRanCode(ogOrRange) {
 
     if (ogOrRange) {
         
-        for (let i = 0; i < char.ogColor.length; i++) {
+        for (let i = 0; i < characterImgs.colorIn.length; i++) {
             code += characterImgs.colorIn[i];
-            if (i != char.ogColor.length - 1) { // if its the last one, dont add "-"
+            if (i != characterImgs.colorIn.length - 1) { // if its the last one, dont add "-"
                 code += "-"            
             }
         }
@@ -920,9 +920,9 @@ function genOgRanCode(ogOrRange) {
 
     } else {
 
-        for (let i = 0; i < char.colorRange.length; i++) {
+        for (let i = 0; i < characterImgs.colorTolerance.length; i++) {
             code += characterImgs.colorTolerance[i];
-            if (i != char.colorRange.length - 1) {
+            if (i != characterImgs.colorTolerance.length - 1) {
                 code += "-"            
             }
         }
@@ -965,17 +965,20 @@ function translateCode() {
 
 
 // its character creator time
+const defaultFilePor = document.getElementById("fileuploadPor");
+const defaultFileSpr = document.getElementById("fileuploadSpr");
+let firstImg = true;
 document.getElementById("newChar").addEventListener("click", () => {
 
     // show a bit of info just in case
     document.getElementById("infoNC").style.display = "flex";
 
-    /* // show hidden elements and hide useless ones
-    const proEls = document.getElementsByClassName("proMode");
+    // show hidden elements and hide useless ones
+    const proEls = document.getElementsByClassName("showCustom");
     for (let i = 0; i < proEls.length; i++) {
         proEls[i].style.display = "flex";
     }
-    const casualEls = document.getElementsByClassName("casualMode");
+    const casualEls = document.getElementsByClassName("hideCustom");
     for (let i = 0; i < casualEls.length; i++) {
         casualEls[i].style.display = "none";
     }
@@ -984,10 +987,150 @@ document.getElementById("newChar").addEventListener("click", () => {
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", codeInput);
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", copyToClip);
     document.getElementById("row3").style.paddingBottom = "10px"
-    codeInput.style.width = "345px"; */
+    codeInput.style.width = "345px";
 
 })
+document.getElementById("uplPor").addEventListener("click", () => {
+    defaultFilePor.click();
+})
+document.getElementById("uplSpr").addEventListener("click", () => {
+    defaultFileSpr.click();
+})
+defaultFilePor.addEventListener("change", () => {
+    const newImg = defaultFilePor.files[0];
 
+    const fileReader = new FileReader();
+    fileReader.addEventListener("load", function () {
+
+        if (firstImg) {
+            let basicOg = [], basicRange = [];
+            for (let i = 0; i < 8; i++) {
+                basicOg.push(1);
+                if (i==3 || i==7) {
+                    basicRange.push(1)
+                } else {
+                    basicRange.push(0);
+                }          
+            }
+            characterImgs = new RoaRecolor(basicOg, basicRange, eaCheck.checked);
+            showCustomUI();
+        }
+
+        if (characterImgs.charImgs["Full"]) {
+            characterImgs.addCustom(this.result, "Full").then( () => {
+                recolor(char.ogColor);
+            })
+        } else {
+            characterImgs.addImage(fullCanvas, this.result, "Full").then( () => {
+                recolor(char.ogColor);
+                fullCanvas.style.display = "flex";
+            })
+        }
+
+        firstImg = false;
+
+    });
+    fileReader.readAsDataURL(newImg);
+});
+defaultFileSpr.addEventListener("change", () => {
+    const newImg = defaultFileSpr.files[0];
+
+    const fileReader = new FileReader();
+    fileReader.addEventListener("load", function () {
+
+        if (firstImg) {
+            let basicOg = [], basicRange = [];
+            for (let i = 0; i < 8; i++) {
+                basicOg.push(1);
+                if (i==3 || i==7) {
+                    basicRange.push(1)
+                } else {
+                    basicRange.push(0);
+                }          
+            }
+            characterImgs = new RoaRecolor(basicOg, basicRange, eaCheck.checked);
+            showCustomUI();
+        }
+
+        if (characterImgs.charImgs["Idle"]) {
+            characterImgs.addCustom(this.result, "Idle").then( () => {
+                recolor(char.ogColor);
+            })
+        } else {
+            characterImgs.addImage(animCanvas, this.result, "Idle").then( () => {
+                recolor(char.ogColor);
+                spritesDiv.style.display = "flex";
+                document.getElementById("frameCountDiv").style.display = "inline";
+                document.getElementById("frameCountInp").value = 6;
+                document.getElementById("frameCountInp").addEventListener("change", updateFC);
+            })
+        }
+
+        const sprite = new Image();
+        sprite.src = this.result;
+        sprite.decode().then( () => {
+            // default framecount here will always be 6
+            animDiv.style.width = (sprite.width / 6) + "px";
+            animDiv.style.height = sprite.height + "px";
+            const r = document.querySelector(':root');
+            r.style.setProperty("--spriteMove", -sprite.width + "px");
+            r.style.setProperty("--spriteCount", 6);
+            r.style.setProperty("--spriteTime", 1000/60*7*6/1000 + "s");
+        })
+
+        char.idleImg = sprite;
+        firstImg = false;
+
+    });
+    fileReader.readAsDataURL(newImg);
+});
+function updateFC() {
+    const sprite = char.idleImg;
+    animDiv.style.width = (sprite.width / this.value) + "px";
+    const r = document.querySelector(':root');
+    r.style.setProperty("--spriteCount", this.value);
+    r.style.setProperty("--spriteTime", 1000/60*7*this.value/1000 + "s");
+}
+
+
+function showCustomUI() {
+    document.getElementById("introCustom").style.display = "none";
+
+    // show hidden elements and hide useless ones
+    const proEls = document.getElementsByClassName("proMode");
+    for (let i = 0; i < proEls.length; i++) {
+        proEls[i].style.display = "flex";
+    }
+    document.getElementById("row4").style.display = "flex";
+    // create the new editors for both ogColors and colorRanges
+    createProEditor(true);
+    createProEditor();
+}
+
+document.getElementById("addOg").addEventListener("click", addRow);
+document.getElementById("addRa").addEventListener("click", addRow);
+document.getElementById("removeOg").addEventListener("click", removeRow);
+document.getElementById("removeRa").addEventListener("click", removeRow);
+function addRow() {
+    characterImgs.addRow();
+    createProEditor(true);
+    createProEditor();
+    if (characterImgs.colorIn.length < 36) {
+        //todo disable
+    } else {
+        //todo enable
+    }
+}
+function removeRow() {
+    characterImgs.removeRow();
+    createProEditor(true);
+    createProEditor();
+    if (characterImgs.colorIn.length <= 4) {
+        //todo disable
+    } else {
+        //todo enable
+    }
+}
 
 // lets just slap an event listener to every ok button
 const okButts = document.getElementsByClassName("okButton");
