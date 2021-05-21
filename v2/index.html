@@ -33,11 +33,10 @@
         <div class="infoDiv">
 
             <h2>Character Creator</h2>
-            <h2>NOT FINISHED</h2>
 
             <p>Here you can start a character from scratch uploading your image and changing the Original Colors and Color Ranges. You can use the values from "colors.gml" on your workshop's character folder.</p>
             <p>You can find more info about how the shader works <a href="https://rivalsofaether.com/colors-gml/">here</a>.<p>
-            <p>Looking for examples?<br>Check the <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters Database</a>!</p>
+            <p>Looking for examples?<br>Check the <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters guide</a>!</p>
 
             <button class="okButton">OK</button>
 
@@ -79,7 +78,7 @@
 
         <div id="frameCountDiv">
             Frame Count: 
-            <input type="number" min="0" id="frameCountInp">
+            <input type="number" min="0" id="frameCountInp" autocomplete="off">
         </div>
 
         <div id="loadingDiv" class="center">
@@ -102,7 +101,7 @@
                 </div>
             </div>
 
-            <input type="text" id="codeInput" class="colorInput" title="Paste your color code here!">
+            <input type="text" id="codeInput" class="colorInput" title="Paste your color code here!" autocomplete="off">
 
             <div id="copyToClip" class="copyToClip" tabindex="1" data-tooltip="Copy the current color code to clipboard" data-tooltip-delay="none">
                 <svg class="copyIcon" viewBox="0 0 20 20">
@@ -124,7 +123,7 @@
                 Randomize
             </div>
 
-            <div id="uplImg" tabindex="1" class="buttons hideCustom" data-tooltip="Upload a local image to be recolored (for example, game spritesheets). Will search the rgb values of the currently selected character, then recolor them if found.">
+            <div id="uplImg" tabindex="1" class="buttons hideCustom" data-tooltip="Upload an image to be recolored (for example, game spritesheets). Will use the values of the currently selected character to recolor.">
                 <input type="file" id="fileupload" hidden="hidden"/>
                 <svg id="uploadIcon" viewBox="0 0 20 20">
                     <path d="M18.555,15.354V4.592c0-0.248-0.202-0.451-0.45-0.451H1.888c-0.248,0-0.451,0.203-0.451,0.451v10.808c0,0.559,0.751,0.451,0.451,0.451h16.217h0.005C18.793,15.851,18.478,14.814,18.555,15.354 M2.8,14.949l4.944-6.464l4.144,5.419c0.003,0.003,0.003,0.003,0.003,0.005l0.797,1.04H2.8z M13.822,14.949l-1.006-1.317l1.689-2.218l2.688,3.535H13.822z M17.654,14.064l-2.791-3.666c-0.181-0.237-0.535-0.237-0.716,0l-1.899,2.493l-4.146-5.42c-0.18-0.237-0.536-0.237-0.716,0l-5.047,6.598V5.042h15.316V14.064z M12.474,6.393c-0.869,0-1.577,0.707-1.577,1.576s0.708,1.576,1.577,1.576s1.577-0.707,1.577-1.576S13.343,6.393,12.474,6.393 M12.474,8.645c-0.371,0-0.676-0.304-0.676-0.676s0.305-0.676,0.676-0.676c0.372,0,0.676,0.304,0.676,0.676S12.846,8.645,12.474,8.645"></path>
@@ -140,7 +139,7 @@
                 Upload Portrait
             </div>
 
-            <div id="uplSpr" tabindex="1" class="buttons customUpl showCustom" data-tooltip="Upload a spritesheet of the character here, It will automatically animate">
+            <div id="uplSpr" tabindex="1" class="buttons customUpl showCustom" data-tooltip="Upload a spritesheet of the character here (will automatically animate)">
                 <input type="file" id="fileuploadSpr" hidden="hidden"/>
                 <svg id="uploadIcon" viewBox="0 0 20 20">
                     <path d="M18.555,15.354V4.592c0-0.248-0.202-0.451-0.45-0.451H1.888c-0.248,0-0.451,0.203-0.451,0.451v10.808c0,0.559,0.751,0.451,0.451,0.451h16.217h0.005C18.793,15.851,18.478,14.814,18.555,15.354 M2.8,14.949l4.944-6.464l4.144,5.419c0.003,0.003,0.003,0.003,0.003,0.005l0.797,1.04H2.8z M13.822,14.949l-1.006-1.317l1.689-2.218l2.688,3.535H13.822z M17.654,14.064l-2.791-3.666c-0.181-0.237-0.535-0.237-0.716,0l-1.899,2.493l-4.146-5.42c-0.18-0.237-0.536-0.237-0.716,0l-5.047,6.598V5.042h15.316V14.064z M12.474,6.393c-0.869,0-1.577,0.707-1.577,1.576s0.708,1.576,1.577,1.576s1.577-0.707,1.577-1.576S13.343,6.393,12.474,6.393 M12.474,8.645c-0.371,0-0.676-0.304-0.676-0.676s0.305-0.676,0.676-0.676c0.372,0,0.676,0.304,0.676,0.676S12.846,8.645,12.474,8.645"></path>
@@ -180,12 +179,12 @@
                 </div>
                 
                 <div id="sliderDiv">
-                    <input type="range" min="0" max="360" class="slider sliderHSV" id="sliderHue">
-                    <input type="range" min="0" max="100" class="slider sliderHSV" id="sliderSat">
-                    <input type="range" min="0" max="100" class="slider sliderHSV" id="sliderVal">
-                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderR">
-                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderG">
-                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderB">
+                    <input type="range" min="0" max="360" class="slider sliderHSV" id="sliderHue" autocomplete="off">
+                    <input type="range" min="0" max="100" class="slider sliderHSV" id="sliderSat" autocomplete="off">
+                    <input type="range" min="0" max="100" class="slider sliderHSV" id="sliderVal" autocomplete="off">
+                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderR" autocomplete="off">
+                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderG" autocomplete="off">
+                    <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderB" autocomplete="off">
                 </div>
             </div>
 
@@ -195,7 +194,7 @@
                     <div data-tooltip="The main colors to look for. This is usually a midtone, not the darkest or lightest one." data-tooltip-delay="none" class="titleList">ORIGINAL COLORS (rgba)</div>
                     <div id="ogColorList"></div>
                     <div>
-                        <input type="text" id="ogColorInput" class="colorInput" title="All above values on a single string for easy sharing">
+                        <input type="text" id="ogColorInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
                         <div id="copyOg" class="copyToClip" tabindex="1" data-tooltip="Copy the ogColors code to clipboard" data-tooltip-delay="none">
                             <svg class="copyIcon" viewBox="0 0 20 20">
                                 <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>
@@ -213,8 +212,8 @@
                     <div data-tooltip="How far we should look for color differences" data-tooltip-delay="none" class="titleList">COLOR RANGES (hsva)</div>
                     <div id="colorRangeList"></div>
                     <div>
-                        <input type="text" id="colorRangeInput" class="colorInput" title="All above values on a single string for easy sharing">
-                        <div id="copyRange" class="copyToClip" tabindex="1" data-tooltip="Copy the ogColors code to clipboard" data-tooltip-delay="none">
+                        <input type="text" id="colorRangeInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
+                        <div id="copyRange" class="copyToClip" tabindex="1" data-tooltip="Copy the Ranges code to clipboard" data-tooltip-delay="none">
                             <svg class="copyIcon" viewBox="0 0 20 20">
                                 <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>
                             </svg>

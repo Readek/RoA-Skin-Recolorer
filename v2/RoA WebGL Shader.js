@@ -355,8 +355,8 @@ class RoaRecolor {
 
   // its finally time to recolor the image
   recolor(colorOut) {
-    for (let key in this.charImgs) {
-      render(this.charImgs[key], colorOut);
+    for (let key in this.charImgs) { // if no code is sent, use the original colors
+      render(this.charImgs[key], colorOut ? colorOut : this.colorIn);
     }
   }
 

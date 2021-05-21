@@ -245,11 +245,11 @@ function createEditor() {
     try {
         rgb = hexDecode(codeInput.value); // get the rgb values of the current code
     } catch (e) {
-        rgb = char.ogColor; // if the code is not valid, use the default colors
+        rgb = characterImgs.colorIn; // if the code is not valid, use the default colors
     }
 
     // check if the current character has hidden parts
-    const theLength = char.actualParts ? char.actualParts * 4 : char.ogColor.length;
+    const theLength = char.actualParts ? char.actualParts * 4 : characterImgs.colorIn.length;
 
     // now for each (editable) part:
     for (let i = 0; i < theLength; i += 4) {
@@ -420,7 +420,7 @@ document.getElementById("randomize").addEventListener("click", () => {
     if (char.actualParts) { // for orcane & olympia
         randomize(char.actualParts)
     } else {
-        randomize(char.ogColor.length / 4)
+        randomize(characterImgs.colorIn.length / 4)
     }
 });
 function randomize(colorNum) {
@@ -518,7 +518,7 @@ window.onclick = (e) => {
 } 
 
 
-// SETTINGS
+/* SETTINGS */
 
 // Early Access check
 eaCheck.addEventListener("click", () => {
@@ -549,19 +549,33 @@ function darkMode() {
 darkMode();
 
 
-// yes this is a separate function just for orcane's sprite greenness
 function recolor(rgb) {
-    if (char.name == "Orcane") {
-        const newRgb = [];
-        for (let i = 0; i < rgb.length; i++) {
-            newRgb.push(rgb[i]);               
+    if (rgb) {
+        if (char.name == "Orcane") { // orcane has a greenish hidden part
+            const newRgb = [];
+            for (let i = 0; i < rgb.length; i++) {
+                newRgb.push(rgb[i]);               
+            }
+            for (let i = 0; i < 4; i++) {
+                newRgb[i+8] = rgb[i];
+            }
+            characterImgs.recolor(newRgb);
+        } else {
+            characterImgs.recolor(rgb);
+        }    if (char.name == "Orcane") {
+            const newRgb = [];
+            for (let i = 0; i < rgb.length; i++) {
+                newRgb.push(rgb[i]);               
+            }
+            for (let i = 0; i < 4; i++) {
+                newRgb[i+8] = rgb[i];
+            }
+            characterImgs.recolor(newRgb);
+        } else {
+            characterImgs.recolor(rgb);
         }
-        for (let i = 0; i < 4; i++) {
-            newRgb[i+8] = rgb[i];
-        }
-        characterImgs.recolor(newRgb);
     } else {
-        characterImgs.recolor(rgb);
+        characterImgs.recolor(); // if no colors, will use original ones
     }
 }
 
@@ -989,6 +1003,17 @@ document.getElementById("newChar").addEventListener("click", () => {
     document.getElementById("row3").style.paddingBottom = "10px"
     codeInput.style.width = "345px";
 
+    // change the names for the parts
+    const newNames = [];
+    for (let i = 0; i < 9; i++) {
+        newNames.push("Part " + (i+1));        
+    }
+    char.partNames = newNames;
+    char.actualParts = null; // so code doesnt have to worry about this later
+    downLink.setAttribute("download", "Custom Recolor.png"); //update the dowloaded image name
+    changePlaceholder(2);
+    codeInput.value = null;
+
 })
 document.getElementById("uplPor").addEventListener("click", () => {
     defaultFilePor.click();
@@ -1003,6 +1028,7 @@ defaultFilePor.addEventListener("change", () => {
     fileReader.addEventListener("load", function () {
 
         if (firstImg) {
+            // create default values, 1 for ogs and 0 for ranges
             let basicOg = [], basicRange = [];
             for (let i = 0; i < 8; i++) {
                 basicOg.push(1);
@@ -1014,15 +1040,16 @@ defaultFilePor.addEventListener("change", () => {
             }
             characterImgs = new RoaRecolor(basicOg, basicRange, eaCheck.checked);
             showCustomUI();
+            createEditor();
         }
 
         if (characterImgs.charImgs["Full"]) {
             characterImgs.addCustom(this.result, "Full").then( () => {
-                recolor(char.ogColor);
+                recolor();
             })
         } else {
             characterImgs.addImage(fullCanvas, this.result, "Full").then( () => {
-                recolor(char.ogColor);
+                recolor();
                 fullCanvas.style.display = "flex";
             })
         }
@@ -1050,18 +1077,18 @@ defaultFileSpr.addEventListener("change", () => {
             }
             characterImgs = new RoaRecolor(basicOg, basicRange, eaCheck.checked);
             showCustomUI();
+            createEditor();
         }
 
         if (characterImgs.charImgs["Idle"]) {
             characterImgs.addCustom(this.result, "Idle").then( () => {
-                recolor(char.ogColor);
+                recolor();
             })
         } else {
             characterImgs.addImage(animCanvas, this.result, "Idle").then( () => {
-                recolor(char.ogColor);
+                recolor();
                 spritesDiv.style.display = "flex";
                 document.getElementById("frameCountDiv").style.display = "inline";
-                document.getElementById("frameCountInp").value = 6;
                 document.getElementById("frameCountInp").addEventListener("change", updateFC);
             })
         }
@@ -1069,16 +1096,25 @@ defaultFileSpr.addEventListener("change", () => {
         const sprite = new Image();
         sprite.src = this.result;
         sprite.decode().then( () => {
-            // default framecount here will always be 6
-            animDiv.style.width = (sprite.width / 6) + "px";
+            let frameCount = 6; // default to 6 if file has no numbers at the end
+            // if the name of the file has at least 2 characters AND those are numbers
+            if (newImg.name.length >= 6 && Number(newImg.name.substr(newImg.name.length - 6, 2))) {
+                frameCount = newImg.name.substr(newImg.name.length - 6, 2);
+            } else if (Number(newImg.name.substr(newImg.name.length - 5, 1))) {
+                frameCount = newImg.name.substr(newImg.name.length - 5, 1);
+            }
+            // same as regular idle sprites
+            animDiv.style.width = (sprite.width / frameCount) + "px";
             animDiv.style.height = sprite.height + "px";
             const r = document.querySelector(':root');
             r.style.setProperty("--spriteMove", -sprite.width + "px");
-            r.style.setProperty("--spriteCount", 6);
-            r.style.setProperty("--spriteTime", 1000/60*7*6/1000 + "s");
+            r.style.setProperty("--spriteCount", frameCount);
+            r.style.setProperty("--spriteTime", 1000/60*7*frameCount/1000 + "s");
+            document.getElementById("frameCountInp").value = frameCount;
+            
+            char.idleImg = sprite;
         })
 
-        char.idleImg = sprite;
         firstImg = false;
 
     });
@@ -1107,30 +1143,66 @@ function showCustomUI() {
     createProEditor();
 }
 
-document.getElementById("addOg").addEventListener("click", addRow);
-document.getElementById("addRa").addEventListener("click", addRow);
-document.getElementById("removeOg").addEventListener("click", removeRow);
-document.getElementById("removeRa").addEventListener("click", removeRow);
-function addRow() {
-    characterImgs.addRow();
+let partCount = 2;
+document.getElementById("addOg").addEventListener("click", () => {addOrRemoveRow(true)});
+document.getElementById("addRa").addEventListener("click", () => {addOrRemoveRow(true)});
+document.getElementById("removeOg").addEventListener("click", () => {addOrRemoveRow()});
+document.getElementById("removeRa").addEventListener("click", () => {addOrRemoveRow()});
+function addOrRemoveRow(add) {
+    
+    if (add) {
+        characterImgs.addRow();
+        partCount++;
+    } else {
+        characterImgs.removeRow();
+        partCount--;
+    }
+    changePlaceholder(partCount);
+    codeInput.value = null;
+    createEditor();
     createProEditor(true);
     createProEditor();
-    if (characterImgs.colorIn.length < 36) {
-        //todo disable
+
+    if (characterImgs.colorIn.length >= 36) {
+        document.getElementById("addOg").disabled = true;
+        document.getElementById("addRa").disabled = true;
+    } else if (characterImgs.colorIn.length <= 4) {
+        document.getElementById("removeOg").disabled = true;
+        document.getElementById("removeRa").disabled = true;
     } else {
-        //todo enable
+        document.getElementById("addOg").disabled = false;
+        document.getElementById("addRa").disabled = false;
+        document.getElementById("removeOg").disabled = false;
+        document.getElementById("removeRa").disabled = false;
+    }
+
+}
+
+function changePlaceholder(colorNum) {
+    switch (colorNum) { // impresive code i know
+        case 1:
+            char.placeholder = "0000-0000"; break;
+        case 2:
+            char.placeholder = "0000-0000-0000-0000"; break;
+        case 3:
+            char.placeholder = "0000-0000-0000-0000-0000"; break;
+        case 4:
+            char.placeholder = "0000-0000-0000-0000-0000-0000-0000"; break;
+        case 5:
+            char.placeholder = "0000-0000-0000-0000-0000-0000-0000-0000"; break;
+        case 6:
+            char.placeholder = "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"; break;
+        case 7:
+            char.placeholder = "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"; break;
+        case 8:
+            char.placeholder = "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"; break;
+        case 9:
+            char.placeholder = "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"; break;
+            
+        default: break;
     }
 }
-function removeRow() {
-    characterImgs.removeRow();
-    createProEditor(true);
-    createProEditor();
-    if (characterImgs.colorIn.length <= 4) {
-        //todo disable
-    } else {
-        //todo enable
-    }
-}
+
 
 // lets just slap an event listener to every ok button
 const okButts = document.getElementsByClassName("okButton");
