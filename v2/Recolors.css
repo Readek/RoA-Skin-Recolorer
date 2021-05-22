@@ -14,9 +14,26 @@
     src: url('Roboto-Regular.ttf');
 }
 
+/* remove some default styles */
 html, body {
     padding: 0;
     margin: 0;
+}
+button, input {
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    border: 0;
+}
+button {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    text-transform: none;
+    box-sizing: content-box;
+}
+button, [type="button"] {
+    -webkit-appearance: button;
 }
 
 
@@ -28,10 +45,9 @@ html {
     scrollbar-width: thin; /* Firefox */
     scrollbar-color: var(--bg) var(--mainBG); /* Firefox */
 }
-
 /* all of this is chromium only */
 body::-webkit-scrollbar {
-    width: 5px; /* this doesnt seem to matter at all? */
+    width: 5px;
     height: 5px;
 }
 body::-webkit-scrollbar-track {
@@ -104,28 +120,27 @@ body::-webkit-scrollbar-thumb {
 
 
 #charSelector {
-    width: 44px;
-    height: 44px;
-    border-radius: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
     margin-right: 10px;
     background-color: var(--bg);
     float: left;
     transition: background-color 150ms;
     position: relative;
-    outline: none; /* Chromium only */
     user-select: none;
+    box-sizing: border-box;
 }
 #selectedIcon {
     width: 30px;
     height: 30px;
-    margin-top: 7px;
-    margin-left: 7px;
+    transform: translateY(3px);
     image-rendering: pixelated; /* Chromium */
     image-rendering: crisp-edges; /* Firefox */
     object-fit: contain;
     user-select: none;
 }
-#charSelector:hover {
+#charSelector:hover, #charSelector:focus {
     cursor: pointer;
     background-color: var(--bgH);
 }
@@ -177,7 +192,6 @@ body::-webkit-scrollbar-thumb {
 .colorInput {
     height: 25px;
     outline: none;
-    border: none;
     border-radius: 20px 0px 0px 20px;
     padding: 5px 10px;
     font-size: 16px;
@@ -191,7 +205,7 @@ body::-webkit-scrollbar-thumb {
 .colorInput::placeholder { /* this is just for Chromium */
     color: rgb(158, 158, 158);
 }
-.colorInput:hover, .colorInput:focus, #copyToClip:hover {
+.colorInput:hover, .colorInput:focus {
     background-color: var(--bgH);
 }
 
@@ -205,7 +219,7 @@ body::-webkit-scrollbar-thumb {
     float: left;
     transition: background-color 100ms;
     margin-top: 5px;
-    outline: none; /* Chromium only */
+    cursor: pointer;
 }
 .copyIcon {
     height: 20px;
@@ -213,11 +227,12 @@ body::-webkit-scrollbar-thumb {
     margin-top: 2px;
     fill: lightgray;
 }
-.copyToClip:hover {
-    cursor: pointer;
+#copyToClip:hover, #copyToClip:focus {
+    background-color: var(--bgH);
 }
-.copyToClip:active {
-    background-color: var(--bg);
+.copyToClip:disabled {
+    filter: brightness(.8);
+    pointer-events: none;
 }
 
 #copied {
@@ -268,25 +283,28 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0px 5px 0px 5px;
     height: 26px;
     width: 152px;
-    border-radius: 20px;
+    margin: 0px 5px 0px 5px;
     padding: 5px 10px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border-radius: 20px;
     font-size: 17px;
     color: white;
     transition: filter 100ms;
     user-select: none;
-    outline: none; /* Chromium only */
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
-}
-.buttons:hover {
-    filter: brightness(1.1);
     cursor: pointer;
+}
+.buttons:hover, .buttons:focus {
+    filter: brightness(1.1);
 }
 .buttons:active {
     filter: brightness(.9);
+}
+.buttons:disabled {
+    filter: grayscale(1);
+    pointer-events: none;
 }
 
 #randomize {
@@ -334,15 +352,16 @@ body::-webkit-scrollbar-thumb {
     transform: translateY(-4px);
 }
 .hsvOrRgb {
-    border: 2px solid var(--bgH);
     padding: 7px 8px;
-    color: white;
+    border: 2px solid var(--bgH);
     background-color: var(--mainBG);
-    cursor: pointer;
     transition: background-color 150ms, filter 150ms;
+    color: white;
     font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
 }
-.hsvOrRgb:hover {
+.hsvOrRgb:hover, .hsvOrRgb:focus {
     filter: brightness(1.2);
 }
 #hsvClick {
@@ -381,8 +400,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 #hideEditor {
+    background: none;
     border: 2px solid var(--bgH);
-    padding: 7px;
+    padding: 7.5px;
     padding-right: 10px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -390,7 +410,7 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
     transition: filter 100ms;
 }
-#hideEditor:hover {
+#hideEditor:hover, #hideEditor:focus {
     filter: brightness(1.3);
 }
 
@@ -443,20 +463,23 @@ body::-webkit-scrollbar-thumb {
 
 
 #partList {
-    width: 500px;
+    width: 475px;
     max-width: 100%;
 }
 .part {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     background-color: var(--bg);
     border-radius: 20px;
-    margin: 10px;
+    margin: 10px 0px;
+    padding: 0;
     cursor: pointer;
     transition: background-color 150ms, transform 150ms, filter 150ms;
+    color: white;
 }
-.part:hover {
+.part:hover, .part:focus {
     background-color: var(--bgH);
     transform: scale(1.03);
 }
@@ -514,11 +537,9 @@ body::-webkit-scrollbar-thumb {
 }
 #config {
     width: auto;
-    height: 36px;
+    height: 26px;
     background-color: var(--bg);
     position: relative;
-    outline: none; /* Chromium only */
-    border: none;
     transition: background-color 150ms;
 }
 #config:hover {
@@ -579,8 +600,9 @@ body::-webkit-scrollbar-thumb {
     margin: 0px 3px 0px 3px;
     padding: 0px 10px;
     background-color: var(--bg);
+    outline: none;
 }
-#goBack:hover {
+#goBack:hover, #goBack:focus {
     filter: brightness(1.1);
 }
 #goBack:active {
@@ -598,7 +620,7 @@ body::-webkit-scrollbar-thumb {
     transition: filter 100ms;
     margin: 0px 3px 0px 3px;
 }
-.buttonsBot:hover {
+.buttonsBot:hover, .buttonsBot:focus {
     filter: brightness(1.1);
     cursor: pointer;
 }
@@ -644,6 +666,7 @@ body::-webkit-scrollbar-thumb {
 
 #lists {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
 .list {
@@ -725,7 +748,7 @@ body::-webkit-scrollbar-thumb {
     font-weight: bold;
     cursor: pointer;
 }
-.okButton:hover {
+.okButton:hover, .okButton:focus {
     filter: brightness(1.2);
 }
 
@@ -760,6 +783,30 @@ body::-webkit-scrollbar-thumb {
 .addRemoveDiv {
     display: none;
 }
+
+.addRemoveButton {
+    width: 16px;
+    height: 30px;
+    background: none;
+    border: 2px solid var(--bgH);
+    color: white;
+    border-radius: 100%;
+    font-size: larger;
+    font-weight: bold;
+    margin: 5px 2.5px 0px 2.5px;
+    cursor: pointer;
+    transition: background-color 150ms, filter 150ms;
+}
+.addRemoveButton:hover, .addRemoveButton:focus {
+    filter: brightness(1.2);
+}
+.addRemoveButton:disabled {
+    filter: brightness(.8);
+    color: gray;
+    pointer-events: none;
+}
+
+
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideIn { from { transform: translateY(-50px); } to { transform: translateY(0px); } }

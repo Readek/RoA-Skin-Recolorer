@@ -461,7 +461,7 @@ function render(glCan, colorOut, dl = false) {
 
   // this will activate when the user downloads the image
   if (dl) {
-    downImgButton.href = canvas.toDataURL()
+    downLink.href = canvas.toDataURL()
   }
 
 }

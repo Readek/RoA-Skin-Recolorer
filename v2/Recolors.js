@@ -18,7 +18,7 @@ const copyToClip = document.getElementById("copyToClip");
 const copiedImg = document.getElementById("copied");
 const codeWarning = document.getElementById("row2");
 const downLink = document.getElementById("downImg");
-const downImgButton = document.getElementById("downImg");
+const downImgButton = document.getElementById("downImgButton");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
 const ogColorList = document.getElementById("ogColorList");
@@ -48,66 +48,65 @@ changeChar(genRnd(0, db.chars.length - 1));
 codeInput.addEventListener("input", codeControl); 
 function codeControl() {
 
-    //look if the code length is correct or if its above or below the limit
+    //look if the code length is correct
     if (codeInput.value.length == char.placeholder.length) {
  
         //if correct, set everything to normal
         codeWarning.innerHTML = "";
         codeWarning.style.height = "0px";
-        copyToClip.style.filter = "brightness(1)";
-        copyToClip.style.pointerEvents = "auto";
 
-        //allow download of the image
-        downImgButton.style.pointerEvents = "auto";
-        downImgButton.style.filter = "grayscale(0)";
+        // allow download of the image and enable copy button
+        downImgButton.disabled = false;
+        copyToClip.disabled = false;
+        downLink.style.pointerEvents = "auto";
 
         //automatically execute recolor for some QoL
         mainRecolor();
         createEditor();
 
-    } else if (!codeInput.value) {
-
-        //if no code, just disable the copy button
-        codeWarning.innerHTML = "";
-        codeWarning.style.height = "0px";
-        copyToClip.style.filter = "brightness(.8)";
-        copyToClip.style.pointerEvents = "none";
-
-        //allow download of the image
-        downImgButton.style.pointerEvents = "auto";
-        downImgButton.style.filter = "grayscale(0)";
-
-    } else if (codeInput.value.length < char.placeholder.length) {
-
-        //if its below the limit, warn the user
-        const dif = char.placeholder.length - codeInput.value.length;
-        codeWarning.innerHTML = "This color code has "+dif+" less characters than it should.";
-        codeWarning.style.color = "orange";
-        codeWarning.style.height = "18px";
+    } else {
 
         //prevent the user from interacting with the copy button
-        copyToClip.style.filter = "brightness(.8)";
-        copyToClip.style.pointerEvents = "none";
+        copyToClip.disabled = true;
 
-        //no downloads allowed without a proper code
-        downImgButton.style.pointerEvents = "none";
-        downImgButton.style.filter = "grayscale(1)";
+        if (!codeInput.value) { // if theres no code
 
-    } else if (codeInput.value.length > char.placeholder.length) {
+            // just remove the warning text
+            codeWarning.innerHTML = "";
+            codeWarning.style.height = "0px";
+    
+            // download button will just download base image
+            downImgButton.disabled = false;
+            downLink.style.pointerEvents = "auto";
+    
+        } else { // check if its above or below the limit
+    
+            if (codeInput.value.length < char.placeholder.length) {
+    
+                //if its below the limit, warn the user
+                const dif = char.placeholder.length - codeInput.value.length;
+                codeWarning.innerHTML = "This color code has "+dif+" less characters than it should.";
+                codeWarning.style.color = "orange";
+        
+            } else if (codeInput.value.length > char.placeholder.length) {
+        
+                //if its above the limit, well thats a big no no
+                const dif = codeInput.value.length - char.placeholder.length;
+                codeWarning.innerHTML = "This color code has too many characters ("+dif+").";
+                codeWarning.style.color = "red";
+        
+            }
 
-        //if its above the limit, well thats a big no no
-        const dif = codeInput.value.length - char.placeholder.length;
-        codeWarning.innerHTML = "This color code has too many characters ("+dif+").";
-        codeWarning.style.color = "red";
-        codeWarning.style.height = "18px";
+            //no downloads allowed without a proper code
+            downImgButton.disabled = true;
+            downLink.style.pointerEvents = "none";
 
-        copyToClip.style.filter = "brightness(.8)";
-        copyToClip.style.pointerEvents = "none";
+            // set height to the warning div so it animates
+            codeWarning.style.height = "18px";
+    
+        }
 
-        downImgButton.style.pointerEvents = "none";
-        downImgButton.style.filter = "grayscale(1)";
-
-    }
+    } 
 
 }
 
@@ -133,19 +132,30 @@ copiedImg.addEventListener('animationend', () => {
 //the recolor function!
 function mainRecolor() {
     const hex = codeInput.value; //grab the color code
-    let rgb;
     try {
+        let rgb;
         rgb = hexDecode(hex); //make some sense out of it
         rgb.splice(rgb.length - 4); //remove the checksum at the end of the code
+        // Olympia needs some special treatment since the pants colors affect all whites
+        if (char.name == "Olympia") {
+            rgb.push(char.ogColor[20], char.ogColor[21], char.ogColor[22], char.ogColor[23])
+        }
+        recolor(rgb); // now recolor the images
     } catch (e) {
-        rgb = char.ogColor; // if the code is not valid, use the default colors
+        recolor(); // if the code is invalid, use the default colors
     }
-    // Olympia needs some special treatment since the pants colors affect all whites
-    if (char.name == "Olympia") {
-        rgb.push(char.ogColor[20], char.ogColor[21], char.ogColor[22], char.ogColor[23])
+}
+function recolor(rgb) {
+    if (char.name == "Orcane") { // orcane has a greenish hidden part
+        const newRgb = rgb ? [...rgb] : [...char.ogColor];
+        for (let i = 0; i < 4; i++) {
+            newRgb[i+8] = newRgb[i];
+        }
+        characterImgs.recolor(newRgb);
+
+    } else {
+        characterImgs.recolor(rgb);
     }
-    // now recolor the images
-    recolor(rgb);
 }
 
 //whenever the character changes
@@ -216,9 +226,8 @@ function changeChar(charNum) {
         //adjust the code input width
         resizeInput();
 
-        //make the copy button unclickable and show some feedback
-        copyToClip.style.filter = "brightness(.8)";
-        copyToClip.style.pointerEvents = "none";
+        //make the copy button unclickable
+        copyToClip.disabled = true;
 
         //update the dowloaded image name
         downLink.setAttribute("download", char.name + " Recolor.png");
@@ -255,7 +264,7 @@ function createEditor() {
     for (let i = 0; i < theLength; i += 4) {
         
         // this is where everything will be stored
-        const part = document.createElement("div");
+        const part = document.createElement("button");
         part.className = "part";
         part.setAttribute("pNum", count); // just a way to know what we will click
         part.addEventListener("click", showSliders);
@@ -393,7 +402,7 @@ function genRnd(min, max) {
 
 
 //download image button
-downImgButton.addEventListener('click', () => {
+downLink.addEventListener('click', () => {
 
     // image has to be repainted to be dowloaded
     const hex = codeInput.value; //grab the color code
@@ -462,9 +471,6 @@ function randomize(colorNum) {
 
     //check the code, this is just to force recoloring the image
     codeControl();
-
-    // hide the color sliders
-    colorEditor.style.display = "none";
 
 }
 
@@ -547,37 +553,6 @@ function darkMode() {
     }
 }
 darkMode();
-
-
-function recolor(rgb) {
-    if (rgb) {
-        if (char.name == "Orcane") { // orcane has a greenish hidden part
-            const newRgb = [];
-            for (let i = 0; i < rgb.length; i++) {
-                newRgb.push(rgb[i]);               
-            }
-            for (let i = 0; i < 4; i++) {
-                newRgb[i+8] = rgb[i];
-            }
-            characterImgs.recolor(newRgb);
-        } else {
-            characterImgs.recolor(rgb);
-        }    if (char.name == "Orcane") {
-            const newRgb = [];
-            for (let i = 0; i < rgb.length; i++) {
-                newRgb.push(rgb[i]);               
-            }
-            for (let i = 0; i < 4; i++) {
-                newRgb[i+8] = rgb[i];
-            }
-            characterImgs.recolor(newRgb);
-        } else {
-            characterImgs.recolor(rgb);
-        }
-    } else {
-        characterImgs.recolor(); // if no colors, will use original ones
-    }
-}
 
 
 // called when the user clicks on a part
@@ -997,6 +972,9 @@ document.getElementById("newChar").addEventListener("click", () => {
         casualEls[i].style.display = "none";
     }
 
+    // display the top buttons just in case they were hidden
+    topButtons.style.display = "inherit";
+
     // move some stuff around
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", codeInput);
     document.getElementById("outColorsBot").insertAdjacentElement("beforeend", copyToClip);
@@ -1131,6 +1109,9 @@ function updateFC() {
 
 function showCustomUI() {
     document.getElementById("introCustom").style.display = "none";
+
+    document.getElementById("randomize").style.display = "inherit";
+    downLink.style.display = "inherit";
 
     // show hidden elements and hide useless ones
     const proEls = document.getElementsByClassName("proMode");
