@@ -107,7 +107,7 @@
                 <svg class="copyIcon" viewBox="0 0 20 20">
                     <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>
                 </svg>
-                <img id="copied" src="Resources/Copied.png" alt="">
+                <img id="copyOutImg" class="copiedImg" src="Resources/Copied.png" alt="">
             </button>
 
         </div>
@@ -192,13 +192,13 @@
                     <div data-tooltip="The main colors to look for. This is usually a midtone, not the darkest or lightest one." data-tooltip-delay="none" class="titleList">ORIGINAL COLORS (rgba)</div>
                     <div id="ogColorList"></div>
                     <div>
-                        <input type="text" id="ogColorInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
-                        <div id="copyOg" class="copyToClip" tabindex="1" data-tooltip="Copy the ogColors code to clipboard" data-tooltip-delay="none">
+                        <input type="text" id="ogInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
+                        <button id="copyOg" class="copyToClip" data-tooltip="Copy the ogColors code to clipboard" data-tooltip-delay="none">
                             <svg class="copyIcon" viewBox="0 0 20 20">
                                 <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>
                             </svg>
-                            <img id="copied" src="Resources/Copied.png" alt="">
-                        </div>
+                            <img id="copyOgImg" class="copiedImg" src="Resources/Copied.png" alt="">
+                        </button>
                     </div>
                     <div class="addRemoveDiv showCustom">
                         <button class="addRemoveButton" id="addOg" data-tooltip="Adds a new row">+</button>
@@ -210,13 +210,13 @@
                     <div data-tooltip="How far we should look for color differences" data-tooltip-delay="none" class="titleList">COLOR RANGES (hsva)</div>
                     <div id="colorRangeList"></div>
                     <div>
-                        <input type="text" id="colorRangeInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
-                        <div id="copyRange" class="copyToClip" tabindex="1" data-tooltip="Copy the Ranges code to clipboard" data-tooltip-delay="none">
+                        <input type="text" id="raInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
+                        <button id="copyRa" class="copyToClip" data-tooltip="Copy the Ranges code to clipboard" data-tooltip-delay="none">
                             <svg class="copyIcon" viewBox="0 0 20 20">
                                 <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>
                             </svg>
-                            <img id="copied" src="Resources/Copied.png" alt="">
-                        </div>
+                            <img id="copyRaImg" class="copiedImg" src="Resources/Copied.png" alt="">
+                        </button>
                     </div>
                     <div class="addRemoveDiv showCustom">
                         <button class="addRemoveButton" id="addRa" data-tooltip="Adds a new row">+</button>
@@ -239,21 +239,21 @@
 
         <div id="options" class="row center">
 
-            <div id="editChar" tabindex="1" class="buttons casualMode hideCustom" data-tooltip-delay="none" data-tooltip="Edit the internal values of the currently selected character">
+            <button id="editChar" class="buttons casualMode hideCustom" data-tooltip-delay="none" data-tooltip="Edit the internal values of the currently selected character">
                 <svg id="editIcon" viewBox="0 0 24 24" stroke-width="1" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
                     <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
                   </svg>
                 Edit Current Character
-            </div>
+            </button>
 
-            <div id="newChar" tabindex="1" class="buttons casualMode hideCustom" data-tooltip-delay="none" data-tooltip="Create a new character from scratch">
+            <button id="newChar" class="buttons casualMode hideCustom" data-tooltip-delay="none" data-tooltip="Create a new character from scratch">
                 <svg id="addIcon" viewBox="0 0 20 20">
                     <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                 </svg>
                 Add New Character
-            </div>
+            </button>
 
             <a id="goBack" class="proMode showCustom" href="https://readek.github.io/RoA-Skin-Recolorer/v2">Go back</a>
 

@@ -1,10 +1,8 @@
 "use strict";
 
 let char; // this will hold the values from the character database
-let characterImgs;
-let maxLength; // limits how many characters there should be in the code input
-let playingAnim = false; // to not allow playing an animation until its finished
-let rgbSliders = false; // if active, the page will use rgb sliders instead of hsv ones
+let characterImgs; // this will hold a class from "RoA WebGL Shader.js"
+let rgbSliders; // if active, the page will use rgb sliders instead of hsv ones
 
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
@@ -15,14 +13,19 @@ const spritesDiv = document.getElementById("sContainer");
 const charIcon = document.getElementById("selectedIcon");
 const codeInput = document.getElementById("codeInput");
 const copyToClip = document.getElementById("copyToClip");
-const copiedImg = document.getElementById("copied");
+const copiedImg = document.getElementById("copyOutImg");
 const codeWarning = document.getElementById("row2");
 const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImgButton");
+const defaultFile = document.getElementById("fileupload");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
 const ogColorList = document.getElementById("ogColorList");
 const colorRangeList = document.getElementById("colorRangeList");
+const ogInput = document.getElementById("ogInput");
+const raInput = document.getElementById("raInput");
+const copyOg = document.getElementById("copyOgImg");
+const copyRa = document.getElementById("copyRaImg");
 const hsvButton = document.getElementById("hsvClick");
 const rgbButton = document.getElementById("rgbClick");
 const sliderHue = document.getElementById("sliderHue");
@@ -34,7 +37,6 @@ const sliderB = document.getElementById("sliderB");
 const nowEditingText = document.getElementById("nowEditing");
 const editingHex = document.getElementById("editingHex");
 const topButtons = document.getElementById("row3");
-const hideSlidsButton = document.getElementById("hideEditor");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
 const x4Down = document.getElementById("x4Down")
@@ -113,56 +115,77 @@ function codeControl() {
 
 //copy to clipboard button, playing an animation to show feedback
 copyToClip.addEventListener("click", () => {
-
     navigator.clipboard.writeText(codeInput.value);
-
-    if (!playingAnim) { //wait for the animation to finish if any
-        playingAnim = true;
+    // wait for the animation to finish if any
+    if (!copiedImg.classList.contains("copiedAnim")) {
         copiedImg.classList.add("copiedAnim");
     }
 });
 //automatically enable copy animation once current one finishes
 copiedImg.addEventListener('animationend', () => {
     copiedImg.classList.remove("copiedAnim");
-    playingAnim = false;
+});
+// do the same for the other copy buttons
+document.getElementById("copyOg").addEventListener("click", () => {
+    navigator.clipboard.writeText(ogInput.value);
+    if (!copyOg.classList.contains("copiedAnim")) {
+        copyOg.classList.add("copiedAnim");
+    }
+});
+copyOg.addEventListener('animationend', () => {
+    copyOg.classList.remove("copiedAnim");
+});
+document.getElementById("copyRa").addEventListener("click", () => {
+    navigator.clipboard.writeText(raInput.value);
+    if (!copyRa.classList.contains("copiedAnim")) {
+        copyRa.classList.add("copiedAnim");
+    }
+});
+copyRa.addEventListener('animationend', () => {
+    copyRa.classList.remove("copiedAnim");
 });
 
 
-
 //the recolor function!
-function mainRecolor() {
-    const hex = codeInput.value; //grab the color code
-    try {
-        let rgb;
-        rgb = hexDecode(hex); //make some sense out of it
+function mainRecolor(dl) {
+
+    let rgb = hexDecode(codeInput.value); // translate the color code
+    if (rgb != characterImgs.colorIn) { // if the code is not the default one
         rgb.splice(rgb.length - 4); //remove the checksum at the end of the code
+
         // Olympia needs some special treatment since the pants colors affect all whites
         if (char.name == "Olympia") {
             rgb.push(char.ogColor[20], char.ogColor[21], char.ogColor[22], char.ogColor[23])
         }
-        recolor(rgb); // now recolor the images
-    } catch (e) {
-        recolor(); // if the code is invalid, use the default colors
+    } else { // if default code, we'll modify it later
+        rgb = null;
+    }
+
+    if (char.name == "Orcane") { // orcane has a greenish hidden part
+        // copy either given array or og colors
+        rgb = rgb ? [...rgb] : [...char.ogColor];
+        for (let i = 0; i < 4; i++) { // add the 1st colors as the 3rd colors
+            rgb[i+8] = rgb[i];
+        }
+    }
+
+    if (dl) { // if we want to download the image
+        characterImgs.download(rgb, "Full");
+    } else {
+        characterImgs.recolor(rgb); // now recolor the images
     }
 }
-function recolor(rgb) {
-    if (char.name == "Orcane") { // orcane has a greenish hidden part
-        const newRgb = rgb ? [...rgb] : [...char.ogColor];
-        for (let i = 0; i < 4; i++) {
-            newRgb[i+8] = newRgb[i];
-        }
-        characterImgs.recolor(newRgb);
-
-    } else {
-        characterImgs.recolor(rgb);
-    }
+// for when we dont use the color code input
+function manualRecolor(rgb) {
+    characterImgs.recolor(rgb); // if rgb is empty, will use og colors
 }
 
 //whenever the character changes
 function changeChar(charNum) {
 
-    // hide the characters, show the loading div
+    // calculate the height of the divs so we dont get jumps when switching to the loading div
     loadingDiv.style.height = (fullCanvas.clientHeight + spritesDiv.clientHeight) + 17 + "px";
+    // hide the character images, show the loading div
     loadingDiv.style.display = "flex";
     fullCanvas.style.display = "none";
     spritesDiv.style.display = "none";
@@ -178,34 +201,56 @@ function changeChar(charNum) {
         characterImgs.addImage(sprLCanvas, "Characters/"+char.name+"/SpriteL.png", "SpriteL"),
         characterImgs.addImage(sprRCanvas, "Characters/"+char.name+"/SpriteR.png", "SpriteR")
     ]
-    // when the images finish loading, then recolor them with the og colors to do a first paint
+    // when the images finish loading
     Promise.all(imgPromises).then( () => {
 
-        // ori is the only character that needs an actual recolor
+        //set a new placeholder text
+        codeInput.placeholder = char.placeholder;
+        //then clear the current color code
+        codeInput.value = null;
+        codeControl(); //to reset the warning message if any
+
+        //change the character icon
+        charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
+
+        // do a first paint (ori is the only character that needs an actual recolor)
         if (char.name == "Ori and Sein") {
-            recolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-FFC7-2038"));
+            manualRecolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-FFC7-2038"));
         } else {
-            recolor(char.ogColor);
+            mainRecolor();
         }
+
+        //adjust the code input width
+        resizeInput();
+
+        //update the dowloaded image name
+        downLink.setAttribute("download", char.name + " Recolor.png");
+
+        // create a new color editor
+        createEditor();
+
+        // hide the color sliders, show top buttons
+        colorEditor.style.display = "none";
+        topButtons.style.display = "flex";
 
         // hide the loading div, show the characters
         loadingDiv.style.display = "none";
-        fullCanvas.style.display = "block";
-        spritesDiv.style.display = "flex";
+        fullCanvas.style.display = "inherit";
+        spritesDiv.style.display = "inherit";
 
     })
 
+    // all of this is for the animated idle sprite
     const sprite = new Image();
     sprite.src = "Characters/"+char.name+"/Idle.png";
     sprite.decode().then( () => { // when the image finishes loading
 
         //change the width of the sprite animation, depending on the character
         animDiv.style.width = (sprite.width / char.idleFC) + "px"; //gets the w of 1 frame
-        animDiv.style.height = sprite.height + "px"; //all frames have the same h
-        //now change the values for the sprite animation
+        //now change the variables for the sprite animation
         const r = document.querySelector(':root');
         r.style.setProperty("--spriteMove", -sprite.width + "px"); //end position of the animation
-        r.style.setProperty("--spriteCount", char.idleFC);
+        r.style.setProperty("--spriteCount", char.idleFC); // frame count
         // formula for this one is: 1000 is a second, then divided by 60 gets us an
         // in-game frame, then we multiply by 7 because thats the average frame
         // wait between sprite changes, and then we multiply by the character frame
@@ -213,31 +258,6 @@ function changeChar(charNum) {
         // by 1000 to get the value in seconds for the css variable
         r.style.setProperty("--spriteTime", 1000/60*7*char.idleFC/1000 + "s");
 
-        //set a new placeholder text and a new limit
-        codeInput.placeholder = char.placeholder;
-        maxLength = char.placeholder.length;
-        //then clear the current color code
-        codeInput.value = "";
-        codeControl(); //to reset the warning message if any
-
-        //change the character icon
-        charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
-
-        //adjust the code input width
-        resizeInput();
-
-        //make the copy button unclickable
-        copyToClip.disabled = true;
-
-        //update the dowloaded image name
-        downLink.setAttribute("download", char.name + " Recolor.png");
-
-        // update the color editor
-        createEditor();
-
-        // hide the color sliders, show top buttons
-        colorEditor.style.display = "none";
-        topButtons.style.display = "flex";
     })    
 
 }
@@ -248,14 +268,9 @@ function createEditor() {
     //clear the part list
     partList.innerHTML = null;
 
-    let count = 0; // this is just for the part name
+    let count = 0; // keep track of how many parts we have created
 
-    let rgb;
-    try {
-        rgb = hexDecode(codeInput.value); // get the rgb values of the current code
-    } catch (e) {
-        rgb = characterImgs.colorIn; // if the code is not valid, use the default colors
-    }
+    const rgb = hexDecode(codeInput.value); // get the rgb values of the current code
 
     // check if the current character has hidden parts
     const theLength = char.actualParts ? char.actualParts * 4 : characterImgs.colorIn.length;
@@ -281,9 +296,9 @@ function createEditor() {
         hexDiv.innerHTML = "#" + rgbToHex(rgb[i], rgb[i+1], rgb[i+2]);
 
         // add the rgb values with a cool colored icon next to them
-        const red = genColorDiv(rgb[i], "rgb(" + rgb[i] + ", 0, 0)");
-        const green = genColorDiv(rgb[i+1], "rgb(0," + rgb[i+1] + ", 0)");
-        const blue = genColorDiv(rgb[i+2], "rgb(0, 0," + rgb[i+2] + ")");
+        const red = genColorDiv(rgb[i], rgb[i] + ", 0, 0");
+        const green = genColorDiv(rgb[i+1], "0," + rgb[i+1] + ", 0");
+        const blue = genColorDiv(rgb[i+2], "0, 0," + rgb[i+2]);
 
         // now add everything we just created to the part div and then to the actual html
         part.appendChild(partName);
@@ -304,7 +319,7 @@ function genColorDiv(text, bgCol) {
 
     const rgbColor = document.createElement("div");
     rgbColor.classList.add("rgbColor");
-    rgbColor.style.backgroundColor = bgCol;
+    rgbColor.style.backgroundColor = "rgb(" + bgCol + ")";
     colorDiv.appendChild(rgbColor);
 
     const colorText = document.createElement("div");
@@ -377,50 +392,21 @@ function charSwitcher() {
 
 //adjust the input width depending on code length
 function resizeInput() {
-    if (maxLength == 19) {
-        codeInput.style.width = "170px";
-    } else if (maxLength == 24) {
-        codeInput.style.width = "215px";
-    } else if (maxLength == 34) {
-        codeInput.style.width = "300px";
-    } else if (maxLength == 39) {
-        codeInput.style.width = "345px";
-    } else if (maxLength == 49) {
-        codeInput.style.width = "430px";
-    } else if (maxLength == 54) {
-        codeInput.style.width = "475px";
-    } else {
-        codeInput.style.width = "555px";
+    switch (char.placeholder.length) {
+        case 19: codeInput.style.width = "170px"; break;
+        case 24: codeInput.style.width = "215px"; break;
+        case 34: codeInput.style.width = "300px"; break;
+        case 39: codeInput.style.width = "345px"; break;
+        case 49: codeInput.style.width = "430px"; break;
+        case 54: codeInput.style.width = "475px"; break;
+        default: codeInput.style.width = "555px"; break;    
     }
-}
-
-
-//just a simple random function
-function genRnd(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 
 //download image button
 downLink.addEventListener('click', () => {
-
-    // image has to be repainted to be dowloaded
-    const hex = codeInput.value; //grab the color code
-    let rgb;
-    try {
-        rgb = hexDecode(hex); //make some sense out of it
-        rgb.splice(rgb.length - 4); //remove the checksum at the end of the code
-    } catch (e) {
-        rgb = char.ogColor; // if the code is not valid, use the default colors
-    }
-    // Olympia needs some special treatment since the pants colors affect all whites
-    if (char.name == "Olympia") {
-        rgb.push(char.ogColor[20], char.ogColor[21], char.ogColor[22], char.ogColor[23])
-    }
-
-    // this is like the recolor function but will activate a download once its finished
-    characterImgs.download(rgb, "Full");
-
+    mainRecolor(true); // we need to repaint the image to be able to download it
 });
 
 
@@ -475,8 +461,6 @@ function randomize(colorNum) {
 }
 
 
-//file upload button
-const defaultFile = document.getElementById("fileupload");
 //when clicking on the fake upload image button, click on the hidden upload file button
 document.getElementById("uplImg").addEventListener("click", () => {
     defaultFile.click();
@@ -491,7 +475,7 @@ defaultFile.addEventListener("change", () => {
         //add the custom image to the "full render" canvas
         characterImgs.addCustom(this.result, "Full").then( () => { // wait for the img to load
 
-            recolor(char.ogColor); // then show it
+            mainRecolor(); // then show it
 
             // hide the sprites, then stop recoloring them
             spritesDiv.style.display = "none";
@@ -503,8 +487,6 @@ defaultFile.addEventListener("change", () => {
     });
     fileReader.readAsDataURL(newImg); //imma be honest idk what this is but it doesnt work without it
 
-    //clear the input code
-    codeInput.value = "";
 });
 
 
@@ -523,16 +505,13 @@ window.onclick = (e) => {
     }
 } 
 
-
-/* SETTINGS */
-
 // Early Access check
 eaCheck.addEventListener("click", () => {
     if (!eaCheck.checked) {
-        characterImgs.changeBlend(1);
+        characterImgs.changeBlend(true);
         mainRecolor();
     } else {
-        characterImgs.changeBlend(0);
+        characterImgs.changeBlend();
         mainRecolor();
     }
 })
@@ -552,7 +531,7 @@ function darkMode() {
         r.style.setProperty("--bgD", "#4a368a");
     }
 }
-darkMode();
+darkMode(); // to activate at startup
 
 
 // called when the user clicks on a part
@@ -576,13 +555,8 @@ function showSliders() {
     sliderSat.setAttribute("num", partNum * 4 + 1);
     sliderVal.setAttribute("num", partNum * 4 + 2);
 
-    let rgb;
-    try {
-        const hex = codeInput.value;
-        rgb = hexDecode(hex);
-    } catch (error) {
-        rgb = char.ogColor; // if the code is not valid, use the default colors
-    }
+    const rgb = hexDecode(codeInput.value);
+
     // update the slider values to the current part's
     if (rgbSliders) {
         sliderR.value = rgb[partNum * 4];
@@ -608,7 +582,7 @@ function showSliders() {
 
 }
 
-hideSlidsButton.addEventListener("click", hideSliders);
+document.getElementById("hideEditor").addEventListener("click", hideSliders);
 function hideSliders() {
     colorEditor.style.display = "none";
     topButtons.style.display = "flex";
@@ -624,19 +598,13 @@ sliderB.oninput = sliderMoved;
 function sliderMoved() {
 
     // get the current code
-    let rgb;
-    try {
-        const hex = codeInput.value;
-        rgb = hexDecode(hex);
-    } catch (error) {
-        rgb = char.ogColor; // if the code is not valid, use the default colors
-    }
+    const rgb = hexDecode(codeInput.value);
 
     const newRgb = [];
     const num = Number(this.getAttribute("num"));
     const num2 = num-(num%4);
 
-    if (rgbSliders) {
+    if (rgbSliders) { // if rgb mode
 
         // modify the rgb values with the new ones from the sliders
         for (let i = 0; i < rgb.length; i++) {
@@ -647,7 +615,7 @@ function sliderMoved() {
             }
         }
 
-    } else {
+    } else { // hsv mode
 
         const rgbFromHsv = hsv2rgb(sliderHue.value / 360, sliderSat.value / 100, sliderVal.value / 100);
         rgbFromHsv[0] = Math.round(rgbFromHsv[0] * 255);
@@ -700,13 +668,13 @@ function changeSliders() {
     if (rgbSliders) {
         for (let i = 0; i < slidersHSV.length; i++) {
             slidersHSV[i].style.display = "none";
-            slidersRGB[i].style.display = "inline";
+            slidersRGB[i].style.display = "inherit";
         }
         hsvButton.style.backgroundColor = "var(--mainBG)";
         rgbButton.style.backgroundColor = "var(--bg)";
     } else {
         for (let i = 0; i < slidersHSV.length; i++) {
-            slidersHSV[i].style.display = "inline";
+            slidersHSV[i].style.display = "inherit";
             slidersRGB[i].style.display = "none";
         }
         hsvButton.style.backgroundColor = "var(--bg)";
@@ -714,13 +682,7 @@ function changeSliders() {
     }
 
     // change the slider values
-    let rgb;
-    try {
-        const hex = codeInput.value;
-        rgb = hexDecode(hex);
-    } catch (error) {
-        rgb = char.ogColor; // if the code is not valid, use the default colors
-    }
+    const rgb = hexDecode(codeInput.value);
     if (rgbSliders) {
         sliderR.value = rgb[sliderR.getAttribute("num")];
         sliderG.value = rgb[sliderG.getAttribute("num")];
@@ -748,7 +710,7 @@ function genCodeManual(rgb) {
     // this is mostly the randomize code
 
     // get the number of parts we will recolor
-    const colorNum = char.actualParts ? char.actualParts : char.ogColor.length / 4;
+    const colorNum = char.actualParts ? char.actualParts : characterImgs.colorIn.length / 4;
 
     // add in the rgb values in hex form
     let finalCode = "";
@@ -905,7 +867,7 @@ function genOgRanCode(ogOrRange) {
             }
         }
 
-        document.getElementById("ogColorInput").value = code;
+        ogInput.value = code;
 
     } else {
 
@@ -916,7 +878,7 @@ function genOgRanCode(ogOrRange) {
             }
         }
 
-        document.getElementById("colorRangeInput").value = code;
+        raInput.value = code;
         
     }
 
@@ -936,12 +898,12 @@ function updateOgRange() {
 }
 
 // if someone pastes a code on the code inputs
-document.getElementById("ogColorInput").addEventListener("input", translateCode);
-document.getElementById("colorRangeInput").addEventListener("input", translateCode);
+ogInput.addEventListener("input", translateCode);
+raInput.addEventListener("input", translateCode);
 function translateCode() {
 
     const splitCode = this.value.split("-"); // create a new array
-    if (this.id == "ogColorInput") {
+    if (this == ogInput) {
         characterImgs.changeOg(0,0,splitCode); // will update the shader
         createProEditor(true); // redo the editor to show updated values
     } else {
@@ -1023,11 +985,11 @@ defaultFilePor.addEventListener("change", () => {
 
         if (characterImgs.charImgs["Full"]) {
             characterImgs.addCustom(this.result, "Full").then( () => {
-                recolor();
+                mainRecolor();
             })
         } else {
             characterImgs.addImage(fullCanvas, this.result, "Full").then( () => {
-                recolor();
+                mainRecolor();
                 fullCanvas.style.display = "flex";
             })
         }
@@ -1060,11 +1022,11 @@ defaultFileSpr.addEventListener("change", () => {
 
         if (characterImgs.charImgs["Idle"]) {
             characterImgs.addCustom(this.result, "Idle").then( () => {
-                recolor();
+                mainRecolor();
             })
         } else {
             characterImgs.addImage(animCanvas, this.result, "Idle").then( () => {
-                recolor();
+                mainRecolor();
                 spritesDiv.style.display = "flex";
                 document.getElementById("frameCountDiv").style.display = "inline";
                 document.getElementById("frameCountInp").addEventListener("change", updateFC);
@@ -1140,6 +1102,7 @@ function addOrRemoveRow(add) {
     }
     changePlaceholder(partCount);
     codeInput.value = null;
+    codeControl();
     createEditor();
     createProEditor(true);
     createProEditor();
@@ -1179,7 +1142,6 @@ function changePlaceholder(colorNum) {
             char.placeholder = "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"; break;
         case 9:
             char.placeholder = "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"; break;
-            
         default: break;
     }
 }
@@ -1197,24 +1159,24 @@ function hideInfoUI() { // this will work with any info UI with the same structu
 
 function hexDecode(hex) {
 
-    // delete those "-" from the code
-    let newHex = "";
-    for (let i = 0; i < hex.length; i++) {
-        if (hex.charAt(i) != "-") {
-            newHex += hex.charAt(i);
+    try {
+        // delete those "-" from the code
+        let newHex = hex.replace(/-/g, "");
+
+        // split each color for every 6 characters
+        const charHex = newHex.match(/.{1,6}/g);
+
+        // create an array for the shader with rgba values
+        const charRGB = [];
+        for (let i = 0; i < charHex.length; i++) {
+            const newArr = hex2rgb(charHex[i]);
+            charRGB.push(newArr[0], newArr[1], newArr[2], 1); //r, g, b, a
         }
+        return charRGB;
+    } catch (e) { // if it fails, use the original colors
+        return characterImgs.colorIn;
     }
 
-    // split each color for every 6 characters
-    const charHex = newHex.match(/.{1,6}/g);
-
-    // create an array for the shader with rgba values
-    const charRGB = [];    
-    for (let i = 0; i < charHex.length; i++) {
-        const newArr = hex2rgb(charHex[i]);
-        charRGB.push(newArr[0], newArr[1], newArr[2], 1); //r, g, b, a
-    }
-    return charRGB;
     
 }
 
@@ -1281,4 +1243,9 @@ function rgb2hsv (r, g, b) {
 
     return [h, s, v];
 
+}
+
+//just a simple random function
+function genRnd(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }

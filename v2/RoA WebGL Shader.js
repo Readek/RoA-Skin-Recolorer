@@ -362,7 +362,7 @@ class RoaRecolor {
 
   // we need to repaint the image to get a screenshot of it before it internaly clears
   download(colorOut, name) {
-    render(this.charImgs[name], colorOut, true);
+    render(this.charImgs[name], colorOut ? colorOut : this.colorIn, true);
   }
 
   // maybe we want to stop recoloring something
