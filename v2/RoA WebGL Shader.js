@@ -362,7 +362,7 @@ class RoaRecolor {
 
   // we need to repaint the image to get a screenshot of it before it internaly clears
   download(colorOut, name) {
-    render(this.charImgs[name], colorOut ? colorOut : this.colorIn, true);
+    render(this.charImgs[name], colorOut ? colorOut : this.colorIn, name);
   }
 
   // maybe we want to stop recoloring something
@@ -461,7 +461,7 @@ function render(glCan, colorOut, dl = false) {
 
   // this will activate when the user downloads the image
   if (dl) {
-    downLink.href = canvas.toDataURL()
+    document.getElementById(dl).href = canvas.toDataURL()
   }
 
 }

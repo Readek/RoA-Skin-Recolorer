@@ -70,6 +70,8 @@ body::-webkit-scrollbar-thumb {
     max-height: 650px;
     margin: 5px;
     margin-top: 10px;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
 }
 
 #sContainer {
@@ -340,6 +342,15 @@ body::-webkit-scrollbar-thumb {
     margin-right: 2px;
     margin-top: 4px;
 }
+#downMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.downButt {
+    background-color: #c27979;
+}
 
 
 #colorEditor {
@@ -532,25 +543,23 @@ body::-webkit-scrollbar-thumb {
     transform: translateX(-3px);
 }
 
-#dropdownDiv {
-    position: relative;
-}
+
 #config {
+    position: relative;
     width: auto;
     height: 26px;
+    margin: 0px 5px 0px 5px;
+    padding: 5px 10px;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border-radius: 20px;
     background-color: var(--bg);
-    position: relative;
+    cursor: pointer;
     transition: background-color 150ms;
 }
-#config:hover {
-    filter: none;
+#config:hover, #config:focus {
     background-color: var(--bgH);
 }
-#config:active {
-    filter: none;
-    background-color: var(--bg);
-}
-
 #configIcon {
     height: 16px;
     width: 16px;
@@ -559,24 +568,26 @@ body::-webkit-scrollbar-thumb {
 }
 
 #configMenu {
+    display: none;
     position: absolute;
     right: 0px;
-    bottom: 45px;
+    top: 36px;
     background-color: var(--bg);
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 3;
     margin-top: 7px;
     border-radius: 5px;
     border: 3px solid var(--bgH);
+    color: white;
+    transform: translate(calc(50% - 19px)); /* todo center this properly lol */
 }
-.hide {
-    display: none;
+#config:focus-within #configMenu {
+    display: block;
 }
 
 .configEntry {
     padding: 2px 0px 2px 5px;
     display: flex;
-    outline: none;
     width: 150px;
 }
 .configEntry:hover {
@@ -584,12 +595,14 @@ body::-webkit-scrollbar-thumb {
 }
 
 .configCheck {
-    outline: none;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 .configText {
     width: 100%;
+    text-align: left;
+    cursor: pointer;
 }
 
 #goBack {
@@ -838,29 +851,28 @@ a:visited {
 
 [data-tooltip] {
     position: relative;
-  }
+}
   
-  /* Positioning and visibility settings of the tooltip */
-  [data-tooltip]:before,
-  [data-tooltip]:after {
+/* Positioning and visibility settings of the tooltip */
+[data-tooltip]:before,
+[data-tooltip]:after {
     position: absolute;
     visibility: hidden;
     opacity: 0;
     left: 50%;
-    bottom: calc(100% + 5px); /* 5px is the size of the arrow */
+    bottom: calc(100% + 5px);
     pointer-events: none;
     transition: 0.05s;
     margin-bottom: -4px;
-  }
+}
   
-  /* The actual tooltip with a dynamic width */
-  [data-tooltip]:before {
+/* The actual tooltip with a dynamic width */
+[data-tooltip]:before {
     content: attr(data-tooltip);
     padding: 5px 10px;
     min-width: 50px;
     max-width: 310px;
     width: max-content;
-    width: -moz-max-content;
     border-radius: 10px;
     font-size: 15px;
     background-color: #222;
@@ -869,50 +881,48 @@ a:visited {
     text-align: center;
     white-space: pre-wrap;
     transform: translate(-50%, -5px) scale(0.9);
-  }
+}
   
-  /* Tooltip becomes visible at hover */
-  [data-tooltip]:hover:before,
-  [data-tooltip]:hover:after {
+/* Tooltip becomes visible at hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
     visibility: visible;
     opacity: 1;
-  }
-  /* Scales from 0.5 to 1 -> grow effect */
-  [data-tooltip]:hover:before {
+}
+/* Scales from 0.5 to 1 -> grow effect */
+[data-tooltip]:hover:before {
     transition-delay: .8s;
     transform: translate(-50%, -5px) scale(1);
-  }
+}
 
-  [data-tooltip]:focus:before,
-  [data-tooltip]:focus:after {
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after {
     visibility: hidden;
     opacity: 0;
-  }
+}
 
-    
-  /* BOTTOM */
-  [data-tooltip-location="bottom"]:before,
-  [data-tooltip-location="bottom"]:after {
+/* BOTTOM */
+[data-tooltip-location="bottom"]:before,
+[data-tooltip-location="bottom"]:after {
     top: calc(100% + 5px);
     bottom: auto;
-  }
+}
   
-  [data-tooltip-location="bottom"]:before {
+[data-tooltip-location="bottom"]:before {
     transform: translate(-50%, 5px) scale(0.9);
-  }
-  [data-tooltip-location="bottom"]:hover:before {
+}
+[data-tooltip-location="bottom"]:hover:before {
     transform: translate(-50%, 5px) scale(1);
-  }
-  
+}
 
-  /* For the characters drowdown */
-  [data-tooltip-delay="none"]:hover:before {
+/* For instant popout */
+[data-tooltip-delay="none"]:hover:before {
     transition-delay: 0s;
-  }
+}
 
 
-  /* responsive time? */
-  @media (max-width: 600px) {
+/* responsive time? */
+@media (max-width: 600px) {
 
     input {
         max-width: 220px;

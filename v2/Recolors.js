@@ -15,8 +15,9 @@ const codeInput = document.getElementById("codeInput");
 const copyToClip = document.getElementById("copyToClip");
 const copiedImg = document.getElementById("copyOutImg");
 const codeWarning = document.getElementById("row2");
-const downLink = document.getElementById("downImg");
 const downImgButton = document.getElementById("downImgButton");
+const downInfo = document.getElementById("downInfo");
+const downMenu = document.getElementById("downMenu");
 const defaultFile = document.getElementById("fileupload");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
@@ -39,7 +40,7 @@ const editingHex = document.getElementById("editingHex");
 const topButtons = document.getElementById("row3");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
-const x4Down = document.getElementById("x4Down")
+const noPixels = document.getElementById("noPixels")
 const darkCheck = document.getElementById("darkTheme");
 
 
@@ -60,7 +61,6 @@ function codeControl() {
         // allow download of the image and enable copy button
         downImgButton.disabled = false;
         copyToClip.disabled = false;
-        downLink.style.pointerEvents = "auto";
 
         //automatically execute recolor for some QoL
         mainRecolor();
@@ -79,7 +79,6 @@ function codeControl() {
     
             // download button will just download base image
             downImgButton.disabled = false;
-            downLink.style.pointerEvents = "auto";
     
         } else { // check if its above or below the limit
     
@@ -101,7 +100,6 @@ function codeControl() {
 
             //no downloads allowed without a proper code
             downImgButton.disabled = true;
-            downLink.style.pointerEvents = "none";
 
             // set height to the warning div so it animates
             codeWarning.style.height = "18px";
@@ -170,7 +168,7 @@ function mainRecolor(dl) {
     }
 
     if (dl) { // if we want to download the image
-        characterImgs.download(rgb, "Full");
+        characterImgs.download(rgb, dl);
     } else {
         characterImgs.recolor(rgb); // now recolor the images
     }
@@ -196,10 +194,10 @@ function changeChar(charNum) {
     characterImgs = new RoaRecolor(char.ogColor, char.colorRange, eaCheck.checked);
     // save all the new images as promises so we know when they are fully loaded
     const imgPromises = [
-        characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png", "Full"),
-        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png", "Idle"),
-        characterImgs.addImage(sprLCanvas, "Characters/"+char.name+"/SpriteL.png", "SpriteL"),
-        characterImgs.addImage(sprRCanvas, "Characters/"+char.name+"/SpriteR.png", "SpriteR")
+        characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png", "Portrait"),
+        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png", "Idle Spritesheet"),
+        characterImgs.addImage(sprLCanvas, "Characters/"+char.name+"/SpriteL.png", "Sprite Left"),
+        characterImgs.addImage(sprRCanvas, "Characters/"+char.name+"/SpriteR.png", "Sprite Right")
     ]
     // when the images finish loading
     Promise.all(imgPromises).then( () => {
@@ -223,9 +221,6 @@ function changeChar(charNum) {
         //adjust the code input width
         resizeInput();
 
-        //update the dowloaded image name
-        downLink.setAttribute("download", char.name + " Recolor.png");
-
         // create a new color editor
         createEditor();
 
@@ -247,6 +242,7 @@ function changeChar(charNum) {
 
         //change the width of the sprite animation, depending on the character
         animDiv.style.width = (sprite.width / char.idleFC) + "px"; //gets the w of 1 frame
+        animDiv.style.height = sprite.height + "px"; // div will have slightly wrong height otherwise
         //now change the variables for the sprite animation
         const r = document.querySelector(':root');
         r.style.setProperty("--spriteMove", -sprite.width + "px"); //end position of the animation
@@ -405,8 +401,37 @@ function resizeInput() {
 
 
 //download image button
-downLink.addEventListener('click', () => {
-    mainRecolor(true); // we need to repaint the image to be able to download it
+downImgButton.addEventListener('click', () => {
+
+    // show the download popout
+    downInfo.style.display = "flex";
+    
+    // clear the download menu
+    downMenu.innerHTML = null;
+
+    // for each loaded image
+    for (const key in characterImgs.charImgs) {
+        
+        // create a link (necessary to trigger download)
+        const newA = document.createElement("a");
+        newA.id = key;
+        newA.setAttribute("download", char.name + " " + key + " Recolor"); // downloaded filename
+
+        // create a button
+        const newBut = document.createElement("button");
+        newBut.classList.add("buttons", "downButt");
+        newBut.innerHTML = key; // set its name
+
+        newBut.addEventListener("click", () => {
+            mainRecolor(key); // we need to repaint the image to be able to download it
+        })
+
+        // add it to the menu
+        newA.append(newBut);
+        downMenu.appendChild(newA);
+
+    }
+
 });
 
 
@@ -472,16 +497,16 @@ defaultFile.addEventListener("change", () => {
     //read file with some magic i dont really understand
     const fileReader = new FileReader();
     fileReader.addEventListener("load", function () {
-        //add the custom image to the "full render" canvas
-        characterImgs.addCustom(this.result, "Full").then( () => { // wait for the img to load
+        //add the custom image to the portrait canvas
+        characterImgs.addCustom(this.result, "Portrait").then( () => { // wait for the img to load
 
             mainRecolor(); // then show it
 
             // hide the sprites, then stop recoloring them
             spritesDiv.style.display = "none";
-            characterImgs.delete("Idle");
-            characterImgs.delete("SpriteL");
-            characterImgs.delete("SpriteR");
+            characterImgs.delete("Idle Spritesheet");
+            characterImgs.delete("Sprite Left");
+            characterImgs.delete("Sprite Right");
 
         })
     });
@@ -489,21 +514,6 @@ defaultFile.addEventListener("change", () => {
 
 });
 
-
-// show config menu if clicking on the config button
-const configMenu = document.getElementById("configMenu");
-document.getElementById("config").addEventListener("click", () => {
-    configMenu.classList.toggle("hide");
-})
-// close the dropdown menu if the user clicks outside of it
-window.onclick = (e) => {
-    if (!e.target.matches('#config') && !e.target.matches('#configIcon') && !e.target.matches('path')) {
-        
-        if (!configMenu.classList.contains('hide')) {
-            configMenu.classList.add('hide');
-        }
-    }
-} 
 
 // Early Access check
 eaCheck.addEventListener("click", () => {
@@ -515,6 +525,20 @@ eaCheck.addEventListener("click", () => {
         mainRecolor();
     }
 })
+// No point scaling
+noPixels.addEventListener("click", noPixelsCheck)
+function noPixelsCheck() {
+    if (noPixels.checked) {
+        fullCanvas.style.imageRendering = "auto";
+        document.getElementById("sContainer").style.imageRendering = "auto";
+    } else {
+        fullCanvas.style.imageRendering = "pixelated";
+        fullCanvas.style.imageRendering = "crisp-edges";
+        document.getElementById("sContainer").style.imageRendering = "pixelated";
+        document.getElementById("sContainer").style.imageRendering = "crisp-edges";
+    }
+}
+noPixelsCheck();
 // Dark Theme
 darkCheck.addEventListener("click", darkMode);
 function darkMode() {
@@ -948,9 +972,9 @@ document.getElementById("newChar").addEventListener("click", () => {
     for (let i = 0; i < 9; i++) {
         newNames.push("Part " + (i+1));        
     }
+    char.name = "Custom Character"; // will be used as download filename
     char.partNames = newNames;
     char.actualParts = null; // so code doesnt have to worry about this later
-    downLink.setAttribute("download", "Custom Recolor.png"); //update the dowloaded image name
     changePlaceholder(2);
     codeInput.value = null;
 
@@ -984,11 +1008,11 @@ defaultFilePor.addEventListener("change", () => {
         }
 
         if (characterImgs.charImgs["Full"]) {
-            characterImgs.addCustom(this.result, "Full").then( () => {
+            characterImgs.addCustom(this.result, "Portrait").then( () => {
                 mainRecolor();
             })
         } else {
-            characterImgs.addImage(fullCanvas, this.result, "Full").then( () => {
+            characterImgs.addImage(fullCanvas, this.result, "Portrait").then( () => {
                 mainRecolor();
                 fullCanvas.style.display = "flex";
             })
@@ -1020,12 +1044,12 @@ defaultFileSpr.addEventListener("change", () => {
             createEditor();
         }
 
-        if (characterImgs.charImgs["Idle"]) {
-            characterImgs.addCustom(this.result, "Idle").then( () => {
+        if (characterImgs.charImgs["Idle Spritesheet"]) {
+            characterImgs.addCustom(this.result, "Idle Spritesheet").then( () => {
                 mainRecolor();
             })
         } else {
-            characterImgs.addImage(animCanvas, this.result, "Idle").then( () => {
+            characterImgs.addImage(animCanvas, this.result, "Idle Spritesheet").then( () => {
                 mainRecolor();
                 spritesDiv.style.display = "flex";
                 document.getElementById("frameCountDiv").style.display = "inline";
@@ -1073,7 +1097,7 @@ function showCustomUI() {
     document.getElementById("introCustom").style.display = "none";
 
     document.getElementById("randomize").style.display = "inherit";
-    downLink.style.display = "inherit";
+    downImgButton.style.display = "inherit";
 
     // show hidden elements and hide useless ones
     const proEls = document.getElementsByClassName("proMode");

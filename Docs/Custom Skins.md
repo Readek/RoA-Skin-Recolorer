@@ -6,15 +6,32 @@ These are some codes and images that can be used on the Recolorer's `Edit Charac
 
 To use them, simply copy and paste the "Original Colors" code and the "Color Ranges", and download the image shown here, then upload that same image on the Recolorer.
 
-Did you create a preset for an image that's not listed here? Please, submit a **pull request**!
+Did you create a preset for an image that's not listed here? Please, submit a [pull request](https://github.com/Readek/RoA-Skin-Recolorer/pulls)!
 
 ---
+
+<h2>Absa</h2>
+
+<p align="center">
+
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Absa/LoA.png" alt="LoA Absa">
+
+</p>
+
+<h3>LoA</h3>
+
+OC - `120-121-161-1-208-128-157-1-65-126-140-1-164-151-128-1-214-215-244-1`
+
+CR (Recoloreable clothes) - `8-8-48-1-9-8-38-1-12-13-24-1-49-38-27-1-4-14-11-1`
+
+CR (No recoloreable clothes) - `8-8-48-1-9-8-38-1-12-13-24-1-7-6-26-1-4-14-11-1`
+
 
 <h2>Forsburn</h2>
 
 <p align="center">
 
-  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Forsburn/LoA.png" alt="LoA Forsburn">
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Forsburn/LoA.png" alt="LoA Forsburn">
 
 </p>
 
@@ -46,7 +63,7 @@ Notes: `Shading` does not have assigned colors.
 
 <p align="center">
 
-  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Zetterburn/LoA.png" alt="LoA Zetterburn">
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Zetterburn/LoA.png" alt="LoA Zetterburn">
 
 </p>
 
