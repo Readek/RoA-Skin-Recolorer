@@ -16,13 +16,14 @@ const copyToClip = document.getElementById("copyToClip");
 const copiedImg = document.getElementById("copyOutImg");
 const codeWarning = document.getElementById("row2");
 const downImgButton = document.getElementById("downImgButton");
-const downInfo = document.getElementById("downInfo");
 const downMenu = document.getElementById("downMenu");
 const defaultFile = document.getElementById("fileupload");
 const colorEditor = document.getElementById("colorEditor");
 const partList = document.getElementById("partList");
 const ogColorList = document.getElementById("ogColorList");
 const colorRangeList = document.getElementById("colorRangeList");
+const ogButton = document.getElementById("ogButton");
+const raButton = document.getElementById("raButton");
 const ogInput = document.getElementById("ogInput");
 const raInput = document.getElementById("raInput");
 const copyOg = document.getElementById("copyOgImg");
@@ -125,7 +126,7 @@ copiedImg.addEventListener('animationend', () => {
 });
 // do the same for the other copy buttons
 document.getElementById("copyOg").addEventListener("click", () => {
-    navigator.clipboard.writeText(ogInput.value);
+    navigator.clipboard.writeText(ogButton.innerText);
     if (!copyOg.classList.contains("copiedAnim")) {
         copyOg.classList.add("copiedAnim");
     }
@@ -134,7 +135,7 @@ copyOg.addEventListener('animationend', () => {
     copyOg.classList.remove("copiedAnim");
 });
 document.getElementById("copyRa").addEventListener("click", () => {
-    navigator.clipboard.writeText(raInput.value);
+    navigator.clipboard.writeText(raButton.innerText);
     if (!copyRa.classList.contains("copiedAnim")) {
         copyRa.classList.add("copiedAnim");
     }
@@ -404,7 +405,7 @@ function resizeInput() {
 downImgButton.addEventListener('click', () => {
 
     // show the download popout
-    downInfo.style.display = "flex";
+    showInfo("downInfo");
     
     // clear the download menu
     downMenu.innerHTML = null;
@@ -772,7 +773,7 @@ function genCodeManual(rgb) {
 document.getElementById("editChar").addEventListener("click", () => {
 
     // show a bit of info just in case
-    document.getElementById("infoCE").style.display = "flex";
+    showInfo("infoCE");
 
     // show hidden elements and hide useless ones
     const proEls = document.getElementsByClassName("proMode");
@@ -822,17 +823,15 @@ function createProEditor(ogOrRange) {
             ", " + characterImgs.colorIn[i+1] + ", " + characterImgs.colorIn[i+2] + ")";
 
         // depending on ogcolors or ranges, add inputs to edit them
-        let sub1, sub2, sub3, sub4;
+        let sub1, sub2, sub3;
         if (ogOrRange) {
             sub1 = genNumInp(characterImgs.colorIn[i], 255, i, true);
             sub2 = genNumInp(characterImgs.colorIn[i+1], 255, i+1, true);
             sub3 = genNumInp(characterImgs.colorIn[i+2], 255, i+2, true);
-            sub4 = genNumInp(characterImgs.colorIn[i+3], 1, i+3, true);
         } else {
             sub1 = genNumInp(characterImgs.colorTolerance[i], 359, i, false);
             sub2 = genNumInp(characterImgs.colorTolerance[i+1], 100, i+1, false);
             sub3 = genNumInp(characterImgs.colorTolerance[i+2], 100, i+2, false);
-            sub4 = genNumInp(characterImgs.colorTolerance[i+3], 1, i+3, false);   
         }
 
         // now add everything we just created to the part div and then to the actual html
@@ -840,7 +839,6 @@ function createProEditor(ogOrRange) {
         part.appendChild(sub1);
         part.appendChild(sub2);
         part.appendChild(sub3);
-        part.appendChild(sub4);
         if (ogOrRange) {
             ogColorList.appendChild(part);
         } else {
@@ -881,30 +879,19 @@ function genNumInp(color, max, colorNum, ogOrRange) {
 function genOgRanCode(ogOrRange) {
 
     let code = "";
+    const arrayToTake = ogOrRange ? characterImgs.colorIn : characterImgs.colorTolerance;
 
-    if (ogOrRange) {
-        
-        for (let i = 0; i < characterImgs.colorIn.length; i++) {
-            code += characterImgs.colorIn[i];
-            if (i != characterImgs.colorIn.length - 1) { // if its the last one, dont add "-"
-                code += "-"            
+    for (let i = 0; i < arrayToTake.length; i++) {
+        if ((i+1)%4 != 0) {
+            code += componentToHex(arrayToTake[i]).toUpperCase();
+        } else {
+            if (i != arrayToTake.length - 1) { // if its the last one, dont add "-"
+                code += "-";
             }
         }
-
-        ogInput.value = code;
-
-    } else {
-
-        for (let i = 0; i < characterImgs.colorTolerance.length; i++) {
-            code += characterImgs.colorTolerance[i];
-            if (i != characterImgs.colorTolerance.length - 1) {
-                code += "-"            
-            }
-        }
-
-        raInput.value = code;
-        
     }
+
+    ogOrRange ? ogButton.innerText = code : raButton.innerText = code;
 
 }
 
@@ -921,19 +908,38 @@ function updateOgRange() {
     }
 }
 
-// if someone pastes a code on the code inputs
-ogInput.addEventListener("input", translateCode);
-raInput.addEventListener("input", translateCode);
+// when clicking on the og/ra codes
+ogButton.addEventListener("click", showCodeInfo);
+raButton.addEventListener("click", showCodeInfo);
+function showCodeInfo() {
+    showInfo("ograChange")
+}
+document.getElementById("updateOgra").addEventListener("click", translateCode);
 function translateCode() {
 
-    const splitCode = this.value.split("-"); // create a new array
-    if (this == ogInput) {
-        characterImgs.changeOg(0,0,splitCode); // will update the shader
-        createProEditor(true); // redo the editor to show updated values
-    } else {
-        characterImgs.changeRange(0,0,splitCode);
-        createProEditor();
+    // create new arrays
+    const splitOg = ogInput.value.split("-");
+    const splitRa = raInput.value.split("-");
+
+    // translate everything to rgb
+    const finalOg = [];
+    const finalRa = [];
+
+    for (let i = 0; i < splitOg.length; i++) {
+        const rgbOg = hex2rgb(splitOg[i]);
+        const rgbRa = hex2rgb(splitRa[i]);
+        for (let i = 0; i < rgbOg.length; i++) {
+            finalOg.push(rgbOg[i]);
+            finalRa.push(rgbRa[i]);
+        }
+        finalOg.push(1);
+        finalRa.push(1);
     }
+
+    characterImgs.changeOg(0,0,finalOg); // will update the shader
+    characterImgs.changeRange(0,0,finalRa);
+    createProEditor(true); // redo the editor to show updated values
+    createProEditor();
     mainRecolor(); // update the render
 
 }
@@ -946,7 +952,7 @@ let firstImg = true;
 document.getElementById("newChar").addEventListener("click", () => {
 
     // show a bit of info just in case
-    document.getElementById("infoNC").style.display = "flex";
+    showInfo("infoNC");
 
     // show hidden elements and hide useless ones
     const proEls = document.getElementsByClassName("showCustom");
@@ -1170,6 +1176,12 @@ function changePlaceholder(colorNum) {
     }
 }
 
+// will show the black background as well as the element itself
+function showInfo(infoID) {
+    const infoEl = document.getElementById(infoID);
+    infoEl.parentElement.style.display = "flex";
+    infoEl.style.display = "block";
+}
 
 // lets just slap an event listener to every ok button
 const okButts = document.getElementsByClassName("okButton");
@@ -1178,6 +1190,7 @@ for (let i = 0; i < okButts.length; i++) {
 }
 function hideInfoUI() { // this will work with any info UI with the same structure
     this.parentElement.parentElement.style.display = "none";
+    this.parentElement.style.display = "none";
 }
 
 

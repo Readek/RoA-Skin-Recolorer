@@ -12,9 +12,9 @@
 </head>
 <body>
 
-    <div class="infoUI" id="infoCE">
+    <div class="infoUI">
 
-        <div class="infoDiv">
+        <div class="infoDiv" id="infoCE">
 
             <h2>Character Editor</h2>
 
@@ -26,11 +26,7 @@
             
         </div>
 
-    </div>
-
-    <div class="infoUI" id="infoNC">
-
-        <div class="infoDiv">
+        <div class="infoDiv" id="infoNC">
 
             <h2>Character Creator</h2>
 
@@ -42,26 +38,18 @@
 
         </div>
 
-    </div>
-
-    <div class="infoUI" id="noWGL">
-
-        <div class="infoDiv">
+        <div class="infoDiv" id="noWGL">
 
             <h2>WebGL2 not supported</h2>
 
-            <p>Without WebGL2 support, this page doesn't work! This is showing up because either your device is really old, or WebGL2 is disabled on your browser.</p>
-            <p>You may be able to manually activate WebGL2 on your browser's settings. Not looking at anyone, especially not at Safari.</p>
+            <p>Without WebGL2 support, this page doesn't work! This is showing up because either WebGL2 is disabled on your browser, or your device is really really old.</p>
+            <p>You may be able to manually activate WebGL2 on your browser's settings.</p>
             <p>Alternatively, you can use an <a href="https://readek.github.io/RoA-Skin-Recolorer/">older version</a> of the Recolorer.</p>
 
             <button class="okButton">OK</button>
         </div>
 
-    </div>
-
-    <div class="infoUI" id="downInfo">
-
-        <div class="infoDiv">
+        <div class="infoDiv" id="downInfo">
 
             <h2>Select download</h2>
 
@@ -71,7 +59,25 @@
 
         </div>
 
+        <div class="infoDiv" id="ograChange">
+
+            <h3 id="ograTitle">Paste your codes here!</h3>
+
+            <p class="ograLabel">Original Color</p>
+            <input id="ogInput" class="ograInput" type="text" autocomplete="off" placeholder="000000-000000-000000-000000...">
+            <p></p>
+
+            <p class="ograLabel">Color Range</p>
+            <input id="raInput" class="ograInput" type="text" autocomplete="off" placeholder="000000-000000-000000-000000...">
+            <p></p>
+
+            <button class="okButton">Back</button>
+            <button class="okButton" id="updateOgra">Update</button>
+
+        </div>
+
     </div>
+
 
     <div id="content">
 
@@ -201,10 +207,10 @@
             <div id="lists">
 
                 <div class="list proMode">
-                    <div data-tooltip="The main colors to look for. This is usually a midtone, not the darkest or lightest one." data-tooltip-delay="none" class="titleList">ORIGINAL COLORS (rgba)</div>
+                    <div data-tooltip="The main colors to look for (this is usually a midtone, not the darkest or lightest color)" data-tooltip-delay="none" class="titleList">ORIGINAL COLORS (rgb)</div>
                     <div id="ogColorList"></div>
                     <div>
-                        <input type="text" id="ogInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
+                        <button id="ogButton" class="colorInput" title="Click to manually change the code"></button>
                         <button id="copyOg" class="copyToClip" data-tooltip="Copy the ogColors code to clipboard" data-tooltip-delay="none">
                             <svg class="copyIcon" viewBox="0 0 20 20">
                                 <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>
@@ -219,10 +225,10 @@
                 </div>
 
                 <div class="list proMode">
-                    <div data-tooltip="How far we should look for color differences" data-tooltip-delay="none" class="titleList">COLOR RANGES (hsva)</div>
+                    <div data-tooltip="How far we should look for color differences" data-tooltip-delay="none" class="titleList">COLOR RANGES (hsv)</div>
                     <div id="colorRangeList"></div>
                     <div>
-                        <input type="text" id="raInput" class="colorInput" title="All above values on a single string for easy sharing" autocomplete="off">
+                        <button id="raButton" class="colorInput" title="Click to manually change the code"></button>
                         <button id="copyRa" class="copyToClip" data-tooltip="Copy the Ranges code to clipboard" data-tooltip-delay="none">
                             <svg class="copyIcon" viewBox="0 0 20 20">
                                 <path d="M17.391,2.406H7.266c-0.232,0-0.422,0.19-0.422,0.422v3.797H3.047c-0.232,0-0.422,0.19-0.422,0.422v10.125c0,0.232,0.19,0.422,0.422,0.422h10.125c0.231,0,0.422-0.189,0.422-0.422v-3.797h3.797c0.232,0,0.422-0.19,0.422-0.422V2.828C17.812,2.596,17.623,2.406,17.391,2.406 M12.749,16.75h-9.28V7.469h3.375v5.484c0,0.231,0.19,0.422,0.422,0.422h5.483V16.75zM16.969,12.531H7.688V3.25h9.281V12.531z"></path>

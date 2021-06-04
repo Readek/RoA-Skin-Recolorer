@@ -177,7 +177,7 @@ void main() {
 testGL() // test if the user is actually able to do this
 function testGL() {
   if (!document.createElement("canvas").getContext("webgl2")) {
-    document.getElementById("noWGL").style.display = "flex";
+    showInfo("noWGL");
   }
 }
 
