@@ -215,7 +215,7 @@ class RoaRecolor {
     
 
     // it's WebGL time, get ready to not understand anything (don't worry i dont either)
-    const gl = canvas.getContext("webgl2");
+    const gl = canvas.getContext("webgl2", { premultipliedAlpha: false });
 
     // create the shader with the text above, then create the program
     const vertexShader = compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource);

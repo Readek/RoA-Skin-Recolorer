@@ -844,8 +844,10 @@ document.getElementById("editChar").addEventListener("click", () => {
     createProEditor(true);
     createProEditor();
 
-    // portrait will be treated as custom from now on
-    customPortrait = "Characters/"+char.name+"/Full.png";
+    // portrait will be treated as custom from now on unless theres already an image
+    if (!customPortrait) {
+        customPortrait = "Characters/"+char.name+"/Full.png";
+    }
     
 })
 

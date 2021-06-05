@@ -59,4 +59,20 @@ CR - `140B13-031712-020923`
 
 To use them, just click on the codes below the editor and paste the 2 codes above.
 
-- TODO - add ragnir, bradshaw, ayala images/codes
+---
+
+And just because I didnt really have a better place to put this, here's some codes for "existing" characters from the game in case you wanna have fun with those:
+
+<h2>Bradshaw</h2>
+
+<p align="center">
+
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Wrastor/Bradshaw.png" alt="Bradshaw">
+
+</p>
+
+OC - `247579-2C4874-E6DA19-BBE7C8-595253`
+
+CR - `1B1732-120F1E-1B1E32-1D0528-12053C`
+
+- TODO ragnir, ayala
