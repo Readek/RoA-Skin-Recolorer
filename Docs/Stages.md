@@ -7,7 +7,7 @@ Yes, you can use the Recolorer to recolor stages too!
 
 Each stage down below will contain 2 images, the first one is an image you can use to preview the changes, and the second one is the spritesheet that you can inject into the game.
 
-To be able to recolor stages with the Recolorer, use the `Add new character` button, upload the images as portraits, and then copy and paste the codes down below.
+To be able to recolor stages with the Recolorer, use the `Add new character` button, upload the images as portraits, and then copy and paste the codes down below. Using the preview image is recommended, when you're finished, you can then swap the preview with the spritesheet image.
 
 To mod Rivals of Aether stages, follow instructions for the [Modding Tool](https://gamebanana.com/tools/6958).
 
@@ -17,15 +17,15 @@ Did you create a preset for a stage that's not listed here? Please, submit a [pu
 
 <h2>The Rock Wall</h2>
 
-<p width="350" align="center">
+<p align="center">
 
-  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/The Rock Wall/preview.png" alt="The Rock Wall preview">
+  <img width="960" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/The Rock Wall/preview.png" alt="The Rock Wall preview">
 
 </p>
 
-<p width="350" align="center">
+<p align="center">
 
-  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/The Rock Wall/texture.png" alt="The Rock Wall texture">
+  <img height="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/The Rock Wall/texture.png" alt="The Rock Wall texture">
 
 </p>
 

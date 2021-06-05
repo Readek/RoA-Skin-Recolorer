@@ -7,7 +7,7 @@ In the character creator, you can upload the portrait (or any image really) of y
 
 Spritesheets will automatically animate, taking the last 2 or 1 characters of the filename as the sprite count (like the game does). If your spritesheet doesn't have numbers at the end, you can manually set the sprite count in the recolorer.
 
-Let's use Guadua as an example. Here you have some example files to work with:
+Let's use Guadua as an example. Here you have some example images to work with:
 
 <p align="center">
 
@@ -21,7 +21,7 @@ Let's use Guadua as an example. Here you have some example files to work with:
 
 </p>
 
-Colors follow the same logic as the file you would find in your character's folder at `scripts/colors.gml`. It's using the same shader, after all.
+Colors follow the same logic as the file you would find in your character's folder at `scripts/colors.gml`. The recolorer uses the same shader, after all.
 
 For the Original Colors, use the same values found in `set_color_profile_slot(0, [part num], [r], [g], [b])`:
 
@@ -51,7 +51,7 @@ For Color Ranges, look for the values found in `set_color_profile_slot_range([pa
 
 </p>
 
-With that, you should be able to change the colors of your character. You can skip looking for those values for next times using the OC/CR codes displayed below. For example, these are Guadua's codes that were generated after setting the colors and ranges:
+With that, you should be able to change the colors of your character. You can skip looking for those values for next times using the OC/CR codes displayed below the editor. For example, these are Guadua's codes that were generated after setting the colors and ranges:
 
 OC - `336834-B2CD98-88685D`
 

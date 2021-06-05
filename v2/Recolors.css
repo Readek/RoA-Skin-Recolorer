@@ -471,7 +471,9 @@ body::-webkit-scrollbar-thumb {
 #sliderB {
     background: linear-gradient(to right, black, blue);
 }
-
+#sliderA{
+    background: linear-gradient(to right, black, white);
+}
 
 #partList {
     width: 475px;
@@ -520,6 +522,12 @@ body::-webkit-scrollbar-thumb {
     height: 15px;
     border-radius: 100%;
     margin-right: 5px;
+}
+.alphaText {
+    width: 50px;
+    text-align: center;
+    margin-right: 25px;
+    margin-left: -10px;
 }
 
 

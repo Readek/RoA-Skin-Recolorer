@@ -4,6 +4,7 @@ let char; // this will hold the values from the character database
 let characterImgs; // this will hold a class from "RoA WebGL Shader.js"
 let rgbSliders; // if active, the page will use rgb sliders instead of hsv ones
 let customPortrait, customSprite; // will hold user uploaded images
+const alphas = [100, 100, 100, 100, 100, 100, 100, 100, 100];
 
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
@@ -37,11 +38,13 @@ const sliderVal = document.getElementById("sliderVal");
 const sliderR = document.getElementById("sliderR");
 const sliderG = document.getElementById("sliderG");
 const sliderB = document.getElementById("sliderB");
+const sliderA = document.getElementById("sliderA");
 const nowEditingText = document.getElementById("nowEditing");
 const editingHex = document.getElementById("editingHex");
 const topButtons = document.getElementById("row3");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
+const alphaCheck = document.getElementById("alphaCheck");
 const noPixels = document.getElementById("noPixels")
 const darkCheck = document.getElementById("darkTheme");
 
@@ -169,6 +172,17 @@ function mainRecolor(dl) {
         }
     }
 
+    if (!rgb) {
+        rgb = characterImgs.colorIn;
+    }
+
+    // add in custom transparency in case the user modified it
+    for (let i = 0; i < rgb.length; i++) {
+        if ((i+1)%4 == 0) {
+            rgb[i] = alphas[((i+1) / 4) - 1] / 100;
+        }        
+    }
+
     if (dl) { // if we want to download the image
         characterImgs.download(rgb, dl);
     } else {
@@ -189,6 +203,11 @@ function changeChar(charNum) {
     loadingDiv.style.display = "flex";
     fullCanvas.style.display = "none";
     spritesDiv.style.display = "none";
+
+    // reset the alphas in case they were modified
+    for (let i = 0; i < alphas.length; i++) {
+        alphas[i] = 100;
+    }
 
     //look at the database to see whats up
     char = db.chars[charNum];
@@ -267,6 +286,7 @@ function createEditor() {
     partList.innerHTML = null;
 
     let count = 0; // keep track of how many parts we have created
+    const aCheck = alphaCheck.checked; // so its shorter
 
     const rgb = hexDecode(codeInput.value); // get the rgb values of the current code
 
@@ -298,12 +318,18 @@ function createEditor() {
         const green = genColorDiv(rgb[i+1], "0," + rgb[i+1] + ", 0");
         const blue = genColorDiv(rgb[i+2], "0, 0," + rgb[i+2]);
 
+        // add the alpha value
+        const alpha = document.createElement("div");
+        alpha.classList.add("alphaText");
+        alpha.innerHTML = alphas[count] + "%";
+
         // now add everything we just created to the part div and then to the actual html
         part.appendChild(partName);
-        part.appendChild(hexDiv);
+        if (!aCheck) part.appendChild(hexDiv);
         part.appendChild(red);
         part.appendChild(green);
         part.appendChild(blue);
+        if (aCheck) part.appendChild(alpha);
 
         partList.appendChild(part);
 
@@ -524,6 +550,20 @@ eaCheck.addEventListener("click", () => {
     characterImgs.changeBlend(!eaCheck.checked);
     mainRecolor();
 })
+// Alpha editing
+alphaCheck.addEventListener("click", alphaEdit);
+function alphaEdit() {
+    if (alphaCheck.checked) {
+        sliderA.style.display = "inherit";
+    } else {
+        sliderA.style.display = "none";
+        for (let i = 0; i < alphas.length; i++) {
+            alphas[i] = 100;
+        }
+    }
+    createEditor();
+}
+alphaEdit();
 // No point scaling
 noPixels.addEventListener("click", noPixelsCheck)
 function noPixelsCheck() {
@@ -577,6 +617,7 @@ function showSliders() {
     sliderHue.setAttribute("num", partNum * 4);
     sliderSat.setAttribute("num", partNum * 4 + 1);
     sliderVal.setAttribute("num", partNum * 4 + 2);
+    sliderA.setAttribute("num", partNum);
 
     const rgb = hexDecode(codeInput.value);
 
@@ -599,6 +640,7 @@ function showSliders() {
         sliderSat.style.background = "linear-gradient(to right, white, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
         sliderVal.style.background = "linear-gradient(to right, black, rgb(" + cssRgb[0] + ", " + cssRgb[1] + ", " + cssRgb[2] + ")";
     }
+    sliderA.value = alphas[partNum];
     
     // change the color of the "now editing" indicator
     editingHex.style.backgroundColor = "rgb(" + rgb[partNum*4] + ", " + rgb[partNum*4+1] + ", " + rgb[partNum*4+2] + ")";
@@ -617,6 +659,7 @@ sliderVal.oninput = sliderMoved;
 sliderR.oninput = sliderMoved;
 sliderG.oninput = sliderMoved;
 sliderB.oninput = sliderMoved;
+sliderA.oninput = alphaMoved;
 
 function sliderMoved() {
 
@@ -674,7 +717,15 @@ function sliderMoved() {
 
 }
 
-// RGB sliders
+function alphaMoved() {
+
+    const num = Number(this.getAttribute("num"));
+    alphas[num] = this.value;
+    createEditor();
+    mainRecolor();
+
+}
+
 hsvButton.addEventListener("click", () => {
     rgbSliders = false;
     changeSliders();

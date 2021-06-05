@@ -201,6 +201,7 @@
                     <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderR" autocomplete="off">
                     <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderG" autocomplete="off">
                     <input type="range" min="0" max="255" class="slider sliderRGB" id="sliderB" autocomplete="off">
+                    <input type="range" min="0" max="100" class="slider" id="sliderA" autocomplete="off">
                 </div>
             </div>
 
@@ -287,7 +288,12 @@
                         <label for="EAcheck" class="configText">EA Shading</label>
                     </div>
 
-                    <div class="configEntry" data-tooltip="Sets canvas image rendering to auto" data-tooltip-delay="none">
+                    <div class="configEntry" data-tooltip="Allows transparency editing (won't get reflected in color code)" data-tooltip-delay="none">
+                        <input id="alphaCheck" type="checkbox" class="configCheck">
+                        <label for="alphaCheck" class="configText">Edit Alpha</label>
+                    </div>
+
+                    <div class="configEntry" data-tooltip="Sets canvas image rendering to auto (for non pixel-art or scaled-down images)" data-tooltip-delay="none">
                         <input id="noPixels" type="checkbox" class="configCheck">
                         <label for="noPixels" class="configText">No point scaling</label>
                     </div>
