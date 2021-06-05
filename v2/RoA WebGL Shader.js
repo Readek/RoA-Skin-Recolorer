@@ -194,16 +194,13 @@ class RoaRecolor {
 
     // this is a variable that the shader will use for Early Access colors
     // if 0, the color will have no shading
-    this.blend1 = [];
-    this.blend0 = [];
+    this.blend = [];
     for (let i = 0; i < ogColor.length; i++) {
-      this.blend1.push(1);
-      this.blend0.push(0);
-    }
-    if (!blend) {
-      this.blend = this.blend1;
-    } else {
-      this.blend = this.blend0;
+      if (blend) {
+        this.blend.push(0);
+      } else {
+        this.blend.push(1);
+      }
     }
   }
 
@@ -374,67 +371,34 @@ class RoaRecolor {
   changeBlend(oneOrZero) {
     for (let key in this.charImgs) {
       const gl = this.charImgs[key].gl;
-      if (oneOrZero) {
-        gl.uniform4fv(this.charImgs[key].blendLoc, this.blend1);
-      } else {
-        gl.uniform4fv(this.charImgs[key].blendLoc, this.blend0);
+      this.blend = [];
+      for (let i = 0; i < this.colorIn.length; i++) {
+        if (oneOrZero) {
+          this.blend.push(1);
+        } else {
+          this.blend.push(0);
+        }        
       }
-    }
-  }
-
-  changeOg(where, what, full) {
-    if (full) {
-      this.colorIn = full;
-    } else {
-      this.colorIn[where] = Number(what);
-    }
-    for (let key in this.charImgs) {
-      const gl = this.charImgs[key].gl;
-      gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
-    }
-  }
-
-  changeRange(where, what, full) {
-    if (full) {
-      this.colorTolerance = full;
-    } else {
-      this.colorTolerance[where] = Number(what);
-    }
-    for (let key in this.charImgs) {
-      const gl = this.charImgs[key].gl;
-      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
-    }
-  }
-
-  addRow() {
-    for (let i = 0; i < 4; i++) {
-      this.colorIn.push(1);
-      if (i==3 || i==7) {
-        this.colorTolerance.push(1)
-      } else {
-        this.colorTolerance.push(0);
-      }
-      this.blend.push(this.blend[0])
-    }
-    for (let key in this.charImgs) {
-      const gl = this.charImgs[key].gl;
-      gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
-      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
       gl.uniform4fv(this.charImgs[key].blendLoc, this.blend);
     }
   }
 
-  removeRow() {
-    this.colorIn.splice(this.colorIn.length - 4)
-    this.colorTolerance.splice(this.colorTolerance.length - 4)
-    this.blend.splice(this.blend.length - 4)
+  changeOg(where, what) {
+    this.colorIn[where] = Number(what);
     for (let key in this.charImgs) {
       const gl = this.charImgs[key].gl;
       gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
-      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
-      gl.uniform4fv(this.charImgs[key].blendLoc, this.blend);
     }
   }
+
+  changeRange(where, what) {
+    this.colorTolerance[where] = Number(what);
+    for (let key in this.charImgs) {
+      const gl = this.charImgs[key].gl;
+      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
+    }
+  }
+  
 }
 
 // this will be called on each paint
