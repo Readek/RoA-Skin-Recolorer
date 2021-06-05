@@ -3,6 +3,7 @@
 let char; // this will hold the values from the character database
 let characterImgs; // this will hold a class from "RoA WebGL Shader.js"
 let rgbSliders; // if active, the page will use rgb sliders instead of hsv ones
+let customPortrait, customSprite; // will hold user uploaded images
 
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
@@ -498,8 +499,10 @@ defaultFile.addEventListener("change", () => {
     //read file with some magic i dont really understand
     const fileReader = new FileReader();
     fileReader.addEventListener("load", function () {
+        // save the image in case we need it
+        customPortrait = this.result;
         //add the custom image to the portrait canvas
-        characterImgs.addCustom(this.result, "Portrait").then( () => { // wait for the img to load
+        characterImgs.addCustom(customPortrait, "Portrait").then( () => { // wait for the img to load
 
             mainRecolor(); // then show it
 
@@ -518,13 +521,8 @@ defaultFile.addEventListener("change", () => {
 
 // Early Access check
 eaCheck.addEventListener("click", () => {
-    if (!eaCheck.checked) {
-        characterImgs.changeBlend(true);
-        mainRecolor();
-    } else {
-        characterImgs.changeBlend();
-        mainRecolor();
-    }
+    characterImgs.changeBlend(!eaCheck.checked);
+    mainRecolor();
 })
 // No point scaling
 noPixels.addEventListener("click", noPixelsCheck)
@@ -794,6 +792,9 @@ document.getElementById("editChar").addEventListener("click", () => {
     // create the new editors for both ogColors and colorRanges
     createProEditor(true);
     createProEditor();
+
+    // portrait will be treated as custom from now on
+    customPortrait = "Characters/"+char.name+"/Full.png";
     
 })
 
@@ -936,12 +937,25 @@ function translateCode() {
         finalRa.push(1);
     }
 
-    characterImgs.changeOg(0,0,finalOg); // will update the shader
-    characterImgs.changeRange(0,0,finalRa);
-    createProEditor(true); // redo the editor to show updated values
+    // update the shader
+    characterImgs = new RoaRecolor(finalOg, finalRa, eaCheck.checked);
+    if (customPortrait) {
+        characterImgs.addImage(fullCanvas, customPortrait, "Portrait").then(mainRecolor);
+    }
+    if (customSprite) {
+        characterImgs.addImage(animCanvas, customSprite, "Spritesheet").then(mainRecolor);
+    }
+    // update the char values in case they changed
+    partCount = finalOg.length / 4;
+    changePlaceholder(finalOg.length / 4);
+    codeInput.value = null;
+    codeControl();
+    // redo the editors to show updated values
+    createProEditor(true);
     createProEditor();
-    mainRecolor(); // update the render
-
+    createEditor();
+    // update the render
+    mainRecolor();
 }
 
 
@@ -985,6 +999,7 @@ document.getElementById("newChar").addEventListener("click", () => {
     codeInput.value = null;
 
 })
+
 document.getElementById("uplPor").addEventListener("click", () => {
     defaultFilePor.click();
 })
@@ -1013,17 +1028,19 @@ defaultFilePor.addEventListener("change", () => {
             createEditor();
         }
 
+        customPortrait = this.result;
+
+        // check if this is not the first image added
         if (characterImgs.charImgs["Full"]) {
-            characterImgs.addCustom(this.result, "Portrait").then( () => {
+            characterImgs.addCustom(customPortrait, "Portrait").then( () => {
                 mainRecolor();
             })
         } else {
-            characterImgs.addImage(fullCanvas, this.result, "Portrait").then( () => {
+            characterImgs.addImage(fullCanvas, customPortrait, "Portrait").then( () => {
                 mainRecolor();
                 fullCanvas.style.display = "flex";
             })
         }
-
         firstImg = false;
 
     });
@@ -1050,12 +1067,14 @@ defaultFileSpr.addEventListener("change", () => {
             createEditor();
         }
 
-        if (characterImgs.charImgs["Idle Spritesheet"]) {
-            characterImgs.addCustom(this.result, "Idle Spritesheet").then( () => {
+        customSprite = this.result;
+
+        if (characterImgs.charImgs["Spritesheet"]) {
+            characterImgs.addCustom(customSprite, "Spritesheet").then( () => {
                 mainRecolor();
             })
         } else {
-            characterImgs.addImage(animCanvas, this.result, "Idle Spritesheet").then( () => {
+            characterImgs.addImage(animCanvas, customSprite, "Spritesheet").then( () => {
                 mainRecolor();
                 spritesDiv.style.display = "flex";
                 document.getElementById("frameCountDiv").style.display = "inline";
@@ -1064,7 +1083,7 @@ defaultFileSpr.addEventListener("change", () => {
         }
 
         const sprite = new Image();
-        sprite.src = this.result;
+        sprite.src = customSprite;
         sprite.decode().then( () => {
             let frameCount = 6; // default to 6 if file has no numbers at the end
             // if the name of the file has at least 2 characters AND those are numbers
@@ -1084,7 +1103,6 @@ defaultFileSpr.addEventListener("change", () => {
             
             char.idleImg = sprite;
         })
-
         firstImg = false;
 
     });
@@ -1122,14 +1140,36 @@ document.getElementById("addRa").addEventListener("click", () => {addOrRemoveRow
 document.getElementById("removeOg").addEventListener("click", () => {addOrRemoveRow()});
 document.getElementById("removeRa").addEventListener("click", () => {addOrRemoveRow()});
 function addOrRemoveRow(add) {
+
+    const og = characterImgs.colorIn;
+    const ra = characterImgs.colorTolerance;
     
     if (add) {
-        characterImgs.addRow();
+        for (let i = 0; i < 4; i++) {
+            if (i != 3) {
+                og.push(1);
+                ra.push(0);
+            } else {
+                og.push(1);
+                ra.push(1);
+            }        
+        }
         partCount++;
     } else {
-        characterImgs.removeRow();
+        og.splice(og.length - 4);
+        ra.splice(ra.length - 4);
         partCount--;
     }
+
+    // we need to add a new class each time since it wont update non-shown parts otherwise
+    characterImgs = new RoaRecolor(og, ra, eaCheck.checked);
+    if (customPortrait) {
+        characterImgs.addImage(fullCanvas, customPortrait, "Portrait").then(mainRecolor);
+    }
+    if (customSprite) {
+        characterImgs.addImage(animCanvas, customSprite, "Spritesheet").then(mainRecolor);
+    }
+
     changePlaceholder(partCount);
     codeInput.value = null;
     codeControl();

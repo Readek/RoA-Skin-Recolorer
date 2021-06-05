@@ -18,7 +18,7 @@ Did you create a preset for an image that's not listed here? Please, submit a [p
 
 <p align="center">
 
-  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Absa/LoA.png" alt="LoA Absa">
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Absa/LoA.png" alt="LoA Absa">
 
 </p>
 
@@ -35,7 +35,7 @@ CR (No recoloreable clothes) - `080830-090826-0C0D18-07061A-040E0B`
 
 <p align="center">
 
-  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Forsburn/LoA.png" alt="LoA Forsburn">
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Forsburn/LoA.png" alt="LoA Forsburn">
 
 </p>
 
@@ -50,7 +50,7 @@ CR - `0A0A0F-1D191E-000000-000000-1C0B64-1E1614-160F1E`
 
 <p align="center">
 
-  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Kragg/LoA HD.png" alt="LoA HD Kragg">
+  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Kragg/LoA HD.png" alt="LoA HD Kragg">
 
 </p>
 
@@ -67,7 +67,7 @@ Notes: `Shading` does not have assigned colors.
 
 <p align="center">
 
-  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Maypul/HD.png" alt="HD Maypul">
+  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Maypul/HD.png" alt="HD Maypul">
 
 </p>
 
@@ -82,7 +82,7 @@ CR - `052837-1E3232-140F29-141414-140A28`
 
 <p align="center">
 
-  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Zetterburn/LoA.png" alt="LoA Zetterburn">
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Zetterburn/LoA.png" alt="LoA Zetterburn">
 
 </p>
 
