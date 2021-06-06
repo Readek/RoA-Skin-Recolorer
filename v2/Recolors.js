@@ -45,6 +45,7 @@ const topButtons = document.getElementById("row3");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
 const alphaCheck = document.getElementById("alphaCheck");
+const noZoom = document.getElementById("zoomCheck");
 const noPixels = document.getElementById("noPixels")
 const darkCheck = document.getElementById("darkTheme");
 
@@ -578,6 +579,18 @@ function noPixelsCheck() {
     }
 }
 noPixelsCheck();
+// No scale down
+noZoom.addEventListener("click", noZoomCheck);
+function noZoomCheck() {
+    if (noZoom.checked) {
+        fullCanvas.style.maxWidth = "none";
+        fullCanvas.style.maxHeight = "none";
+    } else {
+        fullCanvas.style.maxWidth = "100%";
+        fullCanvas.style.maxHeight = "600px";
+    }
+}
+noZoomCheck();
 // Dark Theme
 darkCheck.addEventListener("click", darkMode);
 function darkMode() {
@@ -951,15 +964,24 @@ function genOgRanCode(ogOrRange) {
 
 // gets called every time a number input gets updated
 function updateOgRange() {
+    const num = Number(this.getAttribute("partNum"));
+    const num2 = num-(num%4);
+
     if (this.getAttribute("ogOrRange") == "og") {
-        characterImgs.changeOg(this.getAttribute("partNum"), this.value);
+        characterImgs.changeOg(num, this.value);
         mainRecolor();
         genOgRanCode(true);
     } else {
-        characterImgs.changeRange(this.getAttribute("partNum"), this.value);
+        characterImgs.changeRange(num, this.value);
         mainRecolor();
         genOgRanCode();
     }
+
+    // update the color indicator of the part
+    ogColorList.childNodes[num2/4].firstChild.style.backgroundColor = "rgb(" + characterImgs.colorIn[num2] +
+    ", " + characterImgs.colorIn[num2+1] + ", " + characterImgs.colorIn[num2+2] + ")";
+    colorRangeList.childNodes[num2/4].firstChild.style.backgroundColor = "rgb(" + characterImgs.colorIn[num2] +
+    ", " + characterImgs.colorIn[num2+1] + ", " + characterImgs.colorIn[num2+2] + ")";
 }
 
 // when clicking on the og/ra codes
