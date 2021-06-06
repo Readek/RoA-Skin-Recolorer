@@ -843,6 +843,10 @@ header {
 .okButton:hover, .okButton:focus {
     filter: brightness(1.2);
 }
+.okButton:disabled {
+    filter: brightness(.8);
+    pointer-events: none;
+}
 
 
 /* custom character stuff */

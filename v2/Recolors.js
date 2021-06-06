@@ -5,6 +5,8 @@ let characterImgs; // this will hold a class from "RoA WebGL Shader.js"
 let rgbSliders; // if active, the page will use rgb sliders instead of hsv ones
 let customPortrait, customSprite; // will hold user uploaded images
 const alphas = [100, 100, 100, 100, 100, 100, 100, 100, 100];
+const codeReg = "^([A-Fa-f0-9]+\-)+([A-Fa-f0-9])+$";
+const ograReg = "^([A-Fa-f0-9]{6}\-)+([A-Fa-f0-9]){6}$";
 
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
@@ -58,7 +60,8 @@ codeInput.addEventListener("input", codeControl);
 function codeControl() {
 
     //look if the code length is correct
-    if (codeInput.value.length == char.placeholder.length) {
+    if (codeInput.value.length == char.placeholder.length &&
+         codeInput.value.match(codeReg)) {
  
         //if correct, set everything to normal
         codeWarning.innerHTML = "";
@@ -87,7 +90,6 @@ function codeControl() {
             downImgButton.disabled = false;
     
         } else { // check if its above or below the limit
-    
             if (codeInput.value.length < char.placeholder.length) {
     
                 //if its below the limit, warn the user
@@ -102,6 +104,12 @@ function codeControl() {
                 codeWarning.innerHTML = "This color code has too many characters ("+dif+").";
                 codeWarning.style.color = "red";
         
+            } else {
+
+                // if the regex failed
+                codeWarning.innerHTML = "Invalid code.";
+                codeWarning.style.color = "red";
+                
             }
 
             //no downloads allowed without a proper code
@@ -1033,6 +1041,21 @@ function translateCode() {
     mainRecolor();
 }
 
+// check if the oc/cr codes are right
+ogInput.addEventListener("input", codeControlPro);
+raInput.addEventListener("input", codeControlPro);
+function codeControlPro() {
+
+    // if code has hex characters or "-", AND has 6 chars per segment, AND both have same length
+    if (ogInput.value.match(codeReg) && raInput.value.match(codeReg) &&
+     ogInput.value.length == raInput.value.length) {
+        document.getElementById("updateOgra").disabled = false;
+    } else {
+        document.getElementById("updateOgra").disabled = true;
+    }
+
+}
+
 
 // its character creator time
 const defaultFilePor = document.getElementById("fileuploadPor");
@@ -1296,6 +1319,7 @@ function showInfo(infoID) {
     const infoEl = document.getElementById(infoID);
     infoEl.parentElement.style.display = "flex";
     infoEl.style.display = "block";
+    codeControlPro();
 }
 
 // lets just slap an event listener to every ok button
