@@ -831,7 +831,7 @@ function genCodeManual(rgb) {
     }
 
     //put the code in the code input, separating the full color code with "-" every 4 characters    
-    codeInput.value = finalCode.match(/.{1,4}/g).join("-");
+    codeInput.value = finalCode.match(/.{1,4}/g).join("-").toUpperCase();
 
     //check the code, this is just to force recoloring the image
     codeControl();
