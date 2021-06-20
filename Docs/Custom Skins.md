@@ -70,20 +70,6 @@ CR - `0A0A0F-1D191E-000000-000000-1C0B64-1E1614-160F1E`
 
 <p align="center">
 
-  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Kragg/LoA HD.png" alt="LoA HD Kragg">
-
-</p>
-
-<h3>LoA HD</h3>
-
-OC - `88614F-79AD5D-7C6C72-3C2424`
-
-CR - `291C31-1B1D32-490C18-000000`
-
-Notes: `Shading` does not have assigned colors.
-
-<p align="center">
-
   <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Kragg/HD.png" alt="HD Kragg">
 
 </p>
@@ -93,6 +79,20 @@ Notes: `Shading` does not have assigned colors.
 OC - `5B3A60-67A370-A2B1C7-3C2424`
 
 CR - `0F1E23-0F323C-0F283C-000000`
+
+Notes: `Shading` does not have assigned colors.
+
+<p align="center">
+
+  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Kragg/LoA HD.png" alt="LoA HD Kragg">
+
+</p>
+
+<h3>LoA HD</h3>
+
+OC - `88614F-79AD5D-7C6C72-3C2424`
+
+CR - `291C31-1B1D32-490C18-000000`
 
 Notes: `Shading` does not have assigned colors.
 

@@ -35,22 +35,41 @@ This is work in progress! More codes will be added.
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> Clairen
 
 - `4136-5045-4559-AA22-4AB5-B5B5-FFE6-63FF-0D6A-00FF-F7B9` `00` Default
+- `4136-5045-4559-4076-FFB5-B5B5-FFE6-6346-00C6-00ED-FCC0` `01` Blue
+- `4136-5045-4559-FF64-40B5-B5B5-FFE6-63DC-8700-FF00-0040` `02` Orange
+- `4136-5045-4559-40FF-40B5-B5B5-FFE6-6300-DC5E-FCFF-00C9` `03` Green
+- `5425-5D83-6D9B-483D-4BC5-C0D2-FFAF-51B0-3FFF-FFA8-1FEA` `04` Purple
+- `96A3-A46D-8D9B-FFFF-FFEF-E9FF-FF2F-2F00-CBC4-FF35-3501` `05` White
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> Elliana
 
 - `D580-5796-9C91-AF91-C89D-D454-89C6-C248-453C-9100` `00` Default
+- `6194-D7C9-CDC8-9399-CA67-D5AF-7A8F-A548-453C-8F00` `01` Blue
+- `CD5E-54C9-CDC8-C491-91E7-B256-A590-7A48-453C-E700` `02` Red
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> Etalus
 
 - `FBFA-FCB4-E6E6-4344-57FD` `00` Default
+- `73B9-BAA6-B7FE-F5FF-FFA2` `01` Blue
+- `F9FF-B2FF-9BAB-5F27-2015` `02` Yellow
+- `4F71-56A6-F7B4-CCCD-400C` `03` Green
+- `554D-4CEE-D0B6-AF89-6B33` `04` Brown
+- `FCFA-FCFF-9EEE-4B35-529F` `05` Pink
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> Forsburn
 
 - `746E-6C80-601C-FFE9-00FF-7F00-AA00-0024-2224-FFFF-E441` `00` Default
+- `3270-9180-601C-A9FF-DA3F-B1EB-0030-770F-3143-FFFF-E400` `01` Blue
+- `9132-4480-601C-FFBA-87FF-5F5F-A001-2A43-0F19-FFFF-E44E` `02` Red
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
 
 - `8868-5D79-AD64-D5D8-DD3C-2424-1800` `00` Default
+- `526A-A86E-C4C5-DBD5-DD1C-3B4D-A500` `01` Blue
+- `AA49-68CA-8E61-FFE1-684F-183D-E100` `02` Pink
+- `4181-42A5-7575-D7DD-D51A-2D12-1100` `03` Green
+- `6379-8159-5959-DCDA-D61E-2E2D-2300` `04` Grey
+- `675D-88AD-6483-D9E7-D51D-1F34-5600` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> Maypul
 

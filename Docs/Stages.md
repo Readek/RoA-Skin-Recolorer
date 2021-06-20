@@ -15,12 +15,12 @@ Did you create a preset for a stage that's not listed here? Please, submit a [pu
 
 ---
 
-- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Stages/Air Armada/icon.png" alt="Air Armada icon"> [Air Armada](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#air-armada)
-- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Stages/The Rock Wall/icon.png" alt="Rock Wall icon"> [The Rock Wall](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#the-rock-wall)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/Air%20Armada/icon.png" alt="Air Armada icon"> [Air Armada](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#air-armada)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/The%20Rock%20Wall/icon.png" alt="Rock Wall icon"> [The Rock Wall](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#the-rock-wall)
 
 ---
 
-## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Stages/Air Armada/icon.png" alt="Air Armada icon"> Air Armada
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/Air%20Armada/icon.png" alt="Air Armada icon"> Air Armada
 
 <p align="center">
 
@@ -40,7 +40,7 @@ CR - `1E232C-051405-163C2B-000000`
 
 Note: Metallic parts won't change colors.
 
-## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Stages/The Rock Wall/icon.png" alt="Rock Wall icon"> The Rock Wall
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/The%20Rock%20Wall/icon.png" alt="Rock Wall icon"> The Rock Wall
 
 <p align="center">
 
