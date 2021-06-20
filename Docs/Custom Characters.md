@@ -59,7 +59,7 @@ CR - `140B13-031712-020923`
 
 To use them, just click on the codes below the editor and paste the 2 codes above.
 
----
+<!-- ---
 
 And just because I didnt really have a better place to put this, here's some codes for "existing" characters from the game in case you wanna have fun with those:
 
@@ -75,4 +75,4 @@ OC - `247579-2C4874-E6DA19-BBE7C8-595253`
 
 CR - `1B1732-120F1E-1B1E32-1D0528-12053C`
 
-- TODO ragnir, ayala
+- TODO ragnir, ayala -->

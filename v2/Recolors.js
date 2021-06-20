@@ -243,7 +243,7 @@ function changeChar(charNum) {
 
         // do a first paint (ori is the only character that needs an actual recolor)
         if (char.name == "Ori and Sein") {
-            manualRecolor(hexDecode("F5F2-F9F5-F2F9-0000-005D-CBF1-FFC7-2038"));
+            manualRecolor(hexDecode("F8F5-FCF8-F5FC-0000-005D-CBF1-FFC8-21A4"));
         } else {
             mainRecolor();
         }
@@ -869,6 +869,9 @@ document.getElementById("editChar").addEventListener("click", () => {
     if (!customPortrait) {
         customPortrait = "Characters/"+char.name+"/Full.png";
     }
+
+    // from now on, ask for confirmation if the user leaves
+    askForConfExit();
     
 })
 
@@ -996,7 +999,8 @@ function updateOgRange() {
 ogButton.addEventListener("click", showCodeInfo);
 raButton.addEventListener("click", showCodeInfo);
 function showCodeInfo() {
-    showInfo("ograChange")
+    showInfo("ograChange");
+    ogInput.focus();
 }
 document.getElementById("updateOgra").addEventListener("click", translateCode);
 function translateCode() {
@@ -1216,6 +1220,7 @@ function updateFC() {
 
 
 function showCustomUI() {
+
     document.getElementById("introCustom").style.display = "none";
 
     document.getElementById("randomize").style.display = "inherit";
@@ -1230,6 +1235,10 @@ function showCustomUI() {
     // create the new editors for both ogColors and colorRanges
     createProEditor(true);
     createProEditor();
+
+    // from now on, ask for confirmation if the user leaves
+    askForConfExit();
+
 }
 
 let partCount = 2;
@@ -1424,4 +1433,12 @@ function rgb2hsv (r, g, b) {
 //just a simple random function
 function genRnd(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+
+function askForConfExit() {
+    window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        e.returnValue = '';
+    });
 }

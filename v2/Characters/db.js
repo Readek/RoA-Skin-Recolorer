@@ -1,6 +1,14 @@
-/* Character Database */
-/* "ogColor" values are RGBA, "colorRange" values are HSVA */
-/* These values come from the Character Templates on the Workshop */
+/*
+    Character Database
+
+    "ogColor" values are RGBA, "colorRange" values are HSVA 
+
+    These values come from the Character Templates on the Workshop
+
+    Some values from the templates were wrong or outdated:
+    Kragg: Skin from "121, 173, 93" to "121, 173, 100"
+*/
+
 const db = {
     "chars": [
         {
@@ -179,7 +187,7 @@ const db = {
             name : "Kragg",
             ogColor : [
                 136, 104, 93, 1,    // Rock
-                121, 173, 93, 1,    // Chitin
+                121, 173, 100, 1,   // Chitin
                 213, 216, 221, 1,   // Armor
                 60, 36, 36, 1       // Dark Rock
             ],

@@ -17,4 +17,6 @@ Can also recolor any image with the same colors as the character (for example, s
 
 **Absa**'s `body` part and **Kragg**'s `rock` part will never give correct values. The game does something specific to those, but I have no idea what.
 
+<!-- **Absa**'s `body` part and **Kragg**'s `rock` part have an ingame blend value of 120% and 110%, meaning that the default render you can see before the first recolor won't have the same colors as the original image. -->
+
 Sometimes, result image will not have 100% correct rgb values respect to the ingame colors (having +-1/+-2 difference). I am not sure why this is happening, but it's generally not visible to the human eye.

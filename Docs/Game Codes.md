@@ -6,42 +6,66 @@ This is work in progress! More codes will be added.
 
 ---
 
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Absa/1.png" alt="Absa icon"> [Absa](#-absa)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> [Clairen](#-clairen)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> [Elliana](#-elliana)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> [Etalus](#-etalus)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> [Forsburn](#-forsburn)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> [Kragg](#-kragg)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> [Maypul](#-maypul)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> [Orcane](#-orcane)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> [Ori and Sein](#-ori-and-sein)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> [Ranno](#-ranno)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> [Shovel Knight](#-shovel-knight)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> [Sylvanos](#-sylvanos)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Wrastor/1.png" alt="Wrastor icon"> [Wrastor](#-wrastor)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Zetterburn/1.png" alt="Zetterburn icon"> [Zetterburn](#-zetterburn)
+
+---
+
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Absa/1.png" alt="Absa icon"> Absa
 
-- `7879-A1E7-79B9-82AD-B1BB-9B8F-D6D7-F4EE` Default
+- `7879-A1E7-79B9-82AD-B1BB-9B8F-D6D7-F4EE` `00` Default
+- `687F-B269-DEFF-90AB-C0BB-9B8F-C6DD-FF36` `01` Blue
+- `AE70-69FF-7272-B979-A2BB-9B8F-FFD2-CCE6` `02` Red
+- `ACB2-694F-FF4F-72C0-87BB-9B8F-FFFF-C8F5` `03` Green
+- `4F4F-4FFA-FAFA-9999-99BB-9B8F-B3B3-B3C3` `04` Grey
+- `743F-84FB-FF79-FBFF-79BB-9B8F-D290-E86E` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> Clairen
 
-- `4136-4F45-4558-AA21-4AB4-B4B4-FFE6-62FF-0C6A-00FF-F604` Default
+- `4136-5045-4559-AA22-4AB5-B5B5-FFE6-63FF-0D6A-00FF-F7B9` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> Elliana
 
-- `D57F-5695-9C90-AF90-C79D-D453-88C5-C148-453C-7D00` Default
+- `D580-5796-9C91-AF91-C89D-D454-89C6-C248-453C-9100` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> Etalus
 
-- `FBF9-FBB4-E6E6-4344-56C7` Default (NEEDS REVISION)
+- `FBFA-FCB4-E6E6-4344-57FD` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> Forsburn
 
-- `746E-6C7F-5F1B-FFE8-00FF-7F00-AA00-0023-2123-FFFF-E463` Default
+- `746E-6C80-601C-FFE9-00FF-7F00-AA00-0024-2224-FFFF-E441` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
 
-- `8768-5C79-AD63-D5D8-DD3C-2323-1100` Default
+- `8868-5D79-AD64-D5D8-DD3C-2424-1800` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> Maypul
 
-- `719B-6FE4-E1AD-A9F4-7C41-3E37-C286-6583` Default
+- `719B-6FE4-E1AD-A9F5-7C41-3E37-C387-65BE` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> Orcane
 
-- `3B49-86CD-F6F6-DF00` Orcane
+- `3B49-87CD-F7F7-1500` `00` Orcane
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> Ori and Sein
 
-- `F2EA-FCFC-EDFC-45FF-405C-CBF0-FFC7-2038` Default (spritesheet)
-- `F5F2-F9F5-F2F9-0000-005D-CBF1-FFC7-2038` Default (ingame)
+Note: Non-default codes were taken through replays, which means they may not be accurate. Will fix someday.
+
+- `F3EB-FDFD-EEFD-45FF-405D-CBF1-FFC8-2146` Default (spritesheet)
+- `F8F5-FCF8-F5FC-0000-005D-CBF1-FFC8-21A4` Default (ingame)
 - `C3E9-F8C3-E9F8-0000-009D-51D5-5C7D-C45B` Cyan
 - `EFCA-CAEF-CACA-0000-00FF-DC72-F77D-7DF5` Red
 - `DAF9-E2DA-F9E2-0000-00F7-9385-4A9B-5B47` Green
@@ -61,21 +85,21 @@ This is work in progress! More codes will be added.
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> Ranno
 
-- `3AD2-E42B-3571-FF7C-00C0-C09D-B5F3-2FE2` Default
+- `3AD2-E42C-3571-FF7C-00C1-C19D-B6F4-3057` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> Shovel Knight
 
-- `3AD2-E43B-4986-FFFF-00DC-CB69-E900` Default
+- `3AD2-E43B-4987-FFFF-00DC-CB69-5100` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> Sylvanos
 
-- `3136-277E-A756-9055-46C3-2B45-F1D0-850A` Default
+- `3236-287E-A757-9156-46C4-2C45-F2D0-86B2` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Wrastor/1.png" alt="Wrastor icon"> Wrastor
 
-- `A856-8E60-445F-8CE6-FFF5-ADC4-E6DA-1884` Default
+- `A857-8F61-4460-8DE7-FFF6-ADC5-E6DA-192B` `00` Default
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Zetterburn/1.png" alt="Zetterburn icon"> Zetterburn
 
-- `7A59-4DDC-CB69-FFE8-00FF-7F00-AA00-00D2` Default
+- `7A5A-4EDC-CB69-FFE9-00FF-7F00-AA00-0007` `00` Default
 

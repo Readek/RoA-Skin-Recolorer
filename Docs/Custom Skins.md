@@ -4,13 +4,28 @@
 
 These are some codes and images that can be used on the Recolorer's `Edit Character` menu, so you can use any color code you want on them.
 
-To use them, simply copy and paste the "Original Colors" code and the "Color Ranges", and download the image shown here, then upload that same image on the Recolorer.
+To use them, simply copy and paste the "Original Colors" and "Color Ranges" codes, and download the image shown here, then upload that same image on the Recolorer.
 
 Non pixel-art images may be modified. Don't worry, this is so they can work in the tool.
 
 Did you create a preset for an image that's not listed here? Please, submit a [pull request](https://github.com/Readek/RoA-Skin-Recolorer/pulls)!
 
-### All non pixel-art codes are Work In Progress!!
+---
+
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Absa/1.png" alt="Absa icon"> [Absa](#-absa)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> [Clairen](#-clairen)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> [Elliana](#-elliana)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> [Etalus](#-etalus)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> [Forsburn](#-forsburn)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> [Kragg](#-kragg)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> [Maypul](#-maypul)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> [Orcane](#-orcane)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> [Ori and Sein](#-ori-and-sein)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> [Ranno](#-ranno)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> [Shovel Knight](#-shovel-knight)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> [Sylvanos](#-sylvanos)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Wrastor/1.png" alt="Wrastor icon"> [Wrastor](#-wrastor)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Zetterburn/1.png" alt="Zetterburn icon"> [Zetterburn](#-zetterburn)
 
 ---
 
@@ -64,6 +79,20 @@ CR - `0A0A0F-1D191E-000000-000000-1C0B64-1E1614-160F1E`
 OC - `88614F-79AD5D-7C6C72-3C2424`
 
 CR - `291C31-1B1D32-490C18-000000`
+
+Notes: `Shading` does not have assigned colors.
+
+<p align="center">
+
+  <img width="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Kragg/HD.png" alt="HD Kragg">
+
+</p>
+
+<h3>HD</h3>
+
+OC - `5B3A60-67A370-A2B1C7-3C2424`
+
+CR - `0F1E23-0F323C-0F283C-000000`
 
 Notes: `Shading` does not have assigned colors.
 

@@ -193,13 +193,32 @@ class RoaRecolor {
     this.charImgs = {};
 
     // this is a variable that the shader will use for Early Access colors
+    // apparently, the game will also use this value for some character's parts
     // if 0, the color will have no shading
     this.blend = [];
-    for (let i = 0; i < ogColor.length; i++) {
-      if (blend) {
-        this.blend.push(0);
-      } else {
-        this.blend.push(1);
+    if (char.name == "Absa") {
+      for (let i = 0; i < ogColor.length; i++) {
+        if (i < 4) {
+          this.blend.push(1.2);
+        } else {
+          this.blend.push(1);
+        }
+      }
+    } else if (char.name == "Kragg") {
+      for (let i = 0; i < ogColor.length; i++) {
+        if (i < 4) {
+          this.blend.push(1.1);
+        } else {
+          this.blend.push(1);
+        }
+      }
+    } else {
+      for (let i = 0; i < ogColor.length; i++) {
+        if (blend) {
+          this.blend.push(0);
+        } else {
+          this.blend.push(1);
+        }
       }
     }
   }
