@@ -207,7 +207,7 @@ function manualRecolor(rgb) {
 function changeChar(charNum) {
 
     // calculate the height of the divs so we dont get jumps when switching to the loading div
-    loadingDiv.style.height = (fullCanvas.clientHeight + spritesDiv.clientHeight) + 17 + "px";
+    loadingDiv.style.height = (fullCanvas.clientHeight + spritesDiv.clientHeight) + 7 + "px";
     // hide the character images, show the loading div
     loadingDiv.style.display = "flex";
     fullCanvas.style.display = "none";

@@ -74,18 +74,26 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-header {
-    opacity: .5;
-    text-align: center;
-}
-
-
 #fContainer {
     overflow: auto;
     max-width: 100%;
     max-height: 600px;
     margin-top: 10px;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--bg) var(--mainBG); /* Firefox */
 }
+/* chromium only */
+#fContainer::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+#fContainer::-webkit-scrollbar-track {
+    background: var(--mainBG);
+  }
+#fContainer::-webkit-scrollbar-thumb {
+    background-color: var(--bg);
+}
+
 #fullCanvas{
     image-rendering: pixelated; /* Chromium */
     image-rendering: crisp-edges; /* Firefox */
