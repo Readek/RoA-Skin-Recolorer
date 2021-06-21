@@ -2,8 +2,8 @@
 
 <p align="center">
 
-  <img src="https://github.com/Readek/RoA-Skin-Recolorer/tree/main/Docs/Resources/preview.png" alt="Preview">
-
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/preview.png" alt="Preview">
+  
 </p>
 
 Uses Rivals of Aether's color codes to return a recolored character image.
