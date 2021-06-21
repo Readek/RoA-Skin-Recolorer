@@ -1,0 +1,413 @@
+:root {
+    --mainBG: #514188;
+    --bg: #7c6bb4;
+    --bgH: #9484c9;
+}
+
+@font-face {
+    font-family: "Roboto-Regular";
+    src: url('Roboto-Regular.ttf');
+}
+
+
+html {
+    background-color: var(--mainBG);
+    color: white;
+    font-family: 'Roboto-Regular';
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--bg) var(--mainBG); /* Firefox */
+}
+
+/* all of this is chromium only */
+body::-webkit-scrollbar {
+    width: 5px; /* this doesnt seem to matter at all? */
+    height: 5px;
+}
+body::-webkit-scrollbar-track {
+    background: var(--mainBG);
+  }
+body::-webkit-scrollbar-thumb {
+    background-color: var(--bg);
+}
+
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#resultImg {
+    height: 339px; /* max image heigth, which is Ranno's */
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: scale-down;
+}
+
+
+.row {
+    padding: 5px;
+}
+
+
+#charSelector {
+    width: 44px;
+    height: 44px;
+    border-radius: 20px;
+    margin-right: 10px;
+    background-color: var(--bg);
+    float: left;
+    transition: background-color 150ms;
+    position: relative;
+    outline: none; /* Chromium only */
+}
+#selectedIcon {
+    width: 30px;
+    height: 30px;
+    margin-top: 7px;
+    margin-left: 7px;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
+    object-fit: contain;
+    user-select: none;
+}
+#charSelector:hover {
+    cursor: pointer;
+    background-color: var(--bgH);
+}
+
+#charDropdown {
+    display: none;
+    position: absolute;
+    background-color: var(--bg);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 3;
+    margin-top: 7px;
+    border-radius: 5px;
+    cursor: default;
+    border: 3px solid var(--bgH);
+}
+.charRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.charEntry {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 5px;
+    background-color: var(--bg);
+}
+
+.iconImage {
+    width: 30px;
+    height: 30px;
+    image-rendering: pixelated; /* Chromium */
+    image-rendering: crisp-edges; /* Firefox */
+    object-fit: contain;
+    user-select: none;
+}
+
+.charEntry:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
+}
+
+#charSelector:focus #charDropdown {
+    display: block;
+}
+
+
+input {
+    width: 120px; /* init width is just so an animation happens on page load */
+    height: 25px;
+    outline: none;
+    border: none;
+    border-radius: 20px 0px 0px 20px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: var(--bg);
+    color: white;
+    float: left;
+    transition: background-color 150ms, width 150ms;
+    margin-top: 5px;
+}
+input::placeholder { /* this is just for Chromium */
+    color: rgb(158, 158, 158);
+}
+input:hover, input:focus, #copyToClip:hover {
+    background-color: #8a7bbb;
+}
+
+
+#copyToClip {
+    width: 20px;
+    height: 25px;
+    border-radius: 0px 20px 20px 0px;
+    padding: 5px 8px 5px 5px;
+    background-color: var(--bg);
+    float: left;
+    transition: background-color 100ms;
+    margin-top: 5px;
+    outline: none; /* Chromium only */
+}
+#copyIcon {
+    height: 20px;
+    width: 20px;
+    margin-top: 2px;
+    fill: lightgray;
+}
+#copyToClip:hover {
+    cursor: pointer;
+}
+#copyToClip:active {
+    background-color: var(--bg);
+}
+
+#copied {
+    position: absolute;
+    bottom: -17px;
+    left: -11px;
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+}
+.copiedAnim {
+    animation: copyMove 1s ease 1;
+}
+@keyframes copyMove {
+    0%   {bottom: -8px; opacity: 0;}
+    10%  {bottom: -17px; opacity: 1;}
+    80%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+
+#row2 {
+    font-size: 15px;
+    height: 0px;
+    transition: height 150ms;
+    margin-top: -5px;
+}
+
+
+#row3, #row4 {
+    display: flex;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 5px 0px 5px;
+    height: 26px;
+    width: 152px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 17px;
+    color: white;
+    transition: filter 100ms;
+    user-select: none;
+    outline: none; /* Chromium only */
+}
+.buttons:hover {
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+.buttons:active {
+    filter: brightness(.9);
+}
+
+#randomize {
+    background-color: #75b46f;
+}
+#randomIcon {
+    height: 36px;
+    width: 36px;
+    fill: white;
+    margin-left: -5px;
+    margin-right: -2px;
+    margin-top: 7px;
+}
+
+#uplImg {
+    background-color: #7992c2;
+}
+#uploadIcon {
+    height: 28px;
+    width: 28px;
+    fill: white;
+    margin-right: 3px;
+}
+
+#downImgButton {
+    background-color: #c27979;
+}
+#downIcon {
+    height: 24px;
+    width: 24px;
+    fill: white;
+    margin-left: -2px;
+    margin-right: 2px;
+    margin-top: 4px;
+}
+
+
+.buttonsBot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    transition: filter 100ms;
+    margin: 0px 3px 0px 3px;
+}
+.buttonsBot:hover {
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+.buttonsBot:active {
+    filter: brightness(.9);
+}
+#twitterButton {
+    background-color: #6479be;
+}
+#twitterIcon {
+    height: 21px;
+    width: 21px;
+    fill: white;
+    transform: translate(1px, 1px);
+}
+#githubButton {
+    background-color: #272727;
+}
+#githubIcon {
+    height: 23px;
+    width: 23px;
+    fill: white;
+    transform: translate(0px, 1px);
+}
+#resourcesButton {
+    background-color: #c2934d;
+}
+#resourcesIcon {
+    height: 21px;
+    width: 21px;
+    fill: white;
+    transform: translate(0px, 0px);
+}
+
+
+div>a:link {
+    text-decoration: none;
+}
+div>a:visited {
+    text-decoration: none;
+}
+a:link {
+    color: lightsalmon;
+}
+a:visited {
+    color: lightgrey;
+}
+
+
+/* modified from https://codepen.io/reiinii1/pen/aPGXEa */
+
+[data-tooltip] {
+    position: relative;
+  }
+  
+  /* Positioning and visibility settings of the tooltip */
+  [data-tooltip]:before,
+  [data-tooltip]:after {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: 50%;
+    bottom: calc(100% + 5px); /* 5px is the size of the arrow */
+    pointer-events: none;
+    transition: 0.05s;
+    margin-bottom: -4px;
+  }
+  
+  /* The actual tooltip with a dynamic width */
+  [data-tooltip]:before {
+    content: attr(data-tooltip);
+    padding: 5px 10px;
+    min-width: 50px;
+    max-width: 310px;
+    width: max-content;
+    width: -moz-max-content;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #222;
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-align: center;
+    white-space: pre-wrap;
+    transform: translate(-50%, -5px) scale(0.9);
+  }
+  
+  /* Tooltip becomes visible at hover */
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after {
+    visibility: visible;
+    opacity: 1;
+  }
+  /* Scales from 0.5 to 1 -> grow effect */
+  [data-tooltip]:hover:before {
+    transition-delay: .8s;
+    transform: translate(-50%, -5px) scale(1);
+  }
+
+  [data-tooltip]:focus:before,
+  [data-tooltip]:focus:after {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+    
+  /* BOTTOM */
+  [data-tooltip-location="bottom"]:before,
+  [data-tooltip-location="bottom"]:after {
+    top: calc(100% + 5px);
+    bottom: auto;
+  }
+  
+  [data-tooltip-location="bottom"]:before {
+    transform: translate(-50%, 5px) scale(0.9);
+  }
+  [data-tooltip-location="bottom"]:hover:before {
+    transform: translate(-50%, 5px) scale(1);
+  }
+  
+
+  /* For the characters drowdown */
+  [data-tooltip-delay="none"]:hover:before {
+    transition-delay: 0s;
+  }
+
+
+  /* responsive time? */
+  @media (max-width: 620px) {
+
+    #row3 {
+        display:block
+    }
+
+    .buttons {
+        margin: 8px;
+    }
+
+    input {
+        max-width: 180px;
+    }
+
+}
