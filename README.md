@@ -2,7 +2,7 @@
 
 <p align="center">
 
-  <video src="https://github.com/Readek/RoA-Skin-Recolorer/tree/main/Docs/Resources/Demo.mp4" alt="Preview">
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/tree/main/Docs/Resources/preview.png" alt="Preview">
 
 </p>
 
