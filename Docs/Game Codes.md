@@ -2,7 +2,7 @@
 
 <p align="center">Game Codes - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Skins.md">Custom Skins</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md">Stages</a></p>
 
-This is work in progress! More codes will be added.
+These are the codes the game uses for character skins. More codes will be added over time.
 
 ---
 
@@ -74,10 +74,20 @@ This is work in progress! More codes will be added.
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> Maypul
 
 - `719B-6FE4-E1AD-A9F5-7C41-3E37-C387-65BE` `00` Default
+- `4E7C-9CC3-FBFC-7FFD-FF41-3E37-C387-652D` `01` Blue
+- `9A45-45FF-CFF1-FF80-8341-3E37-C387-65D6` `02` Red
+- `9A86-45FF-FFDF-FDF6-8141-3E37-C387-650C` `03` Yellow
+- `666A-6DFF-E6E1-FAFA-FA41-3E37-C387-6545` `04` Grey
+- `7A6F-9BBE-EBF7-7F90-FF41-3E37-C387-6536` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> Orcane
 
-- `3B49-87CD-F7F7-1500` `00` Orcane
+- `3B49-87CD-F7F7-1500` `00` Default
+- `1BAA-A8FA-FFFF-C800` `01` Cyan
+- `CE30-30FF-DAA1-6E00` `02` Red
+- `237A-35F8-FF86-9700` `03` Green
+- `393A-3CFF-FFFF-8800` `04` Grey
+- `6937-73FF-EF37-B700` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> Ori and Sein
 
@@ -105,20 +115,29 @@ Note: Non-default codes were taken through replays, which means they may not be 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> Ranno
 
 - `3AD2-E42C-3571-FF7C-00C1-C19D-B6F4-3057` `00` Default
+- `712F-DF10-0060-A532-32BB-9992-A5A1-FFB6` `01` Blue
+- `E86A-6A61-0000-A532-32D3-C797-FFA3-A358` `02` Red
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> Shovel Knight
 
 - `3AD2-E43B-4987-FFFF-00DC-CB69-5100` `00` Default
+- `B2F0-DC4D-380B-9F9D-60FA-FFFF-EA00` `01` Cyan
+- `CE48-2856-443C-FFFF-00C2-A996-7C00` `02` Red
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> Sylvanos
 
 - `3236-287E-A757-9156-46C4-2C45-F2D0-86B2` `00` Default
+- `3B3B-758B-D5FF-807A-76BC-D5FF-FFFF-FF14` `01` Blue
+- `7529-29FF-9566-9B6E-6ED0-1515-FFC1-55FD` `02` Red
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Wrastor/1.png" alt="Wrastor icon"> Wrastor
 
 - `A857-8F61-4460-8DE7-FFF6-ADC5-E6DA-192B` `00` Default
+- `4194-D41F-4579-B8DF-FFBE-F4FF-E6DA-194C` `01` Blue
+- `C549-4678-2F33-FFC0-BEEB-C375-E6DA-19E3` `02` Red
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Zetterburn/1.png" alt="Zetterburn icon"> Zetterburn
 
 - `7A5A-4EDC-CB69-FFE9-00FF-7F00-AA00-0007` `00` Default
-
+- `4B5F-C0FA-FDFF-A9FF-DA3F-B1EB-0030-77CD` `01` Blue
+- `CE30-30FD-F724-FFBA-87FF-5F5F-A001-2A8A` `02` Red
