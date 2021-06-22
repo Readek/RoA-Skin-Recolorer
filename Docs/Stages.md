@@ -16,7 +16,7 @@ Did you create a preset for a stage that's not listed here? Please, submit a [pu
 ---
 
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/Air%20Armada/icon.png" alt="Air Armada icon"> [Air Armada](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#air-armada)
-- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/Blazing%20Hideout/icon.png" alt="Blazing Hideout icon"> [Air Armada](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#blazing-hideout)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/Blazing%20Hideout/icon.png" alt="Blazing Hideout icon"> [Blazing Hideout](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#blazing-hideout)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/The%20Rock%20Wall/icon.png" alt="Rock Wall icon"> [The Rock Wall](https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md#the-rock-wall)
 
 ---
