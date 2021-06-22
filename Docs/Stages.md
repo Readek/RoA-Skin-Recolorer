@@ -40,6 +40,24 @@ CR - `1E232C-051405-163C2B-000000`
 
 Note: Metallic parts won't change colors.
 
+## Blazing Hideout
+
+<p align="center">
+
+  <img width="960" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/Blazing Hideout/preview.png" alt="Blazing Hideout preview">
+
+</p>
+
+<p align="center">
+
+  <img height="350" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Stages/Blazing Hideout/texture.png" alt="Blazing Hideout texture">
+
+</p>
+
+OC - `A92B12-FFA201-6C5E6B-48343B-9EAACC`
+
+CR - `1F2F3C-102042-1D3C39-0F0F0A-131819`
+
 ## The Rock Wall
 
 <p align="center">
