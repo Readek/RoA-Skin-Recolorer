@@ -46,6 +46,9 @@ These are the codes the game uses for character skins. More codes will be added 
 - `D580-5796-9C91-AF91-C89D-D454-89C6-C248-453C-9100` `00` Default
 - `6194-D7C9-CDC8-9399-CA67-D5AF-7A8F-A548-453C-8F00` `01` Blue
 - `CD5E-54C9-CDC8-C491-91E7-B256-A590-7A48-453C-E700` `02` Red
+- `6AD5-72E4-C259-C7C0-8F8E-D547-A0A5-7A48-453C-AE00` `03` Green
+- `5050-50E4-EEFF-C7BF-BF93-93BA-AAAA-AA48-453C-FC00` `04` Grey
+- `A956-90DA-BAD0-FFFE-FFFF-FFFF-AAAA-AA86-3F95-1100` `05` Pink
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> Etalus
 
@@ -61,6 +64,9 @@ These are the codes the game uses for character skins. More codes will be added 
 - `746E-6C80-601C-FFE9-00FF-7F00-AA00-0024-2224-FFFF-E441` `00` Default
 - `3270-9180-601C-A9FF-DA3F-B1EB-0030-770F-3143-FFFF-E400` `01` Blue
 - `9132-4480-601C-FFBA-87FF-5F5F-A001-2A43-0F19-FFFF-E44E` `02` Red
+- `6591-3280-601C-D2FF-001F-DD00-007F-0F2B-430F-FFFF-E44B` `03` Green
+- `B3B3-B380-601C-D5D6-D983-8588-4040-414B-4B4B-FFFF-E4E2` `04` White
+- `7732-9180-601C-C281-FF6D-36C1-4A00-AA35-1342-FFFF-E4FB` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
 
@@ -117,27 +123,42 @@ Note: Non-default codes were taken through replays, which means they may not be 
 - `3AD2-E42C-3571-FF7C-00C1-C19D-B6F4-3057` `00` Default
 - `712F-DF10-0060-A532-32BB-9992-A5A1-FFB6` `01` Blue
 - `E86A-6A61-0000-A532-32D3-C797-FFA3-A358` `02` Red
+- `B0CD-5728-4B52-3977-9AB3-B5BB-00CA-69E7` `03` Green
+- `F7F7-F739-3939-1F1F-1FFF-FFFF-9F9F-9F1A` `04` Grey
+- `E84C-C570-0348-5EAA-70BE-AD9D-DCFF-E43F` `05` Pink
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> Shovel Knight
 
 - `3AD2-E43B-4987-FFFF-00DC-CB69-5100` `00` Default
 - `B2F0-DC4D-380B-9F9D-60FA-FFFF-EA00` `01` Cyan
 - `CE48-2856-443C-FFFF-00C2-A996-7C00` `02` Red
+- `52B7-4E04-5300-FFFF-00ED-D9B7-E300` `03` Green
+- `6A6A-6A29-2929-DE2A-12E6-6756-4000` `04` Dark
+- `9B7E-DE7C-0E73-E679-83E8-B1A6-7100` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> Sylvanos
 
 - `3236-287E-A757-9156-46C4-2C45-F2D0-86B2` `00` Default
 - `3B3B-758B-D5FF-807A-76BC-D5FF-FFFF-FF14` `01` Blue
 - `7529-29FF-9566-9B6E-6ED0-1515-FFC1-55FD` `02` Red
+- `2F87-65B9-FF8E-859F-79EF-FF83-FFAC-AC53` `03` Green
+- `3D3D-3DFF-FFFF-9393-93D9-5775-FFFF-FFE8` `04` White
+- `5D34-60B1-8EFF-9D85-9FFF-83CC-7750-6950` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Wrastor/1.png" alt="Wrastor icon"> Wrastor
 
 - `A857-8F61-4460-8DE7-FFF6-ADC5-E6DA-192B` `00` Default
 - `4194-D41F-4579-B8DF-FFBE-F4FF-E6DA-194C` `01` Blue
 - `C549-4678-2F33-FFC0-BEEB-C375-E6DA-19E3` `02` Red
+- `57A8-643D-5A3E-C1FF-CAED-F7A7-E6DA-1916` `03` Green
+- `7677-793E-3E40-FFFF-FFFF-FFFF-E6DA-19E7` `04` Grey
+- `645E-B07B-3329-FEFC-D3D3-BCF3-E6DA-1983` `05` Purple
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Zetterburn/1.png" alt="Zetterburn icon"> Zetterburn
 
 - `7A5A-4EDC-CB69-FFE9-00FF-7F00-AA00-0007` `00` Default
 - `4B5F-C0FA-FDFF-A9FF-DA3F-B1EB-0030-77CD` `01` Blue
 - `CE30-30FD-F724-FFBA-87FF-5F5F-A001-2A8A` `02` Red
+- `237A-35BD-FFA6-D2FF-001F-DD00-007F-0F43` `03` Green
+- `393A-3CFF-FFFF-D5D6-D983-8588-4040-412C` `04` Grey
+- `FAFD-FFDC-CB69-9D87-C36F-5EA6-3C30-3CF6` `05` Purple
