@@ -371,18 +371,19 @@ const db = {
                 99, 41, 76, 1,      // Jacket
                 35, 13, 64, 1,      // Outfit
                 116, 16, 80, 1,     // Eye
-                183, 101, 184, 1,   // Hair
-                243, 155, 233, 1    // Effects
+                85, 22, 98, 1,      // Hair
+                224, 90, 199, 1     // Music
             ],
             colorRange : [
-                13, 12, 8, 1,       // Skin
+                13, 32, 52, 1,      // Skin
                 2, 10, 27, 1,       // Jacket
                 12, 10, 12, 1,      // Outfit
                 14, 14, 25, 1,      // Eye
-                18, 4, 24, 1,       // Hair
-                1, 12, 3, 1         // Effects
+                10, 34, 35, 1,      // Hair
+                8, 30, 26, 1        // Music
             ],
-            partNames : ["Skin", "Jacket", "Outfit", "Eye", "Hair", "Effects"],
+            /* some colors are missing compared to the actual colors.gml */
+            partNames : ["Skin", "Jacket", "Outfit", "Eye", "Hair", "Music"],
             idleFC : 12,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
