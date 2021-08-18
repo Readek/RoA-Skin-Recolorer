@@ -37,7 +37,7 @@ Did you create a preset for an image that's not listed here? Please, submit a [p
 
 </p>
 
-<h3>LoA</h3>
+<h3>Lovers of Aether</h3>
 
 OC - `7879A1-D0809D-417E8C-A49780-D6D7F4`
 
@@ -49,6 +49,18 @@ CR (No recoloreable clothes) - `080830-090826-0C0D18-07061A-040E0B`
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> Elliana
 
+<p align="center">
+
+  <img src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Resources/Characters/Elliana/CoA.png" alt="CoA Elliana">
+
+</p>
+
+<h3>Creatures of Aether</h3>
+
+OC - `D47F56-989D8E-89589D-AFD258-89C6C2-2F3242`
+
+CR - `140F31-22142D-05211E-0A0B28-000000-050509`
+
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> Etalus
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> Forsburn
@@ -59,7 +71,7 @@ CR (No recoloreable clothes) - `080830-090826-0C0D18-07061A-040E0B`
 
 </p>
 
-<h3>LoA</h3>
+<h3>Lovers of Aether</h3>
 
 OC - `3B373B-80601C-FCAB54-EF7939-A71B11-46464A-D0C4AB`
 
@@ -88,7 +100,7 @@ Notes: `Shading` does not have assigned colors.
 
 </p>
 
-<h3>LoA HD</h3>
+<h3>Lovers of Aether HD</h3>
 
 OC - `88614F-79AD5D-7C6C72-3C2424`
 
@@ -130,7 +142,7 @@ CR - `052837-1E263C-141031-060A13-100528`
 
 </p>
 
-<h3>LoA</h3>
+<h3>Lovers of Aether</h3>
 
 OC - `87032C-D5BD7E-FCAB54-D7401D-A71B11`
 
