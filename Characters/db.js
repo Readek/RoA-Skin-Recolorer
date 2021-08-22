@@ -390,26 +390,27 @@ const db = {
         {
             name : "Olympia",
             ogColor : [
-                236, 141, 202, 1,   // Gauntlets
+                236, 141, 202, 1,   // Crystal Light
+                161, 26, 113, 1,    // Crystal Dark
                 166, 115, 75, 1,    // Fur
-                219, 119, 101, 1,   // Tail,Ear
-                240, 236, 236, 1,   // Pants
-                54, 123, 141, 1,    // Eyes
-                255, 249, 249, 1    // Shine (this one overrides some "Pants" colors)
-
+                228, 133, 116, 1,   // Skin???
+                213, 207, 215, 1,   // Pant
+                54, 123, 141, 1,    // Eye
+                255, 249, 249, 1,   // White
             ],
             colorRange : [
-                20, 50, 50, 1,      //Gauntlets
-                55, 50, 50, 1,      //Fur
-                15, 40, 1, 1,       //Tail/Ear
-                10, 1, 50, 1,       //Pants
-                10, 75, 40, 1,      //Eye
-                5, 5, 0, 1          //Shine
+                1, 1, 1, 1,         // Crystal Light
+                1, 1, 1, 1,         // Crystal Dark
+                12, 13, 10, 1,      // Fur
+                6, 4, 29, 1,        // Skin???
+                9, 5, 18, 1,        // Pant
+                2, 6, 5, 1,         // Eye
+                1, 1, 1, 1,         // White
             ],
-            partNames : ["Gauntlets", "Fur", "Tail/Ear", "Pants", "Eyes"],
-            idleFC : 7,
-            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000",
-            actualParts : 5
+            partNames : ["Crystal L", "Crystal D", "Fur", "Skin", "Pants", "Eyes"],
+            idleFC : 10,
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
+            actualParts : 6
         }
 
     ]

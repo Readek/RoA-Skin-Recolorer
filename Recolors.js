@@ -167,7 +167,7 @@ function mainRecolor(dl) {
 
         // Olympia needs some special treatment since the pants colors affect all whites
         if (char.name == "Olympia") {
-            rgb.push(char.ogColor[20], char.ogColor[21], char.ogColor[22], char.ogColor[23])
+            rgb.push(char.ogColor[24], char.ogColor[25], char.ogColor[26], char.ogColor[27])
         }
     } else { // if default code, we'll modify it later
         rgb = null;
