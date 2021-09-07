@@ -75,7 +75,7 @@ These are the codes the game uses for character skins. More codes will be added 
 - `0400-A330-2F23-FFEF-3BCF-5E17-A400-00BF-8700-FFFF-FFFD` `12` AZ
 - `4F3D-5E56-5492-DC71-FF92-3BCE-4E17-8D15-0F1B-E4F6-FFF2` `13` Abyss
 - `537A-3EA7-BA4A-D3E2-9AA7-BA4A-2343-3123-4331-D3E2-9A3C` `14` Early Access
-- `B2FF-D041-3E37-FFFF-FFD0-DFDE-D0E9-DE67-9378-FFFF-E4E7` `15` Champion `Fire 1 75%` `Fire 2/3 40%`
+- `B2FF-D041-3E37-FFFF-FFD0-DFDE-D0DF-DE67-9378-FFFF-E4E7` `15` Champion `Fire 1 75%` `Fire 2/3 40%`
 - `0C11-6F8C-8B9B-5328-EB8E-0AB4-262F-A6??-????-FFFF-E4E0` `16` Dreamscape (Cloak2 missing)
 - `????-????-????-????-????-????-????-????-????-????-????` `17` LoA
 - `FFCC-0030-2F23-FFCC-00E4-E4F0-0000-00FF-8700-E4E4-F0D0` `18` Ranked
