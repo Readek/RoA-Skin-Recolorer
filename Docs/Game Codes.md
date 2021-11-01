@@ -32,6 +32,8 @@ These are the codes the game uses for character skins. More codes will be added 
 - `4F4F-4FFA-FAFA-9999-99BB-9B8F-B3B3-B3C3` `04` Grey
 - `743F-84FB-FF79-FBFF-79BB-9B8F-D290-E86E` `05` Purple
 
+- `30DA-A5A2-5D34-0FFF-EB59-423D-D3F8-ECA5` `19` Steampunk
+
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> Clairen
 
 - `4136-5045-4559-AA22-4AB5-B5B5-FFE6-63FF-0D6A-00FF-F7B9` `00` Default
@@ -106,6 +108,8 @@ These are the codes the game uses for character skins. More codes will be added 
 - `237A-35F8-FF86-9700` `03` Green
 - `393A-3CFF-FFFF-8800` `04` Grey
 - `6937-73FF-EF37-B700` `05` Purple
+
+- `A25D-3430-DAA5-C200` `17` Steampunk
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> Ori and Sein
 
