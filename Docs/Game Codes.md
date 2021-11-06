@@ -31,7 +31,6 @@ These are the codes the game uses for character skins. More codes will be added 
 - `ACB2-694F-FF4F-72C0-87BB-9B8F-FFFF-C8F5` `03` Green
 - `4F4F-4FFA-FAFA-9999-99BB-9B8F-B3B3-B3C3` `04` Grey
 - `743F-84FB-FF79-FBFF-79BB-9B8F-D290-E86E` `05` Purple
-
 - `30DA-A5A2-5D34-0FFF-EB59-423D-D3F8-ECA5` `19` Steampunk
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> Clairen
@@ -42,6 +41,7 @@ These are the codes the game uses for character skins. More codes will be added 
 - `4136-5045-4559-40FF-40B5-B5B5-FFE6-6300-DC5E-FCFF-00C9` `03` Green
 - `5425-5D83-6D9B-483D-4BC5-C0D2-FFAF-51B0-3FFF-FFA8-1FEA` `04` Purple
 - `96A3-A46D-8D9B-FFFF-FFEF-E9FF-FF2F-2F00-CBC4-FF35-3501` `05` White
+- `302F-238F-1212-1E0A-A3A4-6D39-CDB8-39C5-0000-FFD7-5A78` `20` Heat Wave
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> Elliana
 
@@ -108,7 +108,6 @@ These are the codes the game uses for character skins. More codes will be added 
 - `237A-35F8-FF86-9700` `03` Green
 - `393A-3CFF-FFFF-8800` `04` Grey
 - `6937-73FF-EF37-B700` `05` Purple
-
 - `A25D-3430-DAA5-C200` `17` Steampunk
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> Ori and Sein
