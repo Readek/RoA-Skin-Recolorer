@@ -2,7 +2,9 @@
 
 <p align="center">Game Codes - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Skins.md">Custom Skins</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md">Stages</a></p>
 
-These are the codes the game uses for character skins. More codes will be added over time.
+These are the codes the game uses for character skins, alongside their internal skin ID.
+
+More codes will be added over time.
 
 ---
 
@@ -31,6 +33,15 @@ These are the codes the game uses for character skins. More codes will be added 
 - `ACB2-694F-FF4F-72C0-87BB-9B8F-FFFF-C8F5` `03` Green
 - `4F4F-4FFA-FAFA-9999-99BB-9B8F-B3B3-B3C3` `04` Grey
 - `743F-84FB-FF79-FBFF-79BB-9B8F-D290-E86E` `05` Purple
+- `FFA6-D4D1-3030-DE49-77FF-F6D1-FFFF-FFB4` `06` Valentines
+- `6441-A5ED-DEFF-937E-B8FF-DFC3-FFFF-FF71` `11` Twitch
+- `3F3F-46B2-FFD0-F5FE-FFFF-FFFF-C6C6-D411` `12` Champion `Horn 25%`
+- `745E-8776-73B9-DC71-FFDC-71FF-A6AC-D60C` `13` Abyss
+- `A7BA-4A53-7A3E-D3E2-9AD3-E29A-D3E2-9AA7` `14` Early Access
+- `3F3F-3F4D-83FF-E742-FFFF-DD55-FFFF-FFD2` `15` Penguin
+- `????-????-????-????-????-????-????-????` `16` LoA
+- `FFDD-1EFF-F2BA-FCD5-35E3-A40A-FFF7-CAD7` `17` Golden
+- `FFCC-0083-83B0-FFFF-FFFF-8700-E4E4-F045` `18` Ranked
 - `30DA-A5A2-5D34-0FFF-EB59-423D-D3F8-ECA5` `19` Steampunk
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> Clairen
