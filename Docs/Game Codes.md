@@ -95,6 +95,14 @@ More codes will be added over time.
 - `4F71-56A6-F7B4-CCCD-400C` `03` Green
 - `554D-4CEE-D0B6-AF89-6B33` `04` Brown
 - `FCFA-FCFF-9EEE-4B35-529F` `05` Pink
+- `FFEC-F7E3-4B4B-E661-A95E` `06` Valentines
+- `D0DF-DE5A-5A5A-FFFF-FFA6` `11` Champion `Body 80%`
+- `FDFB-F4FF-DC1E-4344-5791` `12` Golden
+- `A6AC-D674-5E87-5654-929E` `13` Abyss
+- `D3E2-9A53-7A3E-2343-31FF` `14` Early Access
+- `FBFA-FC7F-EF67-4344-57E6` `15` Panda
+- `4644-44E0-0B00-F6EF-EFD8` `16` Genesis
+- `FFCC-00E4-E4F0-FF87-0068` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> Forsburn
 
