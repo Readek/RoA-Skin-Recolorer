@@ -198,10 +198,10 @@ class RoaRecolor {
     // apparently, the game will also use this value for some character's parts
     // if 0, the color will have no shading
     this.blend = [];
-    if (char.name == "Kragg") {
+    if (char.name == "Kragg" || char.name == "Absa") {
       for (let i = 0; i < ogColor.length; i++) {
         if (i < 4) {
-          this.blend.push(1.2);
+          this.blend.push(1.1);
         } else {
           this.blend.push(1);
         }
