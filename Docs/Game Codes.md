@@ -124,6 +124,7 @@ More codes will be added over time.
 - `0C11-6F8C-8B9B-5328-EB8E-0AB4-262F-A6??-????-FFFF-E4E0` `16` Dreamscape (Cloak2 missing)
 - `????-????-????-????-????-????-????-????-????-????-????` `17` LoA
 - `FFCC-0030-2F23-FFCC-00E4-E4F0-0000-00FF-8700-E4E4-F0D0` `18` Ranked
+- `FFDD-1EE1-BA25-FFFF-FFFD-FFFC-FFF8-C48E-5C00-FFF7-CAFC` `19` Golden
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
 
@@ -133,6 +134,15 @@ More codes will be added over time.
 - `4181-42A5-7575-D7DD-D51A-2D12-1100` `03` Green
 - `6379-8159-5959-DCDA-D61E-2E2D-2300` `04` Grey
 - `675D-88AD-6483-D9E7-D51D-1F34-5600` `05` Purple
+- `FF82-CBFF-C1FF-FFEC-F7BA-2A24-6700` `06` Valentines
+- `D1D5-DD4B-5068-BCC2-CE1E-2432-2A00` `11` Summit (White)
+- `AC08-274B-5068-BCC2-CE1E-2432-A900` `11` Summit (Red)
+- `82AD-B141-3E37-5E56-4D39-3F4B-0300` `12` Champion `Rock 75%`
+- `4F3D-5E56-5492-DC71-FF15-0F1B-8B00` `13` Abyss
+- `537A-3EA7-BA4A-D3E2-9A23-4331-9900` `14` Early Access
+- `AA95-3ADB-4C53-A9F5-7C32-333E-9E00` `15` Burrito
+- `FFBB-00FF-FFFF-FFFD-FB6B-4E1C-4A00` `16` Golden
+- `FFCC-005C-6160-C4FF-F662-4C00-E800` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> Maypul
 
