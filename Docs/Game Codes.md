@@ -172,7 +172,16 @@ More codes will be added over time.
 - `237A-35F8-FF86-9700` `03` Green
 - `393A-3CFF-FFFF-8800` `04` Grey
 - `6937-73FF-EF37-B700` `05` Purple
+- `FF84-C1FF-ECF7-C000` `06` Valentines
+- `ECC9-21EC-C921-C800` `11` Golden
+- `3A3B-53DA-193C-1400` `12` Summit
+- `4F3D-5EA6-ACD6-9300` `13` Abyss
+- `537A-3ED3-E29A-DD00` `14` Early Access
+- `FFF6-E7FF-F6E7-FC00` `15` Pool Party (upper body)
+- `FFB5-41FF-B541-B500` `15` Pool Party (lower body)
+- `3F3F-46D0-DFDE-E800` `16` Champion `Belly 50%`
 - `A25D-3430-DAA5-C200` `17` Steampunk
+- `FFCC-00E4-E4F0-F700` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> Ori and Sein
 
