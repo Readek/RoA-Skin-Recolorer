@@ -212,6 +212,15 @@ More codes will be added over time.
 - `B0CD-5728-4B52-3977-9AB3-B5BB-00CA-69E7` `03` Green
 - `F7F7-F739-3939-1F1F-1FFF-FFFF-9F9F-9F1A` `04` Grey
 - `E84C-C570-0348-5EAA-70BE-AD9D-DCFF-E43F` `05` Pink
+- `FFD3-D3FF-99D2-E34B-4BFF-D9ED-B700-7035` `06` Valentines
+- `F790-0E71-2500-F86E-6EC1-C19B-85EF-FE60` `11` Pool Party
+- `C9C9-DC3F-3F46-B2FF-D0D2-D2B4-FFFF-FEA1` `12` Champion `Poison 75%`
+- `A6AC-D64F-3D5E-4E17-8D92-3BCE-DC71-FF4E` `13` Abyss
+- `537A-3ED3-E29A-D3E2-9AA7-BA4A-537A-3EFB` `14` Early Access
+- `3AD2-E42C-3571-????-??C1-C19D-????-????` `15` Tuxedo
+- `FFF7-CAFF-DD1E-FFDD-1EFF-DD1E-FEFF-0533` `16` Golden
+- `37EA-FF33-3741-5653-AAD4-45FE-00FF-A8D6` `17` Infamous
+- `E4E4-F079-7AC3-FFCC-00FF-8700-F2FD-FFE9` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> Shovel Knight
 
