@@ -152,6 +152,17 @@ More codes will be added over time.
 - `9A86-45FF-FFDF-FDF6-8141-3E37-C387-650C` `03` Yellow
 - `666A-6DFF-E6E1-FAFA-FA41-3E37-C387-6545` `04` Grey
 - `7A6F-9BBE-EBF7-7F90-FF41-3E37-C387-6536` `05` Purple
+- `FF85-D8FF-FFFF-D850-5091-2222-FFEC-F7FE` `06` Valentines
+- `FFFF-FFFF-FFFF-FF9A-B41E-1E1E-9995-7CC7` `11` Panda
+- `413E-3791-D2F3-D3ED-FB41-3E37-91D2-F330` `12` Arcade (Blue)
+- `413E-378C-DE5E-E4F2-7C41-3E37-8CDE-5EEA` `12` Arcade (Green)
+- `413E-37D9-87CD-F1C3-F341-3E37-D987-CD95` `12` Arcade (Pink)
+- `5654-92A6-ACD6-DC71-FF4F-3D5E-4F3D-5E6B` `13` Abyss
+- `5378-3ED3-E29A-A7BA-4A53-7A40-D3E2-9AEB` `14` Early Access
+- `????-????-????-????-????-????-????-????` `15` Ragnir
+- `FFDC-1EFF-FFFF-FFDC-1EFF-DC1E-FFE6-1E04` `16` Golden
+- `5252-52D0-DFDE-B2FF-D03F-3F46-C9C9-DC5D` `17` Champion `Belly 50%`
+- `FFCC-00E4-E4F0-E4E4-F000-0117-FFBA-279A` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> Orcane
 
