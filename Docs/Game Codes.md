@@ -230,6 +230,13 @@ More codes will be added over time.
 - `52B7-4E04-5300-FFFF-00ED-D9B7-E300` `03` Green
 - `6A6A-6A29-2929-DE2A-12E6-6756-4000` `04` Dark
 - `9B7E-DE7C-0E73-E679-83E8-B1A6-7100` `05` Purple
+- `FF99-D2B7-0070-E34B-4BFF-F3FB-3A00` `06` Valentines
+- `FCD5-3575-5C00-FCFC-FCFF-FFFE-3A00` `11` Golden
+- `00FF-A856-53AA-D445-FE37-EAFF-3A00` `12` Infamous
+- `5654-924F-3D5E-DC71-FFA6-ACD6-3A00` `13` Abyss
+- `537A-3ED3-E29A-D3E2-9AA7-BA4A-3A00` `14` Early Access
+- `6A6A-6A41-3F37-B2FF-D0D0-DFDE-3A00` `15` Champion `Horns 50%`
+- `FFCC-0079-7AC3-FF87-00E4-E4F0-3A00` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> Sylvanos
 
