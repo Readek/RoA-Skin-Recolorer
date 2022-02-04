@@ -246,6 +246,14 @@ More codes will be added over time.
 - `2F87-65B9-FF8E-859F-79EF-FF83-FFAC-AC53` `03` Green
 - `3D3D-3DFF-FFFF-9393-93D9-5775-FFFF-FFE8` `04` White
 - `5D34-60B1-8EFF-9D85-9FFF-83CC-7750-6950` `05` Purple
+- `FFFF-FFFF-99D2-FFD9-EDB7-0070-E34B-4B2A` `06` Valentines
+- `FAF7-F79E-2317-3435-37FF-3941-FF39-412A` `11` Genesis
+- `3337-4100-FFA8-5653-AAD4-45FE-37EA-FF2A` `12` Infamous
+- `4F3D-5EDC-71FF-5654-92A6-ACD6-903B-CE2A` `13` Abyss
+- `2343-31A7-BA4A-537A-3ED3-E29A-A7BA-4A2A` `14` Early Access
+- `FFDD-1EFF-E762-FFDD-1EFFD-D1E-FFF6-CF2A` `15` Golden
+- `3F3F-46B2-FFD0-C9C9-DCD0-DFDE-B2FF-D02A` `16` Champion `Petals 1 50%`
+- `FFCC-00FF-8700-E4E4-F0FF-F4E0-FF87-002A` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Wrastor/1.png" alt="Wrastor icon"> Wrastor
 
@@ -255,6 +263,15 @@ More codes will be added over time.
 - `57A8-643D-5A3E-C1FF-CAED-F7A7-E6DA-1916` `03` Green
 - `7677-793E-3E40-FFFF-FFFF-FFFF-E6DA-19E7` `04` Grey
 - `645E-B07B-3329-FEFC-D3D3-BCF3-E6DA-1983` `05` Purple
+- `FFEC-F7E3-4B4B-FF93-C6FF-ECF7-F8FF-9032` `06` Valentines
+- `B222-343C-3B6E-FFFF-FFFF-FFFF-E6DA-19A1` `11` Spangled
+- `2926-21FF-FFFF-B2FF-D058-544E-9692-8CFD` `12` Champion `Hands 50%`
+- `5654-924F-3D5E-DC71-FFA6-ACD6-A6AC-D6FD` `13` Abyss
+- `A7BA-4A53-7A3E-D3E2-9AD3-E29A-D3E2-9AFD` `14` Early Access
+- `????-????-????-????-????-????-????-????` `15` Bradshaw
+- `324D-BBFF-CA07-F7FC-FFC0-DAFF-FFCA-07FD` `16` Collegiate
+- `FFDD-1EFC-D535-FCFC-FCFF-F7CA-FFF2-ABFD` `17` Golden
+- `E4E4-F0FF-CC00-FF87-00F9-E1BE-FFD8-3DFD` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Zetterburn/1.png" alt="Zetterburn icon"> Zetterburn
 
