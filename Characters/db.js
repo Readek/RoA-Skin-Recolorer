@@ -317,24 +317,24 @@ const db = {
         {
             name : "Mollo",
             ogColor : [
-                171, 106, 152, 1,   // PURPLE FUR
-                214, 170, 137, 1,   // TAN FUR
-                107, 31, 31, 1,     // RED CLOTH
-                74, 55, 76, 1,      // SHIRT
-                255, 71, 71, 1,     // BOMBS
-                255, 145, 54, 1,    // EMBERS
-                41, 0, 46, 1        // EYES?
+                175, 96, 136, 1,    // Body
+                244, 212, 173, 1,   // Fluff
+                145, 47, 41, 1,     // Cloth
+                74, 53, 76, 1,      // Wings
+                255, 71, 71, 1,     // Bombs
+                255, 145, 52, 1,    // Embers
+                40, 0, 45, 1        // Eyes
             ],
             colorRange : [
-                7, 5, 15, 1,        // PURPLE FUR
-                8, 19, 13, 1,       // TAN FUR
-                1, 15, 25, 1,       // RED CLOTH
-                3, 22, 16, 1,       // SHIRT
-                4, 17, 40, 1,       // BOMBS
-                22, 14, 46, 1,      // EMBERS
-                2, 36, 27, 1        // EYES?
+                7, 6, 30, 1,        // Body
+                14, 11, 29, 1,      // Fluff
+                4, 14, 34, 1,       // Cloth
+                3, 4, 17, 1,        // Wings
+                13, 5, 42, 1,       // Bombs
+                22, 14, 46, 1,      // Embers
+                2, 36, 27, 1        // Eyes
             ],
-            partNames : ["Purple Fur", "Tan Fur", "Red Cloth", "Shirt", "Bombs", "Embers", "Eyes"],
+            partNames : ["Body", "Fluff", "Cloth", "Wings", "Bombs", "Embers", "Eyes"],
             idleFC : 8,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
