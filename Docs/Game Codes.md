@@ -155,6 +155,7 @@ More codes will be added over time.
 - `AA95-3ADB-4C53-A9F5-7C32-333E-9E00` `15` Burrito
 - `FFBB-00FF-FFFF-FFFD-FB6B-4E1C-4A00` `16` Golden
 - `FFCC-005C-6160-C4FF-F662-4C00-E800` `18` Ranked
+- `302B-2DF8-5C69-D6DF-EA16-1415-EA00` `19` Genesis
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> Maypul
 
@@ -276,6 +277,7 @@ More codes will be added over time.
 - `FFDD-1EFF-E762-FFDD-1EFFD-D1E-FFF6-CF2A` `15` Golden
 - `3F3F-46B2-FFD0-C9C9-DCD0-DFDE-B2FF-D02A` `16` Champion `Petals 1 50%`
 - `FFCC-00FF-8700-E4E4-F0FF-F4E0-FF87-002A` `18` Ranked
+- `5252-52A2-5D34-30DA-A58A-8A8A-FFFF-FF38` `19` Steampunk
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Wrastor/1.png" alt="Wrastor icon"> Wrastor
 
@@ -316,3 +318,4 @@ More codes will be added over time.
 - `F1CC-3FF0-D94F-FFFF-FFFD-FFFC-FFF8-C46C` `16` Golden
 - `????-????-????-????-????-????-????-????` `17` LoA
 - `FFCC-00F9-E1BE-FFD8-3DE4-E4F0-0000-00B2` `18` Ranked
+- `5252-52E4-923F-30D9-A312-9477-0257-55BE` `19` Steampunk
