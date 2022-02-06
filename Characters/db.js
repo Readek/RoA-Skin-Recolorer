@@ -381,7 +381,7 @@ const db = {
                 12, 16, 29, 1,      // Clothes
                 0, 0, 0, 1,         // Eyes
                 11, 13, 33, 1,      // Hair
-                5, 5, 11, 1        // Music
+                5, 5, 11, 1         // Music
             ],
             partNames : ["Skin", "Jacket", "Clothes", "Eyes", "Hair", "Music"],
             idleFC : 12,
@@ -390,27 +390,26 @@ const db = {
         {
             name : "Olympia",
             ogColor : [
-                236, 141, 202, 1,   // Crystal Light
-                161, 26, 113, 1,    // Crystal Dark
-                166, 115, 75, 1,    // Fur
-                228, 133, 116, 1,   // Skin???
-                213, 207, 215, 1,   // Pant
-                54, 123, 141, 1,    // Eye
-                255, 249, 249, 1,   // White
+                236, 141, 202, 1,   // Right Crystal
+                141, 236, 175, 1,   // Left Crystal
+                184, 128, 83, 1,    // Body
+                228, 133, 116, 1,   // Tail
+                247, 243, 249, 1,   // Pants
+                255, 249, 249, 1,   // Shine
+                54, 123, 141, 1,    // Eyes
             ],
             colorRange : [
-                1, 1, 1, 1,         // Crystal Light
-                1, 1, 1, 1,         // Crystal Dark
-                12, 13, 10, 1,      // Fur
-                6, 4, 29, 1,        // Skin???
-                9, 5, 18, 1,        // Pant
-                2, 6, 5, 1,         // Eye
-                1, 1, 1, 1,         // White
+                2, 46, 31, 1,       // Crystal Light
+                2, 46, 31, 1,       // Crystal Dark
+                13, 15, 36, 1,      // Bodys
+                5, 2, 25, 1,        // Tail
+                7, 7, 32, 1,        // Pants
+                0, 4, 0, 1,         // Shine
+                2, 14, 15, 1,       // Eyes
             ],
-            partNames : ["Crystal L", "Crystal D", "Fur", "Skin", "Pants", "Eyes"],
+            partNames : ["R. Crystal", "L. Crystal", "Body", "Tail", "Pants", "Shine", "Eyes"],
             idleFC : 10,
-            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
-            actualParts : 6
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         }
 
     ]

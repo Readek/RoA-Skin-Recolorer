@@ -164,11 +164,6 @@ function mainRecolor(dl) {
     let rgb = hexDecode(codeInput.value); // translate the color code
     if (rgb != characterImgs.colorIn) { // if the code is not the default one
         rgb.splice(rgb.length - 4); //remove the checksum at the end of the code
-
-        // Olympia needs some special treatment since the pants colors affect all whites
-        if (char.name == "Olympia") {
-            rgb.push(char.ogColor[24], char.ogColor[25], char.ogColor[26], char.ogColor[27])
-        }
     } else { // if default code, we'll modify it later
         rgb = null;
     }
@@ -480,7 +475,7 @@ downImgButton.addEventListener('click', () => {
 
 //randomize button, generates a random valid code based on character parts count
 document.getElementById("randomize").addEventListener("click", () => {
-    if (char.actualParts) { // for orcane & olympia
+    if (char.actualParts) { // for orcane
         randomize(char.actualParts)
     } else {
         randomize(characterImgs.colorIn.length / 4)
