@@ -13,10 +13,14 @@ More codes will be added over time.
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> [Elliana](#-elliana)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> [Etalus](#-etalus)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> [Forsburn](#-forsburn)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Hodan/1.png" alt="Hodan icon"> [Hodan](#-hodan)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> [Kragg](#-kragg)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> [Maypul](#-maypul)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Mollo/1.png" alt="Mollo icon"> [Mollo](#-mollo)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Olympia/1.png" alt="Olympia icon"> [Olympia](#-Olympia)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> [Orcane](#-orcane)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> [Ori and Sein](#-ori-and-sein)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Pomme/1.png" alt="Pomme icon"> [Pomme](#-pomme)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> [Ranno](#-ranno)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> [Shovel Knight](#-shovel-knight)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> [Sylvanos](#-sylvanos)
@@ -148,6 +152,10 @@ More codes will be added over time.
 - `FFCC-0030-2F23-FFCC-00E4-E4F0-0000-00FF-8700-E4E4-F0D0` `18` Ranked
 - `FFDD-1EE1-BA25-FFFF-FFFD-FFFC-FFF8-C48E-5C00-FFF7-CAFC` `19` Golden
 
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Hodan/1.png" alt="Hodan icon"> Hodan
+
+- 
+
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
 
 - `8868-5D79-AD64-D5D8-DD3C-2424-1800` `00` Default
@@ -197,6 +205,27 @@ More codes will be added over time.
 - `5252-52D0-DFDE-B2FF-D03F-3F46-C9C9-DC5D` `17` Champion `Belly 50%`
 - `FFCC-00E4-E4F0-E4E4-F000-0117-FFBA-279A` `18` Ranked
 
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Mollo/1.png" alt="Mollo icon"> Mollo
+
+- `AF60-88F4-D4AD-912F-294A-354C-FF47-47FF-9134-2800-2D00` `00` Default
+- `4756-6337-383B-11B0-CB43-5E79-00E2-FFA8-E4FF-0000-0099` `01` Blue
+- `AD37-37DF-DFDF-B591-8951-4646-FF7C-7CFF-B387-3D07-0799` `02` Red
+- `5143-3CFF-F5E0-EAB4-4F3A-6B46-4CB7-4035-CE35-001E-0599` `03` Green
+- `FFFF-FF35-393A-A9B1-BC7C-8485-E7FA-FFAF-C5CE-1E1E-1E99` `04` White
+- `FEFF-FFFF-9EE5-43AE-D83C-3C3C-F74D-C77F-DAFF-2E0D-2599` `05` Pink
+- `8149-3AE7-4949-45CD-42E1-ECEE-FF49-3188-E041-0320-08BA` `06` Christmas
+- `FFEE-F7FF-DAED-B626-2759-3E50-FF7F-FFFF-4747-2900-2E99` `06` Valentines
+- `F29A-30FF-F9A1-D63D-3D1A-5A72-28D4-FF3D-EFFF-2C18-0FBA` `06` Summer
+- `6360-5984-7970-A8A1-9E41-3D3B-E7CA-ADFF-CBCB-FF00-00BA` `06` Halloween
+- `8251-31ED-D8B6-C493-684C-2E1B-FFFB-E9FF-9136-1608-0202` `08` Default Custom 1
+- `5E67-72D2-F2E6-8EFF-D701-395E-3DD8-FFED-EDED-0014-21CA` `09` Default Custom 2
+- `5654-9285-6E96-A6AC-D64F-3D5E-DC71-FFE2-A0E1-1610-1C99` `13` Abyss
+- `537A-3ED3-E29A-A7BA-4A23-4331-A7BA-4AD3-E29A-2343-3199` `14` Early Access
+
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Olympia/1.png" alt="Olympia icon"> Olympia
+
+- 
+
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> Orcane
 
 - `3B49-87CD-F7F7-1500` `00` Default
@@ -241,6 +270,10 @@ More codes will be added over time.
 - `4E3D-5D4E-3D5D-FF7F-00DC-71FF-FF7F-0093` `13` Abyss
 - `D3E2-9AD3-E29A-0000-0052-7A3E-A7B9-4ADE` `14` Early Access
 - `FFCC-00E4-E4F0-0000-00FF-8700-BE57-2383` `18` Ranked
+
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Olympia/1.png" alt="Olympia icon"> Olympia
+
+- 
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> Ranno
 

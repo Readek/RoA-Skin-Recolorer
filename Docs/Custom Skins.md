@@ -17,10 +17,14 @@ Did you create a preset for an image that's not listed here? Please, submit a [p
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Elliana/1.png" alt="Elliana icon"> [Elliana](#-elliana)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Etalus/1.png" alt="Etalus icon"> [Etalus](#-etalus)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> [Forsburn](#-forsburn)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Hodan/1.png" alt="Hodan icon"> [Hodan](#-hodan)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> [Kragg](#-kragg)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> [Maypul](#-maypul)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Mollo/1.png" alt="Mollo icon"> [Mollo](#-mollo)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Olympia/1.png" alt="Olympia icon"> [Olympia](#-olympia)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> [Orcane](#-orcane)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> [Ori and Sein](#-ori-and-sein)
+- <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Pomme/1.png" alt="Pomme icon"> [Pomme](#-pomme)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> [Ranno](#-ranno)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Shovel%20Knight/1.png" alt="SK icon"> [Shovel Knight](#-shovel-knight)
 - <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Sylvanos/1.png" alt="Sylvanos icon"> [Sylvanos](#-sylvanos)
@@ -77,6 +81,7 @@ OC - `3B373B-80601C-FCAB54-EF7939-A71B11-46464A-D0C4AB`
 
 CR - `0A0A0F-1D191E-000000-000000-1C0B64-1E1614-160F1E`
 
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Hodan/1.png" alt="Hodan icon"> Hodan
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
 
@@ -122,9 +127,15 @@ OC - `40466A-9CC8AF-719439-3C3325-772A32`
 
 CR - `052837-1E263C-141031-060A13-100528`
 
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Mollo/1.png" alt="Mollo icon"> Mollo
+
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Olympia/1.png" alt="Olympia icon"> Olympia
+
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> Orcane
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> Ori and Sein
+
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Pomme/1.png" alt="Pomme icon"> Pomme
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> Ranno
 
