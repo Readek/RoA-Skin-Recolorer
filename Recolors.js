@@ -239,6 +239,8 @@ function changeChar(charNum) {
         // do a first paint (ori is the only character that needs an actual recolor)
         if (char.name == "Ori and Sein") {
             manualRecolor(hexDecode("F8F5-FCF8-F5FC-0000-005D-CBF1-FFC8-21A4"));
+        } else if (char.name == "Olympia") {
+            manualRecolor(hexDecode("EC8D-CAEC-8DCA-B880-53E4-8574-F7F3-F9FF-F9F9-367B-8D4A"));
         } else {
             mainRecolor();
         }

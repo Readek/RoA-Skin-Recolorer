@@ -341,28 +341,26 @@ const db = {
         {
             name : "Hodan",
             ogColor : [
-                167, 231, 231, 1,   // FX
-                231, 84, 84, 1,     // Skin
-                139, 79, 40, 1,     // Pads
-                64, 64, 255, 1,     // Towel Main
-                255, 255, 128, 1,   // Towel Strip
-                242, 249, 251, 1,   // Fur 1
-                192, 219, 255, 1,   // Fur 2
-                161, 181, 255, 1    // Fur 3
+                136, 231, 255, 1,   // Steam
+                231, 84, 84, 1,     // Body
+                139, 79, 40, 1,     // Hands
+                82, 82, 235, 1,     // Towel
+                255, 220, 66, 1,    // Towel Stripe
+                253, 253, 253, 1,   // Fur 1
+                201, 220, 231, 1,   // Fur 2
             ],
             colorRange : [
-                18, 21, 52, 1,      // FX
-                1, 37, 23, 1,       // Skin
-                33, 19, 14, 1,      // Pads
-                1, 27, 26, 1,       // Towel Main
-                1, 1, 1, 1,         // Towel Strip
-                1, 1, 1, 1,         // Fur 1
-                0, 0, 0, 1,         // Fur 2
-                0, 0, 0, 1          // Fur 3
+                11, 32, 10, 1,      // Steam
+                1, 23, 13, 1,       // Body
+                5, 9, 31, 1,        // Hands
+                5, 15, 32, 1,       // Towel
+                23, 7, 5, 1,        // Towel Stripe
+                0, 0, 0, 1,         // Fur 1
+                16, 29, 8, 1,       // Fur 2
             ],
-            partNames : ["FX", "Skin", "Pads", "Towel 1", "Towel 2", "Fur 1", "Fur 2", "Fur 3"],
+            partNames : ["Steam", "Body", "Hands", "Towel", "T. Stripe", "Fur 1", "Fur 2"],
             idleFC : 8,
-            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
+            placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
         {
             name : "Pomme",
