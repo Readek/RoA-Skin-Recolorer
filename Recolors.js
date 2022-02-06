@@ -263,6 +263,12 @@ function changeChar(charNum) {
         fullCanvas.style.display = "inherit";
         spritesDiv.style.display = "inherit";
 
+        // to remove later
+        if (charNum == 16) {
+            codeWarning.style.height = "16px";
+            codeWarning.innerHTML = "Pomme has missing Hair/Music colors, though color code is correct. Will get fixed soon™"
+        }
+
     })
 
     // all of this is for the animated idle sprite

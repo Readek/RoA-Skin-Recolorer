@@ -368,22 +368,22 @@ const db = {
             name : "Pomme",
             ogColor : [
                 233, 190, 224, 1,   // Skin
-                99, 41, 76, 1,      // Jacket
-                35, 13, 64, 1,      // Outfit
-                116, 16, 80, 1,     // Eye
-                85, 22, 98, 1,      // Hair
-                224, 90, 199, 1     // Music
+                167, 83, 132, 1,    // Jacket
+                103, 49, 137, 1,    // Clothes
+                177, 47, 102, 1,    // Eyes
+                183, 101, 184, 1,   // Hair
+                219, 74, 195, 1     // Music
+                
             ],
             colorRange : [
-                13, 32, 52, 1,      // Skin
-                2, 10, 27, 1,       // Jacket
-                12, 10, 12, 1,      // Outfit
-                14, 14, 25, 1,      // Eye
-                10, 34, 35, 1,      // Hair
-                8, 30, 26, 1        // Music
+                14, 21, 37, 1,      // Skin
+                5, 14, 37, 1,       // Jacket
+                12, 16, 29, 1,      // Clothes
+                0, 0, 0, 1,         // Eyes
+                11, 13, 33, 1,      // Hair
+                5, 5, 11, 1        // Music
             ],
-            /* some colors are missing compared to the actual colors.gml */
-            partNames : ["Skin", "Jacket", "Outfit", "Eye", "Hair", "Music"],
+            partNames : ["Skin", "Jacket", "Clothes", "Eyes", "Hair", "Music"],
             idleFC : 12,
             placeholder : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000"
         },
