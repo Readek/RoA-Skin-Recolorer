@@ -4,7 +4,7 @@
 
 These are the codes the game uses for character skins, alongside their internal skin ID.
 
-More codes will be added over time.
+If a code is wrong or missing, please submit a [pull request](https://github.com/Readek/RoA-Skin-Recolorer/pulls) or tell me directly through [twitter](https://twitter.com/Readeku) or Discord `Readek#5869`.
 
 ---
 
@@ -147,7 +147,7 @@ More codes will be added over time.
 - `4F3D-5E56-5492-DC71-FF92-3BCE-4E17-8D15-0F1B-E4F6-FFF2` `13` Abyss
 - `537A-3EA7-BA4A-D3E2-9AA7-BA4A-2343-3123-4331-D3E2-9A3C` `14` Early Access
 - `B2FF-D041-3E37-FFFF-FFD0-DFDE-D0DF-DE67-9378-FFFF-E4E7` `15` Champion `Fire 1 75%` `Fire 2/3 40%`
-- `0C11-6F8C-8B9B-5328-EB8E-0AB4-262F-A6??-????-FFFF-E4E0` `16` Dreamscape (Cloak2 missing)
+- `0C11-6F8C-8B9B-5328-EB8E-0AB4-262F-A6??-????-FFFF-E4E0` `16` Dreamscape
 - `????-????-????-????-????-????-????-????-????-????-????` `17` LoA
 - `FFCC-0030-2F23-FFCC-00E4-E4F0-0000-00FF-8700-E4E4-F0D0` `18` Ranked
 - `FFDD-1EE1-BA25-FFFF-FFFD-FFFC-FFF8-C48E-5C00-FFF7-CAFC` `19` Golden
@@ -298,9 +298,22 @@ More codes will be added over time.
 - `D3E2-9AD3-E29A-0000-0052-7A3E-A7B9-4ADE` `14` Early Access
 - `FFCC-00E4-E4F0-0000-00FF-8700-BE57-2383` `18` Ranked
 
-## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Olympia/1.png" alt="Olympia icon"> Olympia
+## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Pomme/1.png" alt="Pomme icon"> Pomme
 
-- 
+- `E9BE-E0A7-5384-6731-89B1-2F66-B765-B8DB-4AC3-EE00` `00` Default
+- `BED2-E923-4160-1550-5810-1574-65B8-9C87-E7D1-1A00` `01` Blue
+- `E9BE-CA6C-1B2E-3320-1974-101E-B897-65E2-CE7F-D500` `02` Red
+- `CDEE-E242-6C1B-0834-3A10-7469-747A-BF97-9FF7-2700` `03` Green
+- `EAE6-EE3D-384F-4950-6213-2837-AEAF-CE93-9BB4-2200` `04` White
+- `D7C5-FF32-2347-1611-272A-083D-6840-8AC1-8FFF-3700` `05` Purple
+- `F4DE-DE3B-AE38-FB00-008C-4848-AD0F-389A-A0FE-E200` `06` Christmas
+- `F4BB-DDBB-2243-FB62-C3CD-5555-AD3F-97FE-59CE-A700` `06` Valentines
+- `F4E0-9056-D3F0-FF92-1742-BAB3-F886-435D-B5EE-7300` `06` Summer
+- `9482-53BE-1414-621B-0D00-0000-332D-29E6-AE4D-5200` `06` Halloween
+- `E8D9-D366-4917-7F81-8287-5100-D6D6-D6E0-BE8B-C400` `08` Default Custom 1
+- `CEBB-BB35-2A2A-5100-0040-0000-9129-29ED-9B87-2500` `09` Default Custom 2
+- `5654-9291-3BCE-4F3D-5E4E-178D-A6AC-D6F4-D4FF-EF00` `13` Abyss
+- `D3E2-9A53-7A3E-2343-3123-4331-A7BA-4AD3-E29A-3900` `14` Early Access
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> Ranno
 
