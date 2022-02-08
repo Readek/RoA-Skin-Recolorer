@@ -168,6 +168,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `FFC5-2643-BD47-43BD-47CF-9C00-FFCE-CEFF-8C0D-E139-01FF` `09` Default Custom 2
 - `A6AC-D6A6-ACD6-5654-92DC-71FF-913B-CE4F-3D5E-3827-46DB` `13` Abyss
 - `D3E2-9AA7-BA4A-537A-3E23-4331-A7BA-4AD3-E29A-D3E2-9A69` `14` Early Access
+- `EBDE-7BE9-E9E8-FF9E-27CD-70DE-7E00-7EFF-F88F-F8D1-6174` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
 
@@ -234,6 +235,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `5E67-72D2-F2E6-8EFF-D701-395E-3DD8-FFED-EDED-0014-21CA` `09` Default Custom 2
 - `5654-9285-6E96-A6AC-D64F-3D5E-DC71-FFE2-A0E1-1610-1C99` `13` Abyss
 - `537A-3ED3-E29A-A7BA-4A23-4331-A7BA-4AD3-E29A-2343-3199` `14` Early Access
+- `A260-A0D2-D2D2-FDD2-5152-2B5A-FFE9-00FF-6E00-0000-0030` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Olympia/1.png" alt="Olympia icon"> Olympia
 
@@ -252,6 +254,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `C517-38C5-1738-E4DA-BAE4-8574-D6CF-F5FF-F9F9-32DB-9675` `09` Default Custom 2
 - `C81F-FFF0-A9FF-5654-924F-3D5E-A6AC-D6DA-B9FF-4F3D-5DFC` `13` Abyss
 - `D3E2-9AD3-E29A-537A-3EA7-BA4A-D3E2-9AD3-E29A-2343-3105` `14` Early Access
+- `FFD2-2FFF-D22F-FFFE-F9E1-9E00-C489-CDFF-F9F9-2343-31C4` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> Orcane
 
@@ -314,6 +317,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `CEBB-BB35-2A2A-5100-0040-0000-9129-29ED-9B87-2500` `09` Default Custom 2
 - `5654-9291-3BCE-4F3D-5E4E-178D-A6AC-D6F4-D4FF-EF00` `13` Abyss
 - `D3E2-9A53-7A3E-2343-3123-4331-A7BA-4AD3-E29A-3900` `14` Early Access
+- `FAEF-D3FF-EC52-FFB5-47FF-9403-9C5F-A0DD-CE00-3700` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ranno/1.png" alt="Ranno icon"> Ranno
 
