@@ -39,6 +39,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `743F-84FB-FF79-FBFF-79BB-9B8F-D290-E86E` `05` Purple
 - `F3D9-D56D-C253-DE48-48DE-4848-FFFF-FF4A` `06` Christmas
 - `FFA6-D4D1-3030-DE49-77FF-F6D1-FFFF-FFB4` `06` Valentines
+- `F6EC-7259-CCE9-9BF9-D1FF-B957-FFFD-D398` `06` Summer
 - `444D-6BFA-7AFF-FF7C-0044-4D6B-B1FF-6BFC` `06` Halloween
 - `CCCC-CCF9-FF62-988C-B7FF-EBBA-FBFD-FFD7` `08` Default Custom 1
 - `6716-164B-4B4B-A42F-FF53-3A3A-D696-7116` `09` Default Custom 2
