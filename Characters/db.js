@@ -206,14 +206,14 @@ const db = {
             ogColor : [
                 59, 73, 135, 1,     // Body
                 205, 247, 247, 1,   // Belly
-                0, 255, 0, 1,       // Highlight (golden skin only)
-                /* 29, 33, 91, 1    // Dark (not sure what this is for?) */
+                0, 255, 0, 1,       // Highlight
+                255, 255, 0, 1      // Highlight Golden
             ],
             colorRange : [
                 18, 30, 40, 1,      // Body
                 22, 30, 65, 1,      // Belly
                 2, 0, 0, 0,         // Highlight
-                /* 3, 0, 0, 0       // Dark */
+                2, 0, 0, 0       // Dark
             ],
             partNames : ["Body", "Belly"],
             idleFC : 8,

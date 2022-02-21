@@ -168,10 +168,11 @@ function mainRecolor(dl) {
         rgb = null;
     }
 
-    if (char.name == "Orcane") { // orcane has a greenish hidden part
+    if (char.name == "Orcane") { // orcane has green and yellow hidden parts
         // copy either given array or og colors
         rgb = rgb ? [...rgb] : [...char.ogColor];
-        for (let i = 0; i < 4; i++) { // add the 1st colors as the 3rd colors
+        for (let i = 0; i < 8; i++) {
+            // add the 1st colors as the 3rd colors, 2nd to 4th
             rgb[i+8] = rgb[i];
         }
     }
