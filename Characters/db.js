@@ -213,7 +213,7 @@ const db = {
                 18, 30, 40, 1,      // Body
                 22, 30, 65, 1,      // Belly
                 2, 0, 0, 0,         // Highlight
-                2, 0, 0, 0       // Dark
+                2, 0, 0, 0          // Highlight Golden
             ],
             partNames : ["Body", "Belly"],
             idleFC : 8,
