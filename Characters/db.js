@@ -374,12 +374,12 @@ const db = {
                 
             ],
             colorRange : [
-                14, 21, 37, 1,      // Skin
-                5, 14, 37, 1,       // Jacket
-                12, 16, 29, 1,      // Clothes
+                13, 12, 36, 1,      // Skin
+                3, 24, 36, 1,       // Jacket
+                12, 61, 40, 1,      // Clothes
                 0, 0, 0, 1,         // Eyes
-                11, 13, 33, 1,      // Hair
-                5, 5, 11, 1         // Music
+                22, 13, 33, 1,      // Hair
+                6, 35, 23, 1        // Music
             ],
             partNames : ["Skin", "Jacket", "Clothes", "Eyes", "Hair", "Music"],
             idleFC : 12,
