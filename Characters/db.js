@@ -326,13 +326,13 @@ const db = {
                 40, 0, 45, 1        // Eyes
             ],
             colorRange : [
-                7, 6, 30, 1,        // Body
-                14, 11, 29, 1,      // Fluff
-                4, 14, 34, 1,       // Cloth
-                3, 4, 17, 1,        // Wings
-                13, 5, 42, 1,       // Bombs
-                22, 14, 46, 1,      // Embers
-                2, 36, 27, 1        // Eyes
+                7.2, 6, 30, 1,      // Body
+                21.6, 19, 29, 1,    // Fluff
+                7.2, 15, 34, 1,     // Cloth
+                4.42, 22, 18, 1,    // Wings
+                0.72, 33, 46, 1,    // Bombs
+                23.4, 14, 46, 1,    // Embers
+                3.6, 36, 27, 1      // Eyes
             ],
             partNames : ["Body", "Fluff", "Cloth", "Wings", "Bombs", "Embers", "Eyes"],
             idleFC : 8,
@@ -341,22 +341,22 @@ const db = {
         {
             name : "Hodan",
             ogColor : [
-                136, 231, 255, 1,   // Steam
+                137, 232, 255, 1,   // Steam
                 231, 84, 84, 1,     // Body
                 139, 79, 40, 1,     // Hands
                 82, 82, 235, 1,     // Towel
                 255, 220, 66, 1,    // Towel Stripe
                 253, 253, 253, 1,   // Fur 1
-                201, 220, 231, 1,   // Fur 2
+                201, 220, 232, 1,   // Fur 2
             ],
             colorRange : [
-                11, 32, 10, 1,      // Steam
-                1, 23, 13, 1,       // Body
-                5, 9, 31, 1,        // Hands
-                5, 15, 32, 1,       // Towel
-                23, 7, 5, 1,        // Towel Stripe
-                0, 0, 0, 1,         // Fur 1
-                16, 29, 8, 1,       // Fur 2
+                18, 39, 37, 1,      // Steam
+                0.72, 37, 23, 1,    // Body
+                11.88, 19, 30, 1,   // Hands
+                7.2, 27, 32, 1,     // Towel
+                21.6, 5.5, 2, 1,    // Towel Stripe
+                0.72, 0.2, 0.2, 1,  // Fur 1
+                15.12, 28, 9, 1,    // Fur 2
             ],
             partNames : ["Steam", "Body", "Hands", "Towel", "T. Stripe", "Fur 1", "Fur 2"],
             idleFC : 8,
@@ -374,12 +374,12 @@ const db = {
                 
             ],
             colorRange : [
-                13, 12, 36, 1,      // Skin
-                3, 24, 36, 1,       // Jacket
-                12, 61, 40, 1,      // Clothes
-                0, 0, 0, 1,         // Eyes
-                22, 13, 33, 1,      // Hair
-                6, 35, 23, 1        // Music
+                12.996, 19, 36, 1,  // Skin
+                3.996, 26, 37, 1,   // Jacket
+                12.024, 26, 37, 1,  // Clothes
+                3.6, 1, 1, 1,       // Eyes
+                18, 13, 34, 1,      // Hair
+                1.872, 48, 16.5, 1  // Music
             ],
             partNames : ["Skin", "Jacket", "Clothes", "Eyes", "Hair", "Music"],
             idleFC : 12,
@@ -397,13 +397,13 @@ const db = {
                 54, 123, 141, 1,    // Eyes
             ],
             colorRange : [
-                2, 46, 31, 1,       // Crystal Light
-                2, 46, 31, 1,       // Crystal Dark
-                13, 15, 36, 1,      // Bodys
-                5, 2, 25, 1,        // Tail
-                7, 7, 32, 1,        // Pants
-                0, 4, 0, 1,         // Shine
-                2, 14, 15, 1,       // Eyes
+                21.6, 50, 50, 1,       // Crystal Light
+                21.6, 50, 50, 1,       // Crystal Dark
+                12.6, 15, 36, 1,      // Bodys
+                5.04, 2, 25, 1,        // Tail
+                10.8, 6, 50, 1,        // Pants
+                5.04, 5, 0, 1,         // Shine
+                9.72, 75, 40, 1,       // Eyes
             ],
             partNames : ["R. Crystal", "L. Crystal", "Body", "Tail", "Pants", "Shine", "Eyes"],
             idleFC : 10,
