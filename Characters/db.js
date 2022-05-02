@@ -397,13 +397,13 @@ const db = {
                 54, 123, 141, 1,    // Eyes
             ],
             colorRange : [
-                21.6, 50, 50, 1,       // Crystal Light
-                21.6, 50, 50, 1,       // Crystal Dark
-                12.6, 15, 36, 1,      // Bodys
-                5.04, 2, 25, 1,        // Tail
-                10.8, 6, 50, 1,        // Pants
-                5.04, 5, 0, 1,         // Shine
-                9.72, 75, 40, 1,       // Eyes
+                21.6, 50, 50, 1,     // Crystal Light
+                21.6, 50, 50, 1,     // Crystal Dark
+                12.6, 15, 36, 1,     // Body
+                5.04, 2, 25, 1,      // Tail
+                10.8, 6, 50, 1,      // Pants
+                5.04, 5, 0, 1,       // Shine
+                9.72, 75, 40, 1,     // Eyes
             ],
             partNames : ["R. Crystal", "L. Crystal", "Body", "Tail", "Pants", "Shine", "Eyes"],
             idleFC : 10,
