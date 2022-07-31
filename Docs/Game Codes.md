@@ -52,6 +52,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `FFDD-1EFF-F2BA-FCD5-35E3-A40A-FFF7-CAD7` `17` Golden
 - `FFCC-0083-83B0-FFFF-FFFF-8700-E4E4-F045` `18` Ranked
 - `30DA-A5A2-5D34-0FFF-EB59-423D-D3F8-ECA5` `19` Steampunk
+- `5E47-3D8E-210B-4B45-FF4F-4F4F-F3DB-ADE7` `20` High Roller
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Clairen/1.png" alt="Clairen icon"> Clairen
 
@@ -219,6 +220,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `FFDC-1EFF-FFFF-FFDC-1EFF-DC1E-FFE6-1E04` `16` Golden
 - `5252-52D0-DFDE-B2FF-D03F-3F46-C9C9-DC5D` `17` Champion `Belly 50%`
 - `FFCC-00E4-E4F0-E4E4-F000-0117-FFBA-279A` `18` Ranked
+- `F16F-2EFD-D11D-FDBC-1D3A-3A3A-F75A-2661` `19` GotE
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Mollo/1.png" alt="Mollo icon"> Mollo
 
@@ -253,6 +255,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `C88D-ECC6-B8EC-8E6D-5C6E-9986-A1CE-62FF-FFFF-FF00-0088` `06` Halloween
 - `17A6-7317-A673-99D7-F255-8568-F5DB-8BFF-F9F9-16D9-9431` `08` Default Custom 1
 - `C517-38C5-1738-E4DA-BAE4-8574-D6CF-F5FF-F9F9-32DB-9675` `09` Default Custom 2
+- `FBFF-FAFB-FFFA-6B6A-68D4-D4AE-B2FF-D0FF-F9F9-367B-8D03` `11` Champion `no alpha?`
 - `C81F-FFF0-A9FF-5654-924F-3D5E-A6AC-D6DA-B9FF-4F3D-5DFC` `13` Abyss
 - `D3E2-9AD3-E29A-537A-3EA7-BA4A-D3E2-9AD3-E29A-2343-3105` `14` Early Access
 - `FFD2-2FFF-D22F-FFFE-F9E1-9E00-C489-CDFF-F9F9-2343-31C4` `18` Ranked
