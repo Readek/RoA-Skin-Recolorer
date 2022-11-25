@@ -413,6 +413,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `324D-BBFF-CA07-F7FC-FFC0-DAFF-FFCA-07DD` `16` Collegiate
 - `FFDD-1EFC-D535-FCFC-FCFF-F7CA-FFF2-AB4D` `17` Golden
 - `E4E4-F0FF-CC00-FF87-00F9-E1BE-FFD8-3D1E` `18` Ranked
+- `28A5-9526-3032-F437-09E3-F07C-E6AA-199F` `19` Street Wave
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Zetterburn/1.png" alt="Zetterburn icon"> Zetterburn
 
