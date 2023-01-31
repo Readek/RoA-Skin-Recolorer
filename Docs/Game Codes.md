@@ -48,7 +48,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `745E-8776-73B9-DC71-FFDC-71FF-A6AC-D60C` `13` Abyss
 - `A7BA-4A53-7A3E-D3E2-9AD3-E29A-D3E2-9AA7` `14` Early Access
 - `3F3F-3F4D-83FF-E742-FFFF-DD55-FFFF-FFD2` `15` Penguin
-- `????-????-????-????-????-????-????-????` `16` LoA
+- `7879-A1E7-79B9-82AD-B196-7870-D6D7-F4B5` `16` LoA
 - `FFDD-1EFF-F2BA-FCD5-35E3-A40A-FFF7-CAD7` `17` Golden
 - `FFCC-0083-83B0-FFFF-FFFF-8700-E4E4-F045` `18` Ranked
 - `30DA-A5A2-5D34-0FFF-EB59-423D-D3F8-ECA5` `19` Steampunk
@@ -98,7 +98,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `413F-368C-DE5E-FFFF-FFFF-FFFF-FFFF-FF41-3F36-1900` `11` Arcade (Green)
 - `413F-36D9-87CD-FFFF-FFFF-FFFF-FFFF-FF41-3F36-DE00` `11` Arcade (Pink)
 - `413F-3691-D2F3-FFFF-FFFF-FFFF-FFFF-FF41-3F36-CB00` `11` Arcade (Blue)
-- `????-????-????-????-????-????-????-????-????-????` `12` Ayala
+- `D580-5796-9C91-BEA6-849D-D454-89C6-C250-5D74-3600` `12` Ayala
 - `4F3D-5EA6-ACD6-DC71-FF92-3BCE-4E17-8D4E-178D-3D00` `13` Abyss
 - `537A-3ED3-E29A-D3E2-9AA7-BA4A-537A-3E53-7A3E-7F00` `14` Early Access
 - `5653-AAD4-45FE-37EA-FF00-FFA8-FFFF-FF33-3741-0900` `15` Infamous
@@ -127,7 +127,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `D3E2-9A53-7A3E-2343-31FF` `14` Early Access
 - `FBFA-FC7F-EF67-4344-57E6` `15` Panda
 - `4644-44E0-0B00-F6EF-EFD8` `16` Genesis
-- `DAA4-F5??-????-4344-5785` `17` Pool Party
+- `DAA4-F5A6-B7FE-4344-5785` `17` Pool Party
 - `FFCC-00E4-E4F0-FF87-0068` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Forsburn/1.png" alt="Forsburn icon"> Forsburn
@@ -150,7 +150,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `537A-3EA7-BA4A-D3E2-9AA7-BA4A-2343-3123-4331-D3E2-9A3C` `14` Early Access
 - `B2FF-D041-3E37-FFFF-FFD0-DFDE-D0DF-DE67-9378-FFFF-E4C3` `15` Champion `Fire 1 75%` `Fire 2/3 40%`
 - `0C11-6F8C-8B9B-5328-EB8E-0AB4-262F-A6??-????-FFFF-E4E0` `16` Dreamscape
-- `????-????-????-????-????-????-????-????-????-????-????` `17` LoA
+- `9889-8480-601C-FFE9-00FF-7F00-AA00-0024-2224-D0C4-AB11` `17` LoA
 - `FFCC-0030-2F23-FFCC-00E4-E4F0-0000-00FF-8700-E4E4-F0D0` `18` Ranked
 - `FFDD-1EE1-BA25-FFFF-FFFD-FFFC-FFF8-C48E-5C00-FFF7-CAFC` `19` Golden
 
@@ -217,7 +217,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `413E-37D9-87CD-F1C3-F341-3E37-D987-CD95` `12` Arcade (Pink)
 - `5654-92A6-ACD6-DC71-FF4F-3D5E-4F3D-5E6B` `13` Abyss
 - `5378-3ED3-E29A-A7BA-4A53-7A40-D3E2-9AEB` `14` Early Access
-- `????-????-????-????-????-????-????-????` `15` Ragnir
+- `E94E-48D1-A376-4E45-5059-4140-FBF2-3608` `15` Ragnir
 - `FFDC-1EFF-FFFF-FFDC-1EFF-DC1E-FFE6-1E04` `16` Golden
 - `5252-52D0-DFDE-B2FF-D03F-3F46-C9C9-DC5D` `17` Champion `Belly 50%`
 - `FFCC-00E4-E4F0-E4E4-F000-0117-FFBA-279A` `18` Ranked
@@ -344,7 +344,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `C9C9-DC3F-3F46-B2FF-D0D2-D2B4-FFFF-FEA1` `12` Champion `Poison 75%`
 - `A6AC-D64F-3D5E-4E17-8D92-3BCE-DC71-FF4E` `13` Abyss
 - `537A-3ED3-E29A-D3E2-9AA7-BA4A-537A-3EFB` `14` Early Access
-- `3AD2-E42C-3571-????-??C1-C19D-????-????` `15` Tuxedo
+- `3AD2-E42C-3571-4545-59C1-C19D-B6F4-30AA` `15` Tuxedo
 - `FFF7-CAFF-DD1E-FFDD-1EFF-DD1E-FEFF-0533` `16` Golden
 - `37EA-FF33-3741-5653-AAD4-45FE-00FF-A8D6` `17` Infamous
 - `E4E4-F079-7AC3-FFCC-00FF-8700-F2FD-FFE9` `18` Ranked
@@ -411,7 +411,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `2926-21FF-FFFF-B2FF-D058-544E-9692-8CE7` `12` Champion `Hands 50%`
 - `5654-924F-3D5E-DC71-FFA6-ACD6-A6AC-D6B4` `13` Abyss
 - `A7BA-4A53-7A3E-D3E2-9AD3-E29A-D3E2-9AA7` `14` Early Access
-- `????-????-????-????-????-????-????-????` `15` Bradshaw
+- `2475-792C-4874-E6DA-19BB-E7C8-5952-5329` `15` Bradshaw
 - `324D-BBFF-CA07-F7FC-FFC0-DAFF-FFCA-07DD` `16` Collegiate
 - `FFDD-1EFC-D535-FCFC-FCFF-F7CA-FFF2-AB4D` `17` Golden
 - `E4E4-F0FF-CC00-FF87-00F9-E1BE-FFD8-3D1E` `18` Ranked
@@ -437,6 +437,6 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `537A-3ED3-E29A-D3E2-9AA7-BA4A-537A-3EFB` `14` Early Access
 - `DCCB-69E5-E1AF-A0FF-FF22-A5E7-FFF9-F940` `15` Shine
 - `F1CC-3FF0-D94F-FFFF-FFFD-FFFC-FFF8-C46F` `16` Golden
-- `????-????-????-????-????-????-????-????` `17` LoA
+- `7A5A-4ED5-BD7E-FFE9-00D7-401D-8703-2C55` `17` LoA
 - `FFCC-00F9-E1BE-FFD8-3DE4-E4F0-0000-00B2` `18` Ranked
 - `5252-52E4-923F-30D9-A312-9477-0257-552E` `19` Steampunk
