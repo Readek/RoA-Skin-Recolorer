@@ -285,6 +285,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `3F3F-46D0-DFDE-E800` `16` Champion `Belly 50%`
 - `A25D-3430-DAA5-C200` `17` Steampunk
 - `FFCC-00E4-E4F0-F700` `18` Ranked
+- `64A6-4674-3E33-A400` `19` Grassroots
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Ori%20and%20Sein/1.png" alt="Ori icon"> Ori and Sein
 
