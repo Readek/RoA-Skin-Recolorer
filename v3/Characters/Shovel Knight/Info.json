@@ -1,0 +1,101 @@
+{
+    "name" : "Shovel Knight",
+    "partNames" : ["Armor Light", "Armor Dark", "Trim", "Horns"],
+    "placeholder" : "0000-0000-0000-0000-0000-0000-0000",
+    "portraitList" : [],
+    "colorData" : {
+        "Default" : {
+            "ogColor" : [
+                58, 210, 228, 1,
+                59, 73, 135, 1,
+                255, 255, 0, 1,
+                220, 203, 105, 1
+            ],
+            "colorRange" : [
+                8, 61, 37, 1,
+                8, 13, 37, 1,
+                26, 91, 1, 1,
+                18, 42, 37, 1
+            ],
+            "idleFC" : 6,
+            "idleSpeed" : "1/6.5"
+        }
+    },
+    "skinList": [
+        {
+            "name": "Default",
+            "hex": "3AD2-E43B-4987-FFFF-00DC-CB69-5100"
+        },
+        {
+            "name": "Cyan",
+            "hex": "B2F0-DC4D-380B-9F9D-60FA-FFFF-EA00"
+        },
+        {
+            "name": "Red",
+            "hex": "CE48-2856-443C-FFFF-00C2-A996-7C00"
+        },
+        {
+            "name": "Green",
+            "hex": "52B7-4E04-5300-FFFF-00ED-D9B7-E300"
+        },
+        {
+            "name": "Grey",
+            "hex": "6A6A-6A29-2929-DE2A-12E6-6756-4000"
+        },
+        {
+            "name": "Purple",
+            "hex": "9B7E-DE7C-0E73-E679-83E8-B1A6-7100"
+        },
+        {
+            "name": "Halloween",
+            "hex": "BD00-0057-5757-D190-3BFF-EDB3-4900"
+        },
+        {
+            "name": "Christmas",
+            "hex": "FF22-2232-B50F-FFFF-FFFF-FFFF-3900"
+        },
+        {
+            "name": "Valentines",
+            "hex": "FF99-D2B7-0070-E34B-4BFF-F3FB-3A00"
+        },
+        {
+            "name": "Summer",
+            "hex": "FFF6-8C59-CCE9-4592-72FF-A628-3800"
+        },
+        {
+            "name": "Default Custom 1",
+            "hex": "DE6C-2561-3131-B466-3B46-1B00-5800"
+        },
+        {
+            "name": "Default Custom 2",
+            "hex": "FFFF-FF61-83A5-BDAA-D52C-1B4E-E800"
+        },
+        {
+            "name": "Golden",
+            "hex": "FCD5-3575-5C00-FCFC-FCFF-FFFE-BA00",
+            "note": "In-game, this skin has Golden Borders active"
+        },
+        {
+            "name": "Infamous",
+            "hex": "00FF-A856-53AA-D445-FE37-EAFF-5500"
+        },
+        {
+            "name": "Abyss",
+            "hex": "5654-924F-3D5E-DC71-FFA6-ACD6-F400"
+        },
+        {
+            "name": "Early Access",
+            "hex": "537A-3ED3-E29A-D3E2-9AA7-BA4A-8200",
+            "note": "In-game, this skin has EA Shading active"
+        },
+        {
+            "name": "Champion",
+            "hex": "6A6A-6A41-3F37-B2FF-D0D0-DFDE-B400",
+            "note": "In-game, this skin has 0.5 alpha for Horns"
+        },
+        {
+            "name": "Ranked",
+            "hex": "FFCC-0079-7AC3-FF87-00E4-E4F0-5C00"
+        }
+    ]
+}

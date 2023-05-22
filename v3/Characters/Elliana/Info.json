@@ -2,7 +2,9 @@
     "name" : "Elliana",
     "partNames" : ["Mech", "Trim", "Body", "Propellers", "Weapons", "Clothes"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
-    "portraitList": ["Ayala"],
+    "portraitList": [
+        {"name" : "Ayala"}
+    ],
     "colorData" : {
         "Default" : {
             "ogColor" : [
@@ -106,8 +108,7 @@
         },
         {
             "name": "Ayala",
-            "hex": "D580-5796-9C91-BEA6-849D-D454-89C6-C250-5D74-3600",
-            "force": true
+            "hex": "D580-5796-9C91-BEA6-849D-D454-89C6-C250-5D74-3600"
         },
         {
             "name": "Abyss",
@@ -116,8 +117,7 @@
         {
             "name": "Early Access",
             "hex": "537A-3ED3-E29A-D3E2-9AA7-BA4A-537A-3E53-7A3E-7F00",
-            "ea": true,
-            "force": true
+            "note": "In-game, this skin has EA Shading active"
         },
         {
             "name": "Infamous",
@@ -130,8 +130,7 @@
         {
             "name": "Champion",
             "hex": "3F3F-46D0-DFDE-D0DF-DEB2-FFD0-B2FF-D052-5252-9F00",
-            "alpha": [1, 0.5, 0.5, 1, 1, 1],
-            "force": true
+            "note": "In-game, this skin has 0.5 alpha for Trim and Body"
         },
         {
             "name": "Ranked",
@@ -140,7 +139,7 @@
         {
             "name": "Golden",
             "hex": "FFDD-1EFF-FCD6-FCFA-F89F-7217-B389-0FFF-DD1E-3C00",
-            "golden": true
+            "note": "In-game, this skin has Golden Borders active"
         }
     ]
 }

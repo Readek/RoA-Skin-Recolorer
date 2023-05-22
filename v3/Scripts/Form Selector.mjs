@@ -8,8 +8,16 @@ const formSelect = document.getElementById("formSelector");
  * Gets you the current form (skin type) of the character
  * @returns {String} Form currently selected
  */
-export function getCurrentForm() {
+export function getCurrentFormValue() {
     return formSelect.value;
+}
+
+/**
+ * Gets you the current form (skin type) of the character
+ * @returns {String} Form currently selected
+ */
+export function getCurrentFormName() {
+    return formSelect.selectedOptions[0].text;
 }
 
 /**
@@ -22,7 +30,7 @@ export function updateFormList(list) {
     formSelect.innerHTML = "";
 
     // add new entries
-    addFormEntry("Default");
+    addFormEntry({name: "Default"});
 
     // for each skin that has a different recolorable image
     for (let i = 0; i < list.length; i++) {
@@ -33,11 +41,11 @@ export function updateFormList(list) {
 
 /**
  * Adds a new value to the form select
- * @param {String} text - Entry text
+ * @param {Object} form - Entry object
  */
-function addFormEntry(text) {
+function addFormEntry(form) {
     const entry = document.createElement("option");
-    entry.text = text;
-    entry.value = text;
+    entry.text = form.name;
+    entry.value = form.useDefault ? "Default" : form.name;
     formSelect.add(entry);
 }

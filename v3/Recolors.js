@@ -1,6 +1,6 @@
 import { RoaRecolor } from "./Scripts/RoA WebGL Shader.mjs";
 import { getJson } from "./Scripts/File System.mjs";
-import { getCurrentForm, updateFormList } from "./Scripts/Form Selector.mjs";
+import { getCurrentFormName, getCurrentFormValue, updateFormList } from "./Scripts/Form Selector.mjs";
 
 let char; // this will hold the values from the character database
 let characterImgs; // this will hold a class from "RoA WebGL Shader.js"
@@ -58,8 +58,7 @@ const darkCheck = document.getElementById("darkTheme");
 
 
 //when the page loads, change to a random character
-//changeChar(charList[genRnd(0, charList.length - 1)]);
-await changeChar("Absa");
+await changeChar(charList[genRnd(0, charList.length - 1)]);
 
 //this will fire everytime we type in the color code input
 codeInput.addEventListener("input", codeControl); 
@@ -176,7 +175,7 @@ function mainRecolor(dl) {
 
     if (char.name == "Orcane") { // orcane has green and yellow hidden parts
         // copy either given array or og colors
-        rgb = rgb ? [...rgb] : [...char.ogColor];
+        rgb = rgb ? [...rgb] : [...char.colorData[getCurrentFormValue()].ogColor];
         for (let i = 0; i < 8; i++) {
             // add the 1st colors as the 3rd colors, 2nd to 4th
             rgb[i+8] = rgb[i];
@@ -231,14 +230,14 @@ async function changeChar(charName, formChange) {
     }
 
     //create new character images with this info
-    characterImgs = new RoaRecolor(char.name, char.colorData[getCurrentForm()].ogColor,
-    char.colorData[getCurrentForm()].colorRange, eaCheck.checked);
+    characterImgs = new RoaRecolor(char.name, char.colorData[getCurrentFormValue()].ogColor,
+    char.colorData[getCurrentFormValue()].colorRange, eaCheck.checked);
     // save all the new images as promises so we know when they are fully loaded
     const imgPromises = [
-        characterImgs.addImage(fullCanvas, `Characters/${char.name}/${getCurrentForm()}/Portrait.png`, "Portrait"),
-        characterImgs.addImage(animCanvas, `Characters/${char.name}/${getCurrentForm()}/Idle.png`, "Idle Spritesheet"),
-        characterImgs.addImage(sprLCanvas, `Characters/${char.name}/${getCurrentForm()}/SpriteL.png`, "Sprite Left"),
-        characterImgs.addImage(sprRCanvas, `Characters/${char.name}/${getCurrentForm()}/SpriteR.png`, "Sprite Right")
+        characterImgs.addImage(fullCanvas, `Characters/${char.name}/${getCurrentFormName()}/Portrait.png`, "Portrait"),
+        characterImgs.addImage(animCanvas, `Characters/${char.name}/${getCurrentFormName()}/Idle.png`, "Idle Spritesheet"),
+        characterImgs.addImage(sprLCanvas, `Characters/${char.name}/${getCurrentFormName()}/SpriteL.png`, "Sprite Left"),
+        characterImgs.addImage(sprRCanvas, `Characters/${char.name}/${getCurrentFormName()}/SpriteR.png`, "Sprite Right")
     ]
     // when the images finish loading
     Promise.all(imgPromises).then( () => {
@@ -284,18 +283,18 @@ async function changeChar(charName, formChange) {
     sprite.decode().then( () => { // when the image finishes loading
 
         //change the width of the sprite animation, depending on the character
-        animDiv.style.width = (sprite.width / char.colorData[getCurrentForm()].idleFC) + "px"; //gets the w of 1 frame
+        animDiv.style.width = (sprite.width / char.colorData[getCurrentFormValue()].idleFC) + "px"; //gets the w of 1 frame
         animDiv.style.height = sprite.height + "px"; // div will have slightly wrong height otherwise
         //now change the variables for the sprite animation
         const r = document.querySelector(':root');
         r.style.setProperty("--spriteMove", -sprite.width + "px"); //end position of the animation
-        r.style.setProperty("--spriteCount", char.colorData[getCurrentForm()].idleFC); // frame count
+        r.style.setProperty("--spriteCount", char.colorData[getCurrentFormValue()].idleFC); // frame count
         // formula for this one is: 1000 is a second, then divided by 60 gets us an
         // in-game frame, then we multiply by 7 because thats the average frame
         // wait between sprite changes, and then we multiply by the character frame
         // count to know how long the animation is going to take, finally, we divide
         // by 1000 to get the value in seconds for the css variable
-        r.style.setProperty("--spriteTime", 1000/60*7*char.colorData[getCurrentForm()].idleFC/1000 + "s");
+        r.style.setProperty("--spriteTime", 1000/60*7*char.colorData[getCurrentFormValue()].idleFC/1000 + "s");
 
     })    
 

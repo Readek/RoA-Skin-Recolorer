@@ -2,7 +2,9 @@
     "name" : "Absa",
     "partNames" : ["Body", "Hair", "Lightning", "Horns", "Belly"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000",
-    "portraitList": ["LoA"],
+    "portraitList": [
+        {"name" : "LoA"}
+    ],
     "colorData" : {
         "Default" : {
             "ogColor" : [

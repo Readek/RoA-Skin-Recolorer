@@ -1,0 +1,110 @@
+{
+    "name" : "Etalus",
+    "partNames" : ["Body", "Ice", "Shading"],
+    "placeholder" : "0000-0000-0000-0000-0000",
+    "portraitList": [
+        {"name" : "Panda", "useDefault" : true},
+        {"name" : "Pool Party", "useDefault" : true}
+    ],
+    "colorData" : {
+        "Default" : {
+            "ogColor" : [
+                251, 250, 252, 1,
+                180, 230, 230, 1,
+                67, 68, 87, 1
+            ],
+            "colorRange" : [
+                15, 41, 70, 1,
+                54, 15, 50, 1,
+                4, 10, 50, 1
+            ],
+            "idleFC" : 14,
+            "idleSpeed" : "1/6"
+        }
+    },
+    "skinList": [
+        {
+            "name": "Default",
+            "hex": "FBFA-FCB4-E6E6-4344-57FD"
+        },
+        {
+            "name": "Cyan",
+            "hex": "73B9-BAA6-B7FE-F5FF-FFA2"
+        },
+        {
+            "name": "Yellow",
+            "hex": "F9FF-B2FF-9BAB-5F27-2015"
+        },
+        {
+            "name": "Green",
+            "hex": "4F71-56A6-F7B4-CCCD-400C"
+        },
+        {
+            "name": "Brown",
+            "hex": "554D-4CEE-D0B6-AF89-6B33"
+        },
+        {
+            "name": "Pink",
+            "hex": "FCFA-FCFF-9EEE-4B35-529F"
+        },
+        {
+            "name": "Halloween",
+            "hex": "3EB6-5A9F-ADB1-3635-350C"
+        },
+        {
+            "name": "Christmas",
+            "hex": "FDEB-E86D-C253-DE48-4819"
+        },
+        {
+            "name": "Valentines",
+            "hex": "FFEC-F7E3-4B4B-E661-A95E"
+        },
+        {
+            "name": "Summer",
+            "hex": "59CC-E9FF-F68C-FFA6-2809"
+        },
+        {
+            "name": "Default Custom 1",
+            "hex": "2930-3464-8B8C-7E39-3919"
+        },
+        {
+            "name": "Default Custom 2",
+            "hex": "8355-84EF-EFEF-5947-5DF0"
+        },
+        {
+            "name": "Champion",
+            "hex": "D0DF-DE5A-5A5A-FFFF-FFA6",
+            "note": "In-game, this skin has 0.8 alpha for Body"
+        },
+        {
+            "name": "Golden",
+            "hex": "FDFB-F4FF-DC1E-4344-5791",
+            "note": "In-game, this skin has Golden Borders active"
+        },
+        {
+            "name": "Abyss",
+            "hex": "A6AC-D674-5E87-5654-929E"
+        },
+        {
+            "name": "Early Access",
+            "hex": "D3E2-9A53-7A3E-2343-31FF",
+            "note": "In-game, this skin has EA Shading active"
+        },
+        {
+            "name": "Panda",
+            "hex": "FBFA-FC7F-EF67-4344-57E6"
+        },
+        {
+            "name": "Genesis",
+            "hex": "4644-44E0-0B00-F6EF-EFD8"
+        },
+        {
+            "name": "Pool Party",
+            "hex": "DAA4-F5A6-B7FE-4344-5785"
+        },
+        {
+            "name": "Ranked",
+            "hex": "FFCC-00E4-E4F0-FF87-0068"
+        }
+    ]
+}
