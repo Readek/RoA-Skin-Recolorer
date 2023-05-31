@@ -151,7 +151,6 @@ body::-webkit-scrollbar-thumb {
     width: 45px;
     height: 45px;
     border-radius: 100%;
-    margin-right: 10px;
     background-color: var(--bg);
     float: left;
     transition: background-color 150ms;
@@ -301,6 +300,35 @@ body::-webkit-scrollbar-thumb {
     transition: height 150ms;
     margin-top: -5px;
 }
+
+
+#charInfoDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -5px;
+    margin-bottom: 4px;
+    gap: 8px;
+}
+
+.selector {
+    background: var(--bg);
+    border: none;
+    height: 32px;
+    width: 120px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    color: white;
+    transition: filter 100ms;
+}
+.selector:hover, .selector:focus {
+    filter: brightness(1.1);
+}
+.selector:active {
+    filter: brightness(.9);
+}
+
 
 
 #row3, #row6 {
