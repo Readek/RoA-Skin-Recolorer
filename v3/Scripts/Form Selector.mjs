@@ -1,5 +1,3 @@
-
-
 const formSelect = document.getElementById("formSelector");
 
 //formSelect.addEventListener("change", () => {charChange(charName)})
