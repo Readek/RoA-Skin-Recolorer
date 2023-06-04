@@ -276,13 +276,16 @@ async function changeChar(charName, formChange) {
         // hide the loading div, show the characters
         loadingDiv.style.display = "none";
         fullCanvas.style.display = "inherit";
-        spritesDiv.style.display = "inherit";
+        // only show sprites if the portrait has those
+        if (!formHasSprites(getCurrentFormName())) {
+            spritesDiv.style.display = "inherit";
+        }
 
     })
 
     // all of this is for the animated idle sprite
     const sprite = new Image();
-    sprite.src = "Characters/"+char.name+"/Default/Idle.png";
+    sprite.src = `Characters/${char.name}/${getCurrentFormValue()}/Idle.png`;
     sprite.decode().then( () => { // when the image finishes loading
 
         //change the width of the sprite animation, depending on the character
@@ -465,6 +468,19 @@ function applySkinSelectCode() {
     }
 }
 
+/**
+ * TODO this should be on i dont even know man but not here
+ * @param {String} name 
+ * @returns {Object}
+ */
+function formHasSprites(name) {
+    for (let i = 0; i < char.portraitList.length; i++) {
+        if (char.portraitList[i].name == name) {
+            return char.portraitList[i].noSprite;
+        }
+    }
+    return null;
+}
 
 //download image button
 downImgButton.addEventListener('click', () => {

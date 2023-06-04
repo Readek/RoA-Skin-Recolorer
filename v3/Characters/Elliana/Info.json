@@ -4,7 +4,7 @@
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList": [
         {"name" : "Ayala"},
-        {"name" : "CoA"}
+        {"name" : "CoA", "noSprite" : true}
     ],
     "colorData" : {
         "Default" : {

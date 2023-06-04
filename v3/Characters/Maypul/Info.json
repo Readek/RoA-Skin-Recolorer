@@ -4,7 +4,7 @@
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList" : [
         {"name" : "Ragnir"},
-        {"name" : "HD"}
+        {"name" : "HD", "noSprite" : true}
     ],
     "colorData" : {
         "Default" : {

@@ -3,7 +3,7 @@
     "partNames" : ["Body Light", "Body Dark", "Pants", "Bandages", "Poison"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList" : [
-        {"name" : "Pool Party", "useDefault" : true},
+        {"name" : "Pool Party", "useDefault" : true, "noSprite" : true},
         {"name" : "Tuxedo"}
     ],
     "colorData" : {

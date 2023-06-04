@@ -3,7 +3,7 @@
     "partNames" : ["Cloak 1", "Body", "Fire 1", "Fire 2", "Fire 3", "Cloak 2", "Skull"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList": [
-        {"name" : "Dreamscape", "useDefault" : true},
+        {"name" : "Dreamscape", "useDefault" : true, "noSprite" : true},
         {"name" : "LoA"}
     ],
     "colorData" : {

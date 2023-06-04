@@ -3,8 +3,8 @@
     "partNames" : ["Rock", "Skin", "Armor", "Shading"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000",
     "portraitList" : [
-        {"name" : "HD"},
-        {"name" : "LoA HD"}
+        {"name" : "HD", "noSprite" : true},
+        {"name" : "LoA HD", "noSprite" : true}
     ],
     "colorData" : {
         "Default" : {

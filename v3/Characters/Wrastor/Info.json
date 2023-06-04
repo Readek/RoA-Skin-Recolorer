@@ -3,7 +3,7 @@
     "partNames" : ["Body", "Hands", "Scarf", "Belly", "Beak"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList" : [
-        {"name" : "Spangled", "useDefault" : true},
+        {"name" : "Spangled", "useDefault" : true, "noSprite" : true},
         {"name" : "Bradshaw"}
     ],
     "colorData" : {
