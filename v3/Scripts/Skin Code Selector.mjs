@@ -1,10 +1,10 @@
 const codePresetSelect = document.getElementById("codePresetSelector");
 
-codePresetSelect.addEventListener("change", codeChange);
+/* codePresetSelect.addEventListener("change", codeChange);
 
 function codeChange() {
     
-}
+} */
 
 /**
  * Gets you the current skin select value
@@ -23,6 +23,12 @@ export function updateSkinList(list) {
     // clear current data
     codePresetSelect.innerHTML = "";
 
+    // add first default entry
+    const entry = document.createElement("option");
+    entry.text = "<Code Preset>";
+    entry.value = "default";
+    codePresetSelect.add(entry);
+
     // for each skin in the list
     for (let i = 0; i < list.length; i++) {
         addSkinEntry(list[i]);
@@ -39,4 +45,8 @@ function addSkinEntry(form) {
     entry.text = form.name;
     entry.value = form.name;
     codePresetSelect.add(entry);
+}
+
+export function resetSkinPresetText() {
+    codePresetSelect.selectedIndex = 0;
 }

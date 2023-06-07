@@ -1,7 +1,7 @@
 import { RoaRecolor } from "./Scripts/RoA WebGL Shader.mjs";
 import { getJson } from "./Scripts/File System.mjs";
 import { getCurrentFormName, getCurrentFormValue, updateFormList } from "./Scripts/Form Selector.mjs";
-import { getSkinSelectValue, updateSkinList } from "./Scripts/Skin Code Selector.mjs";
+import { getSkinSelectValue, resetSkinPresetText, updateSkinList } from "./Scripts/Skin Code Selector.mjs";
 
 let char; // this will hold the values from the character database
 let characterImgs; // this will hold a class from "RoA WebGL Shader.js"
@@ -459,11 +459,14 @@ function resizeInput() {
  * TODO This should be on Skin Code Selector.mjs
  */
 function applySkinSelectCode() {
-    for (let i = 0; i < char.skinList.length; i++) {
-        if (char.skinList[i].name == getSkinSelectValue()) {
-            codeInput.value = char.skinList[i].hex;
-            // check the code, this is just to force recoloring the image
-            codeControl();
+    if (getSkinSelectValue() != "default") {
+        for (let i = 0; i < char.skinList.length; i++) {
+            if (char.skinList[i].name == getSkinSelectValue()) {
+                codeInput.value = char.skinList[i].hex;
+                // check the code, this is just to force recoloring the image
+                codeControl();
+                resetSkinPresetText();
+            }
         }
     }
 }
