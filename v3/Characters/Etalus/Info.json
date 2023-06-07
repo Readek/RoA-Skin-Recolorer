@@ -3,8 +3,8 @@
     "partNames" : ["Body", "Ice", "Shading"],
     "placeholder" : "0000-0000-0000-0000-0000",
     "portraitList": [
-        {"name" : "Panda", "useDefault" : true},
-        {"name" : "Pool Party", "useDefault" : true, "noSprite" : true}
+        {"name" : "Panda", "useDefault" : true, "icon" : true},
+        {"name" : "Pool Party", "useDefault" : true, "noSprite" : true, "icon" : true}
     ],
     "colorData" : {
         "Default" : {

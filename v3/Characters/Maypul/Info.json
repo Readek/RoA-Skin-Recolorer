@@ -3,7 +3,7 @@
     "partNames" : ["Body", "Belly", "Leaf", "Marks", "Vines"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList" : [
-        {"name" : "Ragnir"},
+        {"name" : "Ragnir", "icon" : true},
         {"name" : "HD", "noSprite" : true}
     ],
     "colorData" : {

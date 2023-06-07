@@ -47,6 +47,9 @@ function addSkinEntry(form) {
     codePresetSelect.add(entry);
 }
 
+/**
+ * Resets select value to the first entry
+ */
 export function resetSkinPresetText() {
     codePresetSelect.selectedIndex = 0;
 }

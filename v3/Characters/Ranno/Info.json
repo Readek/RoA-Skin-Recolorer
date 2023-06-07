@@ -4,7 +4,7 @@
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList" : [
         {"name" : "Pool Party", "useDefault" : true, "noSprite" : true},
-        {"name" : "Tuxedo"}
+        {"name" : "Tuxedo", "icon" : true}
     ],
     "colorData" : {
         "Default" : {

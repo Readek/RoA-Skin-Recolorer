@@ -251,8 +251,13 @@ async function changeChar(charName, formChange) {
         codeInput.value = null;
         codeControl(); //to reset the warning message if any
 
-        //change the character icon
-        charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
+        // change the character icon
+        // if the form has a custom icon, lets use it!
+        if (formHasIcon(getCurrentFormName())) {
+            charIcon.setAttribute("src", "Characters/"+char.name+"/"+getCurrentFormName()+"/Icon.png")
+        } else {
+            charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
+        }
 
         // do a first paint (ori is the only character that needs an actual recolor)
         if (char.name == "Ori and Sein") {
@@ -276,10 +281,13 @@ async function changeChar(charName, formChange) {
         // hide the loading div, show the characters
         loadingDiv.style.display = "none";
         fullCanvas.style.display = "inherit";
+
         // only show sprites if the portrait has those
         if (!formHasSprites(getCurrentFormName())) {
             spritesDiv.style.display = "inherit";
         }
+
+        
 
     })
 
@@ -480,6 +488,19 @@ function formHasSprites(name) {
     for (let i = 0; i < char.portraitList.length; i++) {
         if (char.portraitList[i].name == name) {
             return char.portraitList[i].noSprite;
+        }
+    }
+    return null;
+}
+/**
+ * TODO this should be on i dont even know man but not here
+ * @param {String} name 
+ * @returns {Object}
+ */
+function formHasIcon(name) {
+    for (let i = 0; i < char.portraitList.length; i++) {
+        if (char.portraitList[i].name == name) {
+            return char.portraitList[i].icon;
         }
     }
     return null;

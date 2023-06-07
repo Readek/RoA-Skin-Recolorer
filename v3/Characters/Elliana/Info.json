@@ -3,7 +3,7 @@
     "partNames" : ["Mech", "Trim", "Body", "Propellers", "Weapons", "Clothes"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList": [
-        {"name" : "Ayala"},
+        {"name" : "Ayala", "icon" : true},
         {"name" : "CoA", "noSprite" : true}
     ],
     "colorData" : {
