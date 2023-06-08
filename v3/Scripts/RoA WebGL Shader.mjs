@@ -57,6 +57,7 @@ uniform vec4 colorIn[maxcolors];        // color to replace
 uniform vec4 colorOut[maxcolors];       // desired color
 uniform vec4 colorTolerance[maxcolors]; // HSVA tolerances
 uniform vec4 blend[maxcolors];          // 1 = regular shading, 0 = EA shading
+uniform int special;                    // certain skins use a modified shared logic
 
 
 vec3 rgb_to_hsv(vec3 col)
@@ -137,6 +138,53 @@ void main() {
 
       // this is our desired color
       vec4 tColorOut = colorOut[i];
+
+      if (special == 8) { // THE SUMMIT KRAGG EXPERIENCE
+        
+        if (i == 0) { // for the first part (Kraggs rock)
+  
+          // this is the point in absolute pixels where the fade happens
+          float effectY = 900.0/1292.0;
+  
+          if (effectY > v_texCoord.y){
+  
+            // all pixels above that will be white-ish
+            tColorOut.r = 0.81960;
+            tColorOut.g = 0.83529;
+            tColorOut.b = 0.86667;
+  
+          } else if (v_texCoord.y < effectY + 16.0 / 1292.0){
+  
+            // pixels below will be as normal, but with a faded dithered transition
+  
+            // current coordinates in absolute pixels
+            float corx = 1044.0 - v_texCoord.x * 1044.0;
+            float cory = 1292.0 - v_texCoord.y * 1292.0;
+  
+            // some weird math for the dither effect idk
+            float t_y = floor(cory * 0.25) * 4.0;
+            float t_a = (t_y - 900.0)*0.125;
+            float t_dither = (t_a * 4.0);
+            float t_x = floor(corx * 0.5) + mod(t_dither, 4.0);
+  
+            // determines the color blend for the gradient
+            t_y = floor((1292.0 - cory) * 0.25) * 4.0;
+            t_a = (t_y - 900.0)*0.0625;
+  
+            // final colors of the pixel
+            if (mod(t_x, 4.0) < 2.0){
+                tColorOut.r = mix(0.81960,colorOut[i].r,t_a);
+                tColorOut.g = mix(0.83529,colorOut[i].g,t_a);
+                tColorOut.b = mix(0.86667,colorOut[i].b,t_a);
+            }
+            
+          }
+
+        }
+
+      }
+      
+
       vec4 colorOutHSV = vec4( rgb_to_hsv( tColorOut.rgb ), tColorOut.a);
     
       // we will add the hsv difference to the desired color
@@ -185,48 +233,28 @@ function testGL() {
 // time to create our recolored character!
 export class RoaRecolor {
 
-  constructor(charName, ogColor, colorTolerance, blend = null) {
-    this.colorIn = ogColor;
-    this.colorTolerance = colorTolerance;
+  char;
 
-    //this will store whatever images you want to add in
-    this.charImgs = {};
+  gl;
+  positionBuffer;
+  offset;
 
-    // this is a variable that the shader will use for Early Access colors
-    // apparently, the game will also use this value for some character's parts
-    // if 0, the color will have no shading
-    this.blend = [];
-    if (charName == "Kragg" || charName == "Absa") {
-      for (let i = 0; i < ogColor.length; i++) {
-        if (i < 4) {
-          this.blend.push(1.1);
-        } else {
-          this.blend.push(1);
-        }
-      }
-    } else {
-      for (let i = 0; i < ogColor.length; i++) {
-        if (blend) {
-          this.blend.push(0);
-        } else {
-          this.blend.push(1);
-        }
-      }
-    }
+  available = true;
+
+  constructor(canvas) {
+
+    // initialize stuff
+    this.canvas = canvas;
+    this.glLocs = {};
+    this.initializeShader();
+
   }
 
-
-  async addImage(canvas, imgPath, name) {
-    const skinImg = new Image();
-    skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
-    await skinImg.decode(); // wait for the image to be loaded
-
-    canvas.width = skinImg.width;
-    canvas.height = skinImg.height;
-    
+  /** Starts up the shader values */
+  initializeShader() {
 
     // it's WebGL time, get ready to not understand anything (don't worry i dont either)
-    const gl = canvas.getContext("webgl2", { premultipliedAlpha: false });
+    const gl = this.canvas.getContext("webgl2", { premultipliedAlpha: false });
 
     // create the shader with the text above, then create the program
     const vertexShader = compileShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
@@ -238,13 +266,14 @@ export class RoaRecolor {
     const texCoordAttributeLocation = gl.getAttribLocation(program, "a_texCoord");
 
     // lookup uniforms
-    const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
-    const imageLocation = gl.getUniformLocation(program, "u_image");
+    this.glLocs.resolutionLoc = gl.getUniformLocation(program, "u_resolution");
+    this.glLocs.imageLocation = gl.getUniformLocation(program, "u_image");
     // RoA specific uniforms
-    const colorInLoc = gl.getUniformLocation(program, "colorIn");
-    const colorOutLoc = gl.getUniformLocation(program, "colorOut");
-    const colorToleranceLoc = gl.getUniformLocation(program, "colorTolerance");
-    const blendLoc = gl.getUniformLocation(program, "blend");
+    this.glLocs.colorInLoc = gl.getUniformLocation(program, "colorIn");
+    this.glLocs.colorOutLoc = gl.getUniformLocation(program, "colorOut");
+    this.glLocs.colorToleranceLoc = gl.getUniformLocation(program, "colorTolerance");
+    this.glLocs.blendLoc = gl.getUniformLocation(program, "blend");
+    this.glLocs.specialLoc = gl.getUniformLocation(program, "special");
 
     // Create a vertex array object (attribute state)
     const vao = gl.createVertexArray();
@@ -303,6 +332,121 @@ export class RoaRecolor {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 
+    // Tell it to use our program (pair of shaders)
+    gl.useProgram(program);
+
+    // Bind the attribute/buffer set we want.
+    gl.bindVertexArray(vao);
+
+    // store to be used outside this function
+    this.gl = gl;
+    this.positionBuffer = positionBuffer;
+    this.offset = offset;
+
+  }
+
+  updateData(char, colIn, colRan, blend, special) {
+
+    this.char = char;
+    this.updateColorData(colIn, colRan);
+    this.updateBlend(blend);
+    this.updateSpecial(special);
+
+  }
+
+  /**
+   * Updates the shader color data values
+   * @param {Array} colIn - Incoming original color data
+   * @param {Array} colRan - Character's color ranges
+   */
+  updateColorData(colIn, colRan) {
+
+    // create new arrays with the provided data
+    const ogCols = Array(36).fill(0); // max of 9 parts * 4 because of rgba
+    const colTol = Array(36).fill(0);
+
+    // add a one to the final range so it recolors black borders
+    const finalRan = [...colRan];
+    finalRan.push(0, 0, 0, 1);
+
+    // add in the new colors
+    for (let i = 0; i < colIn.length; i++) {
+      ogCols[i] = colIn[i];
+    }
+    for (let i = 0; i < finalRan.length; i++) {
+      colTol[i] = finalRan[i];
+    }
+    
+
+    // update the shader values
+    this.gl.uniform4fv(this.glLocs.colorInLoc, div255(ogCols));
+    this.gl.uniform4fv(this.glLocs.colorToleranceLoc, divHSV(colTol));
+
+    // store for later, just in case
+    this.colorIn = colIn;
+    this.colorTolerance = colRan;
+
+  }
+
+  /**
+   * Determines shading blend
+   * @param {Boolean} blend - False for regular shading, true for retro
+   */
+  updateBlend(blend) {
+
+    let finalBlend = [];
+
+    // this is a variable that the shader will use for Early Access colors
+    // apparently, the game will also use this value for some character's parts
+    // if 0, the color will have no shading
+    if (blend) {
+      finalBlend = Array(36).fill(0);
+    } else {
+      finalBlend = Array(36).fill(1);
+      if (this.char == "Kragg" || this.char == "Absa") {
+        for (let i = 0; i < 4; i++) {
+          if (i < 4) {
+            if (this.char == "Kragg") {
+              // some kragg skins use 1.2 blend, but most of them (including custom
+              // skin) use 1.1 so thats what we will use for all of them
+              finalBlend[i] = 1.1;
+            } else if (this.char == "Absa") {
+              finalBlend[i] = 1.2;
+            }
+          }
+        }
+      }
+    }
+
+    // aaaand make it happen
+    this.gl.uniform4fv(this.glLocs.blendLoc, finalBlend);
+    
+  }
+
+  /**
+   * Determines if special shader logic will be used
+   * @param {Number} number - Special code
+   */
+  updateSpecial(number) {
+    this.gl.uniform1i(this.glLocs.specialLoc, number);
+  }
+
+
+  /**
+   * Updates the shader image to be used
+   * @param {String} imgPath - Path to the image to add
+   */
+  async addImage(imgPath) {
+
+    const skinImg = new Image();
+    skinImg.src = imgPath;  // MUST BE SAME DOMAIN!!!
+    await skinImg.decode(); // wait for the image to be loaded
+
+    this.canvas.width = skinImg.width;
+    this.canvas.height = skinImg.height;
+
+    const gl = this.gl;
+
     // Upload the image into the texture
     const mipLevel = 0;               // the largest mip
     const internalFormat = gl.RGBA;   // format we want in the texture
@@ -317,129 +461,58 @@ export class RoaRecolor {
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    // Tell it to use our program (pair of shaders)
-    gl.useProgram(program);
-
-    // Bind the attribute/buffer set we want.
-    gl.bindVertexArray(vao);
-
     // Pass in the canvas resolution so we can convert from
     // pixels to clipspace in the shader
-    gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
+    gl.uniform2f(this.glLocs.resolutionLoc, gl.canvas.width, gl.canvas.height);
 
     // Tell the shader to get the texture from texture unit 0
-    gl.uniform1i(imageLocation, 0);
-
-    // Pass in the uniforms to the shader
-    gl.uniform4fv(colorInLoc, div255(this.colorIn));
-    gl.uniform4fv(colorToleranceLoc, divHSV(this.colorTolerance));
-    gl.uniform4fv(blendLoc, this.blend);
+    gl.uniform1i(this.imageLocation, 0);
 
     // Bind the position buffer so gl.bufferData that will be called
     // in setRectangle puts data in the position buffer
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
 
     // Set a rectangle the same size as the image.
     setRectangle(gl, 0, 0, skinImg.width, skinImg.height);
 
+  }
 
-    // store everything we just generated
-    this.charImgs[name] = {
-      canvas : canvas,
-      gl : gl,
-      colorInLoc : colorInLoc,
-      colorToleranceLoc : colorToleranceLoc,
-      blendLoc : blendLoc,
-      colorOutLoc : colorOutLoc,
-      offset : offset,
+  // this will be called on each paint
+  render(colorOut, dl) {
+
+    // if no code is sent, use the original colors
+    const finalOut = colorOut ? colorOut : this.colorIn;
+
+    // this is to clean up remaining values from previous codes
+    const actualFinalOut = Array(36).fill(0);
+    for (let i = 0; i < finalOut.length; i++) {
+      actualFinalOut[i] = finalOut[i];
     }
-  }
+    actualFinalOut[finalOut.length + 3] = 1; // alpha for last value
+    
+    // Pass in the uniform to the shader
+    this.gl.uniform4fv(this.glLocs.colorOutLoc, div255(actualFinalOut));
 
-  // replaces the requested image with a new one
-  async addCustom(imgPath, name) {
-    const canvas = this.charImgs[name].canvas;
-    await this.addImage(canvas, imgPath, name);
-  }
+    // Draw the rectangle.
+    const primitiveType = this.gl.TRIANGLES;
+    const count = 6;
+    this.gl.drawArrays(primitiveType, this.offset, count);
 
-  // its finally time to recolor the image
-  recolor(colorOut) {
-    for (let key in this.charImgs) { // if no code is sent, use the original colors
-      render(this.charImgs[key], colorOut ? colorOut : this.colorIn);
+    // to take an image out of a gl canvas, you need to capture it before
+    // the main thread has finished, so it can only be done here
+    // this will activate when the user downloads the image
+    if (dl) {
+      document.getElementById(dl).href = this.canvas.toDataURL()
     }
+
   }
 
-  // we need to repaint the image to get a screenshot of it before it internaly clears
-  download(colorOut, name) {
-    render(this.charImgs[name], colorOut ? colorOut : this.colorIn, name);
-  }
-
-  // maybe we want to stop recoloring something
-  delete(name) {
-    delete this.charImgs[name];
-  }
-
-  // to hot-change retro shading
-  changeBlend(oneOrZero) {
-    for (let key in this.charImgs) {
-      const gl = this.charImgs[key].gl;
-      this.blend = [];
-      for (let i = 0; i < this.colorIn.length; i++) {
-        if (oneOrZero) {
-          this.blend.push(1);
-        } else {
-          this.blend.push(0);
-        }        
-      }
-      gl.uniform4fv(this.charImgs[key].blendLoc, this.blend);
-    }
-  }
-
-  changeOg(where, what) {
-    this.colorIn[where] = Number(what);
-    for (let key in this.charImgs) {
-      const gl = this.charImgs[key].gl;
-      gl.uniform4fv(this.charImgs[key].colorInLoc, div255(this.colorIn));
-    }
-  }
-
-  changeRange(where, what) {
-    this.colorTolerance[where] = Number(what);
-    for (let key in this.charImgs) {
-      const gl = this.charImgs[key].gl;
-      gl.uniform4fv(this.charImgs[key].colorToleranceLoc, divHSV(this.colorTolerance));
-    }
+  setAvailable(state) {
+    this.available = state;
   }
   
 }
 
-// this will be called on each paint
-function render(glCan, colorOut, dl = false) {
-
-  // get what we loaded on startup
-  const canvas = glCan.canvas;
-  const gl = glCan.gl;
-  const colorOutLoc = glCan.colorOutLoc;
-  const offset = glCan.offset;
-  
-
-  // Pass in the uniform to the shader
-  gl.uniform4fv(colorOutLoc, div255(colorOut));
-
-  // Draw the rectangle.
-  const primitiveType = gl.TRIANGLES;
-  const count = 6;
-  gl.drawArrays(primitiveType, offset, count);
-
-
-  // to take an image out of a gl canvas, you need to capture it before
-  // the main thread has finished, so it can only be done here
-
-  // this will activate when the user downloads the image
-  if (dl) {
-    document.getElementById(dl).href = canvas.toDataURL()
-  }
-
-}
 
 // shaders need the rbga values on a [0~1] range
 function div255(array) {
@@ -542,4 +615,5 @@ function createProgram(gl, vertexShader, fragmentShader) {
   }
   
   return program;
+
 };
