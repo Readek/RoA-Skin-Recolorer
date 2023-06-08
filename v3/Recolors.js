@@ -237,11 +237,16 @@ async function changeChar(charName, formChange) {
     char.colorData[getCurrentFormValue()].colorRange, eaCheck.checked);
     // save all the new images as promises so we know when they are fully loaded
     const imgPromises = [
-        characterImgs.addImage(fullCanvas, `Characters/${char.name}/${getCurrentFormName()}/Portrait.png`, "Portrait"),
-        characterImgs.addImage(animCanvas, `Characters/${char.name}/${getCurrentFormName()}/Idle.png`, "Idle Spritesheet"),
-        characterImgs.addImage(sprLCanvas, `Characters/${char.name}/${getCurrentFormName()}/SpriteL.png`, "Sprite Left"),
-        characterImgs.addImage(sprRCanvas, `Characters/${char.name}/${getCurrentFormName()}/SpriteR.png`, "Sprite Right")
+        characterImgs.addImage(fullCanvas, `Characters/${char.name}/${getCurrentFormName()}/Portrait.png`, "Portrait")
     ]
+    // only add sprites if the form has those
+    if (!formHasSprites(getCurrentFormName())) {
+        imgPromises.push(
+            characterImgs.addImage(animCanvas, `Characters/${char.name}/${getCurrentFormName()}/Idle.png`, "Idle Spritesheet"),
+            characterImgs.addImage(sprLCanvas, `Characters/${char.name}/${getCurrentFormName()}/SpriteL.png`, "Sprite Left"),
+            characterImgs.addImage(sprRCanvas, `Characters/${char.name}/${getCurrentFormName()}/SpriteR.png`, "Sprite Right")
+        )
+    }
     // when the images finish loading
     Promise.all(imgPromises).then( () => {
 
