@@ -51,6 +51,7 @@ const editingHex = document.getElementById("editingHex");
 const topButtons = document.getElementById("row3");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
+const goldenCheck = document.getElementById("goldenCheck")
 const alphaCheck = document.getElementById("alphaCheck");
 const noZoom = document.getElementById("zoomCheck");
 const noPixels = document.getElementById("noPixels")
@@ -185,8 +186,14 @@ function mainRecolor(dl) {
         // copy either given array or og colors
         rgb = rgb ? [...rgb] : [...char.colorData[getCurrentFormValue()].ogColor];
         for (let i = 0; i < 8; i++) {
-            // add the 1st colors as the 3rd colors, 2nd to 4th
-            rgb[i+8] = rgb[i];
+            // orcane is a very special boi
+            if (goldenCheck.checked) {
+                rgb[i+8] = 255;
+            } else {
+                // add the 1st colors as the 3rd colors, 2nd to 4th
+                rgb[i+8] = rgb[i];
+            }
+            
         }
     }
 
@@ -199,6 +206,11 @@ function mainRecolor(dl) {
         if ((i+1)%4 == 0) {
             rgb[i] = alphas[((i+1) / 4) - 1] / 100;
         }        
+    }
+
+    // golden skins have a predefined color for black pixels
+    if (goldenCheck.checked) {
+        rgb = [...rgb, 76, 53, 0, 1]
     }
 
     // now recolor the images
@@ -665,6 +677,10 @@ eaCheck.addEventListener("click", () => {
     for (let i = 0; i < charRenders.length; i++) {
         charRenders[i].changeBlend(!eaCheck.checked);
     }
+    mainRecolor();
+})
+// Golden borders check
+goldenCheck.addEventListener("click", () => {
     mainRecolor();
 })
 // Alpha editing
