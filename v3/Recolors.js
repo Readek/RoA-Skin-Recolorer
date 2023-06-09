@@ -56,6 +56,7 @@ const alphaCheck = document.getElementById("alphaCheck");
 const noZoom = document.getElementById("zoomCheck");
 const noPixels = document.getElementById("noPixels")
 const darkCheck = document.getElementById("darkTheme");
+const specialSelect = document.getElementById("specialSelector");
 
 
 // first things first, initialize the shaders:
@@ -234,6 +235,7 @@ function manualRecolor(rgb) {
 // TODO mOdUlAtE
 document.getElementById("formSelector").addEventListener("change", () => {changeChar(char.name, true)})
 document.getElementById("codePresetSelector").addEventListener("change", () => {applySkinSelectCode()})
+specialSelect.addEventListener("change", applySpecial)
 //whenever the character changes
 async function changeChar(charName, formChange) {
 
@@ -286,7 +288,7 @@ async function changeChar(charName, formChange) {
                 char.colorData[getCurrentFormValue()].ogColor,
                 char.colorData[getCurrentFormValue()].colorRange,
                 eaCheck.checked,
-                1 // TODO special
+                specialSelect.value
             )
         }
 
@@ -526,6 +528,14 @@ function applySkinSelectCode() {
             }
         }
     }
+}
+
+
+function applySpecial() {
+    for (let i = 0; i < charRenders.length; i++) {
+        charRenders[i].updateSpecial(this.value);
+    }
+    mainRecolor();
 }
 
 /**

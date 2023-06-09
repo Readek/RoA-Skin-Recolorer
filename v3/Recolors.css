@@ -328,7 +328,12 @@ body::-webkit-scrollbar-thumb {
 .selector:active {
     filter: brightness(.9);
 }
-
+#formSelector {
+    width: 106px;
+}
+#specialSelector {
+    width: 40px;
+}
 
 
 #row3, #row6 {
