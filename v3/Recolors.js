@@ -685,7 +685,7 @@ defaultFile.addEventListener("change", () => {
 // Early Access check
 eaCheck.addEventListener("click", () => {
     for (let i = 0; i < charRenders.length; i++) {
-        charRenders[i].changeBlend(!eaCheck.checked);
+        charRenders[i].updateBlend(eaCheck.checked);
     }
     mainRecolor();
 })
