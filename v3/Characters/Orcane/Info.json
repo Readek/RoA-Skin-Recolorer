@@ -4,7 +4,8 @@
     "placeholder" : "0000-0000-0000-0000",
     "actualParts" : 2,
     "portraitList" : [
-        {"name" : "Pool Party", "useDefault" : true, "noSprite" : true}
+        {"name" : "Pool Party", "useDefault" : true, "noSprite" : true},
+        {"name" : "HD", "noSprite" : true}
     ],
     "colorData" : {
         "Default" : {
@@ -17,6 +18,22 @@
             "colorRange" : [
                 18, 30, 40, 1,
                 22, 30, 65, 1,
+                2, 0, 0, 0,
+                2, 0, 0, 0
+            ],
+            "idleFC" : 8,
+            "idleSpeed" : 0.2
+        },
+        "HD" : {
+            "ogColor" : [
+                44, 125, 133, 1,
+                128, 162, 212, 1,
+                0, 255, 0, 1,
+                255, 255, 0, 1
+            ],
+            "colorRange" : [
+                5, 70, 70, 1,
+                10, 70, 80, 1,
                 2, 0, 0, 0,
                 2, 0, 0, 0
             ],
