@@ -53,6 +53,7 @@ const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
 const goldenCheck = document.getElementById("goldenCheck")
 const alphaCheck = document.getElementById("alphaCheck");
+const numInpsCheck = document.getElementById("numInpsCheck");
 const noZoom = document.getElementById("zoomCheck");
 const noPixels = document.getElementById("noPixels")
 const darkCheck = document.getElementById("darkTheme");
@@ -706,7 +707,24 @@ function alphaEdit() {
     }
     createEditor();
 }
-//alphaEdit();
+/* alphaEdit(); */
+// Numerical Inputs
+numInpsCheck.addEventListener("click", numInpsSwap);
+function numInpsSwap() {
+    const sliders = document.getElementById("sliderDiv").children;
+    for (let i = 0; i < sliders.length; i++) {
+        if (numInpsCheck.checked) {
+            sliders[i].type = "number";
+            sliders[i].classList.remove("slider");
+            sliders[i].classList.add("numInput");
+        } else {
+            sliders[i].type = "range";
+            sliders[i].classList.remove("numInput");
+            sliders[i].classList.add("slider");
+        }
+    }
+}
+numInpsSwap();
 // No point scaling
 noPixels.addEventListener("click", noPixelsCheck)
 function noPixelsCheck() {

@@ -542,6 +542,7 @@ body::-webkit-scrollbar-thumb {
 }
 #sliderA{
     background: linear-gradient(to right, black, white);
+    display: none;
 }
 
 #partList {
@@ -803,6 +804,7 @@ body::-webkit-scrollbar-thumb {
     border-bottom-left-radius: 20px;
     width: 45px;
     color: white;
+    text-shadow: -1px 1px 0px black;
     text-align: right;
     font-size: 15px;
     margin: 0px 6px;
