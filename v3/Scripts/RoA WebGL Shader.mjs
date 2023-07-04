@@ -186,16 +186,19 @@ void main() {
 
         if (i == 5){ // only happens to cloak 2
       
-          // this is the point in absolute pixels where the fade happens
-          float effectY = 900.0/1292.0;
+          //v_vPosition és la coordenada del pixel a dibuixar de la imatge, a nivell local. 0 amunt, n avall
+          //playerY, entenc, és la coordenada del sprite a nivell global
+          //v_texCoord.y 0 => amunt, 1 => avall
       
           // current coordinates in absolute pixels
-          float playerX = 1044.0 - v_texCoord.x * 1044.0;
-          float playerY = 1292.0 - v_texCoord.y * 1292.0;
-      
-          // ok now what even is this
-          float fade = 1.0 - clamp((v_texCoord.y - (playerY+240.0))/280.0, 0.0, 1.0); //0 at bottom, 1 at top
-          float denom = .00392; // 1.0 / 255.0
+          float intX = v_texCoord.x * 1352.0;
+          float intY = v_texCoord.y * 1376.0;
+
+          float playerX = 1352.0 - intX;
+          float playerY = 1376.0 - intY;
+          float fade = 1.0 - clamp((intY - 464.0)/556.0, 0.0, 1.0); //0 at bottom, 1 at top
+
+
           float r1 = colorOut[3].r;
           float g1 = colorOut[3].g;
           float b1 = colorOut[3].b;
@@ -213,6 +216,7 @@ void main() {
           float mody2 = mod(t_y,20.0);
           float isStar2 = float((modx2 == 4.0 && mody2 == 8.0) || (modx2 == 12.0 && mody2 == 0.0));
           float shine_value2 = 0.5 + 0.5 * cos(t_y - floor(temp_time*0.03)) * sin(t_x - floor(temp_time*0.06));
+          
           tColorOut.r = mix((r2-r1)*fade + r1, 1.0, isStar1 * shine_value1 + isStar2 * shine_value2);
           tColorOut.g = mix((g2-g1)*fade + g1, 1.0, isStar1 * shine_value1 + isStar2 * shine_value2);
           tColorOut.b = mix((b2-b1)*fade + b1, 1.0, isStar1 * shine_value1 + isStar2 * shine_value2);
