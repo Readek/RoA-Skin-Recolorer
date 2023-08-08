@@ -728,14 +728,13 @@ body::-webkit-scrollbar-thumb {
 .buttonsBot:active {
     filter: brightness(.9);
 }
-#twitterButton {
+#mastoButton {
     background-color: #6479be;
 }
-#twitterIcon {
+#mastoIcon {
     height: 21px;
     width: 21px;
     fill: white;
-    transform: translate(1px, 1px);
 }
 #githubButton {
     background-color: #272727;
@@ -758,6 +757,15 @@ body::-webkit-scrollbar-thumb {
     background-color: #64b3be;
 }
 #kofiIcon {
+    height: 21px;
+    width: 21px;
+    fill: white;
+    transform: translate(1px, 1px);
+}
+#patreonButton {
+    background-color: #F76754;
+}
+#patreonIcon {
     height: 21px;
     width: 21px;
     fill: white;
