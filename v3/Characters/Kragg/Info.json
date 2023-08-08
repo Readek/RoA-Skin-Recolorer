@@ -107,7 +107,8 @@
         },
         {
             "name": "Summit",
-            "hex": "AC08-274B-5068-BCC2-CE1E-2432-A900"
+            "hex": "AC08-274B-5068-BCC2-CE1E-2432-A900",
+            "note": "In-game, this skin uses a custom shader (8)"
         },
         {
             "name": "Champion",

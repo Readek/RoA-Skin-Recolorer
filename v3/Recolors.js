@@ -526,6 +526,12 @@ function applySkinSelectCode() {
                 // check the code, this is just to force recoloring the image
                 codeControl();
                 resetSkinPresetText();
+                if (char.skinList[i].note) {
+                    // if skin has a note
+                    codeWarning.innerHTML = char.skinList[i].note;
+                    codeWarning.style.color = "orange";
+                    codeWarning.style.height = "18px";
+                }
             }
         }
     }
