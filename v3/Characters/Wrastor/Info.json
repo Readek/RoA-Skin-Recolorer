@@ -4,7 +4,8 @@
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000-0000",
     "portraitList" : [
         {"name" : "Spangled", "useDefault" : true, "noSprite" : true},
-        {"name" : "Bradshaw"}
+        {"name" : "Bradshaw"},
+        {"name" : "HD", "noSprite" : true}
     ],
     "colorData" : {
         "Default" : {
@@ -42,12 +43,30 @@
             ],
             "idleFC" : 8,
             "idleSpeed" : 0.16 
+        },
+        "HD" : {
+            "ogColor" : [
+                189, 164, 63, 1,
+                44, 96, 32, 1,
+                135, 199, 87, 1,
+                206, 215, 132, 1,
+                176, 208, 113, 1
+            ],
+            "colorRange" : [
+                10, 50, 70, 1,
+                10, 50, 50, 1,
+                10, 57, 70, 1,
+                10, 50, 50, 1,
+                10, 40, 70, 1
+            ],
+            "idleFC" : 8,
+            "idleSpeed" : 0.16 
         }
     },
     "skinList": [
         {
             "name": "Default",
-            "hex": "7A5A-4EDC-CB69-FFE9-00FF-7F00-AA00-0007"
+            "hex": "A857-8F61-4460-8DE7-FFF6-ADC5-E6DA-192B"
         },
         {
             "name": "Blue",
