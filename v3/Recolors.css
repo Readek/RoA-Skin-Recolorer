@@ -736,6 +736,14 @@ body::-webkit-scrollbar-thumb {
     width: 21px;
     fill: white;
 }
+#discordButton {
+    background-color: #5E69F6;
+}
+#discordIcon {
+    height: 23px;
+    width: 23px;
+    fill: white;
+}
 #githubButton {
     background-color: #272727;
 }
