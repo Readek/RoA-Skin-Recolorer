@@ -220,17 +220,16 @@ function mainRecolor(dl) {
         charRenders[dl[0]].render(rgb, dl[1])
     } else {
         for (let i = 0; i < charRenders.length; i++) {
-            charRenders[i].render(rgb); // TODO figure out download
+            charRenders[i].render(rgb);
         }
     }
-    
 
 }
-// for when we dont use the color code input
+// for those characters that have different colors for their default skins
 function manualRecolor(rgb) {
-    for (let i = 0; i < charRenders.length; i++) {
-        charRenders[i].render(rgb);
-    }
+    codeInput.value = rgb;
+    mainRecolor();
+    createEditor();
 }
 
 // TODO mOdUlAtE
@@ -307,11 +306,11 @@ async function changeChar(charName, formChange) {
             charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
         }
 
-        // do a first paint (ori is the only character that needs an actual recolor)
+        // do a first paint (some characters have different defaults)
         if (char.name == "Ori and Sein") {
-            manualRecolor(hexDecode("F8F5-FCF8-F5FC-0000-005D-CBF1-FFC8-21A4"));
+            manualRecolor("F8F5-FCF8-F5FC-0000-005D-CBF1-FFC8-21A4");
         } else if (char.name == "Olympia") {
-            manualRecolor(hexDecode("EC8D-CAEC-8DCA-B880-53E4-8574-F7F3-F9FF-F9F9-367B-8D4A"));
+            manualRecolor("EC8D-CAEC-8DCA-B880-53E4-8574-F7F3-F9FF-F9F9-367B-8D4A");
         } else {
             mainRecolor();
         }
