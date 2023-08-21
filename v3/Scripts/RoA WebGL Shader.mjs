@@ -185,10 +185,8 @@ void main() {
       } else if (special == 12){ // THE DREAMSCAPE FORSBURN EXPERIENCE
 
         if (i == 5){ // only happens to cloak 2
-      
-          //v_vPosition és la coordenada del pixel a dibuixar de la imatge, a nivell local. 0 amunt, n avall
-          //playerY, entenc, és la coordenada del sprite a nivell global
-          //v_texCoord.y 0 => amunt, 1 => avall
+
+          // we implemented this one as best as we could i swear
       
           // current coordinates in absolute pixels
           float intX = v_texCoord.x * 1352.0;
@@ -208,13 +206,13 @@ void main() {
           float temp_time = 137.0; //random number
           float t_x = floor((playerX - v_texCoord.x) * 0.5);
           float t_y = floor((playerY - v_texCoord.y) * 0.5);
-          float modx1 = mod(t_x,32.0);
-          float mody1 = mod(t_y,32.0);
-          float isStar1 = float((modx1 == 0.0 && mody1 == 0.0) || (modx1 == 16.0 && mody1 == 16.0));
+          float modx1 = mod(t_x,64.0);
+          float mody1 = mod(t_y,64.0);
+          float isStar1 = float((modx1 == 0.0 && mody1 == 0.0) || (modx1 == 32.0 && mody1 == 32.0));
           float shine_value1 = 0.5 + 0.5 * sin(t_y + floor(temp_time*0.04)) * cos(t_x + floor(temp_time*0.02));
-          float modx2 = mod(t_x,20.0);
-          float mody2 = mod(t_y,20.0);
-          float isStar2 = float((modx2 == 4.0 && mody2 == 8.0) || (modx2 == 12.0 && mody2 == 0.0));
+          float modx2 = mod(t_x,40.0);
+          float mody2 = mod(t_y,40.0);
+          float isStar2 = float((modx2 == 8.0 && mody2 == 16.0) || (modx2 == 24.0 && mody2 == 0.0));
           float shine_value2 = 0.5 + 0.5 * cos(t_y - floor(temp_time*0.03)) * sin(t_x - floor(temp_time*0.06));
           
           tColorOut.r = mix((r2-r1)*fade + r1, 1.0, isStar1 * shine_value1 + isStar2 * shine_value2);

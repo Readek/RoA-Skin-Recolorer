@@ -230,6 +230,7 @@ function manualRecolor(rgb) {
     codeInput.value = rgb;
     mainRecolor();
     createEditor();
+    codeControl();
 }
 
 // TODO mOdUlAtE
