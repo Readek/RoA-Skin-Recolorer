@@ -1,6 +1,6 @@
 <h1 align="center">Game Codes database</h1>
 
-<p align="center">Game Codes - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Skins.md">Custom Skins</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md">Stages</a></p>
+<p align="center">Game Codes - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md">Stages</a></p>
 
 These are the codes the game uses for character skins, alongside their internal skin ID.
 

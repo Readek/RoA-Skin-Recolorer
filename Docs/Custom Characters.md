@@ -1,6 +1,6 @@
 <h1 align="center">Custom Characters</h1>
 
-<p align="center"><a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game Codes.md">Game Codes</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Skins.md">Custom Skins</a> - Custom Characters - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md">Stages</a></p>
+<p align="center"><a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game Codes.md">Game Codes</a> - Custom Characters - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Stages.md">Stages</a></p>
 
 
 In the character creator, you can upload the portrait (or any image really) of your character, as well as any srpitesheet you want. You can find these files where you would normally place them for Steam's Workshop (that is: `[steam folder]/steamapps/workshop/content/383980/`).

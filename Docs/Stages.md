@@ -1,6 +1,6 @@
 <h1 align="center">Stages database</h1>
 
-<p align="center"><a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game Codes.md">Game Codes</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Skins.md">Custom Skins</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters</a> - Stages</p>
+<p align="center"><a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Game Codes.md">Game Codes</a> - <a href="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Docs/Custom Characters.md">Custom Characters</a> - Stages</p>
 
 
 Yes, you can use the Recolorer to recolor stages too!
