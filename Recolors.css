@@ -151,7 +151,6 @@ body::-webkit-scrollbar-thumb {
     width: 45px;
     height: 45px;
     border-radius: 100%;
-    margin-right: 10px;
     background-color: var(--bg);
     float: left;
     transition: background-color 150ms;
@@ -300,6 +299,40 @@ body::-webkit-scrollbar-thumb {
     height: 0px;
     transition: height 150ms;
     margin-top: -5px;
+}
+
+
+#charInfoDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -5px;
+    margin-bottom: 4px;
+    gap: 8px;
+}
+
+.selector {
+    background: var(--bg);
+    border: none;
+    height: 32px;
+    width: 135px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    color: white;
+    transition: filter 100ms;
+}
+.selector:hover, .selector:focus {
+    filter: brightness(1.1);
+}
+.selector:active {
+    filter: brightness(.9);
+}
+#formSelector {
+    width: 106px;
+}
+#specialSelector {
+    width: 40px;
 }
 
 
@@ -509,6 +542,7 @@ body::-webkit-scrollbar-thumb {
 }
 #sliderA{
     background: linear-gradient(to right, black, white);
+    display: none;
 }
 
 #partList {
@@ -694,14 +728,21 @@ body::-webkit-scrollbar-thumb {
 .buttonsBot:active {
     filter: brightness(.9);
 }
-#twitterButton {
+#mastoButton {
     background-color: #6479be;
 }
-#twitterIcon {
+#mastoIcon {
     height: 21px;
     width: 21px;
     fill: white;
-    transform: translate(1px, 1px);
+}
+#discordButton {
+    background-color: #5E69F6;
+}
+#discordIcon {
+    height: 23px;
+    width: 23px;
+    fill: white;
 }
 #githubButton {
     background-color: #272727;
@@ -724,6 +765,15 @@ body::-webkit-scrollbar-thumb {
     background-color: #64b3be;
 }
 #kofiIcon {
+    height: 21px;
+    width: 21px;
+    fill: white;
+    transform: translate(1px, 1px);
+}
+#patreonButton {
+    background-color: #e97364;
+}
+#patreonIcon {
     height: 21px;
     width: 21px;
     fill: white;
@@ -770,6 +820,7 @@ body::-webkit-scrollbar-thumb {
     border-bottom-left-radius: 20px;
     width: 45px;
     color: white;
+    text-shadow: -1px 1px 0px black;
     text-align: right;
     font-size: 15px;
     margin: 0px 6px;

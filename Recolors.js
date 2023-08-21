@@ -1,12 +1,17 @@
-"use strict";
+import { RoaRecolor } from "./Scripts/RoA WebGL Shader.mjs";
+import { getJson } from "./Scripts/File System.mjs";
+import { getCurrentFormName, getCurrentFormValue, updateFormList } from "./Scripts/Form Selector.mjs";
+import { getSkinSelectValue, resetSkinPresetText, updateSkinList } from "./Scripts/Skin Code Selector.mjs";
 
 let char; // this will hold the values from the character database
-let characterImgs; // this will hold a class from "RoA WebGL Shader.js"
 let rgbSliders; // if active, the page will use rgb sliders instead of hsv ones
 let customPortrait, customSprite; // will hold user uploaded images
 const alphas = [100, 100, 100, 100, 100, 100, 100, 100, 100];
 const codeReg = "^([A-Fa-f0-9]+\-)+([A-Fa-f0-9])+$";
 const ograReg = "^([A-Fa-f0-9]{6}\-)+([A-Fa-f0-9]){6}$";
+const charList = ["Clairen", "Forsburn", "Zetterburn", "Wrastor", "Absa", "Elliana",
+    "Sylvanos", "Maypul", "Kragg", "Orcane", "Etalus", "Ranno", "Ori and Sein",
+    "Shovel Knight", "Mollo", "Hodan", "Pomme", "Olympia"];
 
 const fullCanvas = document.getElementById("fullCanvas");
 const animCanvas = document.getElementById("animCanvas");
@@ -46,14 +51,25 @@ const editingHex = document.getElementById("editingHex");
 const topButtons = document.getElementById("row3");
 const loadingDiv = document.getElementById("loadingDiv");
 const eaCheck = document.getElementById("EAcheck");
+const goldenCheck = document.getElementById("goldenCheck")
 const alphaCheck = document.getElementById("alphaCheck");
+const numInpsCheck = document.getElementById("numInpsCheck");
 const noZoom = document.getElementById("zoomCheck");
 const noPixels = document.getElementById("noPixels")
 const darkCheck = document.getElementById("darkTheme");
+const specialSelect = document.getElementById("specialSelector");
 
+
+// first things first, initialize the shaders:
+const charRenders = [
+    new RoaRecolor(fullCanvas), // portrait
+    new RoaRecolor(animCanvas), // idle
+    new RoaRecolor(sprLCanvas), // left sprite
+    new RoaRecolor(sprRCanvas), // right sprite
+];
 
 //when the page loads, change to a random character
-changeChar(genRnd(0, db.chars.length - 1));
+await changeChar(charList[genRnd(0, charList.length - 1)]);
 
 //this will fire everytime we type in the color code input
 codeInput.addEventListener("input", codeControl); 
@@ -162,7 +178,7 @@ copyRa.addEventListener('animationend', () => {
 function mainRecolor(dl) {
 
     let rgb = hexDecode(codeInput.value); // translate the color code
-    if (rgb != characterImgs.colorIn) { // if the code is not the default one
+    if (rgb != charRenders[0].colorIn) { // if the code is not the default one
         rgb.splice(rgb.length - 4); //remove the checksum at the end of the code
     } else { // if default code, we'll modify it later
         rgb = null;
@@ -170,15 +186,21 @@ function mainRecolor(dl) {
 
     if (char.name == "Orcane") { // orcane has green and yellow hidden parts
         // copy either given array or og colors
-        rgb = rgb ? [...rgb] : [...char.ogColor];
+        rgb = rgb ? [...rgb] : [...char.colorData[getCurrentFormValue()].ogColor];
         for (let i = 0; i < 8; i++) {
-            // add the 1st colors as the 3rd colors, 2nd to 4th
-            rgb[i+8] = rgb[i];
+            // orcane is a very special boi
+            if (goldenCheck.checked) {
+                rgb[i+8] = 255;
+            } else {
+                // add the 1st colors as the 3rd colors, 2nd to 4th
+                rgb[i+8] = rgb[i];
+            }
+            
         }
     }
 
     if (!rgb) {
-        rgb = characterImgs.colorIn;
+        rgb = charRenders[0].colorIn;
     }
 
     // add in custom transparency in case the user modified it
@@ -188,19 +210,35 @@ function mainRecolor(dl) {
         }        
     }
 
-    if (dl) { // if we want to download the image
-        characterImgs.download(rgb, dl);
-    } else {
-        characterImgs.recolor(rgb); // now recolor the images
+    // golden skins have a predefined color for black pixels
+    if (goldenCheck.checked) {
+        rgb = [...rgb, 76, 53, 0, 1]
     }
+
+    // now recolor the images
+    if (dl) {
+        charRenders[dl[0]].render(rgb, dl[1])
+    } else {
+        for (let i = 0; i < charRenders.length; i++) {
+            charRenders[i].render(rgb);
+        }
+    }
+
 }
-// for when we dont use the color code input
+// for those characters that have different colors for their default skins
 function manualRecolor(rgb) {
-    characterImgs.recolor(rgb); // if rgb is empty, will use og colors
+    codeInput.value = rgb;
+    mainRecolor();
+    createEditor();
+    codeControl();
 }
 
+// TODO mOdUlAtE
+document.getElementById("formSelector").addEventListener("change", () => {changeChar(char.name, true)})
+document.getElementById("codePresetSelector").addEventListener("change", () => {applySkinSelectCode()})
+specialSelect.addEventListener("change", applySpecial)
 //whenever the character changes
-function changeChar(charNum) {
+async function changeChar(charName, formChange) {
 
     // calculate the height of the divs so we dont get jumps when switching to the loading div
     loadingDiv.style.height = (fullCanvas.clientHeight + spritesDiv.clientHeight) + 7 + "px";
@@ -215,18 +253,45 @@ function changeChar(charNum) {
     }
 
     //look at the database to see whats up
-    char = db.chars[charNum];
-    //create new character images with this info
-    characterImgs = new RoaRecolor(char.ogColor, char.colorRange, eaCheck.checked);
+    char = await getJson("Characters/" + charName + "/Info");
+
+    // update the form selector, unless this is a form change
+    if (!formChange) {
+        updateFormList(char.portraitList);
+        updateSkinList(char.skinList);
+    }
+
+    // create new character images with this info
     // save all the new images as promises so we know when they are fully loaded
     const imgPromises = [
-        characterImgs.addImage(fullCanvas, "Characters/"+char.name+"/Full.png", "Portrait"),
-        characterImgs.addImage(animCanvas, "Characters/"+char.name+"/Idle.png", "Idle Spritesheet"),
-        characterImgs.addImage(sprLCanvas, "Characters/"+char.name+"/SpriteL.png", "Sprite Left"),
-        characterImgs.addImage(sprRCanvas, "Characters/"+char.name+"/SpriteR.png", "Sprite Right")
+        charRenders[0].addImage(`Characters/${char.name}/${getCurrentFormName()}/Portrait.png`)
     ]
+    // only add sprites if the form has those
+    if (!formHasSprites(getCurrentFormName())) {
+        imgPromises.push(
+            charRenders[1].addImage(`Characters/${char.name}/${getCurrentFormName()}/Idle.png`),
+            charRenders[2].addImage(`Characters/${char.name}/${getCurrentFormName()}/SpriteL.png`),
+            charRenders[3].addImage(`Characters/${char.name}/${getCurrentFormName()}/SpriteR.png`)
+        )
+    } else {
+        // to avoid them showing up in the download list
+        charRenders[1].setAvailable(false);
+        charRenders[2].setAvailable(false);
+        charRenders[3].setAvailable(false);
+    }
     // when the images finish loading
     Promise.all(imgPromises).then( () => {
+
+        // update color data for all renders
+        for (let i = 0; i < charRenders.length; i++) {
+            charRenders[i].updateData(
+                char.name,
+                char.colorData[getCurrentFormValue()].ogColor,
+                char.colorData[getCurrentFormValue()].colorRange,
+                eaCheck.checked,
+                specialSelect.value
+            )
+        }
 
         //set a new placeholder text
         codeInput.placeholder = char.placeholder;
@@ -234,14 +299,19 @@ function changeChar(charNum) {
         codeInput.value = null;
         codeControl(); //to reset the warning message if any
 
-        //change the character icon
-        charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
+        // change the character icon
+        // if the form has a custom icon, lets use it!
+        if (formHasIcon(getCurrentFormName())) {
+            charIcon.setAttribute("src", "Characters/"+char.name+"/"+getCurrentFormName()+"/Icon.png")
+        } else {
+            charIcon.setAttribute("src", "Characters/"+char.name+"/1.png");
+        }
 
-        // do a first paint (ori is the only character that needs an actual recolor)
+        // do a first paint (some characters have different defaults)
         if (char.name == "Ori and Sein") {
-            manualRecolor(hexDecode("F8F5-FCF8-F5FC-0000-005D-CBF1-FFC8-21A4"));
+            manualRecolor("F8F5-FCF8-F5FC-0000-005D-CBF1-FFC8-21A4");
         } else if (char.name == "Olympia") {
-            manualRecolor(hexDecode("EC8D-CAEC-8DCA-B880-53E4-8574-F7F3-F9FF-F9F9-367B-8D4A"));
+            manualRecolor("EC8D-CAEC-8DCA-B880-53E4-8574-F7F3-F9FF-F9F9-367B-8D4A");
         } else {
             mainRecolor();
         }
@@ -259,30 +329,40 @@ function changeChar(charNum) {
         // hide the loading div, show the characters
         loadingDiv.style.display = "none";
         fullCanvas.style.display = "inherit";
-        spritesDiv.style.display = "inherit";
+
+        // only show sprites if the portrait has those
+        if (!formHasSprites(getCurrentFormName())) {
+            spritesDiv.style.display = "inherit";
+        }
 
     })
 
-    // all of this is for the animated idle sprite
-    const sprite = new Image();
-    sprite.src = "Characters/"+char.name+"/Idle.png";
-    sprite.decode().then( () => { // when the image finishes loading
+    if (!formHasSprites(getCurrentFormName())) {
+        // all of this is for the animated idle sprite
+        const sprite = new Image();
+        sprite.src = `Characters/${char.name}/${getCurrentFormValue()}/Idle.png`;
+        sprite.decode().then( () => { // when the image finishes loading
 
-        //change the width of the sprite animation, depending on the character
-        animDiv.style.width = (sprite.width / char.idleFC) + "px"; //gets the w of 1 frame
-        animDiv.style.height = sprite.height + "px"; // div will have slightly wrong height otherwise
-        //now change the variables for the sprite animation
-        const r = document.querySelector(':root');
-        r.style.setProperty("--spriteMove", -sprite.width + "px"); //end position of the animation
-        r.style.setProperty("--spriteCount", char.idleFC); // frame count
-        // formula for this one is: 1000 is a second, then divided by 60 gets us an
-        // in-game frame, then we multiply by 7 because thats the average frame
-        // wait between sprite changes, and then we multiply by the character frame
-        // count to know how long the animation is going to take, finally, we divide
-        // by 1000 to get the value in seconds for the css variable
-        r.style.setProperty("--spriteTime", 1000/60*7*char.idleFC/1000 + "s");
+            //change the width of the sprite animation, depending on the character
+            animDiv.style.width = (sprite.width / char.colorData[getCurrentFormValue()].idleFC) + "px"; //gets the w of 1 frame
+            animDiv.style.height = sprite.height + "px"; // div will have slightly wrong height otherwise
+            //now change the variables for the sprite animation
+            const r = document.querySelector(':root');
+            r.style.setProperty("--spriteMove", -sprite.width + "px"); //end position of the animation
+            r.style.setProperty("--spriteCount", char.colorData[getCurrentFormValue()].idleFC); // frame count
+            // formula for this one is: 1000 is a second, then divided by 60 gets us an
+            // in-game frame, then we multiply by 7 because thats the average frame
+            // wait between sprite changes, and then we multiply by the character frame
+            // count to know how long the animation is going to take, finally, we divide
+            // by 1000 to get the value in seconds for the css variable
+            r.style.setProperty("--spriteTime", 1000/60*7*char.colorData[getCurrentFormValue()].idleFC/1000 + "s");
 
-    })    
+        })
+
+        charRenders[1].setAvailable(true);
+        charRenders[2].setAvailable(true);
+        charRenders[3].setAvailable(true);
+    }
 
 }
 
@@ -298,7 +378,7 @@ function createEditor() {
     const rgb = hexDecode(codeInput.value); // get the rgb values of the current code
 
     // check if the current character has hidden parts
-    const theLength = char.actualParts ? char.actualParts * 4 : characterImgs.colorIn.length;
+    const theLength = char.actualParts ? char.actualParts * 4 : charRenders[0].colorIn.length;
 
     // now for each (editable) part:
     for (let i = 0; i < theLength; i += 4) {
@@ -393,7 +473,7 @@ function charSwitcher() {
 
         //if the div gets clicked, update the character to be recolored
         newDiv.addEventListener("click", () => {
-            changeChar(i);
+            changeChar(db.chars[i].name);
             drop.parentElement.blur();
         });
 
@@ -435,6 +515,63 @@ function resizeInput() {
 }
 
 
+/**
+ * TODO This should be on Skin Code Selector.mjs
+ */
+function applySkinSelectCode() {
+    if (getSkinSelectValue() != "default") {
+        for (let i = 0; i < char.skinList.length; i++) {
+            if (char.skinList[i].name == getSkinSelectValue()) {
+                codeInput.value = char.skinList[i].hex;
+                // check the code, this is just to force recoloring the image
+                codeControl();
+                resetSkinPresetText();
+                if (char.skinList[i].note) {
+                    // if skin has a note
+                    codeWarning.innerHTML = char.skinList[i].note;
+                    codeWarning.style.color = "orange";
+                    codeWarning.style.height = "18px";
+                }
+            }
+        }
+    }
+}
+
+
+function applySpecial() {
+    for (let i = 0; i < charRenders.length; i++) {
+        charRenders[i].updateSpecial(this.value);
+    }
+    mainRecolor();
+}
+
+/**
+ * TODO this should be on i dont even know man but not here
+ * @param {String} name 
+ * @returns {Object}
+ */
+function formHasSprites(name) {
+    for (let i = 0; i < char.portraitList.length; i++) {
+        if (char.portraitList[i].name == name) {
+            return char.portraitList[i].noSprite;
+        }
+    }
+    return null;
+}
+/**
+ * TODO this should be on i dont even know man but not here
+ * @param {String} name 
+ * @returns {Object}
+ */
+function formHasIcon(name) {
+    for (let i = 0; i < char.portraitList.length; i++) {
+        if (char.portraitList[i].name == name) {
+            return char.portraitList[i].icon;
+        }
+    }
+    return null;
+}
+
 //download image button
 downImgButton.addEventListener('click', () => {
 
@@ -444,27 +581,30 @@ downImgButton.addEventListener('click', () => {
     // clear the download menu
     downMenu.innerHTML = null;
 
+    const downloadNames = ["Portait", "Idle Spritesheet", "Sprite Left", "Sprite Right"];
+
     // for each loaded image
-    for (const key in characterImgs.charImgs) {
-        
-        // create a link (necessary to trigger download)
-        const newA = document.createElement("a");
-        newA.id = key;
-        newA.setAttribute("download", char.name + " " + key + " Recolor"); // downloaded filename
+    for (let i = 0; i < charRenders.length; i++) {
+        if (charRenders[i].available) {
+            // create a link (necessary to trigger download)
+            const newA = document.createElement("a");
+            newA.id = downloadNames[i];
+            // downloaded filename
+            newA.setAttribute("download", `${char.name} ${downloadNames[i]} Recolor`);
 
-        // create a button
-        const newBut = document.createElement("button");
-        newBut.classList.add("buttons", "downButt");
-        newBut.innerHTML = key; // set its name
+            // create a button
+            const newBut = document.createElement("button");
+            newBut.classList.add("buttons", "downButt");
+            newBut.innerHTML = downloadNames[i]; // set its name
 
-        newBut.addEventListener("click", () => {
-            mainRecolor(key); // we need to repaint the image to be able to download it
-        })
+            newBut.addEventListener("click", () => {
+                mainRecolor([i, downloadNames[i]]); // we need to repaint the image to be able to download it
+            })
 
-        // add it to the menu
-        newA.append(newBut);
-        downMenu.appendChild(newA);
-
+            // add it to the menu
+            newA.append(newBut);
+            downMenu.appendChild(newA);
+        }
     }
 
 });
@@ -475,7 +615,7 @@ document.getElementById("randomize").addEventListener("click", () => {
     if (char.actualParts) { // for orcane
         randomize(char.actualParts)
     } else {
-        randomize(characterImgs.colorIn.length / 4)
+        randomize(charRenders[0].colorIn.length / 4)
     }
 });
 function randomize(colorNum) {
@@ -535,15 +675,12 @@ defaultFile.addEventListener("change", () => {
         // save the image in case we need it
         customPortrait = this.result;
         //add the custom image to the portrait canvas
-        characterImgs.addCustom(customPortrait, "Portrait").then( () => { // wait for the img to load
+        charRenders[0].addImage(customPortrait).then( () => { // wait for the img to load
 
             mainRecolor(); // then show it
 
-            // hide the sprites, then stop recoloring them
+            // hide the sprites
             spritesDiv.style.display = "none";
-            characterImgs.delete("Idle Spritesheet");
-            characterImgs.delete("Sprite Left");
-            characterImgs.delete("Sprite Right");
 
         })
     });
@@ -554,7 +691,13 @@ defaultFile.addEventListener("change", () => {
 
 // Early Access check
 eaCheck.addEventListener("click", () => {
-    characterImgs.changeBlend(!eaCheck.checked);
+    for (let i = 0; i < charRenders.length; i++) {
+        charRenders[i].updateBlend(eaCheck.checked);
+    }
+    mainRecolor();
+})
+// Golden borders check
+goldenCheck.addEventListener("click", () => {
     mainRecolor();
 })
 // Alpha editing
@@ -570,7 +713,24 @@ function alphaEdit() {
     }
     createEditor();
 }
-alphaEdit();
+/* alphaEdit(); */
+// Numerical Inputs
+numInpsCheck.addEventListener("click", numInpsSwap);
+function numInpsSwap() {
+    const sliders = document.getElementById("sliderDiv").children;
+    for (let i = 0; i < sliders.length; i++) {
+        if (numInpsCheck.checked) {
+            sliders[i].type = "number";
+            sliders[i].classList.remove("slider");
+            sliders[i].classList.add("numInput");
+        } else {
+            sliders[i].type = "range";
+            sliders[i].classList.remove("numInput");
+            sliders[i].classList.add("slider");
+        }
+    }
+}
+numInpsSwap();
 // No point scaling
 noPixels.addEventListener("click", noPixelsCheck)
 function noPixelsCheck() {
@@ -803,7 +963,7 @@ function genCodeManual(rgb) {
     // this is mostly the randomize code
 
     // get the number of parts we will recolor
-    const colorNum = char.actualParts ? char.actualParts : characterImgs.colorIn.length / 4;
+    const colorNum = char.actualParts ? char.actualParts : charRenders[0].colorIn.length / 4;
 
     // add in the rgb values in hex form
     let finalCode = "";
@@ -884,7 +1044,7 @@ function createProEditor(ogOrRange) {
         colorRangeList.innerHTML = null;
     }
 
-    for (let i = 0; i < characterImgs.colorIn.length; i += 4) {
+    for (let i = 0; i < charRenders[0].colorIn.length; i += 4) {
         
         // this is where everything will be stored
         const part = document.createElement("div");
@@ -895,19 +1055,19 @@ function createProEditor(ogOrRange) {
         partName.innerHTML = char.partNames[count];
         partName.classList.add("partName");
 
-        partName.style.backgroundColor = "rgb(" + characterImgs.colorIn[i] +
-            ", " + characterImgs.colorIn[i+1] + ", " + characterImgs.colorIn[i+2] + ")";
+        partName.style.backgroundColor = "rgb(" + charRenders[0].colorIn[i] +
+            ", " + charRenders[0].colorIn[i+1] + ", " + charRenders[0].colorIn[i+2] + ")";
 
         // depending on ogcolors or ranges, add inputs to edit them
         let sub1, sub2, sub3;
         if (ogOrRange) {
-            sub1 = genNumInp(characterImgs.colorIn[i], 255, i, true);
-            sub2 = genNumInp(characterImgs.colorIn[i+1], 255, i+1, true);
-            sub3 = genNumInp(characterImgs.colorIn[i+2], 255, i+2, true);
+            sub1 = genNumInp(charRenders[0].colorIn[i], 255, i, true);
+            sub2 = genNumInp(charRenders[0].colorIn[i+1], 255, i+1, true);
+            sub3 = genNumInp(charRenders[0].colorIn[i+2], 255, i+2, true);
         } else {
-            sub1 = genNumInp(characterImgs.colorTolerance[i], 359, i, false);
-            sub2 = genNumInp(characterImgs.colorTolerance[i+1], 100, i+1, false);
-            sub3 = genNumInp(characterImgs.colorTolerance[i+2], 100, i+2, false);
+            sub1 = genNumInp(charRenders[0].colorTolerance[i], 359, i, false);
+            sub2 = genNumInp(charRenders[0].colorTolerance[i+1], 100, i+1, false);
+            sub3 = genNumInp(charRenders[0].colorTolerance[i+2], 100, i+2, false);
         }
 
         // now add everything we just created to the part div and then to the actual html
@@ -955,7 +1115,7 @@ function genNumInp(color, max, colorNum, ogOrRange) {
 function genOgRanCode(ogOrRange) {
 
     let code = "";
-    const arrayToTake = ogOrRange ? characterImgs.colorIn : characterImgs.colorTolerance;
+    const arrayToTake = ogOrRange ? charRenders[0].colorIn : charRenders[0].colorTolerance;
 
     for (let i = 0; i < arrayToTake.length; i++) {
         if ((i+1)%4 != 0) {
@@ -975,22 +1135,28 @@ function genOgRanCode(ogOrRange) {
 function updateOgRange() {
     const num = Number(this.getAttribute("partNum"));
     const num2 = num-(num%4);
+    const ogOrRa = this.getAttribute("ogOrRange") == "og";
 
-    if (this.getAttribute("ogOrRange") == "og") {
-        characterImgs.changeOg(num, this.value);
-        mainRecolor();
-        genOgRanCode(true);
+    const newOg = [...charRenders[0].colorIn];
+    const newRa = [...charRenders[0].colorTolerance];
+
+    if (ogOrRa) {
+        newOg[num] = this.value;
     } else {
-        characterImgs.changeRange(num, this.value);
-        mainRecolor();
-        genOgRanCode();
+        newRa[num] = this.value;
     }
 
+    for (let i = 0; i < charRenders.length; i++) {
+        charRenders[i].updateColorData(newOg, newRa)        
+    }
+    mainRecolor();
+    genOgRanCode(ogOrRa);
+
     // update the color indicator of the part
-    ogColorList.childNodes[num2/4].firstChild.style.backgroundColor = "rgb(" + characterImgs.colorIn[num2] +
-    ", " + characterImgs.colorIn[num2+1] + ", " + characterImgs.colorIn[num2+2] + ")";
-    colorRangeList.childNodes[num2/4].firstChild.style.backgroundColor = "rgb(" + characterImgs.colorIn[num2] +
-    ", " + characterImgs.colorIn[num2+1] + ", " + characterImgs.colorIn[num2+2] + ")";
+    ogColorList.childNodes[num2/4].firstChild.style.backgroundColor = "rgb(" + charRenders[0].colorIn[num2] +
+    ", " + charRenders[0].colorIn[num2+1] + ", " + charRenders[0].colorIn[num2+2] + ")";
+    colorRangeList.childNodes[num2/4].firstChild.style.backgroundColor = "rgb(" + charRenders[0].colorIn[num2] +
+    ", " + charRenders[0].colorIn[num2+1] + ", " + charRenders[0].colorIn[num2+2] + ")";
 }
 
 // when clicking on the og/ra codes
@@ -1023,13 +1189,10 @@ function translateCode() {
     }
 
     // update the shader
-    characterImgs = new RoaRecolor(finalOg, finalRa, eaCheck.checked);
-    if (customPortrait) {
-        characterImgs.addImage(fullCanvas, customPortrait, "Portrait").then(mainRecolor);
+    for (let i = 0; i < charRenders.length; i++) {
+        charRenders[i].updateColorData(finalOg, finalRa);
     }
-    if (customSprite) {
-        characterImgs.addImage(animCanvas, customSprite, "Spritesheet").then(mainRecolor);
-    }
+
     // update the char values in case they changed
     partCount = finalOg.length / 4;
     changePlaceholder(finalOg.length / 4);
@@ -1041,6 +1204,7 @@ function translateCode() {
     createEditor();
     // update the render
     mainRecolor();
+
 }
 
 // check if the oc/cr codes are right
@@ -1098,6 +1262,10 @@ document.getElementById("newChar").addEventListener("click", () => {
     changePlaceholder(2);
     codeInput.value = null;
 
+    for (let i = 0; i < charRenders.length; i++) {
+        charRenders[i].setAvailable(false);
+    }
+
 })
 
 document.getElementById("uplPor").addEventListener("click", () => {
@@ -1123,24 +1291,21 @@ defaultFilePor.addEventListener("change", () => {
                     basicRange.push(0);
                 }          
             }
-            characterImgs = new RoaRecolor(basicOg, basicRange, eaCheck.checked);
+            for (let i = 0; i < charRenders.length; i++) {
+                charRenders[i].updateData(char.name, basicOg, basicRange, eaCheck.checked, 0);
+            }
             showCustomUI();
             createEditor();
         }
 
         customPortrait = this.result;
 
-        // check if this is not the first image added
-        if (characterImgs.charImgs["Full"]) {
-            characterImgs.addCustom(customPortrait, "Portrait").then( () => {
-                mainRecolor();
-            })
-        } else {
-            characterImgs.addImage(fullCanvas, customPortrait, "Portrait").then( () => {
-                mainRecolor();
-                fullCanvas.style.display = "flex";
-            })
-        }
+        // add the new image in
+        charRenders[0].addImage(customPortrait).then( () => {
+            mainRecolor();
+            fullCanvas.style.display = "flex";
+            charRenders[0].setAvailable(true);
+        })
         firstImg = false;
 
     });
@@ -1162,25 +1327,25 @@ defaultFileSpr.addEventListener("change", () => {
                     basicRange.push(0);
                 }          
             }
-            characterImgs = new RoaRecolor(basicOg, basicRange, eaCheck.checked);
+            for (let i = 0; i < charRenders.length; i++) {
+                charRenders[i].updateData(char.name, basicOg, basicRange, eaCheck.checked, 1);
+            }
             showCustomUI();
             createEditor();
         }
 
         customSprite = this.result;
 
-        if (characterImgs.charImgs["Spritesheet"]) {
-            characterImgs.addCustom(customSprite, "Spritesheet").then( () => {
-                mainRecolor();
-            })
-        } else {
-            characterImgs.addImage(animCanvas, customSprite, "Spritesheet").then( () => {
-                mainRecolor();
-                spritesDiv.style.display = "flex";
-                document.getElementById("frameCountDiv").style.display = "inline";
-                document.getElementById("frameCountInp").addEventListener("change", updateFC);
-            })
+        if (!charRenders[1].available) {
+            document.getElementById("frameCountInp").addEventListener("change", updateFC);
         }
+
+        charRenders[1].addImage(customSprite).then( () => {
+            mainRecolor();
+            spritesDiv.style.display = "flex";
+            document.getElementById("frameCountDiv").style.display = "inline";
+            charRenders[1].setAvailable(true);
+        })
 
         const sprite = new Image();
         sprite.src = customSprite;
@@ -1246,8 +1411,8 @@ document.getElementById("removeOg").addEventListener("click", () => {addOrRemove
 document.getElementById("removeRa").addEventListener("click", () => {addOrRemoveRow()});
 function addOrRemoveRow(add) {
 
-    const og = characterImgs.colorIn;
-    const ra = characterImgs.colorTolerance;
+    const og = charRenders[0].colorIn;
+    const ra = charRenders[0].colorTolerance;
     
     if (add) {
         for (let i = 0; i < 4; i++) {
@@ -1267,13 +1432,10 @@ function addOrRemoveRow(add) {
     }
 
     // we need to add a new class each time since it wont update non-shown parts otherwise
-    characterImgs = new RoaRecolor(og, ra, eaCheck.checked);
-    if (customPortrait) {
-        characterImgs.addImage(fullCanvas, customPortrait, "Portrait").then(mainRecolor);
+    for (let i = 0; i < charRenders.length; i++) {
+        charRenders[i].updateData(char.name, og, ra, eaCheck.checked, 1)
     }
-    if (customSprite) {
-        characterImgs.addImage(animCanvas, customSprite, "Spritesheet").then(mainRecolor);
-    }
+    mainRecolor();
 
     changePlaceholder(partCount);
     codeInput.value = null;
@@ -1282,10 +1444,10 @@ function addOrRemoveRow(add) {
     createProEditor(true);
     createProEditor();
 
-    if (characterImgs.colorIn.length >= 36) {
+    if (charRenders[0].colorIn.length >= 36) {
         document.getElementById("addOg").disabled = true;
         document.getElementById("addRa").disabled = true;
-    } else if (characterImgs.colorIn.length <= 4) {
+    } else if (charRenders[0].colorIn.length <= 4) {
         document.getElementById("removeOg").disabled = true;
         document.getElementById("removeRa").disabled = true;
     } else {
@@ -1357,7 +1519,7 @@ function hexDecode(hex) {
         }
         return charRGB;
     } catch (e) { // if it fails, use the original colors
-        return characterImgs.colorIn;
+        return charRenders[0].colorIn;
     }
 
     
