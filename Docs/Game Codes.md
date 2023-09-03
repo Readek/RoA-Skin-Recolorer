@@ -196,6 +196,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `FFBB-00FF-FFFF-FFFD-FB6B-4E1C-4A00` `16` Golden
 - `FFCC-005C-6160-C4FF-F662-4C00-E800` `18` Ranked
 - `302B-2DF8-5C69-D6DF-EA16-1415-2B00` `19` Genesis
+- `C84F-00F9-CD00-2B94-DE79-1F1F-4300` `20` Pool Party
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Maypul/1.png" alt="Maypul icon"> Maypul
 
