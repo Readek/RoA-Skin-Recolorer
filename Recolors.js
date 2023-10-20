@@ -448,12 +448,12 @@ function charSwitcher() {
     const row2 = document.getElementById("charRow2");
     const row3 = document.getElementById("charRow3");
 
-    for (let i = 0; i < db.chars.length; i++) {
+    for (let i = 0; i < charList.length; i++) {
         
         //create a new div that will have the char info
         const newDiv = document.createElement('div');
         newDiv.className = "charEntry";
-        newDiv.setAttribute("data-tooltip", db.chars[i].name);
+        newDiv.setAttribute("data-tooltip", charList[i]);
         newDiv.setAttribute("data-tooltip-delay", "none");
 
         //depending on the char num, set elemental background
@@ -473,14 +473,14 @@ function charSwitcher() {
 
         //if the div gets clicked, update the character to be recolored
         newDiv.addEventListener("click", () => {
-            changeChar(db.chars[i].name);
+            changeChar(charList[i]);
             drop.parentElement.blur();
         });
 
         //create the character image, randomized icon just because we can
         const newImg = document.createElement('img');
         newImg.setAttribute("src",
-            "Characters/"+db.chars[i].name+"/"+genRnd(2, 3)+".png"
+            `Characters/${charList[i]}/${genRnd(2, 3)}.png`
         );
         newImg.className = "iconImage";
 
