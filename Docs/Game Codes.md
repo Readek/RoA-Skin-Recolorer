@@ -262,9 +262,10 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `17A6-7317-A673-99D7-F255-8568-F5DB-8BFF-F9F9-16D9-9431` `08` Default Custom 1
 - `C517-38C5-1738-E4DA-BAE4-8574-D6CF-F5FF-F9F9-32DB-9675` `09` Default Custom 2
 - `FBFF-FAFB-FFFA-6B6A-68D4-D4AE-B2FF-D0FF-F9F9-56AB-950B` `11` Champion `no alpha?`
-- `FF78-00FA-AB14-02A5-BC28-4973-FFE5-00FF-FFFF-6149-FE5A` `12` Streetwave
+- `FFE9-81FF-E981-FBD4-3475-5B00-F5EA-CAFE-FDFE-A78A-1BCB` `12` Golden
 - `C81F-FFF0-A9FF-5654-924F-3D5E-A6AC-D6DA-B9FF-4F3D-5DFC` `13` Abyss
 - `D3E2-9AD3-E29A-537A-3EA7-BA4A-D3E2-9AD3-E29A-2343-3105` `14` Early Access
+- `FF78-00FA-AB14-02A5-BC28-4973-FFE5-00FF-FFFF-6149-FE5A` `15` Streetwave
 - `FFD2-2FFF-D22F-FFFE-F9E1-9E00-C489-CDFF-F9F9-2343-31C4` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Orcane/1.png" alt="Orcane icon"> Orcane
