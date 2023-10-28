@@ -54,7 +54,8 @@
         },
         {
             "name": "Champion",
-            "hex": "FBFF-FAFB-FFFA-6B6A-68D4-D4AE-B2FF-D0FF-F9F9-56AB-950B"
+            "hex": "FBFF-FAFB-FFFA-6B6A-68D4-D4AE-B2FF-D0FF-F9F9-56AB-950B",
+            "note": "In-game, this skin has 0.5 alpha for both Crystals"
         },
         {
             "name": "Golden",

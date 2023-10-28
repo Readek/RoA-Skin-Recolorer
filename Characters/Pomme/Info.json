@@ -77,7 +77,8 @@
         },
         {
             "name": "Champion",
-            "hex": "CECE-DD3F-3F46-B2FF-D089-E46A-66A0-7C2E-BC16-9000"
+            "hex": "CECE-DD3F-3F46-B2FF-D089-E46A-66A0-7C2E-BC16-9000",
+            "note": "In-game, this skin has 0.75 alpha for Hair"
         },
         {
             "name": "Pool Party",
