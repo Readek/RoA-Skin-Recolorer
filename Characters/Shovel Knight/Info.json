@@ -2,7 +2,9 @@
     "name" : "Shovel Knight",
     "partNames" : ["Armor Light", "Armor Dark", "Trim", "Horns"],
     "placeholder" : "0000-0000-0000-0000-0000-0000-0000",
-    "portraitList" : [],
+    "portraitList" : [
+        {"name" : "HD", "noSprite" : true}
+    ],
     "colorData" : {
         "Default" : {
             "ogColor" : [
@@ -16,6 +18,22 @@
                 8, 13, 37, 1,
                 26, 91, 1, 1,
                 18, 42, 37, 1
+            ],
+            "idleFC" : 6,
+            "idleSpeed" : "1/6.5"
+        },
+        "HD" : {
+            "ogColor" : [
+                81, 197, 81, 1,
+                28, 84, 45, 1,
+                137, 204, 102, 1,
+                187, 232, 96, 1
+            ],
+            "colorRange" : [
+                5, 60, 75, 1,
+                5, 30, 70, 1,
+                5, 70, 80, 1,
+                5, 70, 80, 1
             ],
             "idleFC" : 6,
             "idleSpeed" : "1/6.5"
