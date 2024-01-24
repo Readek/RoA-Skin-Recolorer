@@ -224,6 +224,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `5252-52D0-DFDE-B2FF-D03F-3F46-C9C9-DC5D` `17` Champion `Belly 50%`
 - `FFCC-00E4-E4F0-E4E4-F000-0117-FFBA-279A` `18` Ranked
 - `F16F-2EFD-D11D-FDBC-1D3A-3A3A-F75A-2661` `19` GoTE
+- `CDB0-F7FA-FAFF-FAFA-FF4B-4BE6-4B4B-E653` `20` Early to Bed
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Mollo/1.png" alt="Mollo icon"> Mollo
 
