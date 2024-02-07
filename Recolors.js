@@ -581,7 +581,7 @@ downImgButton.addEventListener('click', () => {
     // clear the download menu
     downMenu.innerHTML = null;
 
-    const downloadNames = ["Portait", "Idle Spritesheet", "Sprite Left", "Sprite Right"];
+    const downloadNames = ["Portrait", "Idle Spritesheet", "Sprite Left", "Sprite Right"];
 
     // for each loaded image
     for (let i = 0; i < charRenders.length; i++) {
