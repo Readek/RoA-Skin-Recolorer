@@ -450,3 +450,4 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `7A5A-4ED5-BD7E-FFE9-00D7-401D-8703-2C55` `17` LoA
 - `FFCC-00F9-E1BE-FFD8-3DE4-E4F0-0000-00B2` `18` Ranked
 - `5252-52E4-923F-30D9-A312-9477-0257-552E` `19` Steampunk
+- `8381-8051-5151-FF39-3FFF-393F-FF39-3F87` `20` Genesis
