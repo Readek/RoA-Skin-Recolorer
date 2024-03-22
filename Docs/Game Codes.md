@@ -172,6 +172,7 @@ If a code is wrong or missing, please submit a [pull request](https://github.com
 - `FF3A-3ABD-BABA-BDBA-BAEC-0000-E5DE-DE3D-3D3D-1E1C-1CEC` `12` Genesis
 - `A6AC-D6A6-ACD6-5654-92DC-71FF-913B-CE4F-3D5E-3827-46DB` `13` Abyss
 - `D3E2-9AA7-BA4A-537A-3E23-4331-A7BA-4AD3-E29A-D3E2-9A69` `14` Early Access
+- `FFEA-85E3-7B0A-C38F-05FF-F2BA-E38D-26FF-DD1E-FFB9-6BFD` `15` Golden
 - `EBDE-7BE9-E9E8-FF9E-27CD-70DE-7E00-7EFF-F88F-F8D1-6174` `18` Ranked
 
 ## <img width="30" src="https://github.com/Readek/RoA-Skin-Recolorer/blob/main/Characters/Kragg/1.png" alt="Kragg icon"> Kragg
