@@ -736,6 +736,14 @@ body::-webkit-scrollbar-thumb {
     width: 21px;
     fill: white;
 }
+#bskyButton {
+    background-color: #459ef1;
+}
+#bskyIcon {
+    height: 20px;
+    width: 20px;
+    fill: white;
+}
 #discordButton {
     background-color: #5E69F6;
 }
